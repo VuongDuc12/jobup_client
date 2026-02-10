@@ -571,56 +571,147 @@
                             </div>
 
                             <!-- ═══════════════════════════════════════════ -->
-                            <!-- FLOATING GLASS CARDS -->
+                            <!-- FLOATING PREMIUM CARDS - Call-to-Action Focused -->
                             <!-- ═══════════════════════════════════════════ -->
 
-                            <!-- Card 1: Jobs Available (Top Left) - True Glassmorphism -->
-                            <div class="absolute -left-6 lg:-left-16 top-16 glass-card-yellow animate-float-slow"
+                            <!-- Card 1: Tìm Việc Ngay (Top Left) - Primary CTA -->
+                            <div class="absolute -left-6 lg:-left-16 top-12 animate-float-slow group/card cursor-pointer"
                                 style="animation-delay: 0s;">
                                 <div
-                                    class="flex items-center gap-4 bg-white/75 backdrop-blur-[16px] px-5 py-4 rounded-2xl shadow-[0_20px_50px_-12px_rgba(240,180,41,0.3),0_0_0_1px_rgba(255,255,255,0.6)_inset] border border-white/40">
+                                    class="relative bg-gradient-to-br from-amber-500 via-amber-400 to-yellow-500 p-[1px] rounded-[1.5rem] shadow-[0_25px_60px_-15px_rgba(245,158,11,0.4)] hover:shadow-[0_30px_70px_-15px_rgba(245,158,11,0.5)] transition-all duration-500">
                                     <div
-                                        class="w-12 h-12 bg-gradient-to-br from-amber-200/80 to-amber-100/60 rounded-xl flex items-center justify-center text-amber-700 shadow-inner">
-                                        <i class="fa-solid fa-briefcase text-lg"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-extrabold text-[#111827] tracking-tight">15,400+</h4>
-                                        <p class="text-xs text-[#4B5563] font-semibold">Việc làm đang mở</p>
+                                        class="bg-white/95 backdrop-blur-xl rounded-[1.4rem] px-5 py-4 relative overflow-hidden">
+                                        <!-- Animated gradient overlay -->
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                                        </div>
+                                        <div class="relative z-10 flex flex-col gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="relative">
+                                                    <div
+                                                        class="absolute inset-0 bg-amber-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity animate-pulse">
+                                                    </div>
+                                                    <div
+                                                        class="relative w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover/card:scale-110 transition-transform duration-300">
+                                                        <i class="fa-solid fa-magnifying-glass text-white text-lg"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4
+                                                        class="text-lg font-black text-[#111827] tracking-tight leading-tight">
+                                                        TÌM VIỆC NGAY!</h4>
+                                                    <p
+                                                        class="text-[10px] text-amber-600 font-bold uppercase tracking-wider">
+                                                        15,400+ cơ hội</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-2 text-[11px] font-bold text-gray-600 bg-amber-50/80 px-3 py-1.5 rounded-lg border border-amber-100/50">
+                                                <i
+                                                    class="fa-solid fa-arrow-right text-amber-600 group-hover/card:translate-x-1 transition-transform"></i>
+                                                <span>Khám phá việc làm hot</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Card 2: Offer Received (Bottom Right) - True Glassmorphism -->
-                            <div class="absolute -right-4 lg:-right-12 bottom-24 glass-card-green animate-float-slow"
+                            <!-- Card 2: Gửi CV Ngay (Bottom Right) - Conversion CTA -->
+                            <div class="absolute -right-4 lg:-right-12 bottom-44 animate-float-slow group/card cursor-pointer"
                                 style="animation-delay: -2s;">
                                 <div
-                                    class="flex items-center gap-4 bg-white/75 backdrop-blur-[16px] px-5 py-4 rounded-2xl shadow-[0_20px_50px_-12px_rgba(34,197,94,0.25),0_0_0_1px_rgba(255,255,255,0.6)_inset] border border-white/40">
+                                    class="relative bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 p-[1px] rounded-[1.5rem] shadow-[0_25px_60px_-15px_rgba(16,185,129,0.4)] hover:shadow-[0_30px_70px_-15px_rgba(16,185,129,0.5)] transition-all duration-500">
                                     <div
-                                        class="w-12 h-12 bg-gradient-to-br from-green-200/80 to-green-100/60 rounded-xl flex items-center justify-center text-green-700 shadow-inner">
-                                        <i class="fa-solid fa-check text-lg"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-lg font-extrabold text-[#111827]">Offer mới!</h4>
-                                        <p class="text-xs text-[#4B5563] font-semibold">Lương: <span
-                                                class="text-green-600 font-bold">65 triệu VNĐ</span></p>
+                                        class="bg-white/95 backdrop-blur-xl rounded-[1.4rem] px-5 py-4 relative overflow-hidden">
+                                        <!-- Animated gradient overlay -->
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                                        </div>
+                                        <div class="relative z-10 flex flex-col gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="relative">
+                                                    <div
+                                                        class="absolute inset-0 bg-emerald-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity animate-pulse">
+                                                    </div>
+                                                    <div
+                                                        class="relative w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover/card:scale-110 transition-transform duration-300">
+                                                        <i class="fa-solid fa-file-circle-check text-white text-lg"></i>
+                                                        <span
+                                                            class="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-ping"></span>
+                                                        <span
+                                                            class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4
+                                                        class="text-lg font-black text-[#111827] tracking-tight leading-tight">
+                                                        GỬI CV NGAY</h4>
+                                                    <p
+                                                        class="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">
+                                                        Miễn phí tư vấn</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-2 text-[11px] font-bold text-gray-600 bg-emerald-50/80 px-3 py-1.5 rounded-lg border border-emerald-100/50">
+                                                <div class="flex -space-x-2">
+                                                    <img src="https://ui-avatars.com/api/?name=HR&background=10b981&color=fff"
+                                                        class="w-4 h-4 rounded-full border border-white" alt="HR">
+                                                    <img src="https://ui-avatars.com/api/?name=JD&background=3b82f6&color=fff"
+                                                        class="w-4 h-4 rounded-full border border-white" alt="HR">
+                                                </div>
+                                                <span>Nhận tư vấn 1-1 miễn phí</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Card 3: Rating (Bottom Left - More subtle) -->
-                            <div class="absolute -left-2 lg:-left-8 bottom-8 glass-card-slate animate-float-slow hidden sm:block"
+                            <!-- Card 3: Liên Hệ Ngay (Bottom Left) - Urgency CTA -->
+                            <div class="absolute -left-2 lg:-left-8 bottom-20 animate-float-slow hidden sm:block group/card cursor-pointer"
                                 style="animation-delay: -4s;">
-                                <div
-                                    class="flex items-center gap-3 bg-white/85 backdrop-blur-xl px-4 py-3 rounded-xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08),0_0_0_1px_rgba(255,255,255,0.8)_inset] border border-white/50">
-                                    <div class="flex text-amber-400 text-xs gap-0.5">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                <a href="tel:0979334143"
+                                    class="block relative bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 p-[1px] rounded-[1.5rem] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.4)] hover:shadow-[0_30px_70px_-15px_rgba(139,92,246,0.5)] transition-all duration-500">
+                                    <div
+                                        class="bg-white/95 backdrop-blur-xl rounded-[1.4rem] px-4 py-3 relative overflow-hidden">
+                                        <!-- Animated gradient overlay -->
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-br from-violet-50/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500">
+                                        </div>
+                                        <div class="relative z-10 flex items-center gap-3">
+                                            <div class="relative">
+                                                <div
+                                                    class="absolute inset-0 bg-violet-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity animate-pulse">
+                                                </div>
+                                                <div
+                                                    class="relative w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-500/30 group-hover/card:scale-110 transition-transform duration-300">
+                                                    <i class="fa-solid fa-headset text-white text-base"></i>
+                                                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                                        <span
+                                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                                                        <span
+                                                            class="relative inline-flex rounded-full h-3 w-3 bg-violet-500 border-2 border-white"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <h4
+                                                    class="text-sm font-black text-[#111827] tracking-tight leading-tight">
+                                                    0979.334.143</h4>
+                                                <div class="flex items-center gap-1.5">
+                                                    <span
+                                                        class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                                    <p
+                                                        class="text-[10px] text-violet-600 font-bold uppercase tracking-wider">
+                                                        Hotline 24/7</p>
+                                                </div>
+                                                <div class="mt-1 flex items-center gap-1 text-amber-600">
+                                                    <i class="fa-solid fa-phone text-[9px]"></i>
+                                                    <span class="text-[9px] font-bold uppercase">Ấn để gọi ngay</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <span class="text-xs text-[#4B5563] font-semibold">4.9/5 (2.4k đánh giá)</span>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -633,16 +724,16 @@
 
         </section>
 
-        <section id="jobs" class="py-16 bg-gray-50 scroll-mt-20">
+        <section id="jobs" class="py-12 bg-gray-50 scroll-mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-                <div class="text-center mb-16" data-aos="fade-up">
+                <div class="text-center mb-10" data-aos="fade-up">
                     <span class="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">Cơ hội nghề
                         nghiệp</span>
-                    <h2 class="text-3xl md:text-5xl font-extrabold text-[#111827] mb-4">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-[#111827] mb-3">
                         Việc làm <span class="text-brand-yellow">Mới Nhất</span>
                     </h2>
-                    <p class="text-gray-500 text-base max-w-2xl mx-auto mb-10">Hơn 500+ việc làm mới được cập nhật hôm
+                    <p class="text-gray-500 text-base max-w-2xl mx-auto mb-8">Hơn 500+ việc làm mới được cập nhật hôm
                         nay từ các tập đoàn công nghệ hàng đầu.</p>
 
                     <div
@@ -670,60 +761,24 @@
 
                     <div class="lg:col-span-8">
 
-                        <div id="tab-content-all" class="job-grid grid grid-cols-1 gap-4">
+                        <div id="tab-content-all" class="job-grid grid grid-cols-1 gap-3">
 
-                            <!-- Job Card 1 -->
-                            <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
-                                    <div class="relative shrink-0">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png"
-                                            class="w-14 h-14 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
-                                            alt="Logo">
-                                        <span
-                                            class="absolute -top-2 -right-2 px-2 py-0.5 bg-green-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">Mới</span>
-                                    </div>
-                                    <div class="flex-grow min-w-0">
-                                        <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
-                                            Senior Backend Engineer (Golang)</h3>
-                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-                                            <p class="text-sm text-gray-500 font-medium">Microsoft Vietnam</p>
-                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                                            <p class="text-sm text-gray-400"><i
-                                                    class="fa-solid fa-location-dot mr-1"></i>Hà Nội</p>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="flex flex-wrap items-center gap-2 md:w-48">
-                                    <span
-                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">Hybrid</span>
-                                    <span
-                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">English</span>
-                                </div>
-
-                                <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">60 - 100 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">2 giờ trước</span>
-                                </div>
-                            </a>
 
                             <!-- Job Card 2 -->
                             <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
                                     <div class="relative shrink-0">
                                         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"
-                                            class="w-14 h-14 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
+                                            class="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
                                             alt="Logo">
                                         <span
                                             class="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">Gấp</span>
                                     </div>
                                     <div class="flex-grow min-w-0">
                                         <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                                             Brand Manager</h3>
                                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                                             <p class="text-sm text-gray-500 font-medium">Shopee</p>
@@ -742,24 +797,24 @@
                                 </div>
 
                                 <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">35 - 60 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">5 giờ trước</span>
+                                    class="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">35 - 60 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">5 giờ trước</span>
                                 </div>
                             </a>
 
                             <!-- Job Card 3 -->
                             <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
                                     <div class="relative shrink-0">
                                         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
-                                            class="w-14 h-14 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
+                                            class="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
                                             alt="Logo">
                                     </div>
                                     <div class="flex-grow min-w-0">
                                         <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                                             UI/UX Designer</h3>
                                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                                             <p class="text-sm text-gray-500 font-medium">Figma</p>
@@ -778,24 +833,24 @@
                                 </div>
 
                                 <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">25 - 50 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">1 ngày trước</span>
+                                    class="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">25 - 50 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">1 ngày trước</span>
                                 </div>
                             </a>
 
                             <!-- Job Card 4 -->
                             <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
                                     <div class="relative shrink-0">
                                         <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-                                            class="w-14 h-14 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
+                                            class="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
                                             alt="Logo">
                                     </div>
                                     <div class="flex-grow min-w-0">
                                         <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                                             Senior Sale B2B</h3>
                                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                                             <p class="text-sm text-gray-500 font-medium">Google Ads</p>
@@ -814,24 +869,24 @@
                                 </div>
 
                                 <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">20 - 35 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">1 ngày trước</span>
+                                    class="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">20 - 35 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">1 ngày trước</span>
                                 </div>
                             </a>
 
                             <!-- Job Card 5 -->
                             <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
                                     <div class="relative shrink-0">
                                         <div
-                                            class="w-14 h-14 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-200">
+                                            class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-blue-200">
                                             V</div>
                                     </div>
                                     <div class="flex-grow min-w-0">
                                         <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                                             DevOps Engineer</h3>
                                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                                             <p class="text-sm text-gray-500 font-medium">Viettel</p>
@@ -850,24 +905,24 @@
                                 </div>
 
                                 <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">45 - 75 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">2 ngày trước</span>
+                                    class="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">45 - 75 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">2 ngày trước</span>
                                 </div>
                             </a>
 
                             <!-- Job Card 6 -->
                             <a href="job-detail.html"
-                                class="group bg-white rounded-2xl p-4 md:p-6 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                                <div class="flex items-center gap-4 flex-grow">
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
                                     <div class="relative shrink-0">
                                         <div
-                                            class="w-14 h-14 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-orange-200">
+                                            class="w-12 h-12 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-orange-200">
                                             F</div>
                                     </div>
                                     <div class="flex-grow min-w-0">
                                         <h3
-                                            class="font-bold text-gray-900 text-lg mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                                             Kế toán trưởng</h3>
                                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                                             <p class="text-sm text-gray-500 font-medium">FPT Software</p>
@@ -886,9 +941,157 @@
                                 </div>
 
                                 <div
-                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
-                                    <span class="text-green-600 font-extrabold text-lg">30 - 50 triệu VNĐ</span>
-                                    <span class="text-gray-400 text-xs mt-1">2 ngày trước</span>
+                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">30 - 50 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">2 ngày trước</span>
+                                </div>
+                            </a>
+
+                            <!-- Job Card 7 -->
+                            <a href="job-detail.html"
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
+                                    <div class="relative shrink-0">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+                                            class="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
+                                            alt="Logo">
+                                        <span
+                                            class="absolute -top-2 -right-2 px-2 py-0.5 bg-green-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">Mới</span>
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h3
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            Frontend Developer (React)</h3>
+                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                            <p class="text-sm text-gray-500 font-medium">Tiki</p>
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            <p class="text-sm text-gray-400"><i
+                                                    class="fa-solid fa-location-dot mr-1"></i>TP.HCM</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap items-center gap-2 md:w-48">
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">React</span>
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">TypeScript</span>
+                                </div>
+
+                                <div
+                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">35 - 55 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">3 giờ trước</span>
+                                </div>
+                            </a>
+
+                            <!-- Job Card 8 -->
+                            <a href="job-detail.html"
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
+                                    <div class="relative shrink-0">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-purple-200">
+                                            G</div>
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h3
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            Data Analyst</h3>
+                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                            <p class="text-sm text-gray-500 font-medium">Grab Vietnam</p>
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            <p class="text-sm text-gray-400"><i
+                                                    class="fa-solid fa-location-dot mr-1"></i>Hà Nội</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap items-center gap-2 md:w-48">
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">Python</span>
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">SQL</span>
+                                </div>
+
+                                <div
+                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">28 - 45 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">5 giờ trước</span>
+                                </div>
+                            </a>
+
+                            <!-- Job Card 9 -->
+                            <a href="job-detail.html"
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
+                                    <div class="relative shrink-0">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/882/882702.png"
+                                            class="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
+                                            alt="Logo">
+                                        <span
+                                            class="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">Gấp</span>
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h3
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            Product Manager</h3>
+                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                            <p class="text-sm text-gray-500 font-medium">Lazada</p>
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            <p class="text-sm text-gray-400"><i
+                                                    class="fa-solid fa-location-dot mr-1"></i>TP.HCM</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap items-center gap-2 md:w-48">
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">Product</span>
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">English</span>
+                                </div>
+
+                                <div
+                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">50 - 80 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">1 ngày trước</span>
+                                </div>
+                            </a>
+
+                            <!-- Job Card 10 -->
+                            <a href="job-detail.html"
+                                class="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+                                <div class="flex items-center gap-3 flex-grow">
+                                    <div class="relative shrink-0">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-teal-200">
+                                            M</div>
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h3
+                                            class="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                            Mobile Developer (Flutter)</h3>
+                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                            <p class="text-sm text-gray-500 font-medium">MoMo</p>
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            <p class="text-sm text-gray-400"><i
+                                                    class="fa-solid fa-location-dot mr-1"></i>TP.HCM</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap items-center gap-2 md:w-48">
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">Flutter</span>
+                                    <span
+                                        class="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">Dart</span>
+                                </div>
+
+                                <div
+                                    class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                    <span class="text-green-600 font-extrabold text-base">40 - 70 triệu VNĐ</span>
+                                    <span class="text-gray-400 text-xs mt-0.5">1 ngày trước</span>
                                 </div>
                             </a>
 
@@ -1006,14 +1209,14 @@
         <!-- SPECIALTY SECTORS - THE FLOATING DECK SLIDER 2026 -->
         <!-- Horizontal Scroll Snap - Swipe-friendly -->
         <!-- ═══════════════════════════════════════════════════════════════════════════ -->
-        <section id="services" class="max-w-[100vw] overflow-hidden py-20 bg-[#F5F5F4] relative">
+        <section id="services" class="max-w-[100vw] overflow-hidden py-14 bg-[#F5F5F4] relative">
 
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-12" data-aos="fade-up">
                 <span class="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">Lĩnh vực chuyên
                     môn</span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-[#111827] mb-4">Khám phá cơ hội <span
+                <h2 class="text-3xl md:text-5xl font-extrabold text-[#111827] mb-3">Khám phá cơ hội <span
                         class="text-brand-yellow">Tiềm Năng</span></h2>
-                <p class="text-gray-500 text-base max-w-2xl mx-auto mb-8">Tìm kiếm vị trí phù hợp với thế mạnh của bạn
+                <p class="text-gray-500 text-base max-w-2xl mx-auto mb-6">Tìm kiếm vị trí phù hợp với thế mạnh của bạn
                     trong hơn 24+ lĩnh vực khác nhau.</p>
                 <div class="flex justify-center gap-3">
                     <button id="slidePrev"
@@ -1319,32 +1522,215 @@
                 });
             }
         </script>
+        <section id="features" class="py-16 bg-white relative overflow-hidden">
+            <!-- Decorative Background -->
+            <div
+                class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-50/50 rounded-full blur-[120px] -z-10 -translate-y-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50/30 rounded-full blur-[100px] -z-10 translate-y-1/4">
+            </div>
 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <span class="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">Giải pháp toàn
+                        diện</span>
+                    <h2 class="text-3xl md:text-5xl font-[1000] text-[#111827] mb-5 tracking-tight">
+                        Hệ sinh thái <span class="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
+                    </h2>
+                    <p class="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                        Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên từng bước ngoặt sự nghiệp với
+                        nền tảng công nghệ dẫn đầu.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Feature 1: AI Smart Match -->
+                    <div class="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow/30 hover:shadow-[0_40px_80px_-20px_rgba(240,180,41,0.15)] transition-all duration-700 group relative overflow-hidden"
+                        data-aos="fade-right">
+                        <div class="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
+                            <!-- Background Image/Graphic -->
+                            <div
+                                class="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800"
+                                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                                    alt="AI Logic">
+                            </div>
+
+                            <div class="relative z-10 max-w-md">
+                                <div class="inline-flex items-center gap-2 text-brand-yellow font-bold text-sm mb-4">
+                                    <span class="w-8 h-[2px] bg-brand-yellow"></span> AI TECHNOLOGY
+                                </div>
+                                <h3 class="text-3xl font-black text-[#111827] mb-4 leading-tight">
+                                    Công nghệ <span class="text-brand-yellow">Match Job 4.0</span> ⚡
+                                </h3>
+                                <p class="text-gray-500 mb-8 leading-relaxed text-lg font-light italic">
+                                    "Thuật toán thông minh tự động 'ghép đôi' bạn với Job ngon dựa trên 50+ tiêu chí dữ
+                                    liệu. Tìm việc chuẩn xác như tìm người yêu!"
+                                </p>
+
+                                <!-- Analytical UI Placeholder -->
+                                <div
+                                    class="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow/20 transition-colors">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow/30">
+                                                <i class="fa-solid fa-brain"></i>
+                                            </div>
+                                            <span class="font-bold text-gray-800">Đang quét hồ sơ...</span>
+                                        </div>
+                                        <span class="text-green-600 font-black text-xl">98%</span>
+                                    </div>
+                                    <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div
+                                            class="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%] animate-pulse">
+                                        </div>
+                                    </div>
+                                    <p
+                                        class="mt-3 text-[11px] text-gray-400 font-medium uppercase tracking-widest text-center">
+                                        Kết quả hiển thị sau 1.2s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: 24/7 Support (Dark Mode Accent) -->
+                    <div class="md:row-span-2 bg-[#111827] rounded-[3rem] p-1 border border-gray-800 hover:shadow-2xl transition-all duration-700 group overflow-hidden"
+                        data-aos="fade-left">
+                        <div
+                            class="bg-gray-900/40 rounded-[2.9rem] p-8 lg:p-10 h-full flex flex-col relative overflow-hidden">
+                            <!-- Background Portrait -->
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600"
+                                class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
+                                alt="Consultant">
+
+                            <div class="relative z-10 flex flex-col h-full">
+                                <div
+                                    class="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center shadow-inner mb-8">
+                                    <i class="fa-solid fa-headset text-2xl text-brand-yellow"></i>
+                                </div>
+                                <h3 class="text-3xl font-black text-white mb-4">Support <br><span
+                                        class="text-brand-yellow">"Không ngủ" 24/7</span></h3>
+                                <p class="text-gray-400 mb-8 leading-relaxed font-light">
+                                    Bạn thức, JobUp cũng thức! Đội ngũ CSKH nhiệt tình "cân" mọi thắc mắc, hỗ trợ tìm
+                                    việc và nộp hồ sơ siêu tốc mọi khung giờ.
+                                </p>
+
+                                <div class="mt-auto space-y-4">
+                                    <!-- Chat Bubbles -->
+                                    <div
+                                        class="bg-white/5 backdrop-blur-md p-4 rounded-[1.5rem] rounded-tl-none border border-white/5 self-start max-w-[90%] transform -rotate-1">
+                                        <p class="text-xs text-gray-200">Em cần tối ưu CV ngành Tech ạ?</p>
+                                    </div>
+                                    <div
+                                        class="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow/20 transform rotate-1">
+                                        <p class="text-xs font-bold leading-relaxed italic">"JobUp đã lọc ra Job ngon
+                                            đúng ý bạn. Apply luôn kẻo lỡ nhé! 🚀"</p>
+                                    </div>
+                                    <a href="tel:0979334143"
+                                        class="flex items-center justify-center gap-3 w-full py-4 bg-white text-[#111827] rounded-[1.5rem] font-black text-sm mt-8 hover:bg-brand-yellow transition-all shadow-xl hover:-translate-y-1">
+                                        GỌI CHUYÊN GIA NGAY <i class="fa-solid fa-phone-volume"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3: CV Optimization -->
+                    <div class="bg-white rounded-[3rem] p-8 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=400"
+                            class="absolute inset-0 w-full h-full object-cover opacity-5 group-hover:opacity-15 transition-opacity duration-700"
+                            alt="CV Writing">
+                        <div class="relative z-10">
+                            <div
+                                class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                                <i class="fa-solid fa-file-signature text-xl text-blue-600 group-hover:text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-black text-[#111827] mb-3">CV Doctor - "Chữa bệnh" hồ sơ</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                                Nhận và "khám" CV miễn phí. Biến hồ sơ nhạt nhòa thành bản CV "sát thủ", đánh bại mọi
+                                đối thủ cạnh tranh.
+                            </p>
+                            <a href="#"
+                                class="inline-flex items-center gap-2 text-blue-600 font-bold text-sm group/link">
+                                Trải nghiệm ngay <i
+                                    class="fa-solid fa-arrow-right-long group-hover/link:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4: Career Path -->
+                    <div class="bg-gradient-to-br from-[#F59E0B] to-[#D97706] rounded-[3rem] p-8 text-white shadow-2xl shadow-amber-500/30 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c7377f5da5b2?auto=format&fit=crop&q=80&w=600"
+                            class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"
+                            alt="Success Path">
+                        <div class="relative z-10">
+                            <div
+                                class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
+                                <i class="fa-solid fa-rocket text-xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-black mb-3">Bí kíp Phỏng vấn & Deal lương</h3>
+                            <p class="text-white/80 text-sm leading-relaxed mb-6">
+                                Trang bị "vũ khí" tận răng: Bộ câu hỏi phỏng vấn thường gặp, mẹo deal lương khéo léo để
+                                bạn tự tin chinh phục mọi HR khó tính.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-2 text-white font-black text-sm group/link">
+                                Khám phá bản đồ <i
+                                    class="fa-solid fa-map-location-dot group-hover/link:scale-125 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-t border-gray-100">
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="0">
+                        <div class="text-3xl font-extrabold text-[#111827] mb-1">3 Giây</div>
+                        <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Tốc độ tìm việc</div>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-3xl font-extrabold text-[#111827] mb-1">24/7</div>
+                        <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Hỗ trợ trực tuyến</div>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-3xl font-extrabold text-[#111827] mb-1">100%</div>
+                        <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Bảo mật thông tin</div>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-3xl font-extrabold text-[#111827] mb-1">Free</div>
+                        <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Tư vấn miễn phí</div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Success Stories / Testimonials -->
-        <section class="py-24 bg-brand-black relative overflow-hidden">
+        <section class="py-16 bg-brand-black relative overflow-hidden">
             <div
                 class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
             </div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <span class="text-brand-yellow font-bold uppercase tracking-widest text-xs mb-4 block">Câu chuyện
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <span class="text-brand-yellow font-bold uppercase tracking-widest text-xs mb-3 block">Câu chuyện
                         thành công</span>
-                    <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Ứng viên nói gì về <span
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Ứng viên nói gì về <span
                             class="text-brand-yellow">JobUp?</span></h2>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-3 gap-6">
                     <!-- Testimonial 1 -->
-                    <div class="bg-gray-800/50 backdrop-blur-md p-8 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
+                    <div class="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
                         data-aos="fade-up" data-aos-delay="0">
-                        <div class="flex gap-1 text-brand-yellow mb-6">
+                        <div class="flex gap-1 text-brand-yellow mb-4">
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                         </div>
-                        <p class="text-gray-300 italic mb-8 leading-relaxed">"Nhờ JobUp, mình đã tìm được vị trí Senior
+                        <p class="text-gray-300 italic mb-6 leading-relaxed">"Nhờ JobUp, mình đã tìm được vị trí Senior
                             React Developer tại VNG chỉ sau 2 tuần ứng tuyển. Quy trình cực kỳ minh bạch và chuyên
                             nghiệp."</p>
                         <div class="flex items-center gap-4">
@@ -1358,16 +1744,16 @@
                         </div>
                     </div>
                     <!-- Testimonial 2 -->
-                    <div class="bg-gray-800/50 backdrop-blur-md p-8 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
+                    <div class="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
                         data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex gap-1 text-brand-yellow mb-6">
+                        <div class="flex gap-1 text-brand-yellow mb-4">
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                         </div>
-                        <p class="text-gray-300 italic mb-8 leading-relaxed">"Giao diện dễ sử dụng, nhiều việc làm chất
+                        <p class="text-gray-300 italic mb-6 leading-relaxed">"Giao diện dễ sử dụng, nhiều việc làm chất
                             lượng. Mình rất ấn tượng với tính năng nhận tin tuyển dụng qua email rất đúng mục tiêu."</p>
                         <div class="flex items-center gap-4">
                             <img src="https://i.pravatar.cc/150?u=2"
@@ -1380,16 +1766,16 @@
                         </div>
                     </div>
                     <!-- Testimonial 3 -->
-                    <div class="bg-gray-800/50 backdrop-blur-md p-8 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
+                    <div class="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow/50 transition-all duration-500"
                         data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex gap-1 text-brand-yellow mb-6">
+                        <div class="flex gap-1 text-brand-yellow mb-4">
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                             <i class="fa-solid fa-star text-sm"></i>
                         </div>
-                        <p class="text-gray-300 italic mb-8 leading-relaxed">"Là nhà tuyển dụng, mình thấy JobUp cung
+                        <p class="text-gray-300 italic mb-6 leading-relaxed">"Là nhà tuyển dụng, mình thấy JobUp cung
                             cấp nguồn ứng viên rất chất lượng, phù hợp với tiêu chí khắt khe của Microsoft."</p>
                         <div class="flex items-center gap-4">
                             <img src="https://i.pravatar.cc/150?u=3"
@@ -1406,14 +1792,14 @@
         </section>
 
         <!-- News & Activities Section -->
-        <section id="news" class="py-24 relative bg-white">
+        <section id="news" class="py-16 relative bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
-                <div class="text-center mb-16" data-aos="fade-up">
+                <div class="text-center mb-12" data-aos="fade-up">
                     <span class="text-brand-yellow font-bold tracking-widest uppercase text-xs mb-3 block">Tin tức &
                         Hoạt động</span>
-                    <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Cập nhật mới nhất từ <span
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">Cập nhật mới nhất từ <span
                             class="text-brand-yellow">Gia đình JobUp</span></h2>
-                    <p class="text-gray-500 text-base max-w-2xl mx-auto mb-6">Những sự kiện, văn hoá và workshop chuyển
+                    <p class="text-gray-500 text-base max-w-2xl mx-auto mb-5">Những sự kiện, văn hoá và workshop chuyển
                         đổi số nổi bật nhất tháng này.</p>
                     <a href="#"
                         class="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellowHover transition">
@@ -1422,7 +1808,7 @@
                 </div>
 
                 <!-- News Grid: Mixed Layout for Dynamic Feel -->
-                <div class="grid lg:grid-cols-12 gap-8">
+                <div class="grid lg:grid-cols-12 gap-6">
                     <!-- Highlighted Post -->
                     <div class="lg:col-span-8 group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
                         <div class="relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-xl">
@@ -1446,7 +1832,7 @@
                     </div>
 
                     <!-- Side News -->
-                    <div class="lg:col-span-4 flex flex-col gap-8">
+                    <div class="lg:col-span-4 flex flex-col gap-6">
                         <div class="group flex gap-4 cursor-pointer" data-aos="fade-up" data-aos-delay="100">
                             <div class="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-md">
                                 <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=300"
