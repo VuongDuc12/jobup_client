@@ -46,6 +46,15 @@
                             lightGray: '#F9FAFB',
                             white: '#FFFFFF'
                         }
+                    },
+                    animation: {
+                        'loop-scroll': 'loop-scroll 30s linear infinite',
+                    },
+                    keyframes: {
+                        'loop-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -204,735 +213,682 @@
         </div>
     </header>
 
-    <main class="flex-grow pt-20">
-        <!-- Hero Section -->
-        <section class="relative h-[250px] flex items-center justify-center overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1920"
-                class="absolute inset-0 w-full h-full object-cover" alt="Recruitment Banner">
-            <div class="absolute inset-0 bg-brand-black/50 backdrop-blur-[2px]"></div>
+    <main class="flex-grow pt-24 bg-[#F8F9FA]">
 
-            <div class="relative z-10 text-center px-4 max-w-4xl">
-                <h1 class="text-2xl md:text-4xl font-extrabold text-white mb-4" data-aos="fade-up">
-                    Tìm Kiếm <span class="text-brand-yellow">Cơ Hội Nghề Nghiệp</span> Vàng
-                </h1>
 
-                <!-- Search Box -->
-                <div class="bg-white p-2 md:p-2.5 rounded-2xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-2 max-w-3xl mx-auto"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex-grow flex items-center px-4 border-b md:border-b-0 md:border-r border-gray-100">
-                        <i class="fa-solid fa-magnifying-glass text-gray-400 mr-3"></i>
-                        <input type="text" placeholder="Tên công việc, vị trí..."
-                            class="w-full py-2 focus:outline-none text-gray-700 bg-transparent text-sm">
-                    </div>
-                    <div class="flex-grow flex items-center px-4">
-                        <i class="fa-solid fa-location-dot text-gray-400 mr-3"></i>
-                        <select
-                            class="w-full py-2 focus:outline-none text-gray-700 bg-transparent appearance-none text-sm">
-                            <option value="">Tất cả địa điểm</option>
-                            <option value="hn">Hà Nội</option>
-                            <option value="hcm">TP. Hồ Chí Minh</option>
-                        </select>
-                    </div>
-                    <button
-                        class="bg-brand-yellow text-brand-black font-bold px-6 py-2 rounded-xl md:rounded-full hover:bg-brand-black hover:text-white transition-all text-sm">
-                        Tìm kiếm
-                    </button>
-                </div>
-            </div>
-        </section>
 
-        <!-- Main Listing Content -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-            <div class="grid lg:grid-cols-12 gap-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10"> <!-- More padding-top -->
 
-                <!-- Left Sidebar: Filters -->
-                <aside class="lg:col-span-4 lg:block hidden">
-                    <div class="sticky-filter space-y-6">
-                        <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-8">
-                            <div>
-                                <h3 class="text-lg font-extrabold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i class="fa-solid fa-filter text-brand-yellow"></i> Bộ lọc chi tiết
-                                </h3>
+            <!-- REFINED: Search Hub (Integrated Broadcast) -->
+            <div class="mb-10" data-aos="fade-up">
+                <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border border-white/20">
 
-                                <!-- Filter: Job Type -->
-                                <div class="filter-group mb-8">
-                                    <p class="font-bold text-gray-700 mb-4 text-sm uppercase tracking-wider">Hình thức
-                                        làm việc</p>
-                                    <div class="space-y-3">
-                                        <label class="flex items-center group">
-                                            <input type="checkbox" class="hidden peer" checked>
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-md mr-3 flex items-center justify-center peer-checked:bg-brand-yellow peer-checked:border-brand-yellow transition-all">
-                                                <i class="fa-solid fa-check text-white text-[10px]"></i>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Tất
-                                                cả hình thức</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="checkbox" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-md mr-3 flex items-center justify-center peer-checked:bg-brand-yellow peer-checked:border-brand-yellow transition-all">
-                                                <i class="fa-solid fa-check text-white text-[10px]"></i>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Toàn
-                                                thời gian</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="checkbox" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-md mr-3 flex items-center justify-center peer-checked:bg-brand-yellow peer-checked:border-brand-yellow transition-all">
-                                                <i class="fa-solid fa-check text-white text-[10px]"></i>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Bán
-                                                thời gian</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="checkbox" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-md mr-3 flex items-center justify-center peer-checked:bg-brand-yellow peer-checked:border-brand-yellow transition-all">
-                                                <i class="fa-solid fa-check text-white text-[10px]"></i>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Remote
-                                                / Làm từ xa</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="checkbox" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-md mr-3 flex items-center justify-center peer-checked:bg-brand-yellow peer-checked:border-brand-yellow transition-all">
-                                                <i class="fa-solid fa-check text-white text-[10px]"></i>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Freelance
-                                                / Tự do</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Filter: Level -->
-                                <div class="filter-group mb-8">
-                                    <p class="font-bold text-gray-700 mb-4 text-sm uppercase tracking-wider">Cấp bậc</p>
-                                    <div class="space-y-3">
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer" checked>
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Tất
-                                                cả cấp bậc</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Sinh
-                                                viên / Thực tập</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Mới
-                                                tốt nghiệp</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Nhân
-                                                viên</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Trưởng
-                                                nhóm / Giám sát</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="level" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Quản
-                                                lý / Trưởng phòng</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Filter: Salary -->
-                                <div class="filter-group mb-8">
-                                    <p class="font-bold text-gray-700 mb-4 text-sm uppercase tracking-wider">Mức lương
-                                    </p>
-                                    <div class="space-y-3">
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer" checked>
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Tất
-                                                cả mức lương</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Dưới
-                                                10 triệu</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">10
-                                                - 20 triệu</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">20
-                                                - 50 triệu</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Trên
-                                                50 triệu</span>
-                                        </label>
-                                        <label class="flex items-center group">
-                                            <input type="radio" name="salary" class="hidden peer">
-                                            <div
-                                                class="w-5 h-5 border-2 border-gray-200 rounded-full mr-3 flex items-center justify-center peer-checked:border-brand-yellow transition-all relative">
-                                                <div
-                                                    class="w-2.5 h-2.5 bg-brand-yellow rounded-full scale-0 peer-checked:scale-100 transition-transform">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-sm text-gray-600 peer-checked:text-brand-black peer-checked:font-bold">Thỏa
-                                                thuận</span>
-                                        </label>
-                                    </div>
+                    <!-- NEW: Integrated Broadcast Bar (Glassmorphism) -->
+                    <div
+                        class="absolute top-0 inset-x-0 z-20 bg-white/10 backdrop-blur-md border-b border-white/10 py-3 overflow-hidden">
+                        <div class="px-8 flex items-center gap-6">
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span class="flex h-2 w-2 relative">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-yellow opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-yellow"></span>
+                                </span>
+                                <span class="text-[10px] font-black text-white uppercase tracking-widest">Live
+                                    Broadcast</span>
+                            </div>
+                            <div class="flex-grow whitespace-nowrap overflow-hidden relative">
+                                <div
+                                    class="animate-[loop-scroll_40s_linear_infinite] flex items-center gap-12 text-[12px] font-bold text-white/80">
+                                    <span>🔥 Tuyển gấp 50 CSKH lương 15Tr không yêu cầu kinh nghiệm</span>
+                                    <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                                    <span>🚀 Top 100+ việc làm IT lương nghìn đô tại HCM & Hà Nội</span>
+                                    <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                                    <span>🎓 Khóa học Tester cam kết đầu ra giảm 50% hôm nay!</span>
+                                    <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                                    <span class="text-brand-yellow">✨ JobUp Connect 2026: Ngày hội tuyển dụng trực tuyến
+                                        lớn nhất năm</span>
+                                    <!-- Loop back -->
+                                    <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                                    <span>🔥 Tuyển gấp 50 CSKH lương 15Tr không yêu cầu kinh nghiệm</span>
                                 </div>
                             </div>
+                            <div class="hidden lg:flex items-center gap-4 text-[10px] font-black text-white/60">
+                                <span id="broadcast-date" class="bg-black/20 px-3 py-1 rounded-full uppercase"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Background Image with Overlay -->
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1600&q=80"
+                            class="w-full h-full object-cover" alt="Search BG">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-brand-black/90 via-brand-black/70 to-brand-black/40">
+                        </div>
+                        <!-- Decorative shapes -->
+                        <div
+                            class="absolute top-0 right-0 w-80 h-80 bg-brand-yellow/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-64 h-64 bg-red-600/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2">
+                        </div>
+                    </div>
 
+                    <div class="relative z-10 p-6 lg:p-14 pt-16 lg:pt-20">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                            <div>
+                                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
+                                    Tìm việc làm <span
+                                        class="text-brand-yellow drop-shadow-[0_0_15px_rgba(255,193,7,0.3)]">phù hợp
+                                        nhất</span>
+                                </h2>
+                                <p class="text-white/80 text-sm lg:text-lg font-bold flex items-center gap-3 mt-3">
+                                    <span class="w-12 h-1 bg-brand-yellow rounded-full"></span>
+                                    50,000+ tin tuyển dụng đã xác thực
+                                </p>
+                            </div>
                             <button
-                                class="w-full py-4 bg-gray-50 text-gray-500 font-bold rounded-2xl hover:bg-gray-100 transition-colors uppercase text-xs tracking-widest">
-                                Xóa tất cả bộ lọc
+                                class="flex items-center gap-2 px-5 py-2.5 bg-white/20 hover:bg-brand-yellow text-white hover:text-brand-black backdrop-blur-lg border border-white/30 rounded-full text-xs font-black transition-all shadow-lg active:scale-95">
+                                <i class="fa-solid fa-sliders text-white"></i> Lọc nâng cao
                             </button>
                         </div>
 
-                        <!-- JobUp Brand Trust Banner -->
-                        <div
-                            class="bg-gradient-to-br from-[#111827] to-[#1E293B] rounded-[2rem] p-8 text-white relative overflow-hidden group border border-white/5 shadow-2xl">
-                            <!-- Decorative Elements -->
-                            <div
-                                class="absolute -top-10 -right-10 w-40 h-40 bg-brand-yellow/10 rounded-full blur-3xl transition-transform group-hover:scale-150 duration-700">
-                            </div>
-                            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-brand-yellow/5 rounded-full blur-2xl">
-                            </div>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div
-                                        class="w-12 h-12 rounded-2xl bg-brand-yellow flex items-center justify-center text-brand-black shadow-[0_0_20px_rgba(240,180,41,0.3)] group-hover:rotate-12 transition-transform duration-500">
-                                        <i class="fa-solid fa-award text-2xl"></i>
-                                    </div>
-                                    <span
-                                        class="text-brand-yellow font-black text-[10px] uppercase tracking-[0.2em]">Thương
-                                        hiệu uy tín</span>
+                        <div class="flex flex-col lg:flex-row gap-4 items-stretch">
+                            <!-- Keyword Input -->
+                            <div class="flex-grow relative group">
+                                <input type="text" placeholder="Tên công việc, công ty hoặc kỹ năng..."
+                                    class="w-full pl-14 pr-6 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-white focus:text-gray-900 font-bold placeholder:text-white/60 backdrop-blur-md">
+                                <div
+                                    class="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-brand-yellow transition-colors text-lg drop-shadow-md z-10 pointer-events-none">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
+                            </div>
 
-                                <h4 class="text-2xl font-black mb-4 leading-tight">
-                                    JobUp - Tận tâm <br>
-                                    <span
-                                        class="bg-gradient-to-r from-brand-yellow to-amber-200 bg-clip-text text-transparent">Nâng
-                                        tầm sự nghiệp</span>
-                                </h4>
+                            <!-- Location Select -->
+                            <div class="w-full lg:w-64 relative group">
+                                <select
+                                    class="w-full pl-12 pr-10 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-white focus:text-gray-900 font-black appearance-none cursor-pointer backdrop-blur-md">
+                                    <option class="text-gray-900">Tất cả địa điểm</option>
+                                    <option class="text-gray-900">Hà Nội</option>
+                                    <option class="text-gray-900">Hồ Chí Minh</option>
+                                    <option class="text-gray-900">Đà Nẵng</option>
+                                </select>
+                                <div
+                                    class="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-brand-yellow transition-colors text-lg drop-shadow-md z-10 pointer-events-none">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div
+                                    class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-white drop-shadow-sm z-10">
+                                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                                </div>
+                            </div>
 
-                                <p class="text-white/50 text-xs mb-8 leading-relaxed font-medium">
-                                    Chúng tôi không chỉ là nền tảng tuyển dụng, mà còn là người đồng hành đáng tin cậy
-                                    nhất trên hành trình chinh phục đỉnh cao nghề nghiệp.
-                                </p>
+                            <!-- Search Button -->
+                            <button
+                                class="bg-brand-yellow text-brand-black px-12 py-4 rounded-2xl font-black hover:bg-white transition-all transform hover:scale-[1.03] shadow-[0_10px_20px_rgba(255,193,7,0.3)] active:scale-95 flex items-center justify-center gap-3">
+                                TÌM KIẾM <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
+                            </button>
+                        </div>
 
-                                <a href="index.html#about"
-                                    class="group/btn relative inline-flex items-center justify-center gap-3 w-full py-4 bg-white/5 hover:bg-brand-yellow rounded-2xl transition-all duration-300 border border-white/10 hover:border-brand-yellow overflow-hidden">
-                                    <span
-                                        class="relative z-10 text-white group-hover/btn:text-brand-black font-bold text-sm">Về
-                                        chúng tôi</span>
-                                    <i
-                                        class="fa-solid fa-arrow-right relative z-10 text-brand-yellow group-hover/btn:text-brand-black transition-transform group-hover/btn:translate-x-1"></i>
-                                </a>
+                        <!-- Hot Tags -->
+                        <div class="mt-8 flex flex-wrap items-center gap-4">
+                            <span
+                                class="text-[9px] font-black text-white/50 uppercase tracking-widest flex items-center gap-2">
+                                <span
+                                    class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]"></span>
+                                Tìm kiếm nhiều nhất:
+                            </span>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="#"
+                                    class="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm">Kinh
+                                    doanh</a>
+                                <a href="#"
+                                    class="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm">Bán
+                                    hàng</a>
+                                <a href="#"
+                                    class="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm">Giao
+                                    hàng</a>
+                                <a href="#"
+                                    class="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm">Part-time</a>
                             </div>
                         </div>
                     </div>
-                </aside>
+                </div>
+            </div>
 
-                <!-- Right Main: Job List -->
+            <script>
+                    (function () {
+                        const dateEl = document.getElementById('broadcast-date');
+                        if (dateEl) {
+                            const now = new Date();
+                            dateEl.innerText = now.toLocaleDateString('vi-VN', { weekday: 'short', day: '2-digit', month: '2-digit' });
+                        }
+                    })();
+            </script>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+
+                <!-- LEFT: Main Content Column -->
                 <div class="lg:col-span-8 flex flex-col gap-6">
 
-                    <div class="lg:hidden flex justify-end">
-                        <button onclick="toggleFilter()"
-                            class="flex items-center gap-2 px-6 py-3 bg-brand-black text-white rounded-full font-bold shadow-lg">
-                            <i class="fa-solid fa-sliders"></i> Bộ lọc
-                        </button>
-                    </div>
+                    <!-- Job Listings -->
+                    <div class="space-y-4">
 
-                    <div
-                        class="flex justify-between items-center bg-white p-4 px-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <p class="text-gray-500 text-sm">Hiển thị <span class="font-bold text-gray-900">10</span> trong
-                            số 1,248 công việc</p>
-                        <select
-                            class="text-sm font-bold text-gray-900 focus:outline-none bg-transparent cursor-pointer">
-                            <option>Mới nhất</option>
-                            <option>Lương cao</option>
-                        </select>
-                    </div>
+                        <!-- VIP Job Card -->
+                        <div
+                            class="relative bg-gradient-to-r from-yellow-50 to-white p-1 rounded-2xl shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group isolation-auto">
+                            <!-- HOT Badge moved and z-index fixed -->
+                            <div class="absolute -top-3 -right-3 z-20">
+                                <span class="relative flex h-10 w-10">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span
+                                        class="relative inline-flex rounded-full h-10 w-10 bg-red-600 items-center justify-center text-white text-[10px] font-black shadow-lg border-2 border-white">HOT</span>
+                                </span>
+                            </div>
 
-                    <!-- Job List Container -->
-                    <div class="space-y-3">
-
-                        <!-- Job Card Item 1 -->
-                        <a href="job-detail.html"
-                            class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
                             <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                                    class="w-full h-full object-contain" alt="JobUp Partner">
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex flex-wrap gap-2 mb-1">
-                                    <span
-                                        class="px-1.5 py-0.5 bg-green-50 text-green-700 text-[9px] font-bold uppercase rounded">Mới</span>
-                                    <span
-                                        class="px-1.5 py-0.5 bg-amber-50 text-amber-700 text-[9px] font-bold uppercase rounded">Gấp</span>
+                                class="bg-white p-6 rounded-xl flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10 overflow-hidden">
+                                <!-- Background Accent -->
+                                <div
+                                    class="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/5 rounded-full translate-x-16 -translate-y-16 -z-10">
                                 </div>
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Sale Engineer (JU0542)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Đối tác JobUp • <span
-                                        class="text-gray-400">Bình Dương / TP. HCM</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Nhân
-                                        viên</span>
+
+                                <div
+                                    class="w-20 h-20 rounded-2xl border-2 border-brand-yellow p-1.5 bg-white shrink-0 shadow-sm">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"
+                                        class="w-full h-full object-contain rounded-xl" alt="Logo">
                                 </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">17 - 22 Triệu</span>
-                                <div class="flex items-center gap-2">
+                                <div class="flex-grow">
+                                    <h3
+                                        class="text-xl font-black text-gray-900 group-hover:text-brand-yellow transition-colors leading-tight mb-2">
+                                        Trưởng Phòng Kinh Doanh (Thu nhập không giới hạn)
+                                    </h3>
+                                    <div class="flex items-center gap-3 text-gray-500 font-bold text-sm">
+                                        <span class="flex items-center gap-1.5 text-brand-black"><i
+                                                class="fa-solid fa-building text-brand-yellow"></i> Shopee
+                                            Vietnam</span>
+                                        <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot"></i>
+                                            Hà Nội</span>
+                                    </div>
+                                    <div class="flex gap-2 mt-4">
+                                        <span
+                                            class="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-lg shadow-sm shadow-red-200">Lương
+                                            $2000++</span>
+                                        <span
+                                            class="px-3 py-1 bg-gray-100 text-gray-600 text-[10px] font-black uppercase rounded-lg">Hoa
+                                            hồng 5%</span>
+                                        <span
+                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase rounded-lg border border-blue-100">Quản
+                                            lý</span>
+                                    </div>
+                                </div>
+                                <div class="shrink-0 w-full md:w-auto">
                                     <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <span
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</span>
+                                        class="w-full md:w-auto px-8 py-4 bg-brand-black text-white font-black rounded-xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl hover:shadow-yellow-400/30 active:scale-95">
+                                        ỨNG TUYỂN NGAY
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
 
-                        <!-- Job Card Item 2 -->
+                        <!-- Normal Job Card -->
                         <a href="job-detail.html"
-                            class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
+                            class="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center block">
+                            <div class="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
                                 <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-                                    class="w-full h-full object-contain" alt="Google">
+                                    class="w-full h-full object-contain" alt="Logo">
                             </div>
                             <div class="flex-grow">
-                                <div class="flex flex-wrap gap-2 mb-1">
-                                    <span
-                                        class="px-1.5 py-0.5 bg-blue-50 text-blue-700 text-[9px] font-bold uppercase rounded">HOT</span>
-                                </div>
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Product Designer (UI/UX)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Google Ads • <span
-                                        class="text-gray-400">TP. HCM</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Remote</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Middle</span>
-                                </div>
+                                <h3 class="font-bold text-gray-900 text-lg">Senior Java Developer</h3>
+                                <p class="text-gray-500 text-sm">Google Outsourcing • Đà Nẵng</p>
                             </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">Thỏa thuận</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <span
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</span>
-                                </div>
+                            <div class="text-right hidden md:block">
+                                <p class="text-green-600 font-bold">35 - 50 Triệu</p>
+                                <p class="text-gray-400 text-xs mt-1">2 giờ trước</p>
                             </div>
                         </a>
 
-                        <!-- Job Card Item 3 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
+                        <!-- In-feed Banner -->
+                        <div class="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md">
                             <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"
-                                    class="w-full h-full object-contain" alt="Shopee">
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex flex-wrap gap-2 mb-1">
-                                    <span
-                                        class="px-1.5 py-0.5 bg-red-50 text-red-600 text-[9px] font-bold uppercase rounded">GẤP</span>
+                                class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2">
                                 </div>
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Marketing Manager</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Shopee Vietnam • <span
-                                        class="text-gray-400">Toàn quốc</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Manager</span>
+                                <div class="relative z-10 flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white text-2xl shrink-0">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="text-white">
+                                        <h4 class="font-bold text-xl uppercase tracking-wide">Bạn chưa có kinh nghiệm?
+                                        </h4>
+                                        <p class="text-blue-100 text-sm">Tham gia khóa đào tạo thực chiến - Cam kết việc
+                                            làm 100%.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">$1,500 - $3,000</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
+                                <button
+                                    class="relative z-10 bg-white text-blue-700 px-6 py-2.5 rounded-full font-bold shadow-lg hover:scale-105 transition-transform whitespace-nowrap">
+                                    Tư vấn miễn phí
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Job Card Item 4 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-                                    class="w-full h-full object-contain" alt="LinkedIn">
-                            </div>
-                            <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Fullstack Developer (React/Node)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">LinkedIn VN • <span
-                                        class="text-gray-400">Hồ Chí Minh</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Hybrid</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Senior</span>
-                                </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">$2,000 - $3,500</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Job Card Item 5 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969117.png"
-                                    class="w-full h-full object-contain" alt="Zalo">
-                            </div>
-                            <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Mobile App Developer (Flutter)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Zalo Group • <span
-                                        class="text-gray-400">TP. Hồ Chí Minh</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Middle</span>
-                                </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">15 - 30 Triệu</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Job Card Item 6 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png"
-                                    class="w-full h-full object-contain" alt="Meta">
-                            </div>
-                            <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Content Creator (Social Media)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Meta Vietnam • <span
-                                        class="text-gray-400">Hà Nội / Remote</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Part-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Junior</span>
-                                </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">$800 - $1,200</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Job Card Item 7 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
+                        <!-- More Normal Job Cards -->
+                        <a href="job-detail.html"
+                            class="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center block">
+                            <div class="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
                                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
-                                    class="w-full h-full object-contain" alt="Figma">
+                                    class="w-full h-full object-contain" alt="Logo">
                             </div>
                             <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Lead UI Designer</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Design Agency • <span
-                                        class="text-gray-400">Đà Nẵng</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Leader</span>
-                                </div>
+                                <h3 class="font-bold text-gray-900 text-lg">UI/UX Designer (Figma)</h3>
+                                <p class="text-gray-500 text-sm">TechStartup • Remote</p>
                             </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">$1,800 - $2,500</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
+                            <div class="text-right hidden md:block">
+                                <p class="text-green-600 font-bold">Thỏa thuận</p>
+                                <p class="text-gray-400 text-xs mt-1">1 ngày trước</p>
                             </div>
-                        </div>
+                        </a>
 
-                        <!-- Job Card Item 8 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
+                        <a href="job-detail.html"
+                            class="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center block">
+                            <div class="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
+                                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                                    class="w-full h-full object-contain" alt="Logo">
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-gray-900 text-lg">Fullstack Developer (React/Node)</h3>
+                                <p class="text-gray-500 text-sm">LinkedIn VN • Hồ Chí Minh</p>
+                            </div>
+                            <div class="text-right hidden md:block">
+                                <p class="text-green-600 font-bold">$2,000 - $3,500</p>
+                                <p class="text-gray-400 text-xs mt-1">3 giờ trước</p>
+                            </div>
+                        </a>
+
+                        <a href="job-detail.html"
+                            class="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center block">
+                            <div class="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
                                 <img src="https://cdn-icons-png.flaticon.com/512/882/882731.png"
-                                    class="w-full h-full object-contain" alt="Grab">
+                                    class="w-full h-full object-contain" alt="Logo">
                             </div>
                             <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Data Analyst (SQL/Python)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Grab Vietnam • <span
-                                        class="text-gray-400">Hà Nội</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Middle</span>
-                                </div>
+                                <h3 class="font-bold text-gray-900 text-lg">Data Analyst (SQL/Python)</h3>
+                                <p class="text-gray-500 text-sm">Grab Vietnam • Hà Nội</p>
                             </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">20 - 35 Triệu</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
+                            <div class="text-right hidden md:block">
+                                <p class="text-green-600 font-bold">20 - 35 Triệu</p>
+                                <p class="text-gray-400 text-xs mt-1">5 giờ trước</p>
                             </div>
-                        </div>
+                        </a>
 
-                        <!-- Job Card Item 9 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969247.png"
-                                    class="w-full h-full object-contain" alt="Tiki">
+                        <a href="job-detail.html"
+                            class="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center block">
+                            <div class="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
+                                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969117.png"
+                                    class="w-full h-full object-contain" alt="Logo">
                             </div>
                             <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    Sales Executive (B2B)</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">Tiki Corporation • <span
-                                        class="text-gray-400">Toàn quốc</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Junior</span>
-                                </div>
+                                <h3 class="font-bold text-gray-900 text-lg">Mobile App Developer (Flutter)</h3>
+                                <p class="text-gray-500 text-sm">Zalo Group • TP. Hồ Chí Minh</p>
                             </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">12 - 20 Triệu</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
+                            <div class="text-right hidden md:block">
+                                <p class="text-green-600 font-bold">15 - 30 Triệu</p>
+                                <p class="text-gray-400 text-xs mt-1">1 ngày trước</p>
                             </div>
-                        </div>
-
-                        <!-- Job Card Item 10 -->
-                        <div class="job-card bg-white p-4 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-4 cursor-pointer"
-                            data-aos="fade-up">
-                            <div
-                                class="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968260.png"
-                                    class="w-full h-full object-contain" alt="VinGroup">
-                            </div>
-                            <div class="flex-grow">
-                                <h3
-                                    class="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                                    HR Generalist</h3>
-                                <p class="text-gray-500 text-sm font-medium mb-2">VinGroup • <span
-                                        class="text-gray-400">Hà Nội</span></p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Full-time</span>
-                                    <span
-                                        class="text-[11px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">Middle</span>
-                                </div>
-                            </div>
-                            <div class="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                                <span class="text-green-600 font-black text-lg mb-auto">Thỏa thuận</span>
-                                <div class="flex items-center gap-2">
-                                    <button
-                                        class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-100 hover:bg-red-50 hover:text-red-500 transition-all"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button
-                                        class="px-5 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">Ứng
-                                        tuyển</button>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
 
                     </div>
 
-                    <!-- Pagination -->
-                    <div class="flex justify-center items-center gap-2 pt-8" data-aos="fade-up">
+                    <!-- Load More -->
+                    <div class="flex justify-center pt-8">
                         <button
-                            class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-black hover:text-white transition-all">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button
-                            class="w-10 h-10 rounded-full bg-brand-yellow text-brand-black font-bold border border-brand-yellow">1</button>
-                        <button
-                            class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 font-bold hover:bg-gray-50">2</button>
-                        <button
-                            class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 font-bold hover:bg-gray-50">3</button>
-                        <span class="px-2 text-gray-300">...</span>
-                        <button
-                            class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 font-bold hover:bg-gray-50">12</button>
-                        <button
-                            class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-black hover:text-white transition-all">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
+                            class="px-6 py-2 border border-gray-300 rounded-full hover:bg-black hover:text-white transition-all font-medium">Xem
+                            thêm việc làm</button>
                     </div>
-
+                    <!-- Spotlight Banner -->
+                    <div
+                        class="relative rounded-2xl overflow-hidden h-auto min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+                            class="w-full h-full absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="Ads">
+                        <div
+                            class="relative h-full bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-8 lg:p-14">
+                            <span
+                                class="text-brand-yellow font-black uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2">
+                                <span class="w-8 h-px bg-brand-yellow"></span> Chương trình đặc biệt
+                            </span>
+                            <h1 class="text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">
+                                Ngày hội tuyển dụng <br>
+                                <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Big
+                                    Tech 2026</span>
+                            </h1>
+                            <p
+                                class="text-gray-200 mb-8 max-w-lg text-base lg:text-lg font-medium leading-relaxed opacity-90">
+                                Cơ hội phỏng vấn trực tiếp với Google, Microsoft, VNG. <br class="hidden lg:block"> Nhận
+                                Offer ngay tại sự kiện ngày mai.
+                            </p>
+                            <button
+                                class="bg-brand-yellow text-brand-black px-8 py-4 rounded-full font-black w-fit hover:bg-white transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/20">
+                                ĐĂNG KÝ THAM GIA NGAY
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- RIGHT: Sidebar -->
+                <aside class="lg:col-span-4 space-y-8">
+
+                    <!-- CV Review CTA -->
+                    <div
+                        class="bg-gradient-to-br from-brand-yellow to-amber-500 rounded-2xl p-6 text-brand-black shadow-lg relative overflow-hidden group">
+                        <div
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-white opacity-20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700">
+                        </div>
+                        <h3 class="text-xl font-black mb-2">CV của bạn đã đủ tốt?</h3>
+                        <p class="text-sm font-medium opacity-80 mb-4">80% Nhà tuyển dụng loại hồ sơ vì CV xấu. Để
+                            chuyên gia JobUp giúp bạn.</p>
+                        <button
+                            class="w-full py-3 bg-brand-black text-white font-bold rounded-xl shadow-md hover:bg-white hover:text-brand-black transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Review CV Miễn Phí
+                        </button>
+                    </div>
+
+                    <!-- Sticky Sidebar Widgets -->
+                    <div class="sticky top-24 space-y-6">
+
+                        <!-- NEW: Urgent Jobs Widget (Premium Sync) -->
+                        <!-- REDESIGNED: Urgent Jobs (Sleek & Compact 5-List) -->
+                        <div
+                            class="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col relative group/urgent mb-8 transition-all hover:shadow-brand-yellow/10">
+                            <!-- Indicator -->
+                            <div class="absolute top-0 right-0 p-5">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-yellow/50 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-yellow"></span>
+                                </span>
+                            </div>
+
+                            <!-- Header -->
+                            <div class="p-6 pb-2 shrink-0">
+                                <h4 class="font-black text-gray-900 text-xl flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-brand-yellow/10 flex items-center justify-center">
+                                        <i class="fa-solid fa-fire text-brand-yellow text-lg animate-pulse"></i>
+                                    </div>
+                                    Việc Làm Gấp
+                                </h4>
+                                <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-3.5 pl-1">
+                                    Tin mới nhất trong 24h</p>
+                            </div>
+
+                            <!-- List Content (5 Compact Jobs) -->
+                            <div class="px-3 pb-4 space-y-1">
+                                <!-- Job 1 -->
+                                <a href="#"
+                                    class="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20">
+                                    <div
+                                        class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3225/3225191.png"
+                                            class="w-full h-full object-contain" alt="Job">
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h5
+                                            class="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                                            Nhân viên chốt đơn Online</h5>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <p class="text-brand-yellow font-extrabold text-[11px] tracking-tight">8 -
+                                                12
+                                                Triệu</p>
+                                            <p class="text-gray-400 text-[9px] font-bold">3h trước</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Job 2 -->
+                                <a href="#"
+                                    class="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20">
+                                    <div
+                                        class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png"
+                                            class="w-full h-full object-contain" alt="Job">
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h5
+                                            class="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                                            Tài xế giao hàng (Xe máy)</h5>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <p class="text-brand-yellow font-extrabold text-[11px] tracking-tight">15
+                                                Triệu++
+                                            </p>
+                                            <p class="text-gray-400 text-[9px] font-bold">5h trước</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Job 3 -->
+                                <a href="#"
+                                    class="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20">
+                                    <div
+                                        class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135823.png"
+                                            class="w-full h-full object-contain" alt="Job">
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h5
+                                            class="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                                            Sale Engineer Thiết bị CNC</h5>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <p class="text-brand-yellow font-extrabold text-[11px] tracking-tight">17 -
+                                                22
+                                                Triệu</p>
+                                            <p class="text-gray-400 text-[9px] font-bold">1d trước</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Job 4 -->
+                                <a href="#"
+                                    class="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20">
+                                    <div
+                                        class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3858/3858686.png"
+                                            class="w-full h-full object-contain" alt="Job">
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h5
+                                            class="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                                            Kế toán kho (Thanh Xuân)</h5>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <p class="text-brand-yellow font-extrabold text-[11px] tracking-tight">10 -
+                                                14
+                                                Triệu</p>
+                                            <p class="text-gray-400 text-[9px] font-bold">2h trước</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Job 5 -->
+                                <a href="#"
+                                    class="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20">
+                                    <div
+                                        class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2830/2830305.png"
+                                            class="w-full h-full object-contain" alt="Job">
+                                    </div>
+                                    <div class="flex-grow min-w-0">
+                                        <h5
+                                            class="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                                            Lễ tân tòa nhà (Giao tiếp)</h5>
+                                        <div class="flex items-center justify-between mt-1">
+                                            <p class="text-brand-yellow font-extrabold text-[11px] tracking-tight">7 - 9
+                                                Triệu</p>
+                                            <p class="text-gray-400 text-[9px] font-bold">4h trước</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="p-5 pt-0 mt-auto shrink-0">
+                                <button
+                                    class="w-full py-3.5 bg-gray-50 text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-brand-black hover:text-white transition-all group/btn flex items-center justify-center gap-2 shadow-sm border border-gray-100/50">
+                                    Xem tất cả tin gấp <i
+                                        class="fa-solid fa-chevron-right text-[8px] group-hover/btn:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Career Handbook Auto-Slider (Optimized Balance) -->
+                        <div
+                            class="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col h-[480px] relative group/handbook">
+                            <!-- Header with Progress Dots -->
+                            <div class="p-6 pb-4 flex items-center justify-between shrink-0">
+                                <h4 class="font-black text-gray-900 text-xl flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-brand-yellow/10 flex items-center justify-center">
+                                        <i class="fa-solid fa-book-open text-brand-yellow text-sm"></i>
+                                    </div>
+                                    Cẩm Nang
+                                </h4>
+                                <div class="flex gap-2" id="handbook-dots">
+                                    <span
+                                        class="w-6 h-1 rounded-full bg-brand-yellow transition-all duration-300"></span>
+                                    <span class="w-1.5 h-1 rounded-full bg-gray-200 transition-all duration-300"></span>
+                                    <span class="w-1.5 h-1 rounded-full bg-gray-200 transition-all duration-300"></span>
+                                </div>
+                            </div>
+
+                            <!-- Slider Container -->
+                            <div class="flex-grow overflow-hidden relative">
+                                <div id="handbook-slider"
+                                    class="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]">
+
+                                    <!-- Slide 1: CV Writing -->
+                                    <div class="w-full flex-shrink-0 px-6 flex flex-col h-full">
+                                        <div
+                                            class="relative rounded-2xl overflow-hidden h-48 mb-4 shadow-sm group cursor-pointer shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80"
+                                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                                alt="CV Tip">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent">
+                                            </div>
+                                            <span
+                                                class="absolute top-3 left-3 bg-red-600 text-white text-[8px] font-black px-2 py-1 rounded shadow-lg uppercase">Hot
+                                                Tip</span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <h5
+                                                class="font-black text-gray-900 text-base leading-tight group-hover/handbook:text-brand-yellow transition-colors line-clamp-2">
+                                                5 lỗi kinh điển khi viết CV khiến bạn bị loại ngay lập tức</h5>
+                                            <p
+                                                class="text-gray-500 text-sm mt-3 font-medium leading-relaxed line-clamp-2">
+                                                Những lỗi tưởng chừng nhỏ nhưng lại là rào cản lớn nhất giữa bạn và nhà
+                                                tuyển dụng...</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slide 2: Salary Negotiation -->
+                                    <div class="w-full flex-shrink-0 px-6 flex flex-col h-full">
+                                        <div
+                                            class="relative rounded-2xl overflow-hidden h-48 mb-4 shadow-sm group cursor-pointer shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1454165833767-027ffcb99c17?auto=format&fit=crop&w=800&q=80"
+                                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                                alt="Salary Deal">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent">
+                                            </div>
+                                            <span
+                                                class="absolute top-3 left-3 bg-brand-yellow text-brand-black text-[8px] font-black px-2 py-1 rounded shadow-lg uppercase">Salary</span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <h5 class="font-black text-gray-900 text-base leading-tight line-clamp-2">Bí
+                                                kíp thương lượng lương "khéo" để đạt mức thu nhập mong muốn</h5>
+                                            <p
+                                                class="text-gray-500 text-sm mt-3 font-medium leading-relaxed line-clamp-2">
+                                                Nghệ thuật đàm phán không chỉ nằm ở con số, mà còn ở cách bạn thể hiện
+                                                giá trị...</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slide 3: Interview Master -->
+                                    <div class="w-full flex-shrink-0 px-6 flex flex-col h-full">
+                                        <div
+                                            class="relative rounded-2xl overflow-hidden h-48 mb-4 shadow-sm group cursor-pointer shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+                                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                                alt="Interview">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent">
+                                            </div>
+                                            <span
+                                                class="absolute top-3 left-3 bg-brand-black text-white text-[8px] font-black px-2 py-1 rounded shadow-lg uppercase">Skills</span>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <h5 class="font-black text-gray-900 text-base leading-tight line-clamp-2">
+                                                Tuyệt chiêu trả lời những câu hỏi phỏng vấn hóc búa nhất</h5>
+                                            <p
+                                                class="text-gray-500 text-sm mt-3 font-medium leading-relaxed line-clamp-2">
+                                                Tổng hợp những tình huống thường gặp từ các tập đoàn lớn và cách trả lời
+                                                thông minh...</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Footer Button -->
+                            <div class="p-6 pt-0 mt-auto shrink-0">
+                                <button
+                                    class="w-full py-4 bg-brand-black text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl group/btn flex items-center justify-center gap-2 active:scale-95">
+                                    Khám phá cẩm nang <i
+                                        class="fa-solid fa-arrow-right-long group-hover/btn:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+
+                            <script>
+                                (function () {
+                                    const slider = document.getElementById('handbook-slider');
+                                    const dots = document.querySelectorAll('#handbook-dots span');
+                                    let current = 0;
+                                    function update() {
+                                        slider.style.transform = `translateX(-${current * 100}%)`;
+                                        dots.forEach((dot, i) => {
+                                            if (i === current) {
+                                                dot.classList.add('bg-brand-yellow', 'w-6');
+                                                dot.classList.remove('bg-gray-200', 'w-1.5');
+                                            } else {
+                                                dot.classList.remove('bg-brand-yellow', 'w-6');
+                                                dot.classList.add('bg-gray-200', 'w-1.5');
+                                            }
+                                        });
+                                    }
+                                    let interval = setInterval(() => {
+                                        current = (current + 1) % 3;
+                                        update();
+                                    }, 4000);
+                                    const card = document.querySelector('.group\\/handbook');
+                                    card.addEventListener('mouseenter', () => clearInterval(interval));
+                                    card.addEventListener('mouseleave', () => interval = setInterval(() => {
+                                        current = (current + 1) % 3;
+                                        update();
+                                    }, 4000));
+                                })();
+                            </script>
+                        </div>
+
+                    </div>
+
+                </aside>
+
             </div>
-        </section>
+        </div>
     </main>
+
 
     <!-- Footer -->
     <footer class="bg-brand-black pt-24 font-sans relative overflow-hidden text-white" id="footer">
