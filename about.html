@@ -1,111 +1,613 @@
-<!-- About Us Section: Refined & Human-Centric -->
-<section id="about" class="py-32 bg-white relative overflow-hidden">
-    <!-- Decorative Large Text in Background -->
-    <div
-        class="absolute top-20 -left-10 text-[12rem] font-black text-gray-50/50 select-none pointer-events-none -z-10 uppercase tracking-tighter">
-        JobUp
-    </div>
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <!-- Top Header: Editorial Style -->
-        <div class="max-w-3xl mb-24" data-aos="fade-up">
-            <div class="flex items-center gap-4 mb-6">
-                <span class="w-12 h-px bg-brand-yellow"></span>
-                <span class="text-brand-yellow font-bold uppercase tracking-[0.3em] text-xs">Về chúng tôi</span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về JobUp – Đối Tác Tuyển Dụng Chuyên Nghiệp Hàng Đầu Việt Nam</title>
+    <link rel="icon" type="image/png" href="./favicon.png">
+
+    <!-- SEO -->
+    <meta name="description"
+        content="JobUp là đơn vị tư vấn tuyển dụng chuyên nghiệp hàng đầu Việt Nam, phục vụ hơn 100 doanh nghiệp trong 15+ ngành nghề. Tìm hiểu về đội ngũ, tầm nhìn và giá trị cốt lõi của chúng tôi.">
+    <meta name="keywords"
+        content="jobup, tuyển dụng chuyên nghiệp, tư vấn nhân sự, headhunter việt nam, ha phan mhrm, dịch vụ tuyển dụng">
+    <meta name="author" content="JobUp Corporation">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#F0B429">
+    <link rel="canonical" href="https://jobup.vn/about">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jobup.vn/about">
+    <meta property="og:title" content="Về JobUp – Đối Tác Tuyển Dụng Chuyên Nghiệp Hàng Đầu Việt Nam">
+    <meta property="og:description"
+        content="Khám phá hành trình, đội ngũ lãnh đạo và giá trị cốt lõi của JobUp – nền tảng kết nối nhân tài với doanh nghiệp.">
+    <meta property="og:image" content="https://jobup.vn/assets/og-about.jpg">
+
+    <!-- JSON-LD Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "JobUp",
+      "url": "https://jobup.vn",
+      "logo": "https://jobup.vn/Logo.png",
+      "description": "JobUp là nhà cung cấp dịch vụ tư vấn tuyển dụng chuyên nghiệp, phục vụ hơn 100 khách hàng trong 15+ ngành nghề tại Việt Nam.",
+      "foundingDate": "2020",
+      "founder": { "@type": "Person", "name": "Ha Phan", "jobTitle": "CEO & Founder" },
+      "address": { "@type": "PostalAddress", "streetAddress": "C23.Lot18, P.Định Công", "addressLocality": "Hoàng Mai", "addressRegion": "Hà Nội", "addressCountry": "VN" },
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+84979334143", "contactType": "customer service", "availableLanguage": ["Vietnamese", "English"] },
+      "sameAs": ["https://facebook.com/jobup.vn", "https://linkedin.com/company/jobup"]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['"Playfair Display"', 'serif'] },
+                    colors: { brand: { yellow: '#F0B429', yellowHover: '#D99F1F', black: '#111827', gray: '#6B7280', lightGray: '#F9FAFB', white: '#FFFFFF' } },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0,0,0,0.05)', 'hover': '0 20px 40px -5px rgba(0,0,0,0.1)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- ─── NAVBAR (synced with index.html) ─── -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 glass border-b border-gray-100" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group"><img src="Logo.png" alt="JobUp Logo"
+                    class="h-10 w-auto object-contain" loading="lazy"></a>
+            <nav class="hidden lg:flex items-center gap-10">
+                <a href="index.html"
+                    class="font-semibold text-gray-600 hover:text-brand-yellowHover transition relative group py-2">Trang
+                    chủ<span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-yellow transition-all group-hover:w-full"></span></a>
+                <a href="jobs.html"
+                    class="font-semibold text-gray-600 hover:text-brand-yellowHover transition relative group py-2">Tuyển
+                    dụng<span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-yellow transition-all group-hover:w-full"></span></a>
+                <a href="about.html" class="font-bold text-brand-yellow py-2 border-b-2 border-brand-yellow">Về chúng
+                    tôi</a>
+                <a href="index.html#footer"
+                    class="font-semibold text-gray-600 hover:text-brand-yellowHover transition relative group py-2">Liên
+                    hệ<span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-yellow transition-all group-hover:w-full"></span></a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="tel:0979334143"
+                    class="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-amber-600 transition-colors"><i
+                        class="fa-solid fa-phone text-xs"></i><span class="font-medium">0979.334.143</span></a>
+                <span class="hidden md:block w-px h-4 bg-gray-200"></span>
+                <a href="mailto:hr@jobup.vn"
+                    class="px-6 py-2.5 rounded-full bg-brand-black text-white font-bold text-sm shadow-lg hover:shadow-[0_8px_30px_rgba(240,180,41,0.4)] hover:bg-brand-yellow hover:text-brand-black transition-all duration-300 transform hover:-translate-y-1">Gửi
+                    CV ngay</a>
+                <button id="mobile-menu-btn" class="lg:hidden text-2xl text-gray-600"><i
+                        class="fa-solid fa-bars"></i></button>
             </div>
-            <h2 class="text-4xl lg:text-6xl font-display italic font-black text-gray-900 leading-[1.1] mb-8">
-                Kiến tạo giá trị thực <br>
-                <span class="text-gold-matte">từ sự kết nối chân thành</span>
-            </h2>
-            <p class="text-xl text-gray-500 font-light leading-relaxed">
-                Không chỉ là một đơn vị tư vấn tuyển dụng, chúng tôi là người đồng hành đáng tin cậy, giúp doanh
-                nghiệp tìm thấy mảnh ghép hoàn hảo và giúp ứng viên chạm tới ước mơ sự nghiệp.
-            </p>
         </div>
+    </header>
 
-        <div class="grid lg:grid-cols-12 gap-12 items-start">
-            <!-- Left: Overlapping Image Composition -->
-            <div class="lg:col-span-6 relative" data-aos="fade-right">
+    <main class="pt-20">
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- HERO: Background image + overlay + text on top -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="hero-workspace.png"
+                    alt="Không gian làm việc hiện đại của JobUp – nơi kết nối nhân tài và doanh nghiệp"
+                    class="w-full h-full object-cover">
+                <!-- Dark gradient overlay -->
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/50 to-brand-black/80">
+                </div>
+            </div>
+
+            <!-- Text Content on top -->
+            <div class="relative z-10 max-w-4xl mx-auto px-4 text-center py-32">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6"
+                    data-aos="fade-up">
+                    Chúng tôi kết nối nhân tài<br>với doanh nghiệp bằng sự<br>chuyên nghiệp và tận tâm.
+                </h1>
+                <p class="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed mb-10" data-aos="fade-up"
+                    data-aos-delay="100">
+                    JobUp là nhà cung cấp dịch vụ tư vấn tuyển dụng chuyên nghiệp, phục vụ thành công hơn 100 khách hàng
+                    trong 15+ ngành nghề khác nhau trên khắp Việt Nam.
+                </p>
+                <div class="flex justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="mailto:hr@jobup.vn"
+                        class="px-8 py-3.5 rounded-full bg-brand-yellow text-brand-black font-bold text-sm hover:bg-white transition-all shadow-lg">Liên
+                        hệ chúng tôi</a>
+                    <a href="jobs.html"
+                        class="px-8 py-3.5 rounded-full border-2 border-white/30 text-white font-bold text-sm hover:border-brand-yellow hover:text-brand-yellow transition-all">Khám
+                        phá cơ hội</a>
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- OUR JOURNEY: Text left + Image grid right      -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div data-aos="fade-right">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-px bg-brand-yellow"></span>
+                            <span class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Hành
+                                trình</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-brand-black leading-tight mb-8">Tất cả bắt
+                            đầu từ một ý tưởng đơn giản.</h2>
+                        <p class="text-gray-500 text-lg leading-relaxed mb-6">Với nền tảng kinh nghiệm vững chắc trong
+                            lĩnh vực Quản trị Nhân sự và niềm đam mê kết nối con người, JobUp được thành lập để giải
+                            quyết bài toán tuyển dụng cho các doanh nghiệp vừa và nhỏ tại Việt Nam.</p>
+                        <p class="text-gray-500 leading-relaxed">Ngày nay, chúng tôi hợp tác với các doanh nghiệp đa
+                            ngành — từ Công nghệ, Giáo dục, Làm đẹp, Chăm sóc sức khỏe, Thương mại điện tử, FMCG đến Sản
+                            xuất — biến mọi thách thức nhân sự thành kết quả đo lường được.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                        <div class="rounded-2xl overflow-hidden shadow-lg"><img
+                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80"
+                                alt="Đội ngũ JobUp làm việc nhóm" class="w-full aspect-[4/3] object-cover"></div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg mt-8"><img
+                                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=80"
+                                alt="Cuộc họp chiến lược tuyển dụng" class="w-full aspect-[4/3] object-cover"></div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg"><img
+                                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=500&q=80"
+                                alt="Brainstorming giải pháp nhân sự" class="w-full aspect-[4/3] object-cover"></div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg mt-8"><img
+                                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80"
+                                alt="Văn hóa doanh nghiệp JobUp" class="w-full aspect-[4/3] object-cover"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- WHAT MAKES US DIFFERENT                         -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-brand-lightGray">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-20">
+                    <div class="flex items-center justify-center gap-3 mb-4"><span
+                            class="w-8 h-px bg-brand-yellow"></span><span
+                            class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Điểm khác
+                            biệt</span><span class="w-8 h-px bg-brand-yellow"></span></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-brand-black" data-aos="fade-up">Điều gì làm nên
+                        sự khác biệt?</h2>
+                    <p class="text-gray-500 mt-4 text-lg" data-aos="fade-up" data-aos-delay="100">Chúng tôi không chỉ
+                        tìm ứng viên — chúng tôi kiến tạo giải pháp nhân sự bền vững.</p>
+                </div>
+
+                <!-- Block 1: Image left, content right -->
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                    <div class="rounded-3xl overflow-hidden shadow-xl" data-aos="fade-right">
+                        <img src="ceo_ha_phan_portrait_1770740089906.png"
+                            alt="Mrs. Ha Phan - CEO & Founder JobUp, chuyên gia tư vấn tuyển dụng"
+                            class="w-full aspect-[4/3] object-cover">
+                    </div>
+                    <div data-aos="fade-left">
+                        <h3 class="text-3xl font-extrabold text-brand-black mb-4">Chúng tôi tập trung vào kết quả thực,
+                            không chỉ hồ sơ.</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">Công việc của chúng tôi không dừng lại khi gửi CV
+                            — mà khi doanh nghiệp tìm được đúng người, đúng thời điểm, và ứng viên bắt đầu công việc mới
+                            thành công.</p>
+                        <h3 class="text-3xl font-extrabold text-brand-black mb-4">Chiến lược dẫn đầu, thiết kế vì tác
+                            động.</h3>
+                        <p class="text-gray-500 leading-relaxed mb-8">Mọi giải pháp tuyển dụng của JobUp đều dựa trên sự
+                            thấu hiểu sâu sắc về ngành, văn hóa doanh nghiệp và kỳ vọng ứng viên — tạo nên sự kết nối có
+                            ý nghĩa và bền vững.</p>
+
+                        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-brand-yellow/10 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-handshake text-brand-yellow text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-extrabold text-brand-black">100+ doanh nghiệp đối tác</p>
+                                    <p class="text-sm text-gray-400">Trong 15+ ngành nghề trên khắp Việt Nam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- VISION & MISSION                                -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-brand-lightGray rounded-3xl p-10 md:p-14 border border-gray-100 hover:shadow-hover transition-shadow"
+                        data-aos="fade-up">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-yellow/10 flex items-center justify-center text-brand-yellow text-2xl mb-8">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-brand-black mb-4">Tầm nhìn</h3>
+                        <p class="text-gray-500 leading-relaxed text-lg">Trở thành đối tác tin cậy cung cấp dịch vụ
+                            tuyển dụng đa ngành nghề phổ biến khắp Việt Nam.</p>
+                    </div>
+                    <div class="bg-brand-black rounded-3xl p-10 md:p-14 hover:shadow-hover transition-shadow"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-yellow/10 flex items-center justify-center text-brand-yellow text-2xl mb-8">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white mb-4">Sứ mệnh</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">Tư vấn dịch vụ tuyển dụng giúp kết nối những
+                            ứng viên tiềm năng với các doanh nghiệp đang có nhu cầu tuyển dụng nhân sự.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- CORE VALUES: 3 columns                          -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-brand-black" data-aos="fade-up">Giá trị cốt lõi</h2>
+                    <div class="w-12 h-1 bg-brand-yellow mx-auto mt-4 rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <div class="text-center group" data-aos="fade-up">
+                        <div
+                            class="w-16 h-16 rounded-full bg-brand-lightGray flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-yellow transition-all">
+                            <i
+                                class="fa-solid fa-bolt text-brand-yellow text-2xl group-hover:text-brand-black transition-colors"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-brand-black mb-3">Tốc độ</h4>
+                        <p class="text-gray-500 leading-relaxed">Chúng tôi đề cao tốc độ phục vụ khách hàng, hỗ trợ ứng
+                            viên với mong muốn để không ai phải chờ.</p>
+                    </div>
+                    <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="w-16 h-16 rounded-full bg-brand-lightGray flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-yellow transition-all">
+                            <i
+                                class="fa-solid fa-medal text-brand-yellow text-2xl group-hover:text-brand-black transition-colors"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-brand-black mb-3">Chất lượng</h4>
+                        <p class="text-gray-500 leading-relaxed">Chất lượng là thước đo thành công của chúng tôi trong
+                            mọi hoạt động tư vấn và kết nối nhân sự.</p>
+                    </div>
+                    <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="w-16 h-16 rounded-full bg-brand-lightGray flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-yellow transition-all">
+                            <i
+                                class="fa-solid fa-handshake text-brand-yellow text-2xl group-hover:text-brand-black transition-colors"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-brand-black mb-3">Uy tín</h4>
+                        <p class="text-gray-500 leading-relaxed">Chúng tôi trân trọng lời nói, giữ cam kết và luôn có
+                            hành động cụ thể để minh chứng.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- LEADERSHIP TEAM                                 -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-brand-lightGray">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <div class="flex items-center justify-center gap-3 mb-4"><span
+                            class="w-8 h-px bg-brand-yellow"></span><span
+                            class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Đội ngũ lãnh
+                            đạo</span><span class="w-8 h-px bg-brand-yellow"></span></div>
+                    <h2 class="text-4xl font-extrabold text-brand-black" data-aos="fade-up">Những người dẫn dắt JobUp
+                    </h2>
+                </div>
+
+                <!-- CEO -->
+                <div class="grid lg:grid-cols-5 gap-12 items-center mb-20">
+                    <div class="lg:col-span-2 rounded-3xl overflow-hidden shadow-xl" data-aos="fade-right">
+                        <img src="ceo_ha_phan_portrait_1770740089906.png" alt="Mrs. Ha Phan, MHRM – CEO & Founder JobUp"
+                            class="w-full aspect-[3/4] object-cover">
+                    </div>
+                    <div class="lg:col-span-3" data-aos="fade-left">
+                        <span class="text-brand-yellow font-bold text-sm uppercase tracking-widest">CEO & Founder</span>
+                        <h3 class="text-3xl font-extrabold text-brand-black mt-2 mb-6">Mrs. Ha Phan, MHRM</h3>
+                        <ul class="space-y-4 text-gray-600">
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>CEO tại
+                                    <strong>JobUp</strong> – 10 năm kinh nghiệm trong lĩnh vực Nhân sự</span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Nhà sáng
+                                    lập Công ty Cổ phần DNXH <strong>HR Companion</strong></span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Cựu
+                                    <strong>HRBP Manager</strong> tại Citigo | Cựu <strong>HRBP</strong> tại
+                                    TPBank</span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Giảng
+                                    viên khóa "Tuyển dụng thực tế cho người mới" tại <strong>Gitiho</strong> – 300+ học
+                                    viên</span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Chuyên
+                                    gia đào tạo & tư vấn tuyển dụng cho <strong>doanh nghiệp vừa và nhỏ</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Advisor -->
+                <div class="grid lg:grid-cols-5 gap-12 items-center">
+                    <div class="lg:col-span-3 order-2 lg:order-1" data-aos="fade-right">
+                        <span class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Ban Cố Vấn</span>
+                        <h3 class="text-3xl font-extrabold text-brand-black mt-2 mb-6">Mrs. Diep Nguyen Ngoc, MHRM</h3>
+                        <ul class="space-y-4 text-gray-600">
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Cố vấn
+                                    tại <strong>JobUp</strong></span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span><strong>15
+                                        năm</strong> kinh nghiệm Quản lý Nhân sự tại Tập đoàn <strong>Lotus, Vingroup,
+                                        Seaferico</strong></span></li>
+                            <li class="flex gap-3"><i
+                                    class="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0"></i><span>Nguyên
+                                    Giảng viên <strong>Khoa Quản trị nguồn nhân lực</strong></span></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-2 order-1 lg:order-2 rounded-3xl overflow-hidden shadow-xl"
+                        data-aos="fade-left">
+                        <img src="advisor_diep_portrait_1770740104937.png"
+                            alt="Mrs. Diep Nguyen Ngoc, MHRM – Cố vấn JobUp" class="w-full aspect-[3/4] object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- STATS BAR                                       -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-16 bg-brand-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div data-aos="fade-up">
+                        <p class="text-4xl md:text-5xl font-extrabold text-brand-yellow">100<span
+                                class="text-white/30">+</span></p>
+                        <p class="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">Khách hàng</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="100">
+                        <p class="text-4xl md:text-5xl font-extrabold text-brand-yellow">15<span
+                                class="text-white/30">+</span></p>
+                        <p class="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">Ngành nghề</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <p class="text-4xl md:text-5xl font-extrabold text-brand-yellow">98<span
+                                class="text-white/30">%</span></p>
+                        <p class="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">Hài lòng</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="300">
+                        <p class="text-4xl md:text-5xl font-extrabold text-brand-yellow">50K<span
+                                class="text-white/30">+</span></p>
+                        <p class="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">Ứng viên</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- TESTIMONIALS                                    -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end gap-4 mb-14">
+                    <div data-aos="fade-right">
+                        <div class="flex items-center gap-3 mb-3"><span class="w-8 h-px bg-brand-yellow"></span><span
+                                class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Phản hồi ứng
+                                viên</span></div>
+                        <h2 class="text-4xl font-extrabold text-brand-black">Họ nói gì về JobUp?</h2>
+                    </div>
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest" data-aos="fade-left">Vuốt để
+                        xem thêm <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                </div>
+            </div>
+            <div class="flex gap-6 px-6 lg:px-20 overflow-x-auto pb-6 snap-x no-scrollbar">
                 <div
-                    class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-[10px] border-white aspect-[4/5]">
-                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000"
-                        class="w-full h-full object-cover" alt="Team Working">
-                </div>
-                <!-- Floating Badge -->
-                <div class="absolute -bottom-10 -right-10 bg-gray-900 p-8 rounded-[2.5rem] shadow-2xl text-white z-20 hidden md:block"
-                    data-aos="zoom-in" data-aos-delay="400">
-                    <div class="text-4xl font-black text-brand-yellow mb-1 italic">#1</div>
-                    <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Trusted Partner
-                        <br>In Vietnam
+                    class="min-w-[300px] md:min-w-[400px] bg-brand-lightGray rounded-3xl p-8 snap-center hover:-translate-y-1 transition-transform border border-gray-100">
+                    <div class="flex gap-1 text-brand-yellow mb-5"><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i></div>
+                    <p class="text-gray-700 italic leading-relaxed mb-6">"JobUp làm việc rất chuyên nghiệp. Tôi nhận
+                        được offer tại công ty mơ ước chỉ sau 5 ngày. Thực sự ấn tượng!"</p>
+                    <div class="flex items-center gap-3"><img src="candidate_feedback_2_1770740265205.png"
+                            class="w-10 h-10 rounded-full object-cover" alt="Ứng viên Linh Đan">
+                        <div>
+                            <p class="font-bold text-brand-black text-sm">Linh Đan</p>
+                            <p class="text-xs text-gray-400">Senior UI/UX Designer</p>
+                        </div>
                     </div>
                 </div>
-                <!-- Decorative Shape -->
-                <div class="absolute -top-10 -left-10 w-40 h-40 bg-yellow-50 rounded-full -z-10 blur-2xl"></div>
+                <div class="min-w-[300px] md:min-w-[400px] bg-brand-black rounded-3xl p-8 snap-center text-white">
+                    <div class="flex gap-1 text-brand-yellow mb-5"><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i></div>
+                    <p class="text-gray-300 italic leading-relaxed mb-6">"Điểm tôi thích nhất là sự chân thành. Các
+                        chuyên gia không chỉ tìm việc mà còn tư vấn định hướng sự nghiệp sâu sắc."</p>
+                    <div class="flex items-center gap-3"><img
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                            class="w-10 h-10 rounded-full object-cover border border-brand-yellow/30"
+                            alt="Ứng viên Quốc Huy">
+                        <div>
+                            <p class="font-bold text-sm">Quốc Huy</p>
+                            <p class="text-xs text-brand-yellow">Project Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="min-w-[300px] md:min-w-[400px] bg-brand-lightGray rounded-3xl p-8 snap-center hover:-translate-y-1 transition-transform border border-gray-100">
+                    <div class="flex gap-1 text-brand-yellow mb-5"><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i
+                            class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i></div>
+                    <p class="text-gray-700 italic leading-relaxed mb-6">"Uy tín là điều tôi cảm nhận rõ nhất. JobUp giữ
+                        đúng cam kết về thời gian và chất lượng. Recommend cho nhân sự cấp cao."</p>
+                    <div class="flex items-center gap-3"><img
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
+                            class="w-10 h-10 rounded-full object-cover" alt="Ứng viên Minh Châu">
+                        <div>
+                            <p class="font-bold text-brand-black text-sm">Minh Châu</p>
+                            <p class="text-xs text-gray-400">Marketing Director</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Right: Narrative Flow -->
-            <div class="lg:col-span-6 lg:pl-12 space-y-16">
-                <!-- Vision & Mission: Integrated -->
-                <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up">
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-bold text-gray-900 flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-brand-yellow"></span> Tầm nhìn
-                        </h4>
-                        <p class="text-gray-500 text-sm leading-relaxed">
-                            Trở thành đối tác tin cậy cung cấp dịch vụ tuyển dụng đa ngành nghề phổ biến khắp
-                            VN.
-                        </p>
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- CTA                                             -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <section class="py-20 bg-white">
+            <div class="max-w-5xl mx-auto px-4">
+                <div class="bg-brand-yellow rounded-[3rem] p-14 md:p-20 text-center relative overflow-hidden"
+                    data-aos="zoom-in">
+                    <div
+                        class="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none select-none">
+                        <span class="text-[12rem] font-extrabold text-brand-black">JOBUP</span>
                     </div>
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-bold text-gray-900 flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-gray-900"></span> Sứ mệnh
-                        </h4>
-                        <p class="text-gray-500 text-sm leading-relaxed">
-                            Kết nối những ứng viên tiềm năng với các doanh nghiệp đang có nhu cầu tuyển dụng
-                            nhân sự.
-                        </p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-brand-black mb-6 relative z-10">Sẵn sàng bắt đầu
+                        cùng JobUp?</h2>
+                    <p class="text-gray-700 text-lg max-w-xl mx-auto mb-10 relative z-10">Dù bạn là ứng viên hay doanh
+                        nghiệp, chúng tôi luôn sẵn sàng hỗ trợ nhanh nhất.</p>
+                    <div class="flex flex-wrap justify-center gap-4 relative z-10">
+                        <a href="jobs.html"
+                            class="px-10 py-4 bg-brand-black text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl">Xem
+                            việc làm</a>
+                        <a href="https://zalo.me/0979334143" target="_blank"
+                            class="px-10 py-4 bg-white text-brand-black font-bold rounded-full hover:bg-brand-black hover:text-white transition-all shadow-lg">Liên
+                            hệ tư vấn</a>
                     </div>
                 </div>
+            </div>
+        </section>
+    </main>
 
-                <!-- Core Values: Editorial Layout -->
-                <div class="space-y-8" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-4">
-                        Giá trị cốt lõi</h3>
-
-                    <!-- Value 1 -->
-                    <div class="group flex items-start gap-8 transition-all hover:translate-x-4">
-                        <span
-                            class="text-4xl font-black text-gray-100 group-hover:text-brand-yellow transition-colors italic">01</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-gray-900 mb-2">Tốc độ (Speed)</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Chúng tôi đề cao tốc độ phục vụ
-                                khách hàng, hỗ trợ ứng viên với mong muốn để không ai phải chờ.</p>
-                        </div>
-                    </div>
-
-                    <!-- Value 2 -->
-                    <div class="group flex items-start gap-8 transition-all hover:translate-x-4">
-                        <span
-                            class="text-4xl font-black text-gray-100 group-hover:text-blue-500 transition-colors italic">02</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-gray-900 mb-2">Chất lượng (Quality)</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Chất lượng là thước đo thành công
-                                của chúng tôi trong mọi hoạt động.</p>
-                        </div>
-                    </div>
-
-                    <!-- Value 3 -->
-                    <div class="group flex items-start gap-8 transition-all hover:translate-x-4">
-                        <span
-                            class="text-4xl font-black text-gray-100 group-hover:text-green-500 transition-colors italic">03</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-gray-900 mb-2">Uy tín (Prestige)</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Chúng tôi trân trọng lời nói của
-                                mình, giữ cam kết và có hành động cụ thể.</p>
-                        </div>
-                    </div>
+    <!-- ─── FOOTER (synced with index.html) ─── -->
+    <footer id="footer" class="bg-[#0A0F1C] pt-20 pb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/5">
+                <div class="lg:col-span-4"><a href="index.html"><img src="Logo.png" alt="JobUp" class="h-10 mb-6"
+                            loading="lazy"></a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm font-light">Nền tảng kết nối tuyển dụng hàng đầu
+                        Việt Nam — giúp ứng viên và doanh nghiệp tìm thấy nhau.</p>
+                </div>
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-bold text-white text-lg mb-6">Liên kết</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html"
+                                class="text-gray-400 hover:text-brand-yellow transition font-medium">Trang chủ</a></li>
+                        <li><a href="jobs.html"
+                                class="text-gray-400 hover:text-brand-yellow transition font-medium">Tuyển dụng</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-brand-yellow transition font-medium">Về
+                                chúng tôi</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2">
+                    <h4 class="font-bold text-white text-lg mb-6">Ứng viên</h4>
+                    <ul class="space-y-4">
+                        <li><a href="jobs.html"
+                                class="text-gray-400 hover:text-brand-yellow transition font-medium">Việc làm mới</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-brand-yellow transition font-medium">Cẩm nang
+                                xin việc</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brand-yellow transition font-medium">Tra cứu
+                                lương</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-3">
+                    <h4 class="font-bold text-white text-lg mb-6">Liên hệ</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-phone text-brand-yellow mt-1"></i><span
+                                class="text-white font-bold tracking-wider">0979 334 143</span></li>
+                        <li class="flex items-start gap-3"><i
+                                class="fa-solid fa-envelope text-brand-yellow mt-1"></i><span
+                                class="text-gray-400">tuyendung@jopup.vn</span></li>
+                        <li class="flex items-start gap-3"><i
+                                class="fa-solid fa-location-dot text-brand-yellow mt-1"></i><span
+                                class="text-gray-400 leading-relaxed text-sm">C23.Lot18, P.Định Công, Q.Hoàng Mai, Hà
+                                Nội</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
+        <div class="bg-black/50 border-t border-white/5 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-gray-500 text-sm font-medium">&copy; 2026 JobUp Corporation. Crafted with passion for
+                    recruitment excellence.</p>
+                <div class="flex items-center gap-8"><a href="#"
+                        class="text-gray-500 hover:text-brand-yellow text-sm font-medium transition">Privacy
+                        Policy</a><a href="#"
+                        class="text-gray-500 hover:text-brand-yellow text-sm font-medium transition">Terms &
+                        Conditions</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[200] bg-white transform translate-x-full transition-transform duration-500 lg:hidden flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-gray-50"><img src="Logo.png" alt="JobUp"
+                class="h-8" loading="lazy"><button id="close-menu-btn"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-500"><i
+                    class="fa-solid fa-xmark text-xl"></i></button></div>
+        <nav class="flex-grow p-8 flex flex-col gap-8 text-xl font-bold text-gray-900"><a href="index.html">Trang
+                chủ</a><a href="jobs.html">Tuyển dụng</a><a href="about.html" class="text-brand-yellow">Về chúng
+                tôi</a><a href="index.html#footer">Liên hệ</a></nav>
+        <div class="p-8 border-t border-gray-50"><a href="mailto:hr@jobup.vn"
+                class="block w-full py-4 bg-brand-black text-white text-center rounded-2xl font-bold shadow-xl">Gửi CV
+                Ngay</a></div>
     </div>
-</section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800, easing: 'ease-out-cubic' });
+        const menuBtn = document.getElementById('mobile-menu-btn'), mobileMenu = document.getElementById('mobile-menu'), closeMenuBtn = document.getElementById('close-menu-btn');
+        if (menuBtn && mobileMenu && closeMenuBtn) { menuBtn.addEventListener('click', () => { mobileMenu.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; }); closeMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('translate-x-full'); document.body.style.overflow = 'auto'; }); mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { mobileMenu.classList.add('translate-x-full'); document.body.style.overflow = 'auto'; })); }
+        window.addEventListener('scroll', () => { const h = document.getElementById('header'); if (window.scrollY > 60) { h.classList.add('shadow-lg'); } else { h.classList.remove('shadow-lg'); } });
+    </script>
+</body>
+
+</html>
