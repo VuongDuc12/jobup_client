@@ -1,135 +1,52 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { fetchLatestJobs } from "@/lib/api";
+import {
+    formatSalary,
+    workTypeLabel,
+    timeAgo,
+    companyInitial,
+} from "@/lib/utils";
+import type { PublicJobResponse } from "@/lib/types";
 
-interface JobData {
-    id: number;
-    title: string;
-    company: string;
-    location: string;
-    tags: string[];
-    salary: string;
-    time: string;
-    logo?: string;
-    logoFallback?: { letter: string; bg: string };
-    badge?: { text: string; color: string };
-    category: string;
+/* ────────────────────────────────────────────────
+ *  Color palette for logo-fallback initials
+ * ──────────────────────────────────────────────── */
+const FALLBACK_COLORS = [
+    "bg-blue-600",
+    "bg-orange-500",
+    "bg-purple-600",
+    "bg-teal-600",
+    "bg-pink-600",
+    "bg-emerald-600",
+    "bg-rose-600",
+    "bg-indigo-600",
+    "bg-cyan-600",
+    "bg-amber-600",
+];
+
+function colorForCompany(name: string): string {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
 }
 
+/* ────────────────────────────────────────────────
+ *  Tabs (chỉ tab "Tất cả" hiện tại, sẽ thêm
+ *  category tabs sau khi có API lấy danh sách)
+ * ──────────────────────────────────────────────── */
 const tabs = [
-    { key: "all", label: "Tất cả" },
-    { key: "it", label: "💻 IT/Software" },
-    { key: "mkt", label: "📢 Marketing" },
-    { key: "sale", label: "💰 Sales" },
+    { key: "all", label: "Tất cả", categoryId: undefined as string | undefined },
+    // TODO: Load from GET /api/Categories later
 ];
 
-const jobs: JobData[] = [
-    {
-        id: 2,
-        title: "Brand Manager",
-        company: "Shopee",
-        location: "TP.HCM",
-        tags: ["Full-time", "Manager"],
-        salary: "35 - 60 triệu VNĐ",
-        time: "5 giờ trước",
-        logo: "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
-        badge: { text: "Gấp", color: "bg-red-500" },
-        category: "mkt",
-    },
-    {
-        id: 3,
-        title: "UI/UX Designer",
-        company: "Figma",
-        location: "Remote",
-        tags: ["Remote", "Figma"],
-        salary: "25 - 50 triệu VNĐ",
-        time: "1 ngày trước",
-        logo: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png",
-        category: "it",
-    },
-    {
-        id: 4,
-        title: "Senior Sale B2B",
-        company: "Google Ads",
-        location: "Hà Nội",
-        tags: ["Sale", "English"],
-        salary: "20 - 35 triệu VNĐ",
-        time: "1 ngày trước",
-        logo: "https://cdn-icons-png.flaticon.com/512/300/300221.png",
-        category: "sale",
-    },
-    {
-        id: 5,
-        title: "DevOps Engineer",
-        company: "Viettel",
-        location: "Hà Nội",
-        tags: ["AWS", "K8s"],
-        salary: "45 - 75 triệu VNĐ",
-        time: "2 ngày trước",
-        logoFallback: { letter: "V", bg: "bg-blue-600" },
-        category: "it",
-    },
-    {
-        id: 6,
-        title: "Kế toán trưởng",
-        company: "FPT Software",
-        location: "Đà Nẵng",
-        tags: ["ACC", "CPA"],
-        salary: "30 - 50 triệu VNĐ",
-        time: "2 ngày trước",
-        logoFallback: { letter: "F", bg: "bg-orange-500" },
-        category: "all",
-    },
-    {
-        id: 7,
-        title: "Frontend Developer (React)",
-        company: "Tiki",
-        location: "TP.HCM",
-        tags: ["React", "TypeScript"],
-        salary: "35 - 55 triệu VNĐ",
-        time: "3 giờ trước",
-        logo: "https://cdn-icons-png.flaticon.com/512/732/732200.png",
-        badge: { text: "Mới", color: "bg-green-500" },
-        category: "it",
-    },
-    {
-        id: 8,
-        title: "Data Analyst",
-        company: "Grab Vietnam",
-        location: "Hà Nội",
-        tags: ["Python", "SQL"],
-        salary: "28 - 45 triệu VNĐ",
-        time: "5 giờ trước",
-        logoFallback: { letter: "G", bg: "bg-purple-600" },
-        category: "it",
-    },
-    {
-        id: 9,
-        title: "Product Manager",
-        company: "Lazada",
-        location: "TP.HCM",
-        tags: ["Product", "English"],
-        salary: "50 - 80 triệu VNĐ",
-        time: "1 ngày trước",
-        logo: "https://cdn-icons-png.flaticon.com/512/882/882702.png",
-        badge: { text: "Gấp", color: "bg-red-500" },
-        category: "it",
-    },
-    {
-        id: 10,
-        title: "Mobile Developer (Flutter)",
-        company: "MoMo",
-        location: "TP.HCM",
-        tags: ["Flutter", "Dart"],
-        salary: "40 - 70 triệu VNĐ",
-        time: "1 ngày trước",
-        logoFallback: { letter: "M", bg: "bg-teal-600" },
-        category: "it",
-    },
-];
-
+/* ────────────────────────────────────────────────
+ *  Top employers sidebar (static for now)
+ * ──────────────────────────────────────────────── */
 const topEmployers = [
     {
         name: "Microsoft",
@@ -148,52 +65,69 @@ const topEmployers = [
     },
 ];
 
-function JobCard({ job }: { job: JobData }) {
+/* ────────────────────────────────────────────────
+ *  Job Card
+ * ──────────────────────────────────────────────── */
+function JobCard({ job }: { job: PublicJobResponse }) {
+    const salary = formatSalary(job.salaryFrom, job.salaryTo);
+    const workType = workTypeLabel(job.workType);
+    const time = timeAgo(job.createdAt);
+    const initial = companyInitial(job.displayCompanyName);
+    const bgColor = colorForCompany(job.displayCompanyName);
+    const avatar = job.contactStaff?.avatar;
+
     return (
         <Link
-            href="/tuyen-dung/chi-tiet"
+            href={`/tuyen-dung/${job.slug}`}
             className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4"
         >
+            {/* Company Logo / Fallback */}
             <div className="flex items-center gap-3 flex-grow">
                 <div className="relative shrink-0">
-                    {job.logo ? (
+                    {avatar ? (
                         <img
-                            src={job.logo}
-                            className="w-12 h-12 object-contain rounded-xl p-2 bg-gray-50 border border-gray-100"
-                            alt={job.company}
+                            src={avatar}
+                            className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
+                            alt={job.displayCompanyName}
                         />
                     ) : (
                         <div
-                            className={`w-12 h-12 rounded-xl ${job.logoFallback?.bg} text-white flex items-center justify-center font-bold text-lg shadow-lg`}
+                            className={`w-12 h-12 rounded-xl ${bgColor} text-white flex items-center justify-center font-bold text-lg shadow-lg`}
                         >
-                            {job.logoFallback?.letter}
+                            {initial}
                         </div>
                     )}
-                    {job.badge && (
-                        <span
-                            className={`absolute -top-2 -right-2 px-2 py-0.5 ${job.badge.color} text-white text-[8px] font-bold uppercase rounded-full shadow-sm`}
-                        >
-                            {job.badge.text}
+                    {job.isHot && (
+                        <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
+                            Hot
                         </span>
                     )}
                 </div>
+
+                {/* Title & Company */}
                 <div className="flex-grow min-w-0">
                     <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
                         {job.title}
                     </h3>
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <p className="text-sm text-gray-500 font-medium">{job.company}</p>
+                        <p className="text-sm text-gray-500 font-medium">
+                            {job.displayCompanyName}
+                        </p>
                         <span className="w-1 h-1 rounded-full bg-gray-300" />
                         <p className="text-sm text-gray-400">
                             <i className="fa-solid fa-location-dot mr-1" />
-                            {job.location}
+                            {job.provinceName}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 md:w-48">
-                {job.tags.map((tag) => (
+            {/* Tags */}
+            <div className="flex flex-wrap items-center gap-2 md:w-52">
+                <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100">
+                    {workType}
+                </span>
+                {job.tags.slice(0, 2).map((tag) => (
                     <span
                         key={tag}
                         className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100"
@@ -203,25 +137,72 @@ function JobCard({ job }: { job: JobData }) {
                 ))}
             </div>
 
-            <div className="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-center md:min-w-[120px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
-                <span className="text-green-600 font-extrabold text-base">
-                    {job.salary}
+            {/* Salary & Time */}
+            <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                <span className="text-green-600 font-extrabold text-sm md:text-base">
+                    {salary}
                 </span>
-                <span className="text-gray-400 text-xs mt-0.5">{job.time}</span>
+                <span className="text-gray-400 text-xs mt-0.5">{time}</span>
             </div>
         </Link>
     );
 }
 
+/* ────────────────────────────────────────────────
+ *  Loading Skeleton
+ * ──────────────────────────────────────────────── */
+function JobCardSkeleton() {
+    return (
+        <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row md:items-center gap-4 animate-pulse">
+            <div className="flex items-center gap-3 flex-grow">
+                <div className="w-12 h-12 rounded-xl bg-gray-200" />
+                <div className="flex-grow space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-3/4" />
+                    <div className="h-3 bg-gray-100 rounded w-1/2" />
+                </div>
+            </div>
+            <div className="flex gap-2 md:w-48">
+                <div className="h-6 bg-gray-100 rounded-lg w-16" />
+                <div className="h-6 bg-gray-100 rounded-lg w-12" />
+            </div>
+            <div className="md:min-w-[120px] space-y-1 md:text-right">
+                <div className="h-4 bg-gray-200 rounded w-24 ml-auto" />
+                <div className="h-3 bg-gray-100 rounded w-16 ml-auto" />
+            </div>
+        </div>
+    );
+}
+
+/* ────────────────────────────────────────────────
+ *  Main Section
+ * ──────────────────────────────────────────────── */
 export default function JobsSection() {
     const [activeTab, setActiveTab] = useState("all");
+    const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const filteredJobs =
-        activeTab === "all"
-            ? jobs
-            : jobs.filter(
-                (job) => job.category === activeTab || job.category === "all"
-            );
+    const loadJobs = useCallback(async (categoryId?: string) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await fetchLatestJobs({
+                limit: 10,
+                categoryId,
+            });
+            setJobs(data);
+        } catch (err) {
+            console.error("Failed to fetch jobs:", err);
+            setError("Không thể tải danh sách việc làm. Vui lòng thử lại sau.");
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        const tab = tabs.find((t) => t.key === activeTab);
+        loadJobs(tab?.categoryId);
+    }, [activeTab, loadJobs]);
 
     return (
         <section id="jobs" className="py-12 bg-gray-50 scroll-mt-20">
@@ -260,16 +241,53 @@ export default function JobsSection() {
                     {/* Job List */}
                     <div className="lg:col-span-8">
                         <div className="grid grid-cols-1 gap-3 transition-all duration-200">
-                            {filteredJobs.map((job) => (
-                                <JobCard key={job.id} job={job} />
-                            ))}
+                            {/* Loading */}
+                            {loading &&
+                                Array.from({ length: 6 }).map((_, i) => (
+                                    <JobCardSkeleton key={i} />
+                                ))}
+
+                            {/* Error */}
+                            {!loading && error && (
+                                <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
+                                    <i className="fa-solid fa-triangle-exclamation text-red-400 text-3xl mb-3" />
+                                    <p className="text-red-600 font-semibold mb-4">{error}</p>
+                                    <button
+                                        onClick={() => loadJobs()}
+                                        className="px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition-colors cursor-pointer"
+                                    >
+                                        Thử lại
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Empty */}
+                            {!loading && !error && jobs.length === 0 && (
+                                <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
+                                    <i className="fa-solid fa-briefcase text-gray-300 text-4xl mb-4" />
+                                    <p className="text-gray-500 font-medium">
+                                        Chưa có việc làm nào.
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Jobs */}
+                            {!loading &&
+                                !error &&
+                                jobs.map((job) => <JobCard key={job.id} job={job} />)}
                         </div>
 
-                        <div className="mt-8 text-center">
-                            <button className="px-8 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-full hover:bg-[#111827] hover:text-white hover:border-[#111827] transition-all shadow-sm cursor-pointer">
-                                Xem thêm 124 công việc khác
-                            </button>
-                        </div>
+                        {/* View More */}
+                        {!loading && !error && jobs.length > 0 && (
+                            <div className="mt-8 text-center">
+                                <Link
+                                    href="/tuyen-dung"
+                                    className="inline-block px-8 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-full hover:bg-[#111827] hover:text-white hover:border-[#111827] transition-all shadow-sm"
+                                >
+                                    Xem thêm việc làm khác
+                                </Link>
+                            </div>
+                        )}
                     </div>
 
                     {/* Sidebar */}
@@ -289,12 +307,14 @@ export default function JobsSection() {
                                 </div>
                                 <h3 className="text-white text-3xl font-extrabold mb-3 leading-tight">
                                     JobUp - Tận tâm <br />
-                                    <span className="text-amber-400">Đồng hành & Bứt phá</span>
+                                    <span className="text-amber-400">
+                                        Đồng hành & Bứt phá
+                                    </span>
                                 </h3>
                                 <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
                                     Chúng tôi tin rằng mỗi sự nghiệp đều xứng đáng được trân
-                                    trọng. JobUp cam kết mang lại sự minh bạch, nhiệt huyết và cơ
-                                    hội vàng cho mọi ứng viên.
+                                    trọng. JobUp cam kết mang lại sự minh bạch, nhiệt huyết và
+                                    cơ hội vàng cho mọi ứng viên.
                                 </p>
                                 <div className="flex items-center gap-2 group/btn">
                                     <span className="h-0.5 w-8 bg-amber-400 transition-all duration-300 group-hover/btn:w-12" />
