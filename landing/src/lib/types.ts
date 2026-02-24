@@ -3,35 +3,57 @@
  * ──────────────────────────────────────────────── */
 
 export interface ContactStaff {
-    fullName: string;
-    avatar: string | null;
-    zaloPhone: string | null;
+  fullName: string;
+  avatar: string | null;
+  zaloPhone: string | null;
 }
 
 export interface PublicJobResponse {
-    id: string;
-    title: string;
-    slug: string;
-    displayCompanyName: string;
-    categoryName: string;
-    categorySlug: string;
-    provinceName: string;
-    salaryFrom: number;
-    salaryTo: number;
-    experience: number;
-    workType: number; // 0 = Full-time, 1 = Part-time, 2 = Remote, …
-    isHot: boolean;
-    tags: string[];
-    deadline: string;   // ISO 8601
-    createdAt: string;  // ISO 8601
-    viewCount: number;
-    contactStaff: ContactStaff;
+  id: string;
+  title: string;
+  slug: string;
+  displayCompanyName: string;
+  categoryName: string;
+  categorySlug: string;
+  provinceName: string;
+  salaryFrom: number;
+  salaryTo: number;
+  experience: number;
+  workType: number; // 0 = Full-time, 1 = Part-time, 2 = Remote, …
+  isHot: boolean;
+  tags: string[];
+  deadline: string; // ISO 8601
+  createdAt: string; // ISO 8601
+  viewCount: number;
+  contactStaff: ContactStaff;
+}
+
+export interface PublicJobSearchResponse {
+  list: PublicJobResponse[];
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface ProvinceDropdown {
+  id: string;
+  name: string;
+  slug: string | null;
+  sortOrder: number;
+}
+
+export interface JobCategoryTreeItem {
+  id: string;
+  name: string;
+  slug: string | null;
+  icon: string | null;
+  jobCount: number;
+  children: JobCategoryTreeItem[];
 }
 
 export interface ApiResponse<T> {
-    succeeded: boolean;
-    code: number;
-    message: string;
-    errors: string | null;
-    data: T;
+  succeeded: boolean;
+  code: number;
+  message: string;
+  errors: string | null;
+  data: T;
 }
