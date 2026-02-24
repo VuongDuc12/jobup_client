@@ -39,7 +39,7 @@ export default function RootLayout({
     <html lang="vi" className="scroll-smooth">
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="canonical" href="https://jobup.vn/" />
+        <link rel="canonical" href="https://ducdev04.pro.vn/" />
       </head>
       <body
         className={`${plusJakartaSans.variable} font-sans bg-brand-white text-gray-800 flex flex-col min-h-screen antialiased`}

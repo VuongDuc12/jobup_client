@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         title: "Tuyển Dụng Việc Làm Toàn Quốc - JobUp",
         description:
             "50,000+ tin tuyển dụng đã xác thực. Tìm việc phù hợp nhất với bạn.",
-        url: "https://jobup.vn/tuyen-dung",
+        url: "https://ducdev04.pro.vn/tuyen-dung",
     },
 };
 
