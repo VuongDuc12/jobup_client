@@ -8,10 +8,21 @@ export interface ContactStaff {
   zaloPhone: string | null;
 }
 
+export interface PublicCategoryInfo {
+  id: string;
+  name: string;
+  slug: string | null;
+}
+
+export interface PublicLocationInfo {
+  id: string;
+  name: string;
+}
+
 export interface PublicJobResponse {
   id: string;
   title: string;
-  slug: string;
+  slug: string | null;
   displayCompanyName: string;
   categoryName: string;
   categorySlug: string;
@@ -25,7 +36,38 @@ export interface PublicJobResponse {
   deadline: string; // ISO 8601
   createdAt: string; // ISO 8601
   viewCount: number;
-  contactStaff: ContactStaff;
+  contactStaff: ContactStaff | null;
+}
+
+export interface PublicJobDetailResponse {
+  id: string;
+  title: string;
+  slug: string | null;
+  displayCompanyName: string | null;
+  description: string | null;
+  requirements: string | null;
+  benefits: string | null;
+  additionalInfo: string | null;
+  category: PublicCategoryInfo | null;
+  province: PublicLocationInfo | null;
+  salaryFrom: number | null;
+  salaryTo: number | null;
+  quantity: number | null;
+  gender: number | null;
+  experience: number | null;
+  level: number | null;
+  workType: number | null;
+  ageFrom: number | null;
+  ageTo: number | null;
+  contactStaff: ContactStaff | null;
+  isHot: boolean;
+  tags: string[] | null;
+  deadline: string | null;
+  viewCount: number;
+  applicationCount: number;
+  createdAt: string;
+  seoTitle: string | null;
+  seoDescription: string | null;
 }
 
 export interface PublicJobSearchResponse {

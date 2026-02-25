@@ -36,6 +36,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
   const bgColor = colorForCompany(job.displayCompanyName);
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const wt = workTypeLabel(job.workType);
+  const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
 
   return (
     <div className="relative bg-gradient-to-r from-yellow-50 to-white p-1 rounded-2xl shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group isolation-auto">
@@ -50,7 +51,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
       </div>
 
       <Link
-        href={`/tuyen-dung/${job.slug}`}
+        href={jobHref}
         className="bg-white p-6 rounded-xl flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10 overflow-hidden block"
       >
         {/* Background Accent */}
@@ -95,7 +96,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
             <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase rounded-lg border border-blue-100">
               {wt}
             </span>
-            {job.tags.slice(0, 2).map((tag) => (
+            {(job.tags ?? []).slice(0, 2).map((tag) => (
               <span
                 key={tag}
                 className="px-3 py-1 bg-gray-100 text-gray-600 text-[10px] font-black uppercase rounded-lg"
@@ -122,10 +123,11 @@ function NormalJobCard({ job }: { job: PublicJobResponse }) {
   const bgColor = colorForCompany(job.displayCompanyName);
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const time = timeAgo(job.createdAt);
+  const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
 
   return (
     <Link
-      href={`/tuyen-dung/${job.slug}`}
+      href={jobHref}
       className="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center"
     >
       {job.contactStaff?.avatar ? (
