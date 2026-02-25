@@ -20,7 +20,7 @@ interface FetchLatestJobsParams {
 export async function fetchLatestJobs(
   params: FetchLatestJobsParams = {},
 ): Promise<PublicJobResponse[]> {
-  const url = new URL(`${API_BASE_URL}/api/Jobs/latest`);
+  const url = new URL(`${API_BASE_URL}/api/Jobs/public/latest`);
 
   if (params.limit) url.searchParams.set("limit", String(params.limit));
   if (params.categoryId) url.searchParams.set("categoryId", params.categoryId);
@@ -33,6 +33,44 @@ export async function fetchLatestJobs(
 
   const json: ApiResponse<PublicJobResponse[]> = await res.json();
 
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Jobs/recommended
+ * ──────────────────────────────────────────────── */
+
+interface FetchRecommendedJobsParams {
+  limit?: number;
+  excludedId?: string;
+  recentCategoryIds?: string[] | string;
+}
+
+export async function fetchRecommendedJobs(
+  params: FetchRecommendedJobsParams = {},
+): Promise<PublicJobResponse[]> {
+  const url = new URL(`${API_BASE_URL}/api/Jobs/public/recommended`);
+
+  if (params.limit) url.searchParams.set("limit", String(params.limit));
+  if (params.excludedId) url.searchParams.set("excludedId", params.excludedId);
+
+  if (params.recentCategoryIds) {
+    const value = Array.isArray(params.recentCategoryIds)
+      ? params.recentCategoryIds.join(",")
+      : params.recentCategoryIds;
+    if (value.trim()) url.searchParams.set("recentCategoryIds", value);
+  }
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch recommended jobs: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicJobResponse[]> = await res.json();
   if (!json.succeeded) {
     throw new Error(json.message || "API error");
   }
@@ -114,6 +152,30 @@ export async function fetchRelatedJobs(
   const res = await fetch(url.toString());
   if (!res.ok) {
     throw new Error(`Failed to fetch related jobs: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicJobResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Jobs/{id}/similar
+ * ──────────────────────────────────────────────── */
+
+export async function fetchSimilarJobs(
+  id: string,
+  limit = 6,
+): Promise<PublicJobResponse[]> {
+  const url = new URL(`${API_BASE_URL}/api/Jobs/${id}/similar`);
+  url.searchParams.set("limit", String(limit));
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch similar jobs: ${res.status}`);
   }
 
   const json: ApiResponse<PublicJobResponse[]> = await res.json();

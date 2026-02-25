@@ -43,7 +43,6 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
       {/* HOT Badge */}
       <div className="absolute -top-3 -right-3 z-20">
         <span className="relative flex h-10 w-10">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-10 w-10 bg-red-600 items-center justify-center text-white text-[10px] font-black shadow-lg border-2 border-white">
             HOT
           </span>

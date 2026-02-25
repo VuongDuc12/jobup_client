@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Navbar, Footer } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
-import { fetchPublicJobBySlug, fetchRelatedJobs } from "@/lib/api";
+import {
+  fetchPublicJobBySlug,
+  fetchRelatedJobs,
+  fetchSimilarJobs,
+} from "@/lib/api";
 import { companyInitial, formatSalary, timeAgo } from "@/lib/utils";
 import type { PublicJobDetailResponse, PublicJobResponse } from "@/lib/types";
 
@@ -60,6 +64,22 @@ function deadlineLabel(deadline?: string | null): string {
   return `Hết hạn trong ${diffDays} ngày`;
 }
 
+function mergeUniqueJobs(
+  primary: PublicJobResponse[],
+  secondary: PublicJobResponse[],
+  limit: number,
+): PublicJobResponse[] {
+  const seen = new Set(primary.map((job) => job.id));
+  const merged = [...primary];
+  for (const job of secondary) {
+    if (merged.length >= limit) break;
+    if (seen.has(job.id)) continue;
+    seen.add(job.id);
+    merged.push(job);
+  }
+  return merged;
+}
+
 export default function JobDetailPage() {
   const params = useParams();
   const slug = typeof params?.slug === "string" ? params.slug : "";
@@ -87,7 +107,17 @@ export default function JobDetailPage() {
         try {
           const related = await fetchRelatedJobs(detail.id, 6);
           if (!isMounted) return;
-          setRelatedJobs(related);
+          let merged = related;
+          if (related.length < 6) {
+            try {
+              const similar = await fetchSimilarJobs(detail.id, 6);
+              if (!isMounted) return;
+              merged = mergeUniqueJobs(related, similar, 6);
+            } catch {
+              if (!isMounted) return;
+            }
+          }
+          setRelatedJobs(merged);
         } catch {
           if (!isMounted) return;
           setRelatedJobs([]);

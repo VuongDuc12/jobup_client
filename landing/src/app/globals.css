@@ -5,12 +5,12 @@
 /* DESIGN TOKENS & THEME                          */
 /* ═══════════════════════════════════════════════ */
 @theme inline {
-  --color-brand-yellow: #F0B429;
-  --color-brand-yellow-hover: #D99F1F;
+  --color-brand-yellow: #ffb924;
+  --color-brand-yellow-hover: #d99f1f;
   --color-brand-black: #111827;
-  --color-brand-gray: #6B7280;
-  --color-brand-light-gray: #F9FAFB;
-  --color-brand-white: #FFFFFF;
+  --color-brand-gray: #6b7280;
+  --color-brand-light-gray: #f9fafb;
+  --color-brand-white: #ffffff;
 
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-display: "Exo 2", sans-serif;
@@ -18,7 +18,7 @@
   /* Shadows */
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(240, 180, 41, 0.3);
+  --shadow-glow: 0 0 20px rgba(255, 185, 36, 0.3);
 
   /* Animations */
   --animate-float: float 6s ease-in-out infinite;
@@ -45,35 +45,69 @@ body {
 /* KEYFRAME ANIMATIONS                            */
 /* ═══════════════════════════════════════════════ */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 @keyframes loop-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-12px) rotate(0.5deg); }
-  66% { transform: translateY(-6px) rotate(-0.5deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-12px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(-6px) rotate(-0.5deg);
+  }
 }
 
 @keyframes blob-bounce {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
 }
 
 @keyframes mini-ping {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
 @keyframes pill-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -90,24 +124,53 @@ body {
 /* Background Pattern */
 .bg-pattern {
   background-color: #ffffff;
-  background-image: radial-gradient(#F0B429 0.5px, transparent 0.5px),
-                    radial-gradient(#F0B429 0.5px, #ffffff 0.5px);
+  background-image:
+    radial-gradient(#ffb924 0.5px, transparent 0.5px),
+    radial-gradient(#ffb924 0.5px, #ffffff 0.5px);
   background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+  background-position:
+    0 0,
+    10px 10px;
   opacity: 0.1;
 }
 
 /* Animated Grid Background */
 .bg-grid-slate-100 {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23F1F5F9'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-  mask-image: linear-gradient(to bottom, transparent, 10%, white, 90%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, white, 95%, transparent);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    10%,
+    white,
+    90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    5%,
+    white,
+    95%,
+    transparent
+  );
 }
 
 /* Mask Image Gradient for seamless edges */
 .mask-image-gradient {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
 }
 
 /* Glass Card Effects */
@@ -116,7 +179,7 @@ body {
 }
 .glass-card-yellow:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 25px 60px -15px rgba(240, 180, 41, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(255, 185, 36, 0.35);
 }
 
 .glass-card-green {

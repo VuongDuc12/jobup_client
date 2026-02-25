@@ -10,6 +10,7 @@ import {
   CVReviewCTA,
   UrgentJobsWidget,
   CareerHandbook,
+  RecommendedJobsWidget,
 } from "@/components/jobs";
 import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
 import type { JobCategoryTreeItem, ProvinceDropdown } from "@/lib/types";
@@ -134,6 +135,9 @@ export default function JobsPage() {
               <CVReviewCTA />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
+                <RecommendedJobsWidget
+                  categoryId={searchCategoryId || categoryId}
+                />
                 <CareerHandbook />
               </div>
             </aside>
