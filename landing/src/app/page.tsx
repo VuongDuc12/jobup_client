@@ -1,28 +1,25 @@
-import { Navbar, Footer } from "@/components/layout";
-import {
-  HeroSection,
-  JobsSection,
-  SpecialtySectors,
-  FeaturesSection,
-  TestimonialsSection,
-  NewsSection,
-  FloatingActions,
-} from "@/components/sections";
+import type { Metadata } from "next";
+import HomePageClient from "@/components/pages/HomePageClient";
+import { fetchHomepageSettingsPublic } from "@/lib/api";
 
-export default function HomePage() {
-  return (
-    <>
-      <Navbar />
-      <main className="flex-grow pt-20">
-        <HeroSection />
-        <JobsSection />
-        <SpecialtySectors />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <NewsSection />
-      </main>
-      <Footer />
-      <FloatingActions />
-    </>
-  );
+const DEFAULT_META = {
+  title: "JobUp",
+  description:
+    "JobUp - nen tang viec lam uy tin. Tim viec nhanh, luong cao, dai ngo tot.",
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  return DEFAULT_META;
+}
+
+export default async function HomePage() {
+  let settings = null;
+
+  try {
+    settings = await fetchHomepageSettingsPublic();
+  } catch {
+    settings = null;
+  }
+
+  return <HomePageClient initialSettings={settings} />;
 }

@@ -44,14 +44,6 @@ const GENDER_LABELS: Record<number, string> = {
   2: "Nữ",
 };
 
-function buildLines(text?: string | null): string[] {
-  if (!text) return [];
-  return text
-    .split(/\r?\n/)
-    .map((line) => line.replace(/^[-*]\s*/, "").trim())
-    .filter(Boolean);
-}
-
 function deadlineLabel(deadline?: string | null): string {
   if (!deadline) return "Không giới hạn";
   const deadlineDate = new Date(deadline);
@@ -78,6 +70,26 @@ function mergeUniqueJobs(
     merged.push(job);
   }
   return merged;
+}
+
+function buildZaloLink(phone?: string | null): string | null {
+  if (!phone) return null;
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
+  return `https://zalo.me/${digits}`;
+}
+
+function HtmlContent({ html }: { html?: string | null }) {
+  if (!html || !html.trim()) {
+    return <p className="text-gray-500">Đang cập nhật.</p>;
+  }
+
+  return (
+    <div
+      className="text-gray-600 leading-relaxed space-y-3 [&_p]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-2"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }
 
 export default function JobDetailPage() {
@@ -162,10 +174,7 @@ export default function JobDetailPage() {
     return chips;
   }, [job]);
 
-  const descriptionLines = buildLines(job?.description);
-  const requirementLines = buildLines(job?.requirements);
-  const benefitLines = buildLines(job?.benefits);
-  const additionalLines = buildLines(job?.additionalInfo);
+  const zaloLink = buildZaloLink(job?.contactStaff?.zaloPhone);
 
   return (
     <>
@@ -328,18 +337,7 @@ export default function JobDetailPage() {
                       <span className="w-2 h-8 bg-brand-yellow rounded-full" />
                       Mô tả công việc
                     </h3>
-                    {descriptionLines.length > 0 ? (
-                      <ul className="space-y-4 text-gray-600 leading-relaxed">
-                        {descriptionLines.map((line, idx) => (
-                          <li key={`${line}-${idx}`} className="flex gap-3">
-                            <i className="fa-solid fa-check text-brand-yellow mt-1" />
-                            <span>{line}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-gray-500">Đang cập nhật.</p>
-                    )}
+                    <HtmlContent html={job.description} />
                   </div>
 
                   <div>
@@ -347,18 +345,7 @@ export default function JobDetailPage() {
                       <span className="w-2 h-8 bg-brand-yellow rounded-full" />
                       Yêu cầu ứng viên
                     </h3>
-                    {requirementLines.length > 0 ? (
-                      <ul className="space-y-4 text-gray-600 leading-relaxed">
-                        {requirementLines.map((line, idx) => (
-                          <li key={`${line}-${idx}`} className="flex gap-3">
-                            <i className="fa-solid fa-star text-brand-yellow mt-1 text-xs" />
-                            <span>{line}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-gray-500">Đang cập nhật.</p>
-                    )}
+                    <HtmlContent html={job.requirements} />
                   </div>
 
                   <div className="bg-[#FFFDF5] border border-amber-100 rounded-2xl p-6">
@@ -366,46 +353,23 @@ export default function JobDetailPage() {
                       <span className="w-2 h-8 bg-brand-yellow rounded-full" />
                       Quyền lợi & Đãi ngộ
                     </h3>
-                    {benefitLines.length > 0 ? (
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {benefitLines.map((line, idx) => (
-                          <div
-                            key={`${line}-${idx}`}
-                            className="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm"
-                          >
-                            <i className="fa-solid fa-gift text-orange-500 text-xl" />
-                            <span className="text-sm font-bold text-gray-700">
-                              {line}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="text-gray-500">Đang cập nhật.</p>
-                    )}
+                    <HtmlContent html={job.benefits} />
                   </div>
 
-                  {additionalLines.length > 0 && (
+                  {job.additionalInfo && job.additionalInfo.trim() && (
                     <div>
                       <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
                         <span className="w-2 h-8 bg-brand-yellow rounded-full" />
                         Thông tin thêm
                       </h3>
-                      <ul className="space-y-4 text-gray-600 leading-relaxed">
-                        {additionalLines.map((line, idx) => (
-                          <li key={`${line}-${idx}`} className="flex gap-3">
-                            <i className="fa-solid fa-circle-info text-brand-yellow mt-1" />
-                            <span>{line}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <HtmlContent html={job.additionalInfo} />
                     </div>
                   )}
                 </div>
 
                 {relatedJobs.length > 0 && (
                   <div className="pt-10">
-                    <h3 className="text-xl font-black text-brand-black mb-6 flex items-center gap-3">
+                    <h3 className="text-xl font-black text-brand-black mb-6">
                       Việc làm liên quan
                     </h3>
 
@@ -418,57 +382,66 @@ export default function JobDetailPage() {
                               ? `/tuyen-dung/${item.slug}`
                               : "/tuyen-dung"
                           }
-                          className="bg-white p-5 rounded-2xl border border-gray-100 flex flex-col md:flex-row items-center gap-5 hover:border-brand-yellow/50 hover:shadow-lg transition-all group"
+                          className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4"
                         >
-                          <div className="w-16 h-16 rounded-xl border border-gray-100 p-2 flex-shrink-0 flex items-center justify-center bg-white shadow-sm overflow-hidden">
-                            {item.contactStaff?.avatar ? (
-                              <img
-                                src={item.contactStaff.avatar}
-                                className="w-full h-full object-contain"
-                                alt={item.displayCompanyName}
-                              />
-                            ) : (
-                              <div className="w-full h-full rounded-lg bg-brand-black text-white flex items-center justify-center font-bold">
-                                {companyInitial(item.displayCompanyName || "J")}
+                          <div className="flex items-center gap-3 flex-grow">
+                            <div className="relative shrink-0">
+                              {item.contactStaff?.avatar ? (
+                                <img
+                                  src={item.contactStaff.avatar}
+                                  className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
+                                  alt={item.displayCompanyName}
+                                />
+                              ) : (
+                                <div className="w-12 h-12 rounded-xl bg-brand-black text-white flex items-center justify-center font-bold text-lg shadow-lg">
+                                  {companyInitial(
+                                    item.displayCompanyName || "J",
+                                  )}
+                                </div>
+                              )}
+                              {item.isHot && (
+                                <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
+                                  Hot
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="flex-grow min-w-0">
+                              <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                                {item.title}
+                              </h3>
+                              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                <p className="text-sm text-gray-500 font-medium">
+                                  {item.displayCompanyName}
+                                </p>
+                                <span className="w-1 h-1 rounded-full bg-gray-300" />
+                                <p className="text-sm text-gray-400">
+                                  <i className="fa-solid fa-location-dot mr-1" />
+                                  {item.provinceName || "Toàn quốc"}
+                                </p>
                               </div>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-wrap items-center gap-2 md:w-52">
+                            {item.workType !== undefined && (
+                              <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100">
+                                {WORK_TYPE_LABELS[item.workType] || "Khác"}
+                              </span>
+                            )}
+                            {item.categoryName && (
+                              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">
+                                {item.categoryName}
+                              </span>
                             )}
                           </div>
-                          <div className="flex-grow text-center md:text-left">
-                            <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-1">
-                              {item.isHot && (
-                                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[9px] font-bold uppercase rounded">
-                                  HOT
-                                </span>
-                              )}
-                              {item.workType !== undefined && (
-                                <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-[9px] font-bold uppercase rounded">
-                                  {WORK_TYPE_LABELS[item.workType] || "Khác"}
-                                </span>
-                              )}
-                            </div>
-                            <h3 className="text-lg font-extrabold text-[#111827] mb-0.5 group-hover:text-brand-yellow transition-colors">
-                              {item.title}
-                            </h3>
-                            <p className="text-gray-500 text-sm font-bold mb-2">
-                              {item.displayCompanyName} •{" "}
-                              <span className="text-gray-400">
-                                {item.provinceName || "Toàn quốc"}
-                              </span>
-                            </p>
-                            <div className="flex flex-wrap justify-center md:justify-start gap-2 items-center">
-                              {item.categoryName && (
-                                <span className="text-[10px] text-gray-500 bg-gray-50 px-2 py-0.5 rounded-md font-bold border border-gray-100 uppercase tracking-wider">
-                                  {item.categoryName}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <div className="md:text-right flex flex-col md:items-end justify-between self-stretch">
-                            <span className="text-green-600 font-black text-lg mb-2 md:mb-auto">
+
+                          <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+                            <span className="text-green-600 font-extrabold text-sm md:text-base">
                               {formatSalary(item.salaryFrom, item.salaryTo)}
                             </span>
-                            <span className="px-6 py-2 bg-brand-black text-white text-sm font-bold rounded-full hover:bg-brand-yellow hover:text-brand-black transition-all">
-                              Ứng tuyển
+                            <span className="text-gray-400 text-xs mt-0.5">
+                              {timeAgo(item.createdAt)}
                             </span>
                           </div>
                         </Link>
@@ -490,12 +463,55 @@ export default function JobDetailPage() {
                       </p>
                     </div>
 
-                    <button className="w-full py-4 bg-brand-black text-white font-black rounded-xl shadow-lg hover:bg-brand-yellow hover:text-black transition-all transform hover:-translate-y-1 mb-3 uppercase tracking-wider text-sm">
-                      Ứng tuyển ngay
-                    </button>
-                    <button className="w-full py-4 bg-white border border-gray-200 text-gray-600 font-bold rounded-xl hover:border-brand-yellow hover:text-brand-yellow transition-all flex items-center justify-center gap-2">
-                      <i className="fa-regular fa-heart" /> Lưu tin
-                    </button>
+                    {job.contactStaff ? (
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          {job.contactStaff.avatar ? (
+                            <img
+                              src={job.contactStaff.avatar}
+                              alt={job.contactStaff.fullName}
+                              className="w-12 h-12 rounded-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-12 h-12 rounded-full bg-brand-black text-white flex items-center justify-center font-bold">
+                              {companyInitial(job.contactStaff.fullName)}
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-bold text-brand-black">
+                              {job.contactStaff.fullName}
+                            </p>
+                            <p className="text-xs text-gray-500 uppercase tracking-wider">
+                              Người phụ trách
+                            </p>
+                          </div>
+                        </div>
+
+                        {zaloLink ? (
+                          <a
+                            href={zaloLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 bg-brand-black text-white font-black rounded-xl shadow-lg hover:bg-brand-yellow hover:text-black transition-all transform hover:-translate-y-1 uppercase tracking-wider text-sm flex items-center justify-center gap-2"
+                          >
+                            <img
+                              src="/Icon_of_Zalo.svg"
+                              alt="Zalo"
+                              className="w-5 h-5"
+                            />
+                            Liên hệ Zalo
+                          </a>
+                        ) : (
+                          <div className="w-full py-4 bg-white border border-gray-200 text-gray-500 font-bold rounded-xl text-center text-sm">
+                            Chưa có thông tin Zalo người phụ trách
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500 font-medium text-center">
+                        Chưa có thông tin người phụ trách.
+                      </p>
+                    )}
                   </div>
 
                   <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
@@ -568,44 +584,6 @@ export default function JobDetailPage() {
                       </div>
                     </div>
                   </div>
-
-                  {job.contactStaff && (
-                    <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
-                      <h3 className="text-lg font-black text-brand-black">
-                        Liên hệ tư vấn
-                      </h3>
-                      <div className="flex items-center gap-4">
-                        {job.contactStaff.avatar ? (
-                          <img
-                            src={job.contactStaff.avatar}
-                            alt={job.contactStaff.fullName}
-                            className="w-12 h-12 rounded-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-12 h-12 rounded-full bg-brand-black text-white flex items-center justify-center font-bold">
-                            {companyInitial(job.contactStaff.fullName)}
-                          </div>
-                        )}
-                        <div>
-                          <p className="font-bold text-brand-black">
-                            {job.contactStaff.fullName}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            Chuyên viên tuyển dụng
-                          </p>
-                        </div>
-                      </div>
-                      {job.contactStaff.zaloPhone && (
-                        <a
-                          href={`tel:${job.contactStaff.zaloPhone}`}
-                          className="flex items-center justify-between text-sm font-bold text-brand-black bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-brand-yellow transition"
-                        >
-                          <span>{job.contactStaff.zaloPhone}</span>
-                          <i className="fa-solid fa-phone text-brand-yellow" />
-                        </a>
-                      )}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

@@ -304,7 +304,7 @@ export default function JobListings({
           <i className="fa-solid fa-triangle-exclamation text-red-400 text-3xl mb-3" />
           <p className="text-red-600 font-semibold mb-4">{error}</p>
           <button
-            onClick={loadJobs}
+            onClick={() => loadJobs(1, true)}
             className="px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition-colors cursor-pointer"
           >
             Thử lại

@@ -5,7 +5,7 @@
 /* DESIGN TOKENS & THEME                          */
 /* ═══════════════════════════════════════════════ */
 @theme inline {
-  --color-brand-yellow: #ffb924;
+  --color-brand-yellow: #f0b429;
   --color-brand-yellow-hover: #d99f1f;
   --color-brand-black: #111827;
   --color-brand-gray: #6b7280;
@@ -18,7 +18,7 @@
   /* Shadows */
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(255, 185, 36, 0.3);
+  --shadow-glow: 0 0 20px rgba(240, 180, 41, 0.3);
 
   /* Animations */
   --animate-float: float 6s ease-in-out infinite;
@@ -125,8 +125,8 @@ body {
 .bg-pattern {
   background-color: #ffffff;
   background-image:
-    radial-gradient(#ffb924 0.5px, transparent 0.5px),
-    radial-gradient(#ffb924 0.5px, #ffffff 0.5px);
+    radial-gradient(#f0b429 0.5px, transparent 0.5px),
+    radial-gradient(#f0b429 0.5px, #ffffff 0.5px);
   background-size: 20px 20px;
   background-position:
     0 0,
@@ -179,7 +179,7 @@ body {
 }
 .glass-card-yellow:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 25px 60px -15px rgba(255, 185, 36, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(240, 180, 41, 0.35);
 }
 
 .glass-card-green {

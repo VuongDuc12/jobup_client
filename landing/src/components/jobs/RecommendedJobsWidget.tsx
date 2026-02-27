@@ -88,7 +88,7 @@ export default function RecommendedJobsWidget({
             <Link
               key={job.id}
               href={job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung"}
-              className="block rounded-xl border border-gray-100 p-3 hover:border-brand-yellow/50 hover:shadow-md transition-all"
+              className="block rounded-xl border border-gray-100 p-3 hover:border-brand-yellow hover:shadow-md transition-all"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
