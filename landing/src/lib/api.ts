@@ -1,12 +1,119 @@
 import { API_BASE_URL } from "./config";
 import type {
   ApiResponse,
+  FeatureResponse,
+  HomepageSettingsResponse,
+  PartnerResponse,
   PublicJobResponse,
   PublicJobDetailResponse,
   PublicJobSearchResponse,
   ProvinceDropdown,
   JobCategoryTreeItem,
+  StatisticResponse,
+  TestimonialResponse,
 } from "./types";
+
+/* ────────────────────────────────────────────────
+ *  GET /api/HomepageSettings/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchHomepageSettingsPublic(): Promise<HomepageSettingsResponse> {
+  const res = await fetch(`${API_BASE_URL}/api/HomepageSettings/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch homepage settings: ${res.status}`);
+  }
+
+  const json: ApiResponse<HomepageSettingsResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Partners/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchPartnersPublic(): Promise<PartnerResponse[]> {
+  const res = await fetch(`${API_BASE_URL}/api/Partners/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch partners: ${res.status}`);
+  }
+
+  const json: ApiResponse<PartnerResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Features/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchFeaturesPublic(): Promise<FeatureResponse[]> {
+  const res = await fetch(`${API_BASE_URL}/api/Features/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch features: ${res.status}`);
+  }
+
+  const json: ApiResponse<FeatureResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Testimonials/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchTestimonialsPublic(): Promise<
+  TestimonialResponse[]
+> {
+  const res = await fetch(`${API_BASE_URL}/api/Testimonials/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch testimonials: ${res.status}`);
+  }
+
+  const json: ApiResponse<TestimonialResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Statistics/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchStatisticsPublic(): Promise<StatisticResponse[]> {
+  const res = await fetch(`${API_BASE_URL}/api/Statistics/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch statistics: ${res.status}`);
+  }
+
+  const json: ApiResponse<StatisticResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
 
 /* ────────────────────────────────────────────────
  *  GET /api/Jobs/latest
