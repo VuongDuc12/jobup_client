@@ -1,9 +1,12 @@
 import { API_BASE_URL } from "./config";
 import type {
+  AboutSettingResponse,
   ApiResponse,
   FeatureResponse,
   HomepageSettingsResponse,
   PartnerResponse,
+  PublicArticleListItemResponse,
+  PublicArticleSearchResponse,
   PublicJobResponse,
   PublicJobDetailResponse,
   PublicJobSearchResponse,
@@ -11,6 +14,7 @@ import type {
   JobCategoryTreeItem,
   StatisticResponse,
   TestimonialResponse,
+  PublicMediaMentionSearchResponse,
 } from "./types";
 
 /* ────────────────────────────────────────────────
@@ -329,4 +333,83 @@ export async function fetchPublicJobCategories(): Promise<
   }
 
   return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/MediaMentions/public
+ * ──────────────────────────────────────────────── */
+
+export interface MediaMentionSearchParams {
+  Keyword?: string;
+  MediaMentionCategoryId?: string;
+  IsFeatured?: boolean;
+  PageNumber?: number;
+  PageSize?: number;
+}
+
+export async function fetchMediaMentionsPublic(
+  params: MediaMentionSearchParams = {},
+): Promise<PublicMediaMentionSearchResponse> {
+  const url = new URL(`${API_BASE_URL}/api/MediaMentions/public`);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const res = await fetch(url.toString(), { next: { revalidate: 300 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch media mentions: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicMediaMentionSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/AboutSettings/public
+ * ──────────────────────────────────────────────── */
+
+export async function fetchAboutSettingsPublic(): Promise<AboutSettingResponse> {
+  const res = await fetch(`${API_BASE_URL}/api/AboutSettings/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch about settings: ${res.status}`);
+  }
+
+  const json: ApiResponse<AboutSettingResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Articles/public  (featured / hot)
+ * ──────────────────────────────────────────────── */
+
+export async function fetchFeaturedArticlesPublic(
+  limit = 4,
+): Promise<PublicArticleListItemResponse[]> {
+  const url = new URL(`${API_BASE_URL}/api/Articles/public`);
+  url.searchParams.set("IsHot", "true");
+  url.searchParams.set("PageSize", String(limit));
+
+  const res = await fetch(url.toString(), { next: { revalidate: 300 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch featured articles: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data.list;
 }

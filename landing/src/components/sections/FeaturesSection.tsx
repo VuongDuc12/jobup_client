@@ -1,4 +1,114 @@
-export default function FeaturesSection() {
+import type { FeatureResponse, StatisticResponse } from "@/lib/types";
+import { getAssetUrl } from "@/lib/utils";
+
+interface FeaturesSectionProps {
+    features?: FeatureResponse[] | null;
+    statistics?: StatisticResponse[] | null;
+}
+
+/* ── Fallback data when API returns nothing ── */
+const defaultFeatures: {
+    title: string;
+    description: string;
+    iconClass: string;
+    imageUrl: string;
+    tag1: string | null;
+    tag2: string | null;
+    linkUrl: string | null;
+    buttonText: string | null;
+}[] = [
+    {
+        title: 'Công nghệ Match Job 4.0 ⚡',
+        description:
+            'Thuật toán thông minh tự động "ghép đôi" bạn với Job ngon dựa trên 50+ tiêu chí dữ liệu. Tìm việc chuẩn xác như tìm người yêu!',
+        iconClass: "fa-solid fa-brain",
+        imageUrl:
+            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+        tag1: "AI TECHNOLOGY",
+        tag2: null,
+        linkUrl: null,
+        buttonText: null,
+    },
+    {
+        title: 'Support "Không ngủ" 24/7',
+        description:
+            'Bạn thức, JobUp cũng thức! Đội ngũ CSKH nhiệt tình "cân" mọi thắc mắc, hỗ trợ tìm việc và nộp hồ sơ siêu tốc mọi khung giờ.',
+        iconClass: "fa-solid fa-headset",
+        imageUrl:
+            "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600",
+        tag1: null,
+        tag2: null,
+        linkUrl: "tel:0979334143",
+        buttonText: "GỌI CHUYÊN GIA NGAY",
+    },
+    {
+        title: 'CV Doctor - "Chữa bệnh" hồ sơ',
+        description:
+            'Nhận và "khám" CV miễn phí. Biến hồ sơ nhạt nhòa thành bản CV "sát thủ", đánh bại mọi đối thủ cạnh tranh.',
+        iconClass: "fa-solid fa-file-signature",
+        imageUrl:
+            "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=400",
+        tag1: null,
+        tag2: null,
+        linkUrl: "#",
+        buttonText: "Trải nghiệm ngay",
+    },
+    {
+        title: "Bí kíp Phỏng vấn & Deal lương",
+        description:
+            'Trang bị "vũ khí" tận răng: Bộ câu hỏi phỏng vấn thường gặp, mẹo deal lương khéo léo để bạn tự tin chinh phục mọi HR khó tính.',
+        iconClass: "fa-solid fa-rocket",
+        imageUrl:
+            "https://images.unsplash.com/photo-1507679799987-c7377f5da5b2?auto=format&fit=crop&q=80&w=600",
+        tag1: null,
+        tag2: null,
+        linkUrl: "#",
+        buttonText: "Khám phá bản đồ",
+    },
+];
+
+const defaultStats = [
+    { value: "3 Giây", label: "Tốc độ tìm việc" },
+    { value: "24/7", label: "Hỗ trợ trực tuyến" },
+    { value: "100%", label: "Bảo mật thông tin" },
+    { value: "Free", label: "Tư vấn miễn phí" },
+];
+
+export default function FeaturesSection({ features, statistics }: FeaturesSectionProps) {
+    const activeFeatures =
+        features && features.length > 0
+            ? features
+                  .sort((a, b) => a.displayOrder - b.displayOrder)
+            : null;
+
+    const activeStats =
+        statistics && statistics.length > 0
+            ? statistics
+                  .filter((s) => s.isActive)
+                  .sort((a, b) => a.displayOrder - b.displayOrder)
+            : null;
+
+    /* Map API features to a uniform shape (first 4) */
+    const items = activeFeatures
+        ? activeFeatures.slice(0, 4).map((f) => ({
+              title: f.title,
+              description: f.description || "",
+              iconClass: f.iconClass || "fa-solid fa-star",
+              imageUrl: getAssetUrl(f.imageUrl),
+              tag1: f.tag1,
+              tag2: f.tag2,
+              linkUrl: f.linkUrl,
+              buttonText: f.buttonText,
+          }))
+        : defaultFeatures;
+
+    const stats = activeStats
+        ? activeStats.map((s) => ({
+              value: s.numberText || "",
+              label: s.label || "",
+          }))
+        : defaultStats;
+
     return (
         <section id="features" className="py-16 bg-white relative overflow-hidden">
             {/* Decorative Background */}
@@ -22,174 +132,175 @@ export default function FeaturesSection() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    {/* Feature 1: AI Smart Match */}
-                    <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow hover:shadow-[0_40px_80px_-20px_rgba(245,185,20,0.15)] transition-all duration-700 group relative overflow-hidden">
-                        <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
-                            <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                                <img
-                                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800"
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                                    alt="AI Logic"
-                                />
-                            </div>
-
-                            <div className="relative z-10 max-w-md">
-                                <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-sm mb-4">
-                                    <span className="w-8 h-[2px] bg-brand-yellow" /> AI
-                                    TECHNOLOGY
-                                </div>
-                                <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
-                                    Công nghệ{" "}
-                                    <span className="text-brand-yellow">Match Job 4.0</span> ⚡
-                                </h3>
-                                <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic">
-                                    &ldquo;Thuật toán thông minh tự động &lsquo;ghép đôi&rsquo;
-                                    bạn với Job ngon dựa trên 50+ tiêu chí dữ liệu. Tìm việc
-                                    chuẩn xác như tìm người yêu!&rdquo;
-                                </p>
-
-                                {/* Analytical UI */}
-                                <div className="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow transition-colors">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow">
-                                                <i className="fa-solid fa-brain" />
+                    {/* Feature 1 — wide card (2 cols) */}
+                    {items[0] && (
+                        <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow hover:shadow-[0_40px_80px_-20px_rgba(245,185,20,0.15)] transition-all duration-700 group relative overflow-hidden">
+                            <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
+                                {items[0].imageUrl && (
+                                    <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+                                        <img
+                                            src={items[0].imageUrl}
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                                            alt={items[0].title}
+                                        />
+                                    </div>
+                                )}
+                                <div className="relative z-10 max-w-md">
+                                    {items[0].tag1 && (
+                                        <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-sm mb-4">
+                                            <span className="w-8 h-[2px] bg-brand-yellow" /> {items[0].tag1}
+                                        </div>
+                                    )}
+                                    <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
+                                        {items[0].title}
+                                    </h3>
+                                    <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic">
+                                        &ldquo;{items[0].description}&rdquo;
+                                    </p>
+                                    {/* Analytical UI */}
+                                    <div className="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow transition-colors">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow">
+                                                    <i className={items[0].iconClass} />
+                                                </div>
+                                                <span className="font-bold text-gray-800">
+                                                    Đang quét hồ sơ...
+                                                </span>
                                             </div>
-                                            <span className="font-bold text-gray-800">
-                                                Đang quét hồ sơ...
+                                            <span className="text-green-600 font-black text-xl">
+                                                98%
                                             </span>
                                         </div>
-                                        <span className="text-green-600 font-black text-xl">
-                                            98%
-                                        </span>
+                                        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div className="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%] animate-pulse" />
+                                        </div>
+                                        <p className="mt-3 text-[11px] text-gray-400 font-medium uppercase tracking-widest text-center">
+                                            Kết quả hiển thị sau 1.2s
+                                        </p>
                                     </div>
-                                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                        <div className="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%] animate-pulse" />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Feature 2 — tall dark card */}
+                    {items[1] && (
+                        <div className="md:row-span-2 bg-[#111827] rounded-[3rem] p-1 border border-gray-800 hover:shadow-2xl transition-all duration-700 group overflow-hidden">
+                            <div className="bg-gray-900/40 rounded-[2.9rem] p-8 lg:p-10 h-full flex flex-col relative overflow-hidden">
+                                {items[1].imageUrl && (
+                                    <img
+                                        src={items[1].imageUrl}
+                                        className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
+                                        alt={items[1].title}
+                                    />
+                                )}
+                                <div className="relative z-10 flex flex-col h-full">
+                                    <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center shadow-inner mb-8">
+                                        <i className={`${items[1].iconClass} text-2xl text-brand-yellow`} />
                                     </div>
-                                    <p className="mt-3 text-[11px] text-gray-400 font-medium uppercase tracking-widest text-center">
-                                        Kết quả hiển thị sau 1.2s
+                                    <h3 className="text-3xl font-black text-white mb-4">
+                                        {items[1].title}
+                                    </h3>
+                                    <p className="text-gray-400 mb-8 leading-relaxed font-light">
+                                        {items[1].description}
                                     </p>
+                                    <div className="mt-auto space-y-4">
+                                        <div className="bg-white/5 backdrop-blur-md p-4 rounded-[1.5rem] rounded-tl-none border border-white/5 self-start max-w-[90%] transform -rotate-1">
+                                            <p className="text-xs text-gray-200">
+                                                Em cần tối ưu CV ngành Tech ạ?
+                                            </p>
+                                        </div>
+                                        <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1">
+                                            <p className="text-xs font-bold leading-relaxed italic">
+                                                &ldquo;JobUp đã lọc ra Job ngon đúng ý bạn. Apply luôn kẻo lỡ nhé! 🚀&rdquo;
+                                            </p>
+                                        </div>
+                                        {items[1].linkUrl && (
+                                            <a
+                                                href={items[1].linkUrl}
+                                                className="flex items-center justify-center gap-3 w-full py-4 bg-white text-[#111827] rounded-[1.5rem] font-black text-sm mt-8 hover:bg-brand-yellow transition-all shadow-xl hover:-translate-y-1"
+                                            >
+                                                {items[1].buttonText || "GỌI CHUYÊN GIA NGAY"}{" "}
+                                                <i className="fa-solid fa-phone-volume" />
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
-                    {/* Feature 2: 24/7 Support */}
-                    <div className="md:row-span-2 bg-[#111827] rounded-[3rem] p-1 border border-gray-800 hover:shadow-2xl transition-all duration-700 group overflow-hidden">
-                        <div className="bg-gray-900/40 rounded-[2.9rem] p-8 lg:p-10 h-full flex flex-col relative overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600"
-                                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
-                                alt="Consultant"
-                            />
-
-                            <div className="relative z-10 flex flex-col h-full">
-                                <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center shadow-inner mb-8">
-                                    <i className="fa-solid fa-headset text-2xl text-brand-yellow" />
+                    {/* Feature 3 — light card */}
+                    {items[2] && (
+                        <div className="bg-white rounded-[3rem] p-8 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+                            {items[2].imageUrl && (
+                                <img
+                                    src={items[2].imageUrl}
+                                    className="absolute inset-0 w-full h-full object-cover opacity-5 group-hover:opacity-15 transition-opacity duration-700"
+                                    alt={items[2].title}
+                                />
+                            )}
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                                    <i className={`${items[2].iconClass} text-xl text-blue-600 group-hover:text-white`} />
                                 </div>
-                                <h3 className="text-3xl font-black text-white mb-4">
-                                    Support <br />
-                                    <span className="text-brand-yellow">
-                                        &ldquo;Không ngủ&rdquo; 24/7
-                                    </span>
+                                <h3 className="text-xl font-black text-[#111827] mb-3">
+                                    {items[2].title}
                                 </h3>
-                                <p className="text-gray-400 mb-8 leading-relaxed font-light">
-                                    Bạn thức, JobUp cũng thức! Đội ngũ CSKH nhiệt tình
-                                    &ldquo;cân&rdquo; mọi thắc mắc, hỗ trợ tìm việc và nộp hồ sơ
-                                    siêu tốc mọi khung giờ.
+                                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                                    {items[2].description}
                                 </p>
-
-                                <div className="mt-auto space-y-4">
-                                    <div className="bg-white/5 backdrop-blur-md p-4 rounded-[1.5rem] rounded-tl-none border border-white/5 self-start max-w-[90%] transform -rotate-1">
-                                        <p className="text-xs text-gray-200">
-                                            Em cần tối ưu CV ngành Tech ạ?
-                                        </p>
-                                    </div>
-                                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1">
-                                        <p className="text-xs font-bold leading-relaxed italic">
-                                            &ldquo;JobUp đã lọc ra Job ngon đúng ý bạn. Apply luôn kẻo
-                                            lỡ nhé! 🚀&rdquo;
-                                        </p>
-                                    </div>
+                                {items[2].linkUrl && (
                                     <a
-                                        href="tel:0979334143"
-                                        className="flex items-center justify-center gap-3 w-full py-4 bg-white text-[#111827] rounded-[1.5rem] font-black text-sm mt-8 hover:bg-brand-yellow transition-all shadow-xl hover:-translate-y-1"
+                                        href={items[2].linkUrl}
+                                        className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm group/link"
                                     >
-                                        GỌI CHUYÊN GIA NGAY{" "}
-                                        <i className="fa-solid fa-phone-volume" />
+                                        {items[2].buttonText || "Trải nghiệm ngay"}{" "}
+                                        <i className="fa-solid fa-arrow-right-long group-hover/link:translate-x-2 transition-transform" />
                                     </a>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Feature 4 — yellow accent card */}
+                    {items[3] && (
+                        <div className="bg-gradient-to-br from-brand-yellow to-brand-yellow rounded-[3rem] p-8 text-white shadow-2xl shadow-brand-yellow hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+                            {items[3].imageUrl && (
+                                <img
+                                    src={items[3].imageUrl}
+                                    className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"
+                                    alt={items[3].title}
+                                />
+                            )}
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
+                                    <i className={`${items[3].iconClass} text-xl text-white`} />
                                 </div>
+                                <h3 className="text-xl font-black mb-3">
+                                    {items[3].title}
+                                </h3>
+                                <p className="text-white/80 text-sm leading-relaxed mb-6">
+                                    {items[3].description}
+                                </p>
+                                {items[3].linkUrl && (
+                                    <a
+                                        href={items[3].linkUrl}
+                                        className="inline-flex items-center gap-2 text-white font-black text-sm group/link"
+                                    >
+                                        {items[3].buttonText || "Khám phá"}{" "}
+                                        <i className="fa-solid fa-map-location-dot group-hover/link:scale-125 transition-transform" />
+                                    </a>
+                                )}
                             </div>
                         </div>
-                    </div>
-
-                    {/* Feature 3: CV Optimization */}
-                    <div className="bg-white rounded-[3rem] p-8 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=400"
-                            className="absolute inset-0 w-full h-full object-cover opacity-5 group-hover:opacity-15 transition-opacity duration-700"
-                            alt="CV Writing"
-                        />
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                                <i className="fa-solid fa-file-signature text-xl text-blue-600 group-hover:text-white" />
-                            </div>
-                            <h3 className="text-xl font-black text-[#111827] mb-3">
-                                CV Doctor - &ldquo;Chữa bệnh&rdquo; hồ sơ
-                            </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                                Nhận và &ldquo;khám&rdquo; CV miễn phí. Biến hồ sơ nhạt nhòa
-                                thành bản CV &ldquo;sát thủ&rdquo;, đánh bại mọi đối thủ cạnh
-                                tranh.
-                            </p>
-                            <a
-                                href="#"
-                                className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm group/link"
-                            >
-                                Trải nghiệm ngay{" "}
-                                <i className="fa-solid fa-arrow-right-long group-hover/link:translate-x-2 transition-transform" />
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Feature 4: Career Path */}
-                    <div className="bg-gradient-to-br from-brand-yellow to-brand-yellow rounded-[3rem] p-8 text-white shadow-2xl shadow-brand-yellow hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1507679799987-c7377f5da5b2?auto=format&fit=crop&q=80&w=600"
-                            className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"
-                            alt="Success Path"
-                        />
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
-                                <i className="fa-solid fa-rocket text-xl text-white" />
-                            </div>
-                            <h3 className="text-xl font-black mb-3">
-                                Bí kíp Phỏng vấn & Deal lương
-                            </h3>
-                            <p className="text-white/80 text-sm leading-relaxed mb-6">
-                                Trang bị &ldquo;vũ khí&rdquo; tận răng: Bộ câu hỏi phỏng vấn
-                                thường gặp, mẹo deal lương khéo léo để bạn tự tin chinh phục
-                                mọi HR khó tính.
-                            </p>
-                            <a
-                                href="#"
-                                className="inline-flex items-center gap-2 text-white font-black text-sm group/link"
-                            >
-                                Khám phá bản đồ{" "}
-                                <i className="fa-solid fa-map-location-dot group-hover/link:scale-125 transition-transform" />
-                            </a>
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Stats */}
                 <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-t border-gray-100">
-                    {[
-                        { value: "3 Giây", label: "Tốc độ tìm việc" },
-                        { value: "24/7", label: "Hỗ trợ trực tuyến" },
-                        { value: "100%", label: "Bảo mật thông tin" },
-                        { value: "Free", label: "Tư vấn miễn phí" },
-                    ].map((stat, idx) => (
+                    {stats.map((stat, idx) => (
                         <div key={idx} className="text-center">
                             <div className="text-3xl font-extrabold text-[#111827] mb-1">
                                 {stat.value}

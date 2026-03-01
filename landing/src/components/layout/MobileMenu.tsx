@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -18,6 +19,8 @@ const mobileLinks = [
 ];
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+    const pathname = usePathname();
+
     return (
         <div
             className={`fixed inset-0 z-[100] bg-white transform transition-transform duration-500 lg:hidden flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"
@@ -41,17 +44,24 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             <nav className="flex-grow p-8 flex flex-col gap-8 text-xl font-black text-gray-900">
-                {mobileLinks.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={onClose}
-                        className="hover:text-brand-yellow transition-colors flex items-center justify-between"
-                    >
-                        {link.label}
-                        <i className="fa-solid fa-chevron-right text-xs opacity-20" />
-                    </Link>
-                ))}
+                {mobileLinks.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={onClose}
+                            className={`flex items-center justify-between transition-colors ${
+                                isActive
+                                    ? "text-brand-yellow"
+                                    : "hover:text-brand-yellow"
+                            }`}
+                        >
+                            {link.label}
+                            <i className="fa-solid fa-chevron-right text-xs opacity-20" />
+                        </Link>
+                    );
+                })}
             </nav>
 
             <div className="p-8 border-t border-gray-50">

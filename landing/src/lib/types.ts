@@ -154,10 +154,133 @@ export interface StatisticResponse {
   updatedAt: string | null;
 }
 
+export interface PublicMediaMentionListItemResponse {
+  id: string;
+  title: string;
+  summary: string | null;
+  categoryName: string;
+  categorySlug: string | null;
+  sourceName: string | null;
+  sourceLogo: string | null;
+  articleUrl: string | null;
+  thumbnailUrl: string | null;
+  isFeatured: boolean;
+  isHot: boolean;
+  publishedAt: string | null;
+}
+
+export interface PublicMediaMentionSearchResponse {
+  list: PublicMediaMentionListItemResponse[];
+  totalCount: number;
+  totalPages: number;
+}
+
 export interface ApiResponse<T> {
   succeeded: boolean;
   code: number;
   message: string;
   errors: string | null;
   data: T;
+}
+
+/* ────────────────────────────────────────────────
+ *  About Settings
+ * ──────────────────────────────────────────────── */
+
+export interface AboutSettingResponse {
+  id: string;
+
+  // SEO
+  metaTitle: string | null;
+  metaDescription: string | null;
+
+  // Hero
+  heroBadgeText: string | null;
+  heroTitle: string | null;
+  heroSubtitle: string | null;
+  heroBackgroundImage: string | null;
+  heroCta1Text: string | null;
+  heroCta1Url: string | null;
+  heroCta2Text: string | null;
+  heroCta2Url: string | null;
+
+  // Journey
+  journeyBadgeText: string | null;
+  journeyTitle: string | null;
+  journeyParagraph1: string | null;
+  journeyParagraph2: string | null;
+  journeyImage1: string | null;
+  journeyImage2: string | null;
+  journeyImage3: string | null;
+  journeyImage4: string | null;
+
+  // Difference
+  differenceBadgeText: string | null;
+  differenceTitle: string | null;
+  differenceSubtitle: string | null;
+  differenceImage: string | null;
+  differenceHeading1: string | null;
+  differenceParagraph1: string | null;
+  differenceHeading2: string | null;
+  differenceParagraph2: string | null;
+  differenceStatIcon: string | null;
+  differenceStatTitle: string | null;
+  differenceStatSubtitle: string | null;
+
+  // Core Values
+  coreValuesTitle: string | null;
+  coreValue1Icon: string | null;
+  coreValue1Title: string | null;
+  coreValue1Description: string | null;
+  coreValue2Icon: string | null;
+  coreValue2Title: string | null;
+  coreValue2Description: string | null;
+  coreValue3Icon: string | null;
+  coreValue3Title: string | null;
+  coreValue3Description: string | null;
+
+  // Leadership
+  leadershipBadgeText: string | null;
+  leadershipTitle: string | null;
+  ceoRoleLabel: string | null;
+  ceoName: string | null;
+  ceoImage: string | null;
+  ceoAchievements: string | null;
+  advisorRoleLabel: string | null;
+  advisorName: string | null;
+  advisorImage: string | null;
+  advisorAchievements: string | null;
+
+  // CTA
+  ctaTitle: string | null;
+  ctaDescription: string | null;
+  ctaButton1Text: string | null;
+  ctaButton1Url: string | null;
+  ctaButton2Text: string | null;
+  ctaButton2Url: string | null;
+
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+/* ────────────────────────────────────────────────
+ *  Articles (public)
+ * ──────────────────────────────────────────────── */
+
+export interface PublicArticleListItemResponse {
+  id: string;
+  title: string;
+  slug: string | null;
+  avatar: string | null;
+  summary: string | null;
+  categoryName: string;
+  categorySlug: string | null;
+  isHot: boolean;
+  publishedAt: string | null;
+}
+
+export interface PublicArticleSearchResponse {
+  list: PublicArticleListItemResponse[];
+  totalCount: number;
+  totalPages: number;
 }
