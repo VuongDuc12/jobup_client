@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { PartnerResponse, ProvinceDropdown } from "@/lib/types";
+import { getAssetUrl } from "@/lib/utils";
 
 const partnerLogos = [
   {
@@ -61,7 +62,7 @@ export default function HeroSection({
           .filter((item) => item.logoUrl)
           .sort((a, b) => a.displayOrder - b.displayOrder)
           .map((item) => ({
-            src: item.logoUrl as string,
+            src: getAssetUrl(item.logoUrl) || (item.logoUrl as string),
             alt: item.name || "Partner",
             height: "h-6",
           }))
@@ -212,7 +213,7 @@ export default function HeroSection({
               {/* Main Image */}
               <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] ring-[6px] ring-white">
                 <img
-                  src={heroImage || "/hero-image.jpg"}
+                  src={getAssetUrl(heroImage) || "/hero-image.jpg"}
                   alt="Chuyên viên tuyển dụng JobUp"
                   className="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-[1.5s] ease-out"
                   loading="eager"

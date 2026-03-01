@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
@@ -17,6 +18,7 @@ const newsDropdown = [
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <>
@@ -39,16 +41,27 @@ export default function Navbar() {
 
                     {/* Navigation Links */}
                     <nav className="hidden lg:flex items-center gap-10">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="font-semibold text-gray-600 hover:text-brand-yellow-hover transition relative group py-2"
-                            >
-                                {link.label}
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-yellow transition-all group-hover:w-full" />
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isActive = pathname === link.href;
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={`font-semibold transition relative group py-2 ${
+                                        isActive
+                                            ? "text-brand-yellow font-bold"
+                                            : "text-gray-600 hover:text-brand-yellow-hover"
+                                    }`}
+                                >
+                                    {link.label}
+                                    <span
+                                        className={`absolute bottom-0 left-0 h-0.5 bg-brand-yellow transition-all ${
+                                            isActive ? "w-full" : "w-0 group-hover:w-full"
+                                        }`}
+                                    />
+                                </Link>
+                            );
+                        })}
 
                         {/* Dropdown Tin tức */}
                         <div className="relative group">
@@ -71,10 +84,20 @@ export default function Navbar() {
 
                         <Link
                             href="/ve-chung-toi"
-                            className="font-semibold text-gray-600 hover:text-brand-yellow-hover transition relative group py-2"
+                            className={`font-semibold transition relative group py-2 ${
+                                pathname === "/ve-chung-toi"
+                                    ? "text-brand-yellow font-bold"
+                                    : "text-gray-600 hover:text-brand-yellow-hover"
+                            }`}
                         >
                             Về chúng tôi
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-yellow transition-all group-hover:w-full" />
+                            <span
+                                className={`absolute bottom-0 left-0 h-0.5 bg-brand-yellow transition-all ${
+                                    pathname === "/ve-chung-toi"
+                                        ? "w-full"
+                                        : "w-0 group-hover:w-full"
+                                }`}
+                            />
                         </Link>
 
                         <Link

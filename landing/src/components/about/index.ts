@@ -1,0 +1,9 @@
+export { default as AboutHeroSection } from "./AboutHeroSection";
+export { default as OurJourneySection } from "./OurJourneySection";
+export { default as DifferenceSection } from "./DifferenceSection";
+export { default as CoreValuesSection } from "./CoreValuesSection";
+export { default as LeadershipSection } from "./LeadershipSection";
+export { default as StatsBarSection } from "./StatsBarSection";
+export { default as PressMediaSection } from "./PressMediaSection";
+export { default as AboutTestimonialsSection } from "./AboutTestimonialsSection";
+export { default as AboutCTASection } from "./AboutCTASection";

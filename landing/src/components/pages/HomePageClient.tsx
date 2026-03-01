@@ -12,6 +12,7 @@ import {
   FloatingActions,
 } from "@/components/sections";
 import {
+  fetchFeaturedArticlesPublic,
   fetchFeaturesPublic,
   fetchPartnersPublic,
   fetchProvinces,
@@ -23,6 +24,7 @@ import type {
   HomepageSettingsResponse,
   PartnerResponse,
   ProvinceDropdown,
+  PublicArticleListItemResponse,
   StatisticResponse,
   TestimonialResponse,
 } from "@/lib/types";
@@ -45,6 +47,7 @@ export default function HomePageClient({
     null,
   );
   const [provinces, setProvinces] = useState<ProvinceDropdown[] | null>(null);
+  const [articles, setArticles] = useState<PublicArticleListItemResponse[] | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -56,6 +59,7 @@ export default function HomePageClient({
         fetchFeaturesPublic(),
         fetchTestimonialsPublic(),
         fetchStatisticsPublic(),
+        fetchFeaturedArticlesPublic(),
       ]);
 
       if (!isMounted) return;
@@ -65,6 +69,7 @@ export default function HomePageClient({
       if (results[2].status === "fulfilled") setFeatures(results[2].value);
       if (results[3].status === "fulfilled") setTestimonials(results[3].value);
       if (results[4].status === "fulfilled") setStatistics(results[4].value);
+      if (results[5].status === "fulfilled") setArticles(results[5].value);
     };
 
     loadHomepageData();
@@ -91,7 +96,7 @@ export default function HomePageClient({
         <SpecialtySectors />
         <FeaturesSection features={features} statistics={statistics} />
         <TestimonialsSection testimonials={testimonials} />
-        <NewsSection />
+        <NewsSection articles={articles} />
       </main>
       <Footer />
       <FloatingActions />

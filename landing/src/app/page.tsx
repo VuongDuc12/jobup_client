@@ -9,7 +9,15 @@ const DEFAULT_META = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  return DEFAULT_META;
+  try {
+    const settings = await fetchHomepageSettingsPublic();
+    return {
+      title: settings?.metaTitle || DEFAULT_META.title,
+      description: settings?.metaDescription || DEFAULT_META.description,
+    };
+  } catch {
+    return DEFAULT_META;
+  }
 }
 
 export default async function HomePage() {
