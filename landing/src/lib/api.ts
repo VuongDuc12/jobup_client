@@ -2,6 +2,7 @@ import { API_BASE_URL, REVALIDATE_TIME } from "./config";
 import type {
   AboutSettingResponse,
   ApiResponse,
+  BannerPublicResponse,
   FeatureResponse,
   HomepageSettingsResponse,
   PartnerResponse,
@@ -434,4 +435,26 @@ export async function fetchFeaturedArticlesPublic(
   }
 
   return json.data.list;
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Banners/public/{position}
+ * ──────────────────────────────────────────────── */
+export async function fetchBannerPublic(
+  position: string,
+): Promise<BannerPublicResponse | null> {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/api/Banners/public/${position}`,
+      { next: { revalidate: REVALIDATE_TIME } },
+    );
+    if (!res.ok) return null;
+
+    const json: ApiResponse<BannerPublicResponse | null> = await res.json();
+    if (!json.succeeded || !json.data) return null;
+
+    return json.data;
+  } catch {
+    return null;
+  }
 }

@@ -12,6 +12,7 @@ import {
   UrgentJobsWidget,
   CareerHandbook,
 } from "@/components/jobs";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
 import type { JobCategoryTreeItem, ProvinceDropdown } from "@/lib/types";
 
@@ -180,11 +181,11 @@ export default function JobsPage() {
                 workType={searchWorkType}
                 sortBy={searchSortBy}
               />
-              <SpotlightBanner />
+              <DynamicBanner position="jobs_spotlight" variant="spotlight" fallback={<SpotlightBanner />} />
             </div>
 
             <aside className="lg:col-span-4 space-y-8">
-              <CVReviewCTA />
+              <DynamicBanner position="jobs_sidebar" variant="compact" fallback={<CVReviewCTA />} />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
                 <CareerHandbook />

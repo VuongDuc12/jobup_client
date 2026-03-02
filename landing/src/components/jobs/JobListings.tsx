@@ -10,6 +10,7 @@ import {
   companyInitial,
 } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 
 /* ── Color palette for logo fallback ── */
 const FALLBACK_COLORS = [
@@ -331,7 +332,9 @@ export default function JobListings({
           .map((job) => <NormalJobCard key={job.id} job={job} />)}
 
       {/* In-feed Banner */}
-      {!loading && !error && normalJobs.length > 3 && <InFeedBanner />}
+      {!loading && !error && normalJobs.length > 3 && (
+        <DynamicBanner position="jobs_infeed" variant="infeed" fallback={<InFeedBanner />} />
+      )}
 
       {/* Normal Jobs — remaining */}
       {!loading &&

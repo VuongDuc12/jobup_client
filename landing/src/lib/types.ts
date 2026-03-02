@@ -282,3 +282,19 @@ export interface PublicArticleSearchResponse {
   totalCount: number;
   totalPages: number;
 }
+
+/* ────────────────────────────────────────────────
+ *  Types for GET /api/Banners/public/{position}
+ * ──────────────────────────────────────────────── */
+export interface BannerPublicResponse {
+  position: string | null;
+  badgeText: string | null;
+  title: string | null;
+  highlightText: string | null;
+  description: string | null;
+  buttonText: string | null;
+  linkUrl: string | null;
+  target: string;
+  image: string | null;
+  imageMobile: string | null;
+}
