@@ -226,8 +226,8 @@ export default function JobDetailPage() {
 
           {!loading && job && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
-              <div className="lg:col-span-8 space-y-6">
-                <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm relative overflow-hidden">
+              <div className="lg:col-span-8">
+                <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm relative overflow-hidden h-full">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
 
                   <div className="flex flex-col md:flex-row gap-6 items-start relative z-10">
@@ -330,7 +330,124 @@ export default function JobDetailPage() {
                     </div>
                   </div>
                 </div>
+              </div>
 
+              <div className="lg:col-span-4">
+                <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col h-full">
+                  <div className="flex flex-col bg-white rounded-xl">
+                    <div className="flex items-center justify-between mb-4 border-b border-gray-50">
+                      <h3 className="text-sm font-bold text-gray-800">
+                        Người phụ trách
+                      </h3>
+                    </div>
+
+                    {job.contactStaff ? (
+                      <div className="flex flex-col">
+                        {/* Profile Row - Chuyển sang dạng ngang để tiết kiệm chiều cao */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="relative">
+                            {job.contactStaff.avatar ? (
+                              <img
+                                src={job.contactStaff.avatar}
+                                alt={job.contactStaff.fullName}
+                                className="w-12 h-12 rounded-full object-cover ring-2 ring-brand-yellow/10"
+                              />
+                            ) : (
+                              <div className="w-12 h-12 rounded-full bg-brand-black text-white flex items-center justify-center font-bold text-lg">
+                                {companyInitial(job.contactStaff.fullName)}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="flex-1">
+                            <p className="font-bold text-brand-black text-base leading-tight">
+                              {job.contactStaff.fullName}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Contact Info - Thu nhỏ padding và text */}
+                        <div className="grid grid-cols-1 gap-2">
+                          <div className="flex items-center p-2 rounded-lg bg-gray-50/80 border border-gray-100">
+                            <div className="w-6 h-6 flex items-center justify-center mr-2 text-gray-400">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                              </svg>
+                            </div>
+                            <p className="text-xs font-medium text-gray-600 truncate">
+                              {job.contactStaff.email || "Chưa cập nhật"}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center p-2 rounded-lg bg-gray-50/80 border border-gray-100">
+                            <div className="w-6 h-6 flex items-center justify-center mr-2 text-gray-400">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                />
+                              </svg>
+                            </div>
+                            <p className="text-xs font-medium text-gray-600">
+                              {job.contactStaff.zaloPhone || "Chưa cập nhật"}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Button - Thu nhỏ độ cao (py-2.5) */}
+                        <div className="mt-4">
+                          {zaloLink ? (
+                            <a
+                              href={zaloLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-2.5 bg-brand-black text-white font-bold rounded-lg hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
+                            >
+                              <img
+                                src="/Icon_of_Zalo.svg"
+                                alt="Zalo"
+                                className="w-4 h-4"
+                              />
+                              <span className="text-xs uppercase tracking-wider">
+                                Chat Zalo ngay
+                              </span>
+                            </a>
+                          ) : (
+                            <div className="w-full py-2.5 bg-gray-50 text-gray-400 font-medium rounded-lg text-center text-[11px] border border-dashed border-gray-200">
+                              Zalo chưa cập nhật
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-[11px] text-gray-400 text-center py-4">
+                        Chưa có thông tin liên hệ
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-8 space-y-6">
                 <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm space-y-10">
                   <div>
                     <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
@@ -348,10 +465,10 @@ export default function JobDetailPage() {
                     <HtmlContent html={job.requirements} />
                   </div>
 
-                  <div className="bg-[#FFFDF5] border border-amber-100 rounded-2xl p-6">
+                  <div>
                     <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
                       <span className="w-2 h-8 bg-brand-yellow rounded-full" />
-                      Quyền lợi & Đãi ngộ
+                      Quyền lợi và đãi ngộ
                     </h3>
                     <HtmlContent html={job.benefits} />
                   </div>
@@ -450,73 +567,36 @@ export default function JobDetailPage() {
               </div>
 
               <div className="lg:col-span-4 relative">
-                <div className="sticky top-24 space-y-6">
-                  <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-xl shadow-gray-200/50">
-                    <div className="text-center mb-6">
-                      <p className="text-sm text-gray-500 font-medium mb-1">
-                        Đừng bỏ lỡ cơ hội này
-                      </p>
-                      <p className="text-xs text-brand-yellow font-bold uppercase tracking-widest animate-pulse">
-                        {deadlineLabel(job.deadline)}
-                      </p>
-                    </div>
-
-                    {job.contactStaff ? (
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          {job.contactStaff.avatar ? (
-                            <img
-                              src={job.contactStaff.avatar}
-                              alt={job.contactStaff.fullName}
-                              className="w-12 h-12 rounded-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-12 h-12 rounded-full bg-brand-black text-white flex items-center justify-center font-bold">
-                              {companyInitial(job.contactStaff.fullName)}
-                            </div>
-                          )}
-                          <div>
-                            <p className="font-bold text-brand-black">
-                              {job.contactStaff.fullName}
-                            </p>
-                            <p className="text-xs text-gray-500 uppercase tracking-wider">
-                              Người phụ trách
-                            </p>
-                          </div>
-                        </div>
-
-                        {zaloLink ? (
-                          <a
-                            href={zaloLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-4 bg-brand-black text-white font-black rounded-xl shadow-lg hover:bg-brand-yellow hover:text-black transition-all transform hover:-translate-y-1 uppercase tracking-wider text-sm flex items-center justify-center gap-2"
-                          >
-                            <img
-                              src="/Icon_of_Zalo.svg"
-                              alt="Zalo"
-                              className="w-5 h-5"
-                            />
-                            Liên hệ Zalo
-                          </a>
-                        ) : (
-                          <div className="w-full py-4 bg-white border border-gray-200 text-gray-500 font-bold rounded-xl text-center text-sm">
-                            Chưa có thông tin Zalo người phụ trách
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <p className="text-sm text-gray-500 font-medium text-center">
-                        Chưa có thông tin người phụ trách.
-                      </p>
-                    )}
-                  </div>
-
+                <div className="sticky top-24">
                   <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
                     <h3 className="text-lg font-black text-brand-black">
                       Thông tin tuyển dụng
                     </h3>
                     <div className="space-y-3 text-sm text-gray-600">
+                      <div className="flex items-center justify-between">
+                        <span>Hết hạn</span>
+                        <span className="font-bold text-brand-black">
+                          {deadlineLabel(job.deadline)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4">
+                        <span>Người phụ trách</span>
+                        <span className="font-bold text-brand-black text-right">
+                          {job.contactStaff?.fullName || "Chưa cập nhật"}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4">
+                        <span>Email phụ trách</span>
+                        <span className="font-bold text-brand-black text-right break-all">
+                          {job.contactStaff?.email || "Chưa cập nhật"}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4">
+                        <span>Zalo phụ trách</span>
+                        <span className="font-bold text-brand-black text-right">
+                          {job.contactStaff?.zaloPhone || "Chưa cập nhật"}
+                        </span>
+                      </div>
                       <div className="flex items-center justify-between">
                         <span>Kinh nghiệm</span>
                         <span className="font-bold text-brand-black">

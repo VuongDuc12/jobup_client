@@ -33,7 +33,7 @@ export default function Footer() {
             id="footer"
         >
             {/* Decorative glow */}
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-yellow rounded-full blur-[120px] -z-10 translate-y-1/2" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px] -z-10 translate-y-1/2" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16">

@@ -58,11 +58,14 @@ export default function HeroSection({
   provinces,
 }: HeroSectionProps) {
   const { config } = useSystemConfig();
-  
+
   // Build Zalo link from config
-  const zaloLink = config.zaloUrl || 
-    (config.hotline ? `https://zalo.me/${config.hotline.replace(/\D/g, '')}` : '#');
-  
+  const zaloLink =
+    config.zaloUrl ||
+    (config.hotline
+      ? `https://zalo.me/${config.hotline.replace(/\D/g, "")}`
+      : "#");
+
   const partnerItems =
     partners && partners.length > 0
       ? partners
@@ -74,6 +77,33 @@ export default function HeroSection({
             height: "h-6",
           }))
       : partnerLogos;
+
+  const handleHeroSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const keyword = String(formData.get("keyword") || "").trim();
+    const provinceId = String(formData.get("provinceId") || "").trim();
+
+    const payload = {
+      keyword,
+      provinceId,
+      categoryId: "",
+      salaryFrom: "",
+      salaryTo: "",
+      experience: "",
+      workType: "",
+      sortBy: "newest",
+    };
+
+    try {
+      sessionStorage.setItem("jobup_jobs_filters", JSON.stringify(payload));
+    } catch {
+      // no-op
+    }
+
+    window.location.href = "/tuyen-dung";
+  };
 
   return (
     <section
@@ -127,7 +157,7 @@ export default function HeroSection({
 
             {/* Search Form */}
             <form
-              action="/tuyen-dung"
+              onSubmit={handleHeroSearchSubmit}
               className="bg-white p-2 md:p-2.5 rounded-2xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-2 max-w-3xl mt-0 hero-search-form"
             >
               <div className="flex-grow flex items-center px-4 border-b md:border-b-0 md:border-r border-gray-100">
@@ -325,7 +355,7 @@ export default function HeroSection({
                 style={{ animationDelay: "-4s" }}
               >
                 <a
-                  href={`tel:${config.hotline || '0979334143'}`}
+                  href={`tel:${config.hotline || "0979334143"}`}
                   className="block relative bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 p-[1px] rounded-[1.5rem] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.4)] hover:shadow-[0_30px_70px_-15px_rgba(139,92,246,0.5)] transition-all duration-500"
                 >
                   <div className="bg-white/95 backdrop-blur-xl rounded-[1.4rem] px-4 py-3 relative overflow-hidden">
@@ -343,7 +373,12 @@ export default function HeroSection({
                       </div>
                       <div className="flex flex-col">
                         <h4 className="text-sm font-black text-[#111827] tracking-tight leading-tight">
-                          {config.hotline ? config.hotline.replace(/(\d{4})(\d{3})(\d{3})/, '$1.$2.$3') : '0979.334.143'}
+                          {config.hotline
+                            ? config.hotline.replace(
+                                /(\d{4})(\d{3})(\d{3})/,
+                                "$1.$2.$3",
+                              )
+                            : "0979.334.143"}
                         </h4>
                         <div className="flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />

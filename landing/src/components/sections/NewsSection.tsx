@@ -85,8 +85,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             href="/tin-tuc"
             className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellow-hover transition"
           >
-            Xem tất cả tin tức{" "}
-            <i className="fa-solid fa-arrow-right-long" />
+            Xem tất cả tin tức <i className="fa-solid fa-arrow-right-long" />
           </Link>
         </div>
 
@@ -95,7 +94,9 @@ export default function NewsSection({ articles }: NewsSectionProps) {
           {/* Highlighted Post */}
           <Link
             href={
-              highlight?.slug ? `/tin-tuc/${highlight.slug}` : fallbackHighlight.slug
+              highlight?.slug
+                ? `/tin-tuc/${highlight.slug}`
+                : fallbackHighlight.slug
             }
             className="lg:col-span-8 group cursor-pointer"
           >

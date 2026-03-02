@@ -6,16 +6,18 @@ import type {
   FeatureResponse,
   HomepageSettingsResponse,
   PartnerResponse,
-  PublicArticleListItemResponse,
+  PublicArticleResponse,
   PublicArticleSearchResponse,
   PublicJobResponse,
   PublicJobDetailResponse,
   PublicJobSearchResponse,
+  PublicMediaMentionCategoryResponse,
+  PublicMediaMentionSearchResponse,
+  PublicNewsCategoryResponse,
   ProvinceDropdown,
   JobCategoryTreeItem,
   StatisticResponse,
   TestimonialResponse,
-  PublicMediaMentionSearchResponse,
 } from "./types";
 
 /* ────────────────────────────────────────────────
@@ -137,7 +139,9 @@ export async function fetchLatestJobs(
   if (params.limit) url.searchParams.set("limit", String(params.limit));
   if (params.categoryId) url.searchParams.set("categoryId", params.categoryId);
 
-  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
+  const res = await fetch(url.toString(), {
+    next: { revalidate: REVALIDATE_TIME },
+  });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch latest jobs: ${res.status}`);
@@ -336,16 +340,15 @@ export async function fetchPublicJobCategories(): Promise<
   return json.data;
 }
 
-/* ────────────────────────────────────────────────
- *  GET /api/JobCategories/public/top
- * ──────────────────────────────────────────────── */
-
 export async function fetchTopJobCategories(
-  count: number = 4,
+  count = 4,
 ): Promise<JobCategoryTreeItem[]> {
-  const res = await fetch(
-    `${API_BASE_URL}/api/JobCategories/public/top?count=${count}`,
-  );
+  const url = new URL(`${API_BASE_URL}/api/JobCategories/public/top`);
+  url.searchParams.set("count", String(count));
+
+  const res = await fetch(url.toString(), {
+    next: { revalidate: REVALIDATE_TIME },
+  });
   if (!res.ok) {
     throw new Error(`Failed to fetch top job categories: ${res.status}`);
   }
@@ -358,31 +361,119 @@ export async function fetchTopJobCategories(
   return json.data;
 }
 
-/* ────────────────────────────────────────────────
- *  GET /api/MediaMentions/public
- * ──────────────────────────────────────────────── */
-
-export interface MediaMentionSearchParams {
+export interface PublicArticleSearchParams {
   Keyword?: string;
-  MediaMentionCategoryId?: string;
-  IsFeatured?: boolean;
+  NewsCategoryId?: string;
   PageNumber?: number;
   PageSize?: number;
+  MostViewed?: boolean;
 }
 
-export async function fetchMediaMentionsPublic(
-  params: MediaMentionSearchParams = {},
-): Promise<PublicMediaMentionSearchResponse> {
-  const url = new URL(`${API_BASE_URL}/api/MediaMentions/public`);
+export async function fetchPublicArticles(
+  params: PublicArticleSearchParams = {},
+): Promise<PublicArticleSearchResponse> {
+  const url = new URL(`${API_BASE_URL}/api/Articles/public`);
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
       url.searchParams.set(key, String(value));
     }
   });
 
-  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
   if (!res.ok) {
-    throw new Error(`Failed to fetch media mentions: ${res.status}`);
+    throw new Error(`Failed to fetch public articles: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function fetchFeaturedArticlesPublic(
+  limit = 4,
+): Promise<PublicArticleSearchResponse["list"]> {
+  const data = await fetchPublicArticles({
+    PageSize: limit,
+    PageNumber: 1,
+    MostViewed: true,
+  });
+
+  return data.list;
+}
+
+export async function fetchPublicArticleBySlug(
+  slug: string,
+): Promise<PublicArticleResponse> {
+  const res = await fetch(`${API_BASE_URL}/api/Articles/public/${slug}`, {
+    next: { revalidate: 120 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public article by slug: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function trackPublicArticleView(id: string): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/Articles/public/${id}/view`, {
+    method: "POST",
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to track article view: ${res.status}`);
+  }
+}
+
+export async function fetchPublicNewsCategories(): Promise<
+  PublicNewsCategoryResponse[]
+> {
+  const res = await fetch(`${API_BASE_URL}/api/NewsCategories/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch news categories: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicNewsCategoryResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export interface PublicMediaMentionSearchParams {
+  Keyword?: string;
+  MediaMentionCategoryId?: string;
+  PageNumber?: number;
+  PageSize?: number;
+}
+
+export async function fetchPublicMediaMentions(
+  params: PublicMediaMentionSearchParams = {},
+): Promise<PublicMediaMentionSearchResponse> {
+  const url = new URL(`${API_BASE_URL}/api/MediaMentions/public`);
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public media mentions: ${res.status}`);
   }
 
   const json: ApiResponse<PublicMediaMentionSearchResponse> = await res.json();
@@ -393,9 +484,44 @@ export async function fetchMediaMentionsPublic(
   return json.data;
 }
 
-/* ────────────────────────────────────────────────
- *  GET /api/AboutSettings/public
- * ──────────────────────────────────────────────── */
+export async function fetchMediaMentionsPublic(
+  params: PublicMediaMentionSearchParams = {},
+): Promise<PublicMediaMentionSearchResponse> {
+  return fetchPublicMediaMentions(params);
+}
+
+export async function trackPublicMediaMentionView(id: string): Promise<void> {
+  const res = await fetch(
+    `${API_BASE_URL}/api/MediaMentions/public/${id}/track`,
+    {
+      method: "POST",
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`Failed to track media mention view: ${res.status}`);
+  }
+}
+
+export async function fetchPublicMediaMentionCategories(): Promise<
+  PublicMediaMentionCategoryResponse[]
+> {
+  const res = await fetch(`${API_BASE_URL}/api/MediaMentionCategories/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch media mention categories: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicMediaMentionCategoryResponse[]> =
+    await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
 
 export async function fetchAboutSettingsPublic(): Promise<AboutSettingResponse> {
   const res = await fetch(`${API_BASE_URL}/api/AboutSettings/public`, {
@@ -413,48 +539,26 @@ export async function fetchAboutSettingsPublic(): Promise<AboutSettingResponse> 
   return json.data;
 }
 
-/* ────────────────────────────────────────────────
- *  GET /api/Articles/public  (featured / hot)
- * ──────────────────────────────────────────────── */
+export async function fetchBannerPublic(
+  position: string,
+): Promise<BannerPublicResponse | null> {
+  const safePosition = encodeURIComponent(position);
+  const res = await fetch(
+    `${API_BASE_URL}/api/Banners/public/${safePosition}`,
+    {
+      next: { revalidate: REVALIDATE_TIME },
+    },
+  );
 
-export async function fetchFeaturedArticlesPublic(
-  limit = 4,
-): Promise<PublicArticleListItemResponse[]> {
-  const url = new URL(`${API_BASE_URL}/api/Articles/public`);
-  url.searchParams.set("IsHot", "true");
-  url.searchParams.set("PageSize", String(limit));
-
-  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
+  if (res.status === 404) return null;
   if (!res.ok) {
-    throw new Error(`Failed to fetch featured articles: ${res.status}`);
+    throw new Error(`Failed to fetch banner: ${res.status}`);
   }
 
-  const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
+  const json: ApiResponse<BannerPublicResponse | null> = await res.json();
   if (!json.succeeded) {
     throw new Error(json.message || "API error");
   }
 
-  return json.data.list;
-}
-
-/* ────────────────────────────────────────────────
- *  GET /api/Banners/public/{position}
- * ──────────────────────────────────────────────── */
-export async function fetchBannerPublic(
-  position: string,
-): Promise<BannerPublicResponse | null> {
-  try {
-    const res = await fetch(
-      `${API_BASE_URL}/api/Banners/public/${position}`,
-      { next: { revalidate: REVALIDATE_TIME } },
-    );
-    if (!res.ok) return null;
-
-    const json: ApiResponse<BannerPublicResponse | null> = await res.json();
-    if (!json.succeeded || !json.data) return null;
-
-    return json.data;
-  } catch {
-    return null;
-  }
+  return json.data;
 }

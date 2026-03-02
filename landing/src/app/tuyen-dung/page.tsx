@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Navbar, Footer } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import {
@@ -17,7 +16,6 @@ import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
 import type { JobCategoryTreeItem, ProvinceDropdown } from "@/lib/types";
 
 export default function JobsPage() {
-  const searchParams = useSearchParams();
   const [keyword, setKeyword] = useState("");
   const [provinceId, setProvinceId] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -63,56 +61,54 @@ export default function JobsPage() {
     };
   }, []);
 
-  // Read URL params from homepage search and auto-trigger search
   useEffect(() => {
-    const urlKeyword = searchParams.get("keyword") ?? "";
-    const urlProvinceId = searchParams.get("provinceId") ?? "";
-    const urlCategoryId = searchParams.get("categoryId") ?? "";
-    const urlCategorySlug = searchParams.get("categorySlug") ?? "";
-    const urlSalaryFrom = searchParams.get("salaryFrom") ?? "";
-    const urlSalaryTo = searchParams.get("salaryTo") ?? "";
-    const urlExperience = searchParams.get("experience") ?? "";
-    const urlWorkType = searchParams.get("workType") ?? "";
-    const urlSortBy = searchParams.get("sortBy") ?? "newest";
+    const raw = sessionStorage.getItem("jobup_jobs_filters");
+    if (!raw) return;
 
-    // Resolve categorySlug → id using the loaded categories tree
-    let resolvedCategoryId = urlCategoryId;
-    if (urlCategorySlug) {
-      const findBySlug = (items: JobCategoryTreeItem[], slug: string): JobCategoryTreeItem | undefined => {
-        for (const item of items) {
-          if (item.slug === slug) return item;
-          const found = findBySlug(item.children, slug);
-          if (found) return found;
-        }
-        return undefined;
+    try {
+      const parsed = JSON.parse(raw) as {
+        keyword?: string;
+        provinceId?: string;
+        categoryId?: string;
+        salaryFrom?: string;
+        salaryTo?: string;
+        experience?: string;
+        workType?: string;
+        sortBy?: string;
       };
-      const matched = findBySlug(categories, urlCategorySlug);
-      if (matched) resolvedCategoryId = matched.id;
-      // If categories not yet loaded, resolvedCategoryId stays empty — effect re-runs when categories load
-    }
 
-    if (urlKeyword || urlProvinceId || resolvedCategoryId || (urlCategorySlug && categories.length === 0)) {
-      setKeyword(urlKeyword);
-      setProvinceId(urlProvinceId);
-      setCategoryId(resolvedCategoryId);
-      setSalaryFrom(urlSalaryFrom);
-      setSalaryTo(urlSalaryTo);
-      setExperience(urlExperience);
-      setWorkType(urlWorkType);
-      setSortBy(urlSortBy);
+      const nextKeyword = parsed.keyword ?? "";
+      const nextProvinceId = parsed.provinceId ?? "";
+      const nextCategoryId = parsed.categoryId ?? "";
+      const nextSalaryFrom = parsed.salaryFrom ?? "";
+      const nextSalaryTo = parsed.salaryTo ?? "";
+      const nextExperience = parsed.experience ?? "";
+      const nextWorkType = parsed.workType ?? "";
+      const nextSortBy = parsed.sortBy ?? "newest";
 
-      if (!urlCategorySlug || resolvedCategoryId) {
-        setSearchKeyword(urlKeyword);
-        setSearchProvinceId(urlProvinceId);
-        setSearchCategoryId(resolvedCategoryId);
-        setSearchSalaryFrom(urlSalaryFrom ? Number(urlSalaryFrom) : undefined);
-        setSearchSalaryTo(urlSalaryTo ? Number(urlSalaryTo) : undefined);
-        setSearchExperience(urlExperience ? Number(urlExperience) : undefined);
-        setSearchWorkType(urlWorkType ? Number(urlWorkType) : undefined);
-        setSearchSortBy(urlSortBy);
-      }
+      setKeyword(nextKeyword);
+      setProvinceId(nextProvinceId);
+      setCategoryId(nextCategoryId);
+      setSalaryFrom(nextSalaryFrom);
+      setSalaryTo(nextSalaryTo);
+      setExperience(nextExperience);
+      setWorkType(nextWorkType);
+      setSortBy(nextSortBy);
+
+      setSearchKeyword(nextKeyword);
+      setSearchProvinceId(nextProvinceId);
+      setSearchCategoryId(nextCategoryId);
+      setSearchSalaryFrom(nextSalaryFrom ? Number(nextSalaryFrom) : undefined);
+      setSearchSalaryTo(nextSalaryTo ? Number(nextSalaryTo) : undefined);
+      setSearchExperience(nextExperience ? Number(nextExperience) : undefined);
+      setSearchWorkType(nextWorkType ? Number(nextWorkType) : undefined);
+      setSearchSortBy(nextSortBy);
+    } catch {
+      // no-op
+    } finally {
+      sessionStorage.removeItem("jobup_jobs_filters");
     }
-  }, [searchParams, categories]);
+  }, []);
 
   const handleSearch = () => {
     const parseSalary = (value: string) => {
@@ -181,11 +177,19 @@ export default function JobsPage() {
                 workType={searchWorkType}
                 sortBy={searchSortBy}
               />
-              <DynamicBanner position="jobs_spotlight" variant="spotlight" fallback={<SpotlightBanner />} />
+              <DynamicBanner
+                position="jobs_spotlight"
+                variant="spotlight"
+                fallback={<SpotlightBanner />}
+              />
             </div>
 
             <aside className="lg:col-span-4 space-y-8">
-              <DynamicBanner position="jobs_sidebar" variant="compact" fallback={<CVReviewCTA />} />
+              <DynamicBanner
+                position="jobs_sidebar"
+                variant="compact"
+                fallback={<CVReviewCTA />}
+              />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
                 <CareerHandbook />
