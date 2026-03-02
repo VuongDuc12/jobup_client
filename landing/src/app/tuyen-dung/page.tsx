@@ -11,6 +11,7 @@ import {
   UrgentJobsWidget,
   CareerHandbook,
 } from "@/components/jobs";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
 import type { JobCategoryTreeItem, ProvinceDropdown } from "@/lib/types";
 
@@ -58,6 +59,55 @@ export default function JobsPage() {
     return () => {
       isMounted = false;
     };
+  }, []);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("jobup_jobs_filters");
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw) as {
+        keyword?: string;
+        provinceId?: string;
+        categoryId?: string;
+        salaryFrom?: string;
+        salaryTo?: string;
+        experience?: string;
+        workType?: string;
+        sortBy?: string;
+      };
+
+      const nextKeyword = parsed.keyword ?? "";
+      const nextProvinceId = parsed.provinceId ?? "";
+      const nextCategoryId = parsed.categoryId ?? "";
+      const nextSalaryFrom = parsed.salaryFrom ?? "";
+      const nextSalaryTo = parsed.salaryTo ?? "";
+      const nextExperience = parsed.experience ?? "";
+      const nextWorkType = parsed.workType ?? "";
+      const nextSortBy = parsed.sortBy ?? "newest";
+
+      setKeyword(nextKeyword);
+      setProvinceId(nextProvinceId);
+      setCategoryId(nextCategoryId);
+      setSalaryFrom(nextSalaryFrom);
+      setSalaryTo(nextSalaryTo);
+      setExperience(nextExperience);
+      setWorkType(nextWorkType);
+      setSortBy(nextSortBy);
+
+      setSearchKeyword(nextKeyword);
+      setSearchProvinceId(nextProvinceId);
+      setSearchCategoryId(nextCategoryId);
+      setSearchSalaryFrom(nextSalaryFrom ? Number(nextSalaryFrom) : undefined);
+      setSearchSalaryTo(nextSalaryTo ? Number(nextSalaryTo) : undefined);
+      setSearchExperience(nextExperience ? Number(nextExperience) : undefined);
+      setSearchWorkType(nextWorkType ? Number(nextWorkType) : undefined);
+      setSearchSortBy(nextSortBy);
+    } catch {
+      // no-op
+    } finally {
+      sessionStorage.removeItem("jobup_jobs_filters");
+    }
   }, []);
 
   const handleSearch = () => {
@@ -127,11 +177,19 @@ export default function JobsPage() {
                 workType={searchWorkType}
                 sortBy={searchSortBy}
               />
-              <SpotlightBanner />
+              <DynamicBanner
+                position="jobs_spotlight"
+                variant="spotlight"
+                fallback={<SpotlightBanner />}
+              />
             </div>
 
             <aside className="lg:col-span-4 space-y-8">
-              <CVReviewCTA />
+              <DynamicBanner
+                position="jobs_sidebar"
+                variant="compact"
+                fallback={<CVReviewCTA />}
+              />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
                 <CareerHandbook />

@@ -240,8 +240,8 @@ export default function JobDetailPage() {
                         />
                       </div>
                     ) : (
-                      <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-brand-black text-white shadow-sm flex items-center justify-center shrink-0 text-2xl font-black">
-                        {companyInitial(job.displayCompanyName || "J")}
+                      <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
+                        <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
                       </div>
                     )}
 
@@ -510,10 +510,8 @@ export default function JobDetailPage() {
                                   alt={item.displayCompanyName}
                                 />
                               ) : (
-                                <div className="w-12 h-12 rounded-xl bg-brand-black text-white flex items-center justify-center font-bold text-lg shadow-lg">
-                                  {companyInitial(
-                                    item.displayCompanyName || "J",
-                                  )}
+                                <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
+                                  <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
                                 </div>
                               )}
                               {item.isHot && (

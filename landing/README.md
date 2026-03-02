@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:9000
+
+# ISR Configuration (in seconds)
+NEXT_PUBLIC_REVALIDATE_TIME=10
+```
+
 ## Getting Started
 
 First, run the development server:

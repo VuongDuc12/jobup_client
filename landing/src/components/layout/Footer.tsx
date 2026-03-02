@@ -1,5 +1,8 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 const footerAbout = [
     { href: "/ve-chung-toi", label: "Giới thiệu chung" },
@@ -15,14 +18,15 @@ const footerCandidate = [
     { href: "/tin-noi-bo", label: "Tra cứu lương" },
 ];
 
-const socialLinks = [
-    { icon: "fa-brands fa-facebook-f", href: "#" },
-    { icon: "fa-brands fa-linkedin-in", href: "#" },
-    { icon: "fa-brands fa-instagram", href: "#" },
-    { icon: "fa-brands fa-tiktok", href: "#" },
-];
-
 export default function Footer() {
+    const { config, loading } = useSystemConfig();
+
+    const socialLinks = [
+        { icon: "fa-brands fa-facebook-f", href: config.facebookUrl || "#" },
+        { icon: "fa-brands fa-linkedin-in", href: config.linkedInUrl || "#" },
+        { icon: "fa-brands fa-instagram", href: config.instagramUrl || "#" },
+        { icon: "fa-brands fa-tiktok", href: config.tiktokUrl || "#" },
+    ].filter(link => link.href && link.href !== "#");
     return (
         <footer
             className="bg-brand-black pt-24 font-sans relative overflow-hidden text-white"
@@ -114,17 +118,19 @@ export default function Footer() {
                             <li className="flex items-start gap-3">
                                 <i className="fa-solid fa-phone text-brand-yellow mt-1" />
                                 <span className="text-white font-bold tracking-wider">
-                                    0979334143
+                                    {loading ? '...' : config.hotline}
                                 </span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <i className="fa-solid fa-envelope text-brand-yellow mt-1" />
-                                <span className="text-gray-400">tuyendung@jopup.vn</span>
+                                <span className="text-gray-400">
+                                    {loading ? '...' : config.email}
+                                </span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <i className="fa-solid fa-location-dot text-brand-yellow mt-1" />
                                 <span className="text-gray-400 leading-relaxed text-sm">
-                                    C23.Lot18, P.Định Công, Q.Hoàng Mai, Hà Nội
+                                    {loading ? '...' : config.address}
                                 </span>
                             </li>
                         </ul>

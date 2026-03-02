@@ -1,33 +1,70 @@
 import Link from "next/link";
+import type { PublicArticleListItemResponse } from "@/lib/types";
+import { getAssetUrl } from "@/lib/utils";
 
-const sideNews = [
+/* ─── Fallback data (shown when API returns nothing) ─── */
+const fallbackHighlight = {
+  title: "Chào đón thành viên thứ 200 gia nhập đại gia đình JobUp",
+  image:
+    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
+  category: "Tin tiêu biểu",
+  date: "20/05/2026",
+  slug: "#",
+};
+
+const fallbackSideNews = [
   {
     image:
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=300",
     category: "Sự kiện",
-    categoryColor: "text-blue-600",
     title: "Team Building 2026: Vượt Sóng Cùng JobUp tại Phú Quốc",
     date: "15/05/2026",
+    slug: "#",
   },
   {
     image:
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=300",
     category: "Hoạt động chuyên môn",
-    categoryColor: "text-green-600",
     title: "Workshop: Ứng dụng AI trong tối ưu hóa quy trình HR",
     date: "12/05/2026",
+    slug: "#",
   },
   {
     image:
       "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=300",
     category: "Văn hóa",
-    categoryColor: "text-purple-600",
     title: "Happy Friday: Gắn kết tình thân giữa các phòng ban",
     date: "08/05/2026",
+    slug: "#",
   },
 ];
 
-export default function NewsSection() {
+function formatDate(iso: string | null): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return d.toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+const CATEGORY_COLORS = [
+  "text-blue-600",
+  "text-green-600",
+  "text-purple-600",
+  "text-orange-600",
+];
+
+interface NewsSectionProps {
+  articles?: PublicArticleListItemResponse[] | null;
+}
+
+export default function NewsSection({ articles }: NewsSectionProps) {
+  const hasData = articles && articles.length > 0;
+  const highlight = hasData ? articles[0] : null;
+  const sides = hasData ? articles.slice(1) : null;
+
   return (
     <section id="news" className="py-16 relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -45,7 +82,7 @@ export default function NewsSection() {
             này.
           </p>
           <Link
-            href="/tin-noi-bo"
+            href="/tin-tuc"
             className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellow-hover transition"
           >
             Xem tất cả tin tức <i className="fa-solid fa-arrow-right-long" />
@@ -56,32 +93,37 @@ export default function NewsSection() {
         <div className="grid lg:grid-cols-12 gap-6">
           {/* Highlighted Post */}
           <Link
-            href="/tin-noi-bo/xu-huong-nhan-su-2025-ai"
-            className="lg:col-span-8 group cursor-pointer block"
+            href={
+              highlight?.slug
+                ? `/tin-tuc/${highlight.slug}`
+                : fallbackHighlight.slug
+            }
+            className="lg:col-span-8 group cursor-pointer"
           >
             <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200"
+                src={
+                  (highlight && getAssetUrl(highlight.avatar)) ||
+                  fallbackHighlight.image
+                }
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                alt="News"
+                alt={highlight?.title || fallbackHighlight.title}
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-10 left-10 right-10">
                 <span className="px-3 py-1 bg-brand-yellow text-brand-black text-[10px] font-bold rounded-full uppercase mb-4 inline-block">
-                  Tin tiêu biểu
+                  {highlight?.categoryName || fallbackHighlight.category}
                 </span>
                 <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-brand-yellow transition">
-                  Chào đón thành viên thứ 200 gia nhập đại gia đình JobUp
+                  {highlight?.title || fallbackHighlight.title}
                 </h3>
                 <div className="flex items-center gap-4 text-gray-300 text-sm font-medium">
                   <span>
                     <i className="fa-regular fa-calendar mr-2" />
-                    20/05/2026
-                  </span>
-                  <span>
-                    <i className="fa-regular fa-user mr-2" />
-                    Ban Truyền Thông
+                    {highlight
+                      ? formatDate(highlight.publishedAt)
+                      : fallbackHighlight.date}
                   </span>
                 </div>
               </div>
@@ -90,35 +132,57 @@ export default function NewsSection() {
 
           {/* Side News */}
           <div className="lg:col-span-4 flex flex-col gap-6">
-            {sideNews.map((news, idx) => (
-              <Link
-                key={idx}
-                href="/tin-noi-bo"
-                className="group flex gap-4 cursor-pointer"
-              >
-                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-md">
-                  <img
-                    src={news.image}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    alt={news.title}
-                    loading="lazy"
-                  />
-                </div>
-                <div>
-                  <span
-                    className={`text-[10px] font-bold ${news.categoryColor} uppercase mb-1 block`}
-                  >
-                    {news.category}
-                  </span>
-                  <h4 className="font-bold text-gray-900 line-clamp-2 group-hover:text-brand-yellow-hover transition">
-                    {news.title}
-                  </h4>
-                  <p className="text-[10px] text-gray-400 mt-2 font-medium">
-                    {news.date}
-                  </p>
-                </div>
-              </Link>
-            ))}
+            {(sides || fallbackSideNews).map((news, idx) => {
+              const isApi = "id" in news;
+              const imgSrc = isApi
+                ? getAssetUrl((news as PublicArticleListItemResponse).avatar) ||
+                  fallbackSideNews[0].image
+                : (news as (typeof fallbackSideNews)[0]).image;
+              const title = isApi
+                ? (news as PublicArticleListItemResponse).title
+                : (news as (typeof fallbackSideNews)[0]).title;
+              const category = isApi
+                ? (news as PublicArticleListItemResponse).categoryName
+                : (news as (typeof fallbackSideNews)[0]).category;
+              const date = isApi
+                ? formatDate(
+                    (news as PublicArticleListItemResponse).publishedAt,
+                  )
+                : (news as (typeof fallbackSideNews)[0]).date;
+              const href = isApi
+                ? `/tin-tuc/${(news as PublicArticleListItemResponse).slug}`
+                : "#";
+
+              return (
+                <Link
+                  key={isApi ? (news as PublicArticleListItemResponse).id : idx}
+                  href={href}
+                  className="group flex gap-4 cursor-pointer"
+                >
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-md">
+                    <img
+                      src={imgSrc!}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      alt={title}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <span
+                      className={`text-[10px] font-bold ${CATEGORY_COLORS[idx % CATEGORY_COLORS.length]} uppercase mb-1 block`}
+                    >
+                      {category}
+                    </span>
+                    <h4 className="font-bold text-gray-900 line-clamp-2 group-hover:text-brand-yellow-hover transition">
+                      {title}
+                    </h4>
+                    <p className="text-[10px] text-gray-400 mt-2 font-medium">
+                      {date}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

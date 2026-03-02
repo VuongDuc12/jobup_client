@@ -2,14 +2,15 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { fetchLatestJobs } from "@/lib/api";
+import { fetchLatestJobs, fetchTopJobCategories } from "@/lib/api";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 import {
     formatSalary,
     workTypeLabel,
     timeAgo,
     companyInitial,
 } from "@/lib/utils";
-import type { PublicJobResponse } from "@/lib/types";
+import type { JobCategoryTreeItem, PublicJobResponse } from "@/lib/types";
 
 /* ────────────────────────────────────────────────
  *  Color palette for logo-fallback initials
@@ -35,14 +36,7 @@ function colorForCompany(name: string): string {
     return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
 }
 
-/* ────────────────────────────────────────────────
- *  Tabs (chỉ tab "Tất cả" hiện tại, sẽ thêm
- *  category tabs sau khi có API lấy danh sách)
- * ──────────────────────────────────────────────── */
-const tabs = [
-    { key: "all", label: "Tất cả", categoryId: undefined as string | undefined },
-    // TODO: Load from GET /api/Categories later
-];
+type Tab = { key: string; label: string; categoryId: string | undefined };
 
 /* ────────────────────────────────────────────────
  *  Top employers sidebar (static for now)
@@ -91,10 +85,8 @@ function JobCard({ job }: { job: PublicJobResponse }) {
                             alt={job.displayCompanyName}
                         />
                     ) : (
-                        <div
-                            className={`w-12 h-12 rounded-xl ${bgColor} text-white flex items-center justify-center font-bold text-lg shadow-lg`}
-                        >
-                            {initial}
+                        <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+                            <img src="/Logo.png" alt="Jobup" className="w-10 h-10 object-contain" />
                         </div>
                     )}
                     {job.isHot && (
@@ -178,9 +170,29 @@ function JobCardSkeleton() {
  * ──────────────────────────────────────────────── */
 export default function JobsSection() {
     const [activeTab, setActiveTab] = useState("all");
+    const [tabs, setTabs] = useState<Tab[]>([
+        { key: "all", label: "Tất cả", categoryId: undefined },
+    ]);
     const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        fetchTopJobCategories(4)
+            .then((cats: JobCategoryTreeItem[]) => {
+                setTabs([
+                    { key: "all", label: "Tất cả", categoryId: undefined },
+                    ...cats.map((c) => ({
+                        key: c.id,
+                        label: c.name,
+                        categoryId: c.id,
+                    })),
+                ]);
+            })
+            .catch(() => {
+                // giữ nguyên tab "Tất cả" nếu lỗi
+            });
+    }, []);
 
     const loadJobs = useCallback(async (categoryId?: string) => {
         setLoading(true);
@@ -293,38 +305,44 @@ export default function JobsSection() {
                     {/* Sidebar */}
                     <div className="lg:col-span-4 space-y-6">
                         {/* Brand Trust Banner */}
-                        <div className="relative rounded-[32px] overflow-hidden h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100">
-                            <img
-                                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                alt="JobUp Reputation"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-8">
-                                <div className="mb-4">
-                                    <span className="px-4 py-1 bg-amber-400 text-[#111827] text-[10px] font-extrabold rounded-full tracking-wider uppercase shadow-lg shadow-amber-400/20">
-                                        Thương hiệu uy tín
-                                    </span>
+                        <DynamicBanner
+                            position="home_sidebar"
+                            variant="sidebar"
+                            fallback={
+                                <div className="relative rounded-[32px] overflow-hidden h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        alt="JobUp Reputation"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-8">
+                                        <div className="mb-4">
+                                            <span className="px-4 py-1 bg-amber-400 text-[#111827] text-[10px] font-extrabold rounded-full tracking-wider uppercase shadow-lg shadow-amber-400/20">
+                                                Thương hiệu uy tín
+                                            </span>
+                                        </div>
+                                        <h3 className="text-white text-3xl font-extrabold mb-3 leading-tight">
+                                            JobUp - Tận tâm <br />
+                                            <span className="text-amber-400">
+                                                Đồng hành & Bứt phá
+                                            </span>
+                                        </h3>
+                                        <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
+                                            Chúng tôi tin rằng mỗi sự nghiệp đều xứng đáng được trân
+                                            trọng. JobUp cam kết mang lại sự minh bạch, nhiệt huyết và
+                                            cơ hội vàng cho mọi ứng viên.
+                                        </p>
+                                        <div className="flex items-center gap-2 group/btn">
+                                            <span className="h-0.5 w-8 bg-amber-400 transition-all duration-300 group-hover/btn:w-12" />
+                                            <span className="text-white font-bold text-sm tracking-wide uppercase transition-colors group-hover/btn:text-amber-400">
+                                                Khám phá ngay
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 </div>
-                                <h3 className="text-white text-3xl font-extrabold mb-3 leading-tight">
-                                    JobUp - Tận tâm <br />
-                                    <span className="text-amber-400">
-                                        Đồng hành & Bứt phá
-                                    </span>
-                                </h3>
-                                <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
-                                    Chúng tôi tin rằng mỗi sự nghiệp đều xứng đáng được trân
-                                    trọng. JobUp cam kết mang lại sự minh bạch, nhiệt huyết và
-                                    cơ hội vàng cho mọi ứng viên.
-                                </p>
-                                <div className="flex items-center gap-2 group/btn">
-                                    <span className="h-0.5 w-8 bg-amber-400 transition-all duration-300 group-hover/btn:w-12" />
-                                    <span className="text-white font-bold text-sm tracking-wide uppercase transition-colors group-hover/btn:text-amber-400">
-                                        Khám phá ngay
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </div>
+                            }
+                        />
 
                         {/* Hot Employers */}
                         <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm sticky top-24">

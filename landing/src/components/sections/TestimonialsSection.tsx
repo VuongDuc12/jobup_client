@@ -1,10 +1,18 @@
-const testimonials = [
+import type { TestimonialResponse } from "@/lib/types";
+import { getAssetUrl } from "@/lib/utils";
+
+interface TestimonialsSectionProps {
+  testimonials?: TestimonialResponse[] | null;
+}
+
+const defaultTestimonials = [
   {
     quote:
       "Nhờ JobUp, mình đã tìm được vị trí Senior React Developer tại VNG chỉ sau 2 tuần ứng tuyển. Quy trình cực kỳ minh bạch và chuyên nghiệp.",
     name: "Minh Hoàng",
     role: "Software Engineer tại VNG",
     avatar: "https://i.pravatar.cc/150?u=1",
+    rating: 5,
   },
   {
     quote:
@@ -12,6 +20,7 @@ const testimonials = [
     name: "Thùy Chi",
     role: "Digital Marketing Manager",
     avatar: "https://i.pravatar.cc/150?u=2",
+    rating: 5,
   },
   {
     quote:
@@ -19,10 +28,27 @@ const testimonials = [
     name: "James Wilson",
     role: "HR Director @ Microsoft",
     avatar: "https://i.pravatar.cc/150?u=3",
+    rating: 5,
   },
 ];
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ testimonials: apiTestimonials }: TestimonialsSectionProps) {
+  const activeItems =
+    apiTestimonials && apiTestimonials.length > 0
+      ? apiTestimonials
+            .sort((a, b) => a.displayOrder - b.displayOrder)
+      : null;
+
+  const items = activeItems
+    ? activeItems.map((t) => ({
+        quote: t.content || "",
+        name: t.name || "Ẩn danh",
+        role: t.position || "",
+        avatar: getAssetUrl(t.avatarUrl) || "https://i.pravatar.cc/150?u=default",
+        rating: t.rating,
+      }))
+    : defaultTestimonials;
+
   return (
     <section className="py-16 bg-brand-black relative overflow-hidden">
       <div
@@ -44,14 +70,14 @@ export default function TestimonialsSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, idx) => (
+          {items.map((testimonial, idx) => (
             <div
               key={idx}
               className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500"
             >
               {/* Stars */}
               <div className="flex gap-1 text-brand-yellow mb-4">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(testimonial.rating || 5)].map((_, i) => (
                   <i key={i} className="fa-solid fa-star text-sm" />
                 ))}
               </div>

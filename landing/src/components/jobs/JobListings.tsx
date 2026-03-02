@@ -10,6 +10,7 @@ import {
   companyInitial,
 } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 
 /* ── Color palette for logo fallback ── */
 const FALLBACK_COLORS = [
@@ -66,10 +67,8 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
             />
           </div>
         ) : (
-          <div
-            className={`w-20 h-20 rounded-2xl ${bgColor} text-white flex items-center justify-center font-black text-2xl shrink-0 shadow-lg border-2 border-white`}
-          >
-            {initial}
+          <div className="w-20 h-20 rounded-2xl bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-lg border-2 border-white p-2 overflow-hidden">
+            <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
           </div>
         )}
 
@@ -138,10 +137,8 @@ function NormalJobCard({ job }: { job: PublicJobResponse }) {
           />
         </div>
       ) : (
-        <div
-          className={`w-14 h-14 rounded-lg ${bgColor} text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-md`}
-        >
-          {initial}
+        <div className="w-14 h-14 rounded-lg bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-md p-1.5 overflow-hidden">
+          <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
         </div>
       )}
       <div className="flex-grow min-w-0">
@@ -335,7 +332,9 @@ export default function JobListings({
           .map((job) => <NormalJobCard key={job.id} job={job} />)}
 
       {/* In-feed Banner */}
-      {!loading && !error && normalJobs.length > 3 && <InFeedBanner />}
+      {!loading && !error && normalJobs.length > 3 && (
+        <DynamicBanner position="jobs_infeed" variant="infeed" fallback={<InFeedBanner />} />
+      )}
 
       {/* Normal Jobs — remaining */}
       {!loading &&

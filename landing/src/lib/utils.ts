@@ -5,6 +5,17 @@ import { API_BASE_URL } from "./config";
  * ──────────────────────────────────────────────── */
 
 /**
+ * Prepend API_BASE_URL to a relative asset path (e.g. `/storage/about/xxx.jpg`).
+ * Returns the original value when it's already an absolute URL.
+ * Returns `null` for falsy inputs so callers can apply a fallback.
+ */
+export function getAssetUrl(path: string | null | undefined): string | null {
+  if (!path) return null;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  return `${API_BASE_URL}${path}`;
+}
+
+/**
  * Format salary range in VNĐ.
  * e.g. (10_000_000, 18_000_000) → "10 - 18 triệu VNĐ"
  * If both are 0 → "Thỏa thuận"
