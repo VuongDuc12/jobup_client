@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { fetchLatestJobs } from "@/lib/api";
+import { fetchLatestJobs, fetchTopJobCategories } from "@/lib/api";
 import {
     formatSalary,
     workTypeLabel,
     timeAgo,
     companyInitial,
 } from "@/lib/utils";
-import type { PublicJobResponse } from "@/lib/types";
+import type { JobCategoryTreeItem, PublicJobResponse } from "@/lib/types";
 
 /* ────────────────────────────────────────────────
  *  Color palette for logo-fallback initials
@@ -35,14 +35,7 @@ function colorForCompany(name: string): string {
     return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
 }
 
-/* ────────────────────────────────────────────────
- *  Tabs (chỉ tab "Tất cả" hiện tại, sẽ thêm
- *  category tabs sau khi có API lấy danh sách)
- * ──────────────────────────────────────────────── */
-const tabs = [
-    { key: "all", label: "Tất cả", categoryId: undefined as string | undefined },
-    // TODO: Load from GET /api/Categories later
-];
+type Tab = { key: string; label: string; categoryId: string | undefined };
 
 /* ────────────────────────────────────────────────
  *  Top employers sidebar (static for now)
@@ -91,10 +84,8 @@ function JobCard({ job }: { job: PublicJobResponse }) {
                             alt={job.displayCompanyName}
                         />
                     ) : (
-                        <div
-                            className={`w-12 h-12 rounded-xl ${bgColor} text-white flex items-center justify-center font-bold text-lg shadow-lg`}
-                        >
-                            {initial}
+                        <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+                            <img src="/Logo.png" alt="Jobup" className="w-10 h-10 object-contain" />
                         </div>
                     )}
                     {job.isHot && (
@@ -178,9 +169,29 @@ function JobCardSkeleton() {
  * ──────────────────────────────────────────────── */
 export default function JobsSection() {
     const [activeTab, setActiveTab] = useState("all");
+    const [tabs, setTabs] = useState<Tab[]>([
+        { key: "all", label: "Tất cả", categoryId: undefined },
+    ]);
     const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        fetchTopJobCategories(4)
+            .then((cats: JobCategoryTreeItem[]) => {
+                setTabs([
+                    { key: "all", label: "Tất cả", categoryId: undefined },
+                    ...cats.map((c) => ({
+                        key: c.id,
+                        label: c.name,
+                        categoryId: c.id,
+                    })),
+                ]);
+            })
+            .catch(() => {
+                // giữ nguyên tab "Tất cả" nếu lỗi
+            });
+    }, []);
 
     const loadJobs = useCallback(async (categoryId?: string) => {
         setLoading(true);

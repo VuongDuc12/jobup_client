@@ -104,10 +104,8 @@ export default function UrgentJobsWidget() {
                     />
                   </div>
                 ) : (
-                  <div
-                    className={`w-10 h-10 ${bgColor} rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-sm`}
-                  >
-                    {initial}
+                  <div className="w-10 h-10 bg-[#1a1a1a] rounded-xl flex items-center justify-center shrink-0 shadow-sm p-1 overflow-hidden">
+                    <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
                   </div>
                 )}
                 <div className="flex-grow min-w-0">

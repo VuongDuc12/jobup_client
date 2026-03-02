@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Navbar, Footer } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import {
@@ -15,6 +16,7 @@ import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
 import type { JobCategoryTreeItem, ProvinceDropdown } from "@/lib/types";
 
 export default function JobsPage() {
+  const searchParams = useSearchParams();
   const [keyword, setKeyword] = useState("");
   const [provinceId, setProvinceId] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -59,6 +61,57 @@ export default function JobsPage() {
       isMounted = false;
     };
   }, []);
+
+  // Read URL params from homepage search and auto-trigger search
+  useEffect(() => {
+    const urlKeyword = searchParams.get("keyword") ?? "";
+    const urlProvinceId = searchParams.get("provinceId") ?? "";
+    const urlCategoryId = searchParams.get("categoryId") ?? "";
+    const urlCategorySlug = searchParams.get("categorySlug") ?? "";
+    const urlSalaryFrom = searchParams.get("salaryFrom") ?? "";
+    const urlSalaryTo = searchParams.get("salaryTo") ?? "";
+    const urlExperience = searchParams.get("experience") ?? "";
+    const urlWorkType = searchParams.get("workType") ?? "";
+    const urlSortBy = searchParams.get("sortBy") ?? "newest";
+
+    // Resolve categorySlug → id using the loaded categories tree
+    let resolvedCategoryId = urlCategoryId;
+    if (urlCategorySlug) {
+      const findBySlug = (items: JobCategoryTreeItem[], slug: string): JobCategoryTreeItem | undefined => {
+        for (const item of items) {
+          if (item.slug === slug) return item;
+          const found = findBySlug(item.children, slug);
+          if (found) return found;
+        }
+        return undefined;
+      };
+      const matched = findBySlug(categories, urlCategorySlug);
+      if (matched) resolvedCategoryId = matched.id;
+      // If categories not yet loaded, resolvedCategoryId stays empty — effect re-runs when categories load
+    }
+
+    if (urlKeyword || urlProvinceId || resolvedCategoryId || (urlCategorySlug && categories.length === 0)) {
+      setKeyword(urlKeyword);
+      setProvinceId(urlProvinceId);
+      setCategoryId(resolvedCategoryId);
+      setSalaryFrom(urlSalaryFrom);
+      setSalaryTo(urlSalaryTo);
+      setExperience(urlExperience);
+      setWorkType(urlWorkType);
+      setSortBy(urlSortBy);
+
+      if (!urlCategorySlug || resolvedCategoryId) {
+        setSearchKeyword(urlKeyword);
+        setSearchProvinceId(urlProvinceId);
+        setSearchCategoryId(resolvedCategoryId);
+        setSearchSalaryFrom(urlSalaryFrom ? Number(urlSalaryFrom) : undefined);
+        setSearchSalaryTo(urlSalaryTo ? Number(urlSalaryTo) : undefined);
+        setSearchExperience(urlExperience ? Number(urlExperience) : undefined);
+        setSearchWorkType(urlWorkType ? Number(urlWorkType) : undefined);
+        setSearchSortBy(urlSortBy);
+      }
+    }
+  }, [searchParams, categories]);
 
   const handleSearch = () => {
     const parseSalary = (value: string) => {

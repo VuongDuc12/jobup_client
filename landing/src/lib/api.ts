@@ -336,6 +336,28 @@ export async function fetchPublicJobCategories(): Promise<
 }
 
 /* ────────────────────────────────────────────────
+ *  GET /api/JobCategories/public/top
+ * ──────────────────────────────────────────────── */
+
+export async function fetchTopJobCategories(
+  count: number = 4,
+): Promise<JobCategoryTreeItem[]> {
+  const res = await fetch(
+    `${API_BASE_URL}/api/JobCategories/public/top?count=${count}`,
+  );
+  if (!res.ok) {
+    throw new Error(`Failed to fetch top job categories: ${res.status}`);
+  }
+
+  const json: ApiResponse<JobCategoryTreeItem[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+/* ────────────────────────────────────────────────
  *  GET /api/MediaMentions/public
  * ──────────────────────────────────────────────── */
 

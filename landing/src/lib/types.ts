@@ -87,7 +87,9 @@ export interface JobCategoryTreeItem {
   id: string;
   name: string;
   slug: string | null;
-  icon: string | null;
+  tag: string | null;
+  backgroundImage: string | null;
+  description: string | null;
   jobCount: number;
   children: JobCategoryTreeItem[];
 }
