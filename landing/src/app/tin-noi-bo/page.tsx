@@ -1,0 +1,295 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { Footer, Navbar } from "@/components/layout";
+import { FloatingActions } from "@/components/sections";
+import { internalNewsArticles } from "@/lib/mockNews";
+import { fetchPublicArticles, fetchPublicNewsCategories } from "@/lib/api";
+import type {
+  PublicArticleListItemResponse,
+  PublicNewsCategoryResponse,
+} from "@/lib/types";
+
+type CategoryPill = {
+  id: string | null;
+  label: string;
+};
+
+const defaultCategoryPills: CategoryPill[] = [
+  { id: null, label: "Tất cả bài viết" },
+  { id: "mock-cv", label: "Kỹ năng viết CV" },
+  { id: "mock-interview", label: "Kinh nghiệm phỏng vấn" },
+];
+
+function formatDate(value?: string | null): string {
+  if (!value) return "Đang cập nhật";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Đang cập nhật";
+  return date.toLocaleDateString("vi-VN");
+}
+
+function fallbackArticleList(): PublicArticleListItemResponse[] {
+  return internalNewsArticles.map((item) => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    avatar: item.coverImage,
+    summary: item.excerpt,
+    categoryName: item.category,
+    categorySlug: null,
+    authorName: "JobUp",
+    authorAvatar: null,
+    isHot: item.id === "1",
+    publishedAt: item.publishedAt,
+  }));
+}
+
+export default function InternalNewsPage() {
+  const safeFallbackCover =
+    internalNewsArticles[0]?.coverImage ||
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'%3E%3Crect width='1200' height='675' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='28'%3EJobUp News%3C/text%3E%3C/svg%3E";
+
+  const fallbackItems = fallbackArticleList();
+  const [featured, setFeatured] =
+    useState<PublicArticleListItemResponse | null>(fallbackItems[0] || null);
+  const [others, setOthers] = useState<PublicArticleListItemResponse[]>(
+    fallbackItems.slice(1),
+  );
+  const [categoryPills, setCategoryPills] = useState<CategoryPill[]>([
+    ...defaultCategoryPills,
+  ]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null,
+  );
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadData = async () => {
+      try {
+        const [mostViewedResult, categoryResult] = await Promise.all([
+          fetchPublicArticles({
+            PageNumber: 1,
+            PageSize: 1,
+            MostViewed: true,
+          }),
+          fetchPublicNewsCategories(),
+        ]);
+
+        if (!mounted) return;
+
+        const mostViewed = mostViewedResult.list[0];
+        setFeatured(mostViewed || fallbackItems[0] || null);
+
+        const apiPills: CategoryPill[] = categoryResult
+          .slice(0, 3)
+          .map((item: PublicNewsCategoryResponse) => ({
+            id: item.id,
+            label: item.name,
+          }))
+          .filter((item) => Boolean(item.label?.trim()));
+
+        if (apiPills.length > 0) {
+          setCategoryPills([
+            { id: null, label: "Tất cả bài viết" },
+            ...apiPills,
+          ]);
+        } else {
+          setCategoryPills([...defaultCategoryPills]);
+        }
+      } catch {
+        if (!mounted) return;
+        setFeatured(fallbackItems[0] || null);
+        setOthers(fallbackItems.slice(1));
+        setCategoryPills([...defaultCategoryPills]);
+      }
+    };
+
+    loadData();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadCategoryArticles = async () => {
+      try {
+        const articleResult = await fetchPublicArticles({
+          PageNumber: 1,
+          PageSize: 9,
+          NewsCategoryId: selectedCategoryId || undefined,
+        });
+
+        if (!mounted) return;
+        setOthers(articleResult.list);
+      } catch {
+        if (!mounted) return;
+        setOthers(fallbackItems);
+      }
+    };
+
+    loadCategoryArticles();
+
+    return () => {
+      mounted = false;
+    };
+  }, [selectedCategoryId, featured?.id]);
+
+  const featuredLink = useMemo(() => {
+    if (!featured?.slug) return "/tin-noi-bo";
+    return `/tin-noi-bo/${featured.slug}`;
+  }, [featured?.slug]);
+
+  const featuredImage = featured?.avatar || safeFallbackCover;
+
+  return (
+    <>
+      <Navbar />
+      <main className="pt-20">
+        <section className="py-16 bg-brand-light-gray">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <Link
+                href={featuredLink}
+                className="relative rounded-[3rem] overflow-hidden shadow-2xl group block"
+              >
+                <img
+                  src={featuredImage}
+                  alt={featured?.title || "Bài viết nổi bật"}
+                  className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-1000"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-8 pt-20 bg-gradient-to-t from-brand-black/90 via-brand-black/40 to-transparent text-left">
+                  <span className="inline-block px-4 py-1.5 bg-brand-yellow text-brand-black text-xs font-black rounded-full mb-4">
+                    BÀI VIẾT NỔI BẬT
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-black text-white leading-tight">
+                    {featured?.title || "Đang cập nhật bài viết"}
+                  </h2>
+                </div>
+              </Link>
+
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="w-8 h-px bg-brand-yellow" />
+                  <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
+                    Góc chuyên gia JobUp
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-black text-brand-black leading-tight mb-8">
+                  Nơi chia sẻ kiến thức{" "}
+                  <span className="text-brand-yellow">vươn tầm</span> sự nghiệp.
+                </h1>
+                <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                  Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất.
+                  Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực
+                  chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  {categoryPills.map((pill) => (
+                    <button
+                      key={pill.id || pill.label}
+                      type="button"
+                      onClick={() => setSelectedCategoryId(pill.id)}
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold border shadow-soft transition-colors ${
+                        selectedCategoryId === pill.id
+                          ? "bg-brand-yellow text-brand-black border-brand-yellow"
+                          : "bg-white text-gray-500 border-gray-100"
+                      }`}
+                    >
+                      {pill.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {others.map((article) =>
+                (() => {
+                  const cardImage = article.avatar || safeFallbackCover;
+
+                  return (
+                    <article
+                      key={article.id}
+                      className="bg-white border border-gray-100 p-5 rounded-[2.5rem] transition-all duration-300 hover:-translate-y-2 hover:border-brand-yellow hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)]"
+                    >
+                      <Link
+                        href={
+                          article.slug
+                            ? `/tin-noi-bo/${article.slug}`
+                            : "/tin-noi-bo"
+                        }
+                        className="block"
+                      >
+                        <div className="relative aspect-[4/3] rounded-[1.75rem] overflow-hidden mb-6">
+                          <img
+                            src={cardImage}
+                            alt={article.title}
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                          />
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1.5 bg-white/90 backdrop-blur text-brand-black text-[10px] font-black rounded-lg shadow-sm uppercase">
+                              {article.categoryName}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="px-2">
+                          <div className="flex items-center gap-4 mb-4">
+                            <span className="text-xs text-gray-400 flex items-center gap-1">
+                              <i className="fa-regular fa-clock" /> 5 phút đọc
+                            </span>
+                            <span className="text-xs text-gray-400 flex items-center gap-1">
+                              <i className="fa-regular fa-calendar" />{" "}
+                              {formatDate(article.publishedAt)}
+                            </span>
+                          </div>
+                          <h3 className="text-2xl font-black text-brand-black leading-snug hover:text-brand-yellow transition-colors mb-4 line-clamp-2">
+                            {article.title}
+                          </h3>
+                          <p className="text-gray-500 line-clamp-2 mb-6 text-sm">
+                            {article.summary ||
+                              "Đang cập nhật nội dung bài viết."}
+                          </p>
+                          <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
+                            {article.authorAvatar ? (
+                              <img
+                                src={article.authorAvatar}
+                                alt={article.authorName || "Tác giả"}
+                                className="w-8 h-8 rounded-full border border-gray-100 object-cover"
+                              />
+                            ) : (
+                              <div className="w-8 h-8 rounded-full border border-gray-100 bg-brand-black text-white flex items-center justify-center text-[10px] font-black">
+                                {(article.authorName || "JobUp")
+                                  .trim()
+                                  .charAt(0)
+                                  .toUpperCase()}
+                              </div>
+                            )}
+                            <span className="text-xs font-bold text-gray-600">
+                              Bởi {article.authorName || "JobUp"}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </article>
+                  );
+                })(),
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+      <FloatingActions />
+    </>
+  );
+}

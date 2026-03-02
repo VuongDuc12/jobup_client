@@ -5,6 +5,7 @@
 export interface ContactStaff {
   fullName: string;
   avatar: string | null;
+  email: string | null;
   zaloPhone: string | null;
 }
 
@@ -90,6 +91,87 @@ export interface JobCategoryTreeItem {
   icon: string | null;
   jobCount: number;
   children: JobCategoryTreeItem[];
+}
+
+export interface PublicArticleListItemResponse {
+  id: string;
+  title: string;
+  slug: string | null;
+  avatar: string | null;
+  summary: string | null;
+  categoryName: string;
+  categorySlug: string | null;
+  authorName: string;
+  authorAvatar: string | null;
+  isHot: boolean;
+  publishedAt: string | null;
+}
+
+export interface PublicArticleResponse {
+  id: string;
+  title: string;
+  slug: string | null;
+  avatar: string | null;
+  summary: string | null;
+  content: string | null;
+  categoryName: string;
+  categorySlug: string | null;
+  authorName: string;
+  authorAvatar: string | null;
+  tags: string[] | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  isHot: boolean;
+  viewCount: number;
+  publishedAt: string | null;
+}
+
+export interface PublicArticleSearchResponse {
+  list: PublicArticleListItemResponse[];
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface PublicNewsCategoryResponse {
+  id: string;
+  name: string;
+  slug: string | null;
+  isActive: boolean;
+  articleCount: number;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface PublicMediaMentionListItemResponse {
+  id: string;
+  title: string;
+  summary: string | null;
+  categoryName: string;
+  categorySlug: string | null;
+  sourceName: string | null;
+  sourceLogo: string | null;
+  articleUrl: string | null;
+  thumbnailUrl: string | null;
+  isFeatured: boolean;
+  isHot: boolean;
+  publishedAt: string | null;
+}
+
+export interface PublicMediaMentionSearchResponse {
+  list: PublicMediaMentionListItemResponse[];
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface PublicMediaMentionCategoryResponse {
+  id: string;
+  name: string;
+  slug: string | null;
+  sortOrder: number;
+  isActive: boolean;
+  mediaMentionCount: number;
+  createdAt: string;
+  updatedAt: string | null;
 }
 
 export interface HomepageSettingsResponse {

@@ -2,13 +2,13 @@ export default function FeaturesSection() {
     return (
         <section id="features" className="py-16 bg-white relative overflow-hidden">
             {/* Decorative Background */}
-            <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-brand-yellow rounded-full blur-[120px] -z-10 -translate-y-1/2" />
+            <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-50/50 rounded-full blur-[120px] -z-10 -translate-y-1/2" />
             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50/30 rounded-full blur-[100px] -z-10 translate-y-1/4" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-12">
-                    <span className="text-brand-yellow font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
+                    <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
                         Giải pháp toàn diện
                     </span>
                     <h2 className="text-3xl md:text-5xl font-[1000] text-[#111827] mb-5 tracking-tight">
@@ -23,7 +23,7 @@ export default function FeaturesSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {/* Feature 1: AI Smart Match */}
-                    <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow hover:shadow-[0_40px_80px_-20px_rgba(245,185,20,0.15)] transition-all duration-700 group relative overflow-hidden">
+                    <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow/30 hover:shadow-[0_40px_80px_-20px_rgba(240,180,41,0.15)] transition-all duration-700 group relative overflow-hidden">
                         <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
                             <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
                                 <img
@@ -49,10 +49,10 @@ export default function FeaturesSection() {
                                 </p>
 
                                 {/* Analytical UI */}
-                                <div className="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow transition-colors">
+                                <div className="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow/20 transition-colors">
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow">
+                                            <div className="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow/30">
                                                 <i className="fa-solid fa-brain" />
                                             </div>
                                             <span className="font-bold text-gray-800">
@@ -105,7 +105,7 @@ export default function FeaturesSection() {
                                             Em cần tối ưu CV ngành Tech ạ?
                                         </p>
                                     </div>
-                                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1">
+                                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow/20 transform rotate-1">
                                         <p className="text-xs font-bold leading-relaxed italic">
                                             &ldquo;JobUp đã lọc ra Job ngon đúng ý bạn. Apply luôn kẻo
                                             lỡ nhé! 🚀&rdquo;
@@ -153,7 +153,7 @@ export default function FeaturesSection() {
                     </div>
 
                     {/* Feature 4: Career Path */}
-                    <div className="bg-gradient-to-br from-brand-yellow to-brand-yellow rounded-[3rem] p-8 text-white shadow-2xl shadow-brand-yellow hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-[#F59E0B] to-[#D97706] rounded-[3rem] p-8 text-white shadow-2xl shadow-amber-500/30 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
                         <img
                             src="https://images.unsplash.com/photo-1507679799987-c7377f5da5b2?auto=format&fit=crop&q=80&w=600"
                             className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"

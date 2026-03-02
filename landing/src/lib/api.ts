@@ -4,9 +4,14 @@ import type {
   FeatureResponse,
   HomepageSettingsResponse,
   PartnerResponse,
+  PublicArticleResponse,
+  PublicArticleSearchResponse,
   PublicJobResponse,
   PublicJobDetailResponse,
   PublicJobSearchResponse,
+  PublicMediaMentionCategoryResponse,
+  PublicMediaMentionSearchResponse,
+  PublicNewsCategoryResponse,
   ProvinceDropdown,
   JobCategoryTreeItem,
   StatisticResponse,
@@ -324,6 +329,150 @@ export async function fetchPublicJobCategories(): Promise<
   }
 
   const json: ApiResponse<JobCategoryTreeItem[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export interface PublicArticleSearchParams {
+  Keyword?: string;
+  NewsCategoryId?: string;
+  PageNumber?: number;
+  PageSize?: number;
+  MostViewed?: boolean;
+}
+
+export async function fetchPublicArticles(
+  params: PublicArticleSearchParams = {},
+): Promise<PublicArticleSearchResponse> {
+  const url = new URL(`${API_BASE_URL}/api/Articles/public`);
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public articles: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function fetchPublicArticleBySlug(
+  slug: string,
+): Promise<PublicArticleResponse> {
+  const res = await fetch(`${API_BASE_URL}/api/Articles/public/${slug}`, {
+    next: { revalidate: 120 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public article by slug: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function trackPublicArticleView(id: string): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/Articles/public/${id}/view`, {
+    method: "POST",
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to track article view: ${res.status}`);
+  }
+}
+
+export async function fetchPublicNewsCategories(): Promise<
+  PublicNewsCategoryResponse[]
+> {
+  const res = await fetch(`${API_BASE_URL}/api/NewsCategories/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch news categories: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicNewsCategoryResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export interface PublicMediaMentionSearchParams {
+  Keyword?: string;
+  MediaMentionCategoryId?: string;
+  PageNumber?: number;
+  PageSize?: number;
+}
+
+export async function fetchPublicMediaMentions(
+  params: PublicMediaMentionSearchParams = {},
+): Promise<PublicMediaMentionSearchResponse> {
+  const url = new URL(`${API_BASE_URL}/api/MediaMentions/public`);
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public media mentions: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicMediaMentionSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function trackPublicMediaMentionView(id: string): Promise<void> {
+  const res = await fetch(
+    `${API_BASE_URL}/api/MediaMentions/public/${id}/track`,
+    {
+      method: "POST",
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`Failed to track media mention view: ${res.status}`);
+  }
+}
+
+export async function fetchPublicMediaMentionCategories(): Promise<
+  PublicMediaMentionCategoryResponse[]
+> {
+  const res = await fetch(`${API_BASE_URL}/api/MediaMentionCategories/public`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch media mention categories: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicMediaMentionCategoryResponse[]> =
+    await res.json();
   if (!json.succeeded) {
     throw new Error(json.message || "API error");
   }

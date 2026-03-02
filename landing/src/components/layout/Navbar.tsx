@@ -61,7 +61,7 @@ export default function Navbar() {
                                     <Link
                                         key={item.href}
                                         href={item.href}
-                                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-yellow hover:text-brand-black"
+                                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-yellow-50 hover:text-brand-yellow-hover"
                                     >
                                         {item.label}
                                     </Link>
@@ -90,7 +90,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                         <a
                             href="tel:0979334143"
-                            className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-brand-yellow transition-colors"
+                            className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-amber-600 transition-colors"
                         >
                             <i className="fa-solid fa-phone text-xs" />
                             <span className="font-medium">0979.334.143</span>
@@ -98,7 +98,7 @@ export default function Navbar() {
                         <span className="hidden md:block w-px h-4 bg-gray-200" />
                         <a
                             href="mailto:hr@jobup.vn"
-                            className="px-6 py-2.5 rounded-full bg-brand-black text-white font-bold text-sm shadow-lg hover:shadow-[0_8px_30px_rgba(245,185,20,0.4)] hover:bg-brand-yellow hover:text-brand-black transition-all duration-300 transform hover:-translate-y-1"
+                            className="px-6 py-2.5 rounded-full bg-brand-black text-white font-bold text-sm shadow-lg hover:shadow-[0_8px_30px_rgba(240,180,41,0.4)] hover:bg-brand-yellow hover:text-brand-black transition-all duration-300 transform hover:-translate-y-1"
                         >
                             Gửi CV ngay
                         </a>
