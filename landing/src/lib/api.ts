@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./config";
+import { API_BASE_URL, REVALIDATE_TIME } from "./config";
 import type {
   AboutSettingResponse,
   ApiResponse,
@@ -23,7 +23,7 @@ import type {
 
 export async function fetchHomepageSettingsPublic(): Promise<HomepageSettingsResponse> {
   const res = await fetch(`${API_BASE_URL}/api/HomepageSettings/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch homepage settings: ${res.status}`);
@@ -43,7 +43,7 @@ export async function fetchHomepageSettingsPublic(): Promise<HomepageSettingsRes
 
 export async function fetchPartnersPublic(): Promise<PartnerResponse[]> {
   const res = await fetch(`${API_BASE_URL}/api/Partners/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch partners: ${res.status}`);
@@ -63,7 +63,7 @@ export async function fetchPartnersPublic(): Promise<PartnerResponse[]> {
 
 export async function fetchFeaturesPublic(): Promise<FeatureResponse[]> {
   const res = await fetch(`${API_BASE_URL}/api/Features/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch features: ${res.status}`);
@@ -85,7 +85,7 @@ export async function fetchTestimonialsPublic(): Promise<
   TestimonialResponse[]
 > {
   const res = await fetch(`${API_BASE_URL}/api/Testimonials/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch testimonials: ${res.status}`);
@@ -105,7 +105,7 @@ export async function fetchTestimonialsPublic(): Promise<
 
 export async function fetchStatisticsPublic(): Promise<StatisticResponse[]> {
   const res = await fetch(`${API_BASE_URL}/api/Statistics/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch statistics: ${res.status}`);
@@ -136,7 +136,7 @@ export async function fetchLatestJobs(
   if (params.limit) url.searchParams.set("limit", String(params.limit));
   if (params.categoryId) url.searchParams.set("categoryId", params.categoryId);
 
-  const res = await fetch(url.toString(), { next: { revalidate: 60 } }); // cache 60s
+  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch latest jobs: ${res.status}`);
@@ -357,7 +357,7 @@ export async function fetchMediaMentionsPublic(
     }
   });
 
-  const res = await fetch(url.toString(), { next: { revalidate: 300 } });
+  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
   if (!res.ok) {
     throw new Error(`Failed to fetch media mentions: ${res.status}`);
   }
@@ -376,7 +376,7 @@ export async function fetchMediaMentionsPublic(
 
 export async function fetchAboutSettingsPublic(): Promise<AboutSettingResponse> {
   const res = await fetch(`${API_BASE_URL}/api/AboutSettings/public`, {
-    next: { revalidate: 300 },
+    next: { revalidate: REVALIDATE_TIME },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch about settings: ${res.status}`);
@@ -401,7 +401,7 @@ export async function fetchFeaturedArticlesPublic(
   url.searchParams.set("IsHot", "true");
   url.searchParams.set("PageSize", String(limit));
 
-  const res = await fetch(url.toString(), { next: { revalidate: 300 } });
+  const res = await fetch(url.toString(), { next: { revalidate: REVALIDATE_TIME } });
   if (!res.ok) {
     throw new Error(`Failed to fetch featured articles: ${res.status}`);
   }

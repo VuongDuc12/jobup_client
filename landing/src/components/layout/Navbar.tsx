@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
@@ -16,9 +17,19 @@ const newsDropdown = [
     { href: "/truyen-thong", label: "Truyền thông" },
 ];
 
+function formatPhone(phone: string | null): string {
+    if (!phone) return '';
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length === 10) {
+        return `${digits.slice(0, 4)}.${digits.slice(4, 7)}.${digits.slice(7)}`;
+    }
+    return phone;
+}
+
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+    const { config } = useSystemConfig();
 
     return (
         <>
@@ -112,15 +123,17 @@ export default function Navbar() {
                     {/* Action Buttons */}
                     <div className="flex items-center gap-4">
                         <a
-                            href="tel:0979334143"
+                            href={`tel:${config.hotline?.replace(/\D/g, '')}`}
                             className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-brand-yellow transition-colors"
                         >
                             <i className="fa-solid fa-phone text-xs" />
-                            <span className="font-medium">0979.334.143</span>
+                            <span className="font-medium">{formatPhone(config.hotline)}</span>
                         </a>
                         <span className="hidden md:block w-px h-4 bg-gray-200" />
                         <a
-                            href="mailto:hr@jobup.vn"
+                            href={config.zaloUrl && config.zaloUrl !== '#' ? config.zaloUrl : (config.hotline ? `https://zalo.me/${config.hotline.replace(/\D/g, '')}` : '#')}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="px-6 py-2.5 rounded-full bg-brand-black text-white font-bold text-sm shadow-lg hover:shadow-[0_8px_30px_rgba(245,185,20,0.4)] hover:bg-brand-yellow hover:text-brand-black transition-all duration-300 transform hover:-translate-y-1"
                         >
                             Gửi CV ngay
@@ -139,6 +152,7 @@ export default function Navbar() {
             <MobileMenu
                 isOpen={mobileMenuOpen}
                 onClose={() => setMobileMenuOpen(false)}
+                config={config}
             />
         </>
     );

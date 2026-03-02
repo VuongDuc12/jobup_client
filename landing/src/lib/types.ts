@@ -199,10 +199,6 @@ export interface AboutSettingResponse {
   heroTitle: string | null;
   heroSubtitle: string | null;
   heroBackgroundImage: string | null;
-  heroCta1Text: string | null;
-  heroCta1Url: string | null;
-  heroCta2Text: string | null;
-  heroCta2Url: string | null;
 
   // Journey
   journeyBadgeText: string | null;

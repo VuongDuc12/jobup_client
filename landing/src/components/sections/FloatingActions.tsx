@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 export default function FloatingActions() {
     const [showBackToTop, setShowBackToTop] = useState(false);
+    const { config } = useSystemConfig();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,6 +19,10 @@ export default function FloatingActions() {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
+    // Build Zalo link from config
+    const zaloLink = config.zaloUrl || 
+        (config.hotline ? `https://zalo.me/${config.hotline.replace(/\D/g, '')}` : '#');
 
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end group">
@@ -91,7 +97,7 @@ export default function FloatingActions() {
 
                 {/* Zalo Icon */}
                 <a
-                    href="https://zalo.me/0979334143"
+                    href={zaloLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="pointer-events-auto relative block"
@@ -111,7 +117,7 @@ export default function FloatingActions() {
 
             {/* Hotline */}
             <a
-                href="tel:0979334143"
+                href={`tel:${config.hotline || '0979334143'}`}
                 className="w-14 h-14 bg-gradient-to-tr from-red-500 to-pink-500 text-white rounded-full flex items-center justify-center shadow-lg animate-pulse hover:animate-none hover:scale-110 transition-transform relative"
             >
                 <i className="fa-solid fa-phone text-2xl" />

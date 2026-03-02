@@ -1,16 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAssetUrl } from "@/lib/utils";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 interface AboutHeroSectionProps {
     badgeText?: string | null;
     title?: string | null;
     subtitle?: string | null;
     backgroundImage?: string | null;
-    cta1Text?: string | null;
-    cta1Url?: string | null;
-    cta2Text?: string | null;
-    cta2Url?: string | null;
 }
 
 export default function AboutHeroSection({
@@ -18,21 +15,18 @@ export default function AboutHeroSection({
     title,
     subtitle,
     backgroundImage,
-    cta1Text,
-    cta1Url,
-    cta2Text,
-    cta2Url,
 }: AboutHeroSectionProps) {
+    const { config } = useSystemConfig();
     const displayBadge = badgeText || "Về chúng tôi";
     const displayTitle = title || "Kiến tạo giá trị, Kết nối nhân tài Việt.";
     const displaySubtitle =
         subtitle ||
         "Chuyên gia tư vấn tuyển dụng chuyên nghiệp, đồng hành cùng hơn 100+ doanh nghiệp trong hành trình tìm kiếm và phát triển nguồn nhân lực chất lượng cao.";
     const displayBg = getAssetUrl(backgroundImage) || "/hero-workspace.png";
-    const displayCta1Text = cta1Text || "Liên hệ tư vấn";
-    const displayCta1Url = cta1Url || "mailto:hr@jobup.vn";
-    const displayCta2Text = cta2Text || "Khám phá cơ hội";
-    const displayCta2Url = cta2Url || "/tuyen-dung";
+    const displayCta1Url = config.zaloUrl && config.zaloUrl !== '#'
+        ? config.zaloUrl
+        : (config.hotline ? `https://zalo.me/${config.hotline.replace(/\D/g, '')}` : '#');
+    const displayCta2Url = "/tuyen-dung";
 
     return (
         <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
@@ -70,15 +64,17 @@ export default function AboutHeroSection({
                 <div className="flex flex-wrap justify-center gap-6">
                     <a
                         href={displayCta1Url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-12 py-5 rounded-full bg-brand-yellow text-brand-black font-black text-lg hover:bg-white hover:scale-105 transition-all shadow-[0_20px_40px_-10px_rgba(240,180,41,0.5)] active:scale-95"
                     >
-                        {displayCta1Text}
+                        Liên hệ tư vấn
                     </a>
                     <Link
                         href={displayCta2Url}
                         className="px-12 py-5 rounded-full border-2 border-white/40 text-white font-black text-lg hover:bg-white hover:text-brand-black hover:border-white hover:scale-105 transition-all active:scale-95 backdrop-blur-md"
                     >
-                        {displayCta2Text}
+                        Khám phá cơ hội
                     </Link>
                 </div>
             </div>

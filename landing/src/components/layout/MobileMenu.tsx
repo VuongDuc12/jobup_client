@@ -3,10 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import type { SystemConfig } from "@/hooks/useSystemConfig";
 
 interface MobileMenuProps {
     isOpen: boolean;
     onClose: () => void;
+    config: SystemConfig;
 }
 
 const mobileLinks = [
@@ -18,8 +20,14 @@ const mobileLinks = [
     { href: "#footer", label: "Liên hệ" },
 ];
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose, config }: MobileMenuProps) {
     const pathname = usePathname();
+
+    const socialLinks = [
+        { icon: "fa-brands fa-facebook", href: config.facebookUrl },
+        { icon: "fa-brands fa-linkedin", href: config.linkedInUrl },
+        { icon: "fa-brands fa-instagram", href: config.instagramUrl },
+    ].filter(link => link.href && link.href !== '#');
 
     return (
         <div
@@ -66,15 +74,17 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
             <div className="p-8 border-t border-gray-50">
                 <a
-                    href="mailto:hr@jobup.vn"
+                    href={`mailto:${config.email}`}
                     className="block w-full py-5 bg-brand-black text-white text-center rounded-[1.5rem] font-bold shadow-xl shadow-gray-200 active:scale-95 transition-transform"
                 >
                     Gửi CV Ngay
                 </a>
                 <div className="mt-6 flex justify-center gap-6 text-gray-400">
-                    <i className="fa-brands fa-facebook text-xl" />
-                    <i className="fa-brands fa-linkedin text-xl" />
-                    <i className="fa-brands fa-instagram text-xl" />
+                    {socialLinks.map((social, idx) => (
+                        <a key={idx} href={social.href!} target="_blank" rel="noopener noreferrer">
+                            <i className={`${social.icon} text-xl`} />
+                        </a>
+                    ))}
                 </div>
             </div>
         </div>

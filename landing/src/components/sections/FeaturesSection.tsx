@@ -1,5 +1,6 @@
 import type { FeatureResponse, StatisticResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 interface FeaturesSectionProps {
     features?: FeatureResponse[] | null;
@@ -75,6 +76,16 @@ const defaultStats = [
 ];
 
 export default function FeaturesSection({ features, statistics }: FeaturesSectionProps) {
+    const { config } = useSystemConfig();
+
+    // Build fallback features with dynamic hotline from config
+    const fallbackFeatures = defaultFeatures.map((f) => {
+        if (f.linkUrl === "tel:0979334143") {
+            return { ...f, linkUrl: `tel:${config.hotline?.replace(/\D/g, '')}` };
+        }
+        return f;
+    });
+
     const activeFeatures =
         features && features.length > 0
             ? features
@@ -100,7 +111,7 @@ export default function FeaturesSection({ features, statistics }: FeaturesSectio
               linkUrl: f.linkUrl,
               buttonText: f.buttonText,
           }))
-        : defaultFeatures;
+        : fallbackFeatures;
 
     const stats = activeStats
         ? activeStats.map((s) => ({

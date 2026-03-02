@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 interface AboutCTASectionProps {
     title?: string | null;
@@ -17,6 +18,10 @@ export default function AboutCTASection({
     button2Text,
     button2Url,
 }: AboutCTASectionProps) {
+    const { config } = useSystemConfig();
+    const zaloFallback = config.zaloUrl && config.zaloUrl !== '#'
+        ? config.zaloUrl
+        : (config.hotline ? `https://zalo.me/${config.hotline.replace(/\D/g, '')}` : 'https://zalo.me/0979334143');
     const displayTitle = title || "Sẵn sàng bắt đầu cùng JobUp?";
     const displayDescription =
         description ||
@@ -24,7 +29,7 @@ export default function AboutCTASection({
     const displayBtn1Text = button1Text || "Xem việc làm";
     const displayBtn1Url = button1Url || "/tuyen-dung";
     const displayBtn2Text = button2Text || "Liên hệ tư vấn";
-    const displayBtn2Url = button2Url || "https://zalo.me/0979334143";
+    const displayBtn2Url = button2Url || zaloFallback;
 
     const isExternalBtn2 =
         displayBtn2Url.startsWith("http") ||

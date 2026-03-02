@@ -47,10 +47,6 @@ export default function AboutPageClient({
                     title={s?.heroTitle}
                     subtitle={s?.heroSubtitle}
                     backgroundImage={s?.heroBackgroundImage}
-                    cta1Text={s?.heroCta1Text}
-                    cta1Url={s?.heroCta1Url}
-                    cta2Text={s?.heroCta2Text}
-                    cta2Url={s?.heroCta2Url}
                 />
                 <OurJourneySection
                     badgeText={s?.journeyBadgeText}
