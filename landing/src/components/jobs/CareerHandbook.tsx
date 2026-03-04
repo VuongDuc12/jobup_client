@@ -132,7 +132,6 @@ export default function CareerHandbook() {
     } catch {
       // no-op
     }
-
     window.location.href = "/tin-noi-bo";
   };
 
