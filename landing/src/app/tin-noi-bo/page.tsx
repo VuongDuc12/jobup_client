@@ -46,6 +46,7 @@ function fallbackArticleList(): PublicArticleListItemResponse[] {
 }
 
 export default function InternalNewsPage() {
+  const PAGE_SIZE = 9;
   const safeFallbackCover =
     internalNewsArticles[0]?.coverImage ||
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'%3E%3Crect width='1200' height='675' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='28'%3EJobUp News%3C/text%3E%3C/svg%3E";
@@ -62,6 +63,28 @@ export default function InternalNewsPage() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null,
   );
+  const [keywordInput, setKeywordInput] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("jobup_news_filters");
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw) as { categoryId?: string | null };
+      if (parsed.categoryId) {
+        setSelectedCategoryId(parsed.categoryId);
+        setPageNumber(1);
+      }
+    } catch {
+      // no-op
+    } finally {
+      sessionStorage.removeItem("jobup_news_filters");
+    }
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -117,18 +140,30 @@ export default function InternalNewsPage() {
     let mounted = true;
 
     const loadCategoryArticles = async () => {
+      const isFirstPage = pageNumber === 1;
+      if (!isFirstPage) setIsLoadingMore(true);
+
       try {
         const articleResult = await fetchPublicArticles({
-          PageNumber: 1,
-          PageSize: 9,
+          PageNumber: pageNumber,
+          PageSize: PAGE_SIZE,
+          Keyword: keyword || undefined,
           NewsCategoryId: selectedCategoryId || undefined,
         });
 
         if (!mounted) return;
-        setOthers(articleResult.list);
+        const nextList = articleResult.list || [];
+        setOthers((prev) => (isFirstPage ? nextList : [...prev, ...nextList]));
+        setHasMore(nextList.length === PAGE_SIZE);
       } catch {
         if (!mounted) return;
-        setOthers(fallbackItems);
+        if (isFirstPage) {
+          setOthers(fallbackItems);
+          setHasMore(false);
+        }
+      } finally {
+        if (!mounted) return;
+        if (!isFirstPage) setIsLoadingMore(false);
       }
     };
 
@@ -137,7 +172,22 @@ export default function InternalNewsPage() {
     return () => {
       mounted = false;
     };
-  }, [selectedCategoryId, featured?.id]);
+  }, [selectedCategoryId, keyword, pageNumber]);
+
+  const handleSearch = () => {
+    setPageNumber(1);
+    setKeyword(keywordInput.trim());
+  };
+
+  const handleCategoryChange = (id: string | null) => {
+    setSelectedCategoryId(id);
+    setPageNumber(1);
+  };
+
+  const handleLoadMore = () => {
+    if (isLoadingMore || !hasMore) return;
+    setPageNumber((prev) => prev + 1);
+  };
 
   const featuredLink = useMemo(() => {
     if (!featured?.slug) return "/tin-noi-bo";
@@ -188,12 +238,34 @@ export default function InternalNewsPage() {
                   Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực
                   chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá.
                 </p>
+                <div className="mb-5 flex gap-3">
+                  <div className="flex-1 relative">
+                    <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+                    <input
+                      value={keywordInput}
+                      onChange={(event) => setKeywordInput(event.target.value)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") handleSearch();
+                      }}
+                      type="text"
+                      placeholder="Tìm kiếm bài viết..."
+                      className="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white text-sm text-gray-700 focus:outline-none focus:border-brand-yellow"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleSearch}
+                    className="px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
+                  >
+                    Tìm kiếm
+                  </button>
+                </div>
                 <div className="flex flex-wrap gap-4">
                   {categoryPills.map((pill) => (
                     <button
                       key={pill.id || pill.label}
                       type="button"
-                      onClick={() => setSelectedCategoryId(pill.id)}
+                      onClick={() => handleCategoryChange(pill.id)}
                       className={`px-6 py-2.5 rounded-full text-sm font-bold border shadow-soft transition-colors ${
                         selectedCategoryId === pill.id
                           ? "bg-brand-yellow text-brand-black border-brand-yellow"
@@ -283,6 +355,21 @@ export default function InternalNewsPage() {
                     </article>
                   );
                 })(),
+              )}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+              {hasMore ? (
+                <button
+                  type="button"
+                  onClick={handleLoadMore}
+                  disabled={isLoadingMore}
+                  className="px-8 py-3 rounded-full bg-brand-black text-white font-bold text-sm hover:bg-brand-yellow hover:text-brand-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isLoadingMore ? "Đang tải..." : "Xem thêm"}
+                </button>
+              ) : (
+                <span className="text-sm text-gray-400 font-medium"></span>
               )}
             </div>
           </div>
