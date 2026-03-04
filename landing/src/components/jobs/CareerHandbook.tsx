@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { fetchPublicArticles } from "@/lib/api";
+import { getAssetUrl } from "@/lib/utils";
 
 interface Slide {
   image: string;
@@ -40,15 +42,30 @@ const slides: Slide[] = [
   },
 ];
 
+const badgeColorByIndex = [
+  "bg-red-600 text-white",
+  "bg-brand-yellow text-brand-black",
+  "bg-brand-black text-white",
+];
+
+const camnangCategoryId =
+  process.env.NEXT_PUBLIC_CAMNANGCATEGORYID ||
+  process.env.NEXT_PUBLIC_camnangcategoryID ||
+  process.env.NEXT_PUBLIC_CAMNANG_CATEGORY_ID ||
+  "";
+
 export default function CareerHandbook() {
   const [current, setCurrent] = useState(0);
+  const [handbookSlides, setHandbookSlides] = useState<Slide[]>(slides);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startAutoPlay = useCallback(() => {
+    if (handbookSlides.length <= 1) return;
+
     intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      setCurrent((prev) => (prev + 1) % handbookSlides.length);
     }, 4000);
-  }, []);
+  }, [handbookSlides.length]);
 
   const stopAutoPlay = useCallback(() => {
     if (intervalRef.current) {
@@ -61,6 +78,63 @@ export default function CareerHandbook() {
     startAutoPlay();
     return stopAutoPlay;
   }, [startAutoPlay, stopAutoPlay]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadCamNangArticles = async () => {
+      if (!camnangCategoryId) return;
+
+      try {
+        const result = await fetchPublicArticles({
+          PageNumber: 1,
+          PageSize: 3,
+          NewsCategoryId: camnangCategoryId,
+        });
+
+        if (!mounted) return;
+        const nextSlides = (result.list || [])
+          .slice(0, 3)
+          .map((item, index) => ({
+            image:
+              getAssetUrl(item.avatar) || slides[index % slides.length].image,
+            badge: item.categoryName || "Cẩm nang",
+            badgeColor: badgeColorByIndex[index % badgeColorByIndex.length],
+            title: item.title,
+            description: item.summary || "Đang cập nhật nội dung bài viết...",
+          }));
+
+        if (nextSlides.length > 0) {
+          setHandbookSlides(nextSlides);
+          setCurrent(0);
+        }
+      } catch {
+        // Keep fallback slides
+      }
+    };
+
+    loadCamNangArticles();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const handleExploreHandbook = () => {
+    try {
+      sessionStorage.setItem(
+        "jobup_news_filters",
+        JSON.stringify({
+          categoryId: camnangCategoryId || null,
+          label: "Cẩm nang",
+        }),
+      );
+    } catch {
+      // no-op
+    }
+
+    window.location.href = "/tin-noi-bo";
+  };
 
   return (
     <div
@@ -77,7 +151,7 @@ export default function CareerHandbook() {
           Cẩm Nang
         </h4>
         <div className="flex gap-2">
-          {slides.map((_, i) => (
+          {handbookSlides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
@@ -96,7 +170,7 @@ export default function CareerHandbook() {
           className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
-          {slides.map((slide, i) => (
+          {handbookSlides.map((slide, i) => (
             <div
               key={i}
               className="w-full flex-shrink-0 px-6 flex flex-col h-full"
@@ -109,11 +183,6 @@ export default function CareerHandbook() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent" />
-                <span
-                  className={`absolute top-3 left-3 ${slide.badgeColor} text-[8px] font-black px-2 py-1 rounded shadow-lg uppercase`}
-                >
-                  {slide.badge}
-                </span>
               </div>
               <div className="overflow-hidden">
                 <h5 className="font-black text-gray-900 text-base leading-tight group-hover/handbook:text-brand-yellow transition-colors line-clamp-2">
@@ -130,7 +199,10 @@ export default function CareerHandbook() {
 
       {/* Footer Button */}
       <div className="p-6 pt-0 mt-auto shrink-0">
-        <button className="w-full py-4 bg-brand-black text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl group/btn flex items-center justify-center gap-2 active:scale-95 cursor-pointer">
+        <button
+          onClick={handleExploreHandbook}
+          className="w-full py-4 bg-brand-black text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl group/btn flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+        >
           Khám phá cẩm nang{" "}
           <i className="fa-solid fa-arrow-right-long group-hover/btn:translate-x-1 transition-transform" />
         </button>

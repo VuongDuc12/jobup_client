@@ -154,7 +154,7 @@ export default function MediaMentionsPage() {
           </div>
         </section>
 
-        <section className="py-16 bg-white border-y border-gray-100">
+        <section className="py-8 bg-white border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
               {mediaLogosData.map((logo, index) => (
@@ -169,7 +169,7 @@ export default function MediaMentionsPage() {
           </div>
         </section>
 
-        <section className="py-24 bg-white">
+        <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="bg-white border border-gray-100 shadow-soft rounded-[3rem] p-10 md:p-14 hover:border-brand-yellow hover:-translate-y-1 transition-all">
@@ -204,7 +204,7 @@ export default function MediaMentionsPage() {
                 </a>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {list.map((item) =>
                   (() => {
                     const itemLogo = item.sourceLogo || safeFallbackLogo;
@@ -213,7 +213,7 @@ export default function MediaMentionsPage() {
                       <a
                         key={item.id}
                         href={item.articleUrl || "#"}
-                        className="group flex gap-8 p-6 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
+                        className="group flex gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
                         target="_blank"
                         rel="noreferrer"
                       >
