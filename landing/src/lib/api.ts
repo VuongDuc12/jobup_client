@@ -14,6 +14,7 @@ import type {
   PublicMediaMentionCategoryResponse,
   PublicMediaMentionSearchResponse,
   PublicNewsCategoryResponse,
+  PublicStaffResponse,
   ProvinceDropdown,
   JobCategoryTreeItem,
   StatisticResponse,
@@ -433,6 +434,25 @@ export async function trackPublicArticleView(id: string): Promise<void> {
   if (!res.ok) {
     throw new Error(`Failed to track article view: ${res.status}`);
   }
+}
+
+export async function fetchPublicStaff(
+  limit = 10,
+): Promise<PublicStaffResponse[]> {
+  const url = new URL(`${API_BASE_URL}/api/Users/public`);
+  url.searchParams.set("limit", String(limit));
+
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch public staff: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicStaffResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
 }
 
 export async function fetchPublicNewsCategories(): Promise<

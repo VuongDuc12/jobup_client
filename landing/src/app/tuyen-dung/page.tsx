@@ -10,6 +10,7 @@ import {
   CVReviewCTA,
   UrgentJobsWidget,
   CareerHandbook,
+  StaffInfoSlider,
 } from "@/components/jobs";
 import DynamicBanner from "@/components/shared/DynamicBanner";
 import { fetchProvinces, fetchPublicJobCategories } from "@/lib/api";
@@ -193,6 +194,7 @@ export default function JobsPage() {
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
                 <CareerHandbook />
+                <StaffInfoSlider />
               </div>
             </aside>
           </div>

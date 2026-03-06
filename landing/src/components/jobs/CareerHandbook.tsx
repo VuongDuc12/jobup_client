@@ -137,7 +137,7 @@ export default function CareerHandbook() {
 
   return (
     <div
-      className="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col h-[480px] relative group/handbook"
+      className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 flex flex-col h-[480px] relative group/handbook"
       onMouseEnter={stopAutoPlay}
       onMouseLeave={startAutoPlay}
     >
@@ -200,7 +200,7 @@ export default function CareerHandbook() {
       <div className="p-6 pt-0 mt-auto shrink-0">
         <button
           onClick={handleExploreHandbook}
-          className="w-full py-4 bg-brand-black text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl group/btn flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+          className="w-full py-4 bg-brand-black text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-brand-yellow hover:text-brand-black transition-all group/btn flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
         >
           Khám phá cẩm nang{" "}
           <i className="fa-solid fa-arrow-right-long group-hover/btn:translate-x-1 transition-transform" />

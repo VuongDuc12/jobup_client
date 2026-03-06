@@ -134,6 +134,13 @@ export interface PublicArticleSearchResponse {
   totalPages: number;
 }
 
+export interface PublicStaffResponse {
+  id: string;
+  fullName: string;
+  roleName: string;
+  avatar: string | null;
+}
+
 export interface PublicNewsCategoryResponse {
   id: string;
   name: string;
