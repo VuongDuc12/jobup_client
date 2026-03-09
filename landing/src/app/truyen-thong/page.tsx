@@ -5,10 +5,10 @@ import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import { mediaMentions } from "@/lib/mockNews";
 import {
-  fetchPublicMediaMentionCategories,
   fetchPublicMediaMentions,
   trackPublicMediaMentionView,
 } from "@/lib/api";
+import { resolveAssetUrl } from "@/lib/utils";
 import type { PublicMediaMentionListItemResponse } from "@/lib/types";
 
 const mediaLogos = [
@@ -44,6 +44,7 @@ function fallbackMediaList(): PublicMediaMentionListItemResponse[] {
 }
 
 export default function MediaMentionsPage() {
+  const PAGE_SIZE = 8;
   const safeFallbackLogo = mediaLogos[0] || "";
 
   const [mentionList, setMentionList] =
@@ -51,36 +52,56 @@ export default function MediaMentionsPage() {
   const [mediaLogosData, setMediaLogosData] = useState<string[]>([
     ...mediaLogos,
   ]);
+  const [keywordInput, setKeywordInput] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
     const loadData = async () => {
+      const isFirstPage = pageNumber === 1;
+      if (!isFirstPage) setIsLoadingMore(true);
+
       try {
-        const [mentionResult, categoryResult] = await Promise.all([
-          fetchPublicMediaMentions({ PageNumber: 1, PageSize: 8 }),
-          fetchPublicMediaMentionCategories(),
-        ]);
+        const mentionResult = await fetchPublicMediaMentions({
+          PageNumber: pageNumber,
+          PageSize: PAGE_SIZE,
+          Keyword: keyword || undefined,
+        });
 
         if (!mounted) return;
 
-        if (mentionResult.list.length > 0) {
-          setMentionList(mentionResult.list);
-        }
+        const nextList = mentionResult.list || [];
+        setMentionList((prev) =>
+          isFirstPage ? nextList : [...prev, ...nextList],
+        );
+        setHasMore(nextList.length === PAGE_SIZE);
 
-        const logosFromApi = mentionResult.list
-          .map((item) => item.sourceLogo)
+        const logosFromApi = (
+          isFirstPage ? nextList : [...mentionList, ...nextList]
+        )
+          .map((item) => resolveAssetUrl(item.sourceLogo))
           .filter((logo): logo is string => Boolean(logo && logo.trim()));
 
         if (logosFromApi.length > 0) {
           setMediaLogosData(Array.from(new Set(logosFromApi)).slice(0, 6));
-        } else if (categoryResult.length > 0) {
+        } else {
           setMediaLogosData([...mediaLogos]);
         }
       } catch {
         if (!mounted) return;
-        setMentionList(fallbackMediaList());
+        if (isFirstPage) {
+          const fallbackItems = fallbackMediaList();
+          setMentionList(keyword ? [] : fallbackItems);
+          setHasMore(false);
+        }
         setMediaLogosData([...mediaLogos]);
+      } finally {
+        if (!mounted) return;
+        if (!isFirstPage) setIsLoadingMore(false);
       }
     };
 
@@ -89,11 +110,22 @@ export default function MediaMentionsPage() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [keyword, pageNumber]);
+
+  const handleSearch = () => {
+    setPageNumber(1);
+    setKeyword(keywordInput.trim());
+  };
+
+  const handleLoadMore = () => {
+    if (isLoadingMore || !hasMore) return;
+    setPageNumber((prev) => prev + 1);
+  };
 
   const { featured, list } = useMemo(() => {
     const fallbackItems = fallbackMediaList();
-    const items = mentionList.length > 0 ? mentionList : fallbackItems;
+    const items =
+      mentionList.length > 0 ? mentionList : keyword ? [] : fallbackItems;
     const first =
       items.find((item) => item.isFeatured) ||
       items[0] ||
@@ -118,7 +150,8 @@ export default function MediaMentionsPage() {
     };
   }, [mentionList]);
 
-  const featuredLogo = featured?.sourceLogo || safeFallbackLogo;
+  const featuredLogo =
+    resolveAssetUrl(featured?.sourceLogo) || safeFallbackLogo;
 
   return (
     <>
@@ -152,6 +185,28 @@ export default function MediaMentionsPage() {
               dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi
               qua lăng kính báo chí.
             </p>
+            <div className="mt-10 mx-auto max-w-2xl flex gap-3">
+              <div className="flex-1 relative">
+                <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+                <input
+                  value={keywordInput}
+                  onChange={(event) => setKeywordInput(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") handleSearch();
+                  }}
+                  type="text"
+                  placeholder="Tìm kiếm tin truyền thông..."
+                  className="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white text-sm text-gray-700 focus:outline-none focus:border-brand-yellow"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={handleSearch}
+                className="px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
+              >
+                Tìm kiếm
+              </button>
+            </div>
           </div>
         </section>
 
@@ -207,9 +262,15 @@ export default function MediaMentionsPage() {
               </div>
 
               <div className="space-y-6">
+                {list.length === 0 && (
+                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-500 font-medium">
+                    Đã hiển thị hết tin truyền thông.
+                  </div>
+                )}
                 {list.map((item) =>
                   (() => {
-                    const itemLogo = item.sourceLogo || safeFallbackLogo;
+                    const itemLogo =
+                      resolveAssetUrl(item.sourceLogo) || safeFallbackLogo;
 
                     return (
                       <a
@@ -246,6 +307,23 @@ export default function MediaMentionsPage() {
                       </a>
                     );
                   })(),
+                )}
+
+                {list.length > 0 && (
+                  <div className="pt-2 flex justify-center">
+                    {hasMore ? (
+                      <button
+                        type="button"
+                        onClick={handleLoadMore}
+                        disabled={isLoadingMore}
+                        className="px-8 py-3 rounded-full bg-brand-black text-white font-bold text-sm hover:bg-brand-yellow hover:text-brand-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      >
+                        {isLoadingMore ? "Đang tải..." : "Xem thêm"}
+                      </button>
+                    ) : (
+                      <span className="text-sm text-gray-400 font-medium" />
+                    )}
+                  </div>
                 )}
               </div>
             </div>

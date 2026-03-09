@@ -8,6 +8,7 @@ import {
   workTypeLabel,
   timeAgo,
   companyInitial,
+  resolveAssetUrl,
 } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 import DynamicBanner from "@/components/shared/DynamicBanner";
@@ -38,6 +39,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const wt = workTypeLabel(job.workType);
   const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
+  const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
 
   return (
     <div className="relative bg-gradient-to-r from-yellow-50 to-white p-1 rounded-2xl shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group isolation-auto">
@@ -58,17 +60,21 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/5 rounded-full translate-x-16 -translate-y-16 -z-10" />
 
         {/* Company Logo */}
-        {job.contactStaff?.avatar ? (
+        {companyAvatar ? (
           <div className="w-20 h-20 rounded-2xl border-2 border-brand-yellow p-1.5 bg-white shrink-0 shadow-sm">
             <img
-              src={job.contactStaff.avatar}
+              src={companyAvatar}
               className="w-full h-full object-contain rounded-xl"
               alt={job.displayCompanyName}
             />
           </div>
         ) : (
           <div className="w-20 h-20 rounded-2xl bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-lg border-2 border-white p-2 overflow-hidden">
-            <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
+            <img
+              src="/Logo.png"
+              alt="Jobup"
+              className="w-full h-full object-contain"
+            />
           </div>
         )}
 
@@ -122,23 +128,28 @@ function NormalJobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const time = timeAgo(job.createdAt);
   const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
+  const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
 
   return (
     <Link
       href={jobHref}
       className="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center"
     >
-      {job.contactStaff?.avatar ? (
+      {companyAvatar ? (
         <div className="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
           <img
-            src={job.contactStaff.avatar}
+            src={companyAvatar}
             className="w-full h-full object-contain"
             alt={job.displayCompanyName}
           />
         </div>
       ) : (
         <div className="w-14 h-14 rounded-lg bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-md p-1.5 overflow-hidden">
-          <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
+          <img
+            src="/Logo.png"
+            alt="Jobup"
+            className="w-full h-full object-contain"
+          />
         </div>
       )}
       <div className="flex-grow min-w-0">
@@ -333,7 +344,11 @@ export default function JobListings({
 
       {/* In-feed Banner */}
       {!loading && !error && normalJobs.length > 3 && (
-        <DynamicBanner position="jobs_infeed" variant="infeed" fallback={<InFeedBanner />} />
+        <DynamicBanner
+          position="jobs_infeed"
+          variant="infeed"
+          fallback={<InFeedBanner />}
+        />
       )}
 
       {/* Normal Jobs — remaining */}

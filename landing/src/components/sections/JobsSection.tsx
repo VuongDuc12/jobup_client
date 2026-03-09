@@ -80,7 +80,7 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   const time = timeAgo(job.createdAt);
   const initial = companyInitial(job.displayCompanyName);
   const bgColor = colorForCompany(job.displayCompanyName);
-  const avatar = job.contactStaff?.avatar;
+  const avatar = resolveAssetUrl(job.contactStaff?.avatar);
 
   return (
     <Link
