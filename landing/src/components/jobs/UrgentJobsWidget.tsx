@@ -3,7 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { fetchLatestJobs } from "@/lib/api";
-import { formatSalary, timeAgo, companyInitial } from "@/lib/utils";
+import {
+  formatSalary,
+  timeAgo,
+  companyInitial,
+  resolveAssetUrl,
+} from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 
 const FALLBACK_COLORS = [
@@ -88,6 +93,7 @@ export default function UrgentJobsWidget() {
             const bgColor = colorFor(job.displayCompanyName);
             const salary = formatSalary(job.salaryFrom, job.salaryTo);
             const time = timeAgo(job.createdAt);
+            const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
 
             return (
               <Link
@@ -95,17 +101,21 @@ export default function UrgentJobsWidget() {
                 href={`/tuyen-dung/${job.slug}`}
                 className="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20"
               >
-                {job.contactStaff?.avatar ? (
+                {companyAvatar ? (
                   <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors overflow-hidden">
                     <img
-                      src={job.contactStaff.avatar}
+                      src={companyAvatar}
                       className="w-full h-full object-contain"
                       alt={job.displayCompanyName}
                     />
                   </div>
                 ) : (
                   <div className="w-10 h-10 bg-[#1a1a1a] rounded-xl flex items-center justify-center shrink-0 shadow-sm p-1 overflow-hidden">
-                    <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
+                    <img
+                      src="/Logo.png"
+                      alt="Jobup"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 )}
                 <div className="flex-grow min-w-0">

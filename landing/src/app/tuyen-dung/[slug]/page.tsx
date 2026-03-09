@@ -12,7 +12,12 @@ import {
   trackPublicJobView,
   trackPublicJobApply,
 } from "@/lib/api";
-import { companyInitial, formatSalary, timeAgo } from "@/lib/utils";
+import {
+  companyInitial,
+  formatSalary,
+  resolveAssetUrl,
+  timeAgo,
+} from "@/lib/utils";
 import type { PublicJobDetailResponse, PublicJobResponse } from "@/lib/types";
 
 const WORK_TYPE_LABELS: Record<number, string> = {
@@ -101,6 +106,7 @@ export default function JobDetailPage() {
   const [relatedJobs, setRelatedJobs] = useState<PublicJobResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const companyAvatar = resolveAssetUrl(job?.contactStaff?.avatar);
 
   useEffect(() => {
     let isMounted = true;
@@ -242,17 +248,21 @@ export default function JobDetailPage() {
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
 
                   <div className="flex flex-col md:flex-row gap-6 items-start relative z-10">
-                    {job.contactStaff?.avatar ? (
+                    {companyAvatar ? (
                       <div className="w-20 h-20 rounded-2xl border border-gray-100 p-3 bg-white shadow-sm flex items-center justify-center shrink-0">
                         <img
-                          src={job.contactStaff.avatar}
+                          src={companyAvatar}
                           alt={job.displayCompanyName || "Logo công ty"}
                           className="w-full h-full object-contain"
                         />
                       </div>
                     ) : (
                       <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
-                        <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
+                        <img
+                          src="/Logo.png"
+                          alt="Jobup"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     )}
 
@@ -357,9 +367,9 @@ export default function JobDetailPage() {
                         {/* Profile Row - Chuyển sang dạng ngang để tiết kiệm chiều cao */}
                         <div className="flex items-center gap-3 mb-4">
                           <div className="relative">
-                            {job.contactStaff.avatar ? (
+                            {companyAvatar ? (
                               <img
-                                src={job.contactStaff.avatar}
+                                src={companyAvatar}
                                 alt={job.contactStaff.fullName}
                                 className="w-12 h-12 rounded-full object-cover ring-2 ring-brand-yellow/10"
                               />
@@ -515,15 +525,23 @@ export default function JobDetailPage() {
                         >
                           <div className="flex items-center gap-3 flex-grow">
                             <div className="relative shrink-0">
-                              {item.contactStaff?.avatar ? (
+                              {resolveAssetUrl(item.contactStaff?.avatar) ? (
                                 <img
-                                  src={item.contactStaff.avatar}
+                                  src={
+                                    resolveAssetUrl(
+                                      item.contactStaff?.avatar,
+                                    ) as string
+                                  }
                                   className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
                                   alt={item.displayCompanyName}
                                 />
                               ) : (
                                 <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
-                                  <img src="/Logo.png" alt="Jobup" className="w-full h-full object-contain" />
+                                  <img
+                                    src="/Logo.png"
+                                    alt="Jobup"
+                                    className="w-full h-full object-contain"
+                                  />
                                 </div>
                               )}
                               {item.isHot && (

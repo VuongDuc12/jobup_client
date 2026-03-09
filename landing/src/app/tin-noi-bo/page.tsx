@@ -6,6 +6,7 @@ import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import { internalNewsArticles } from "@/lib/mockNews";
 import { fetchPublicArticles, fetchPublicNewsCategories } from "@/lib/api";
+import { resolveAssetUrl } from "@/lib/utils";
 import type {
   PublicArticleListItemResponse,
   PublicNewsCategoryResponse,
@@ -194,7 +195,7 @@ export default function InternalNewsPage() {
     return `/tin-noi-bo/${featured.slug}`;
   }, [featured?.slug]);
 
-  const featuredImage = featured?.avatar || safeFallbackCover;
+  const featuredImage = resolveAssetUrl(featured?.avatar) || safeFallbackCover;
 
   return (
     <>
@@ -286,7 +287,9 @@ export default function InternalNewsPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {others.map((article) =>
                 (() => {
-                  const cardImage = article.avatar || safeFallbackCover;
+                  const cardImage =
+                    resolveAssetUrl(article.avatar) || safeFallbackCover;
+                  const authorAvatar = resolveAssetUrl(article.authorAvatar);
 
                   return (
                     <article
@@ -332,9 +335,9 @@ export default function InternalNewsPage() {
                               "Đang cập nhật nội dung bài viết."}
                           </p>
                           <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
-                            {article.authorAvatar ? (
+                            {authorAvatar ? (
                               <img
-                                src={article.authorAvatar}
+                                src={authorAvatar}
                                 alt={article.authorName || "Tác giả"}
                                 className="w-8 h-8 rounded-full border border-gray-100 object-cover"
                               />

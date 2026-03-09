@@ -138,6 +138,8 @@ export interface PublicStaffResponse {
   id: string;
   fullName: string;
   roleName: string;
+  email?: string;
+  zaloPhone?: string | null;
   avatar: string | null;
 }
 

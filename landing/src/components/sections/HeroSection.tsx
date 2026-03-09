@@ -243,7 +243,7 @@ export default function HeroSection({
           </div>
 
           {/* RIGHT VISUAL (7 Columns) */}
-          <div className="col-span-12 lg:col-span-7 relative order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div className="hidden md:flex col-span-12 lg:col-span-7 relative order-1 lg:order-2 justify-center lg:justify-end">
             {/* Main Image Container */}
             <div className="relative w-full max-w-[560px]">
               {/* Background Decorations */}

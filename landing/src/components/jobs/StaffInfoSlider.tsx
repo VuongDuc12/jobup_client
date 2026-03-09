@@ -11,18 +11,24 @@ const fallbackStaff: PublicStaffResponse[] = [
     id: "1",
     fullName: "Nguyen Minh Anh",
     roleName: "Talent Acquisition Lead",
+    email: "staff@jopup.vn",
+    zaloPhone: "0979334143",
     avatar: "https://i.pravatar.cc/150?u=jobup-1",
   },
   {
     id: "2",
     fullName: "Tran Hoang Viet",
     roleName: "HR Business Partner",
+    email: "staff@jopup.vn",
+    zaloPhone: "0979334143",
     avatar: "https://i.pravatar.cc/150?u=jobup-2",
   },
   {
     id: "3",
     fullName: "Le Thu Trang",
     roleName: "Career Advisor",
+    email: "staff@jopup.vn",
+    zaloPhone: "0979334143",
     avatar: "https://i.pravatar.cc/150?u=jobup-3",
   },
 ];
@@ -124,12 +130,12 @@ export default function StaffInfoSlider() {
           {staff.map((member) => {
             const avatar =
               resolveAssetUrl(member.avatar) ||
-              `https://ui-avatars.com/api/?name=${encodeURIComponent(member.fullName)}&background=111827&color=fff&size=128`;
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(member.fullName)}&background=111827&color=fff&size=160`;
 
             return (
               <div key={member.id} className="w-full flex-shrink-0">
-                <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4 flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden border border-gray-100 bg-white">
+                <div className="rounded-3xl border border-gray-100 bg-gray-50 p-6 md:p-7 flex items-center gap-5 md:gap-6">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-100 bg-white shrink-0">
                     <img
                       src={avatar}
                       alt={member.fullName}
@@ -137,18 +143,27 @@ export default function StaffInfoSlider() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h5 className="text-sm font-bold text-gray-900 truncate">
+                    <h5 className="text-lg font-bold text-gray-900 truncate">
                       {member.fullName}
                     </h5>
-                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                      {member.roleName}
-                    </p>
+
+                    <div className="mt-3 space-y-1.5">
+                      <p className="text-xs text-gray-500 flex items-center gap-2 truncate">
+                        <i className="fa-regular fa-envelope text-gray-400" />
+                        {member.email || "Đang cập nhật email"}
+                      </p>
+                      <p className="text-xs text-gray-500 flex items-center gap-2 truncate">
+                        <i className="fa-solid fa-phone text-gray-400" />
+                        {member.zaloPhone || "Đang cập nhật số điện thoại"}
+                      </p>
+                    </div>
+
                     <Link
                       href="/tuyen-dung"
-                      className="inline-flex items-center gap-2 text-[10px] font-bold text-brand-yellow uppercase tracking-wide mt-3"
+                      className="inline-flex items-center gap-2 text-xs font-bold text-brand-yellow uppercase tracking-wide mt-4"
                     >
                       Kết nối ngay
-                      <i className="fa-solid fa-arrow-right text-[10px]" />
+                      <i className="fa-solid fa-arrow-right text-xs" />
                     </Link>
                   </div>
                 </div>

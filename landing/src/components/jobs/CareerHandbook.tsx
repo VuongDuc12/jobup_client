@@ -12,35 +12,7 @@ interface Slide {
   description: string;
 }
 
-const slides: Slide[] = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80",
-    badge: "Hot Tip",
-    badgeColor: "bg-red-600 text-white",
-    title: "5 lỗi kinh điển khi viết CV khiến bạn bị loại ngay lập tức",
-    description:
-      "Những lỗi tưởng chừng nhỏ nhưng lại là rào cản lớn nhất giữa bạn và nhà tuyển dụng...",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1454165833767-027ffcb99c17?auto=format&fit=crop&w=800&q=80",
-    badge: "Salary",
-    badgeColor: "bg-brand-yellow text-brand-black",
-    title: 'Bí kíp thương lượng lương "khéo" để đạt mức thu nhập mong muốn',
-    description:
-      "Nghệ thuật đàm phán không chỉ nằm ở con số, mà còn ở cách bạn thể hiện giá trị...",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-    badge: "Skills",
-    badgeColor: "bg-brand-black text-white",
-    title: "Tuyệt chiêu trả lời những câu hỏi phỏng vấn hóc búa nhất",
-    description:
-      "Tổng hợp những tình huống thường gặp từ các tập đoàn lớn và cách trả lời thông minh...",
-  },
-];
+const slides: Slide[] = [];
 
 const badgeColorByIndex = [
   "bg-red-600 text-white",
