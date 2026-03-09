@@ -7,6 +7,7 @@ import { mediaMentions } from "@/lib/mockNews";
 import {
   fetchPublicMediaMentionCategories,
   fetchPublicMediaMentions,
+  trackPublicMediaMentionView,
 } from "@/lib/api";
 import type { PublicMediaMentionListItemResponse } from "@/lib/types";
 
@@ -198,6 +199,7 @@ export default function MediaMentionsPage() {
                   className="inline-flex items-center gap-3 text-brand-yellow-hover font-black text-lg"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackPublicMediaMentionView(featured.id)}
                 >
                   XEM BÀI GỐC
                   <i className="fa-solid fa-arrow-up-right-from-square" />
@@ -216,6 +218,7 @@ export default function MediaMentionsPage() {
                         className="group flex gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => trackPublicMediaMentionView(item.id)}
                       >
                         <div className="shrink-0 w-24 h-24 bg-brand-light-gray rounded-2xl flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
                           <img

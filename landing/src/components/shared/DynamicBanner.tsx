@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "@/lib/config";
 import type { BannerPublicResponse } from "@/lib/types";
-import { fetchBannerPublic } from "@/lib/api";
+import { fetchBannerPublic, trackBannerView, trackBannerClick } from "@/lib/api";
 
 type BannerVariant = "sidebar" | "spotlight" | "compact" | "infeed";
 
@@ -224,6 +224,7 @@ export default function DynamicBanner({
 }: DynamicBannerProps) {
   const [data, setData] = useState<BannerPublicResponse | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const viewTracked = useRef(false);
 
   useEffect(() => {
     fetchBannerPublic(position).then((result) => {
@@ -231,6 +232,18 @@ export default function DynamicBanner({
       setLoaded(true);
     });
   }, [position]);
+
+  // Track view once when banner data is loaded
+  useEffect(() => {
+    if (data && !viewTracked.current) {
+      viewTracked.current = true;
+      trackBannerView(position);
+    }
+  }, [data, position]);
+
+  const handleClick = () => {
+    trackBannerClick(position);
+  };
 
   // Still loading — show skeleton matching banner dimensions (no content flash)
   if (!loaded) {
@@ -244,16 +257,24 @@ export default function DynamicBanner({
   // No API data — show fallback (original hardcoded content)
   if (!data) return fallback || null;
 
-  switch (variant) {
-    case "sidebar":
-      return <SidebarBanner data={data} />;
-    case "spotlight":
-      return <SpotlightBannerDynamic data={data} />;
-    case "compact":
-      return <CompactBanner data={data} />;
-    case "infeed":
-      return <InFeedBannerDynamic data={data} />;
-    default:
-      return fallback || null;
-  }
+  const banner = (() => {
+    switch (variant) {
+      case "sidebar":
+        return <SidebarBanner data={data} />;
+      case "spotlight":
+        return <SpotlightBannerDynamic data={data} />;
+      case "compact":
+        return <CompactBanner data={data} />;
+      case "infeed":
+        return <InFeedBannerDynamic data={data} />;
+      default:
+        return fallback || null;
+    }
+  })();
+
+  return (
+    <div onClick={handleClick}>
+      {banner}
+    </div>
+  );
 }

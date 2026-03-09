@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import type { PartnerResponse, PublicMediaMentionListItemResponse } from "@/lib/types";
+import { trackPublicMediaMentionView } from "@/lib/api";
 
 const fallbackMediaLogos = [
     { src: "https://vtv1.vtv.vn/Content/Main/Images/logo-vtv.png", alt: "VTV", height: "h-8 md:h-12" },
@@ -175,6 +176,7 @@ export default function PressMediaSection({
                                     target={article.articleUrl ? "_blank" : undefined}
                                     rel={article.articleUrl ? "noopener noreferrer" : undefined}
                                     className="group/art flex flex-col h-full"
+                                    onClick={() => trackPublicMediaMentionView(article.id)}
                                 >
                                     <div className="relative rounded-3xl overflow-hidden mb-6 h-[300px] md:h-[350px] shadow-lg flex-shrink-0">
                                         <Image

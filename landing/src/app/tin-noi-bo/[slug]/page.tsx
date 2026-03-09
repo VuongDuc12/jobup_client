@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
-import { fetchPublicArticleBySlug, fetchPublicArticles } from "@/lib/api";
+import { fetchPublicArticleBySlug, fetchPublicArticles, trackPublicArticleView } from "@/lib/api";
 import { internalNewsArticles } from "@/lib/mockNews";
 import type {
   PublicArticleListItemResponse,
@@ -79,6 +79,7 @@ export default function InternalNewsDetailPage() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const searchRequestId = useRef(0);
+  const viewTracked = useRef(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -130,6 +131,14 @@ export default function InternalNewsDetailPage() {
       mounted = false;
     };
   }, [slug]);
+
+  // Track article view once when article data is loaded
+  useEffect(() => {
+    if (article && !viewTracked.current) {
+      viewTracked.current = true;
+      trackPublicArticleView(article.id);
+    }
+  }, [article]);
 
   useEffect(() => {
     const keyword = searchQuery.trim();

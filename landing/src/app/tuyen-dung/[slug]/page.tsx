@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Navbar, Footer } from "@/components/layout";
@@ -9,6 +9,8 @@ import {
   fetchPublicJobBySlug,
   fetchRelatedJobs,
   fetchSimilarJobs,
+  trackPublicJobView,
+  trackPublicJobApply,
 } from "@/lib/api";
 import { companyInitial, formatSalary, timeAgo } from "@/lib/utils";
 import type { PublicJobDetailResponse, PublicJobResponse } from "@/lib/types";
@@ -175,6 +177,15 @@ export default function JobDetailPage() {
   }, [job]);
 
   const zaloLink = buildZaloLink(job?.contactStaff?.zaloPhone);
+
+  // Track job view once when job data is loaded
+  const viewTracked = useRef(false);
+  useEffect(() => {
+    if (job && !viewTracked.current) {
+      viewTracked.current = true;
+      trackPublicJobView(job.id);
+    }
+  }, [job]);
 
   return (
     <>
@@ -420,6 +431,7 @@ export default function JobDetailPage() {
                               href={zaloLink}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={() => job && trackPublicJobApply(job.id)}
                               className="w-full py-2.5 bg-brand-black text-white font-bold rounded-lg hover:bg-brand-yellow hover:text-black transition-colors flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
                             >
                               <img

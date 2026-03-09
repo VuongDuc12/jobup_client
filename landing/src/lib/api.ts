@@ -582,3 +582,37 @@ export async function fetchBannerPublic(
 
   return json.data;
 }
+
+/* ── Tracking: Jobs ── */
+
+export async function trackPublicJobView(id: string): Promise<void> {
+  await fetch(`${API_BASE_URL}/api/Jobs/public/${id}/view`, {
+    method: "POST",
+    cache: "no-store",
+  }).catch(() => {});
+}
+
+export async function trackPublicJobApply(id: string): Promise<void> {
+  await fetch(`${API_BASE_URL}/api/Jobs/public/${id}/apply`, {
+    method: "POST",
+    cache: "no-store",
+  }).catch(() => {});
+}
+
+/* ── Tracking: Banners ── */
+
+export async function trackBannerView(position: string): Promise<void> {
+  const safePosition = encodeURIComponent(position);
+  await fetch(`${API_BASE_URL}/api/Banners/public/${safePosition}/view`, {
+    method: "POST",
+    cache: "no-store",
+  }).catch(() => {});
+}
+
+export async function trackBannerClick(position: string): Promise<void> {
+  const safePosition = encodeURIComponent(position);
+  await fetch(`${API_BASE_URL}/api/Banners/public/${safePosition}/click`, {
+    method: "POST",
+    cache: "no-store",
+  }).catch(() => {});
+}
