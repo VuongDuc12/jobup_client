@@ -209,6 +209,13 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
   );
 }
 
+const skeletonClass: Record<BannerVariant, string> = {
+  sidebar: "rounded-[32px] h-[420px]",
+  spotlight: "rounded-2xl min-h-[320px] lg:h-[350px]",
+  compact: "rounded-[2rem] h-[220px]",
+  infeed: "rounded-2xl h-[100px]",
+};
+
 /* ── Main Component ── */
 export default function DynamicBanner({
   position,
@@ -225,8 +232,14 @@ export default function DynamicBanner({
     });
   }, [position]);
 
-  // Still loading — show nothing or fallback
-  if (!loaded) return fallback || null;
+  // Still loading — show skeleton matching banner dimensions (no content flash)
+  if (!loaded) {
+    return (
+      <div
+        className={`w-full animate-pulse bg-gray-200 ${skeletonClass[variant]}`}
+      />
+    );
+  }
 
   // No API data — show fallback (original hardcoded content)
   if (!data) return fallback || null;

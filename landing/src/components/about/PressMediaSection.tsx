@@ -168,15 +168,15 @@ export default function PressMediaSection({
                         {articles.map((article) => (
                             <div
                                 key={article.id}
-                                className="min-w-[300px] md:min-w-[350px] lg:min-w-[380px] flex-shrink-0"
+                                className="min-w-[300px] md:min-w-[350px] lg:min-w-[380px] flex-shrink-0 h-[380px] md:h-[420px]"
                             >
                                 <a
                                     href={article.articleUrl ?? "#"}
                                     target={article.articleUrl ? "_blank" : undefined}
                                     rel={article.articleUrl ? "noopener noreferrer" : undefined}
-                                    className="group/art block"
+                                    className="group/art flex flex-col h-full"
                                 >
-                                    <div className="relative rounded-3xl overflow-hidden mb-6 aspect-video shadow-lg">
+                                    <div className="relative rounded-3xl overflow-hidden mb-6 h-[300px] md:h-[350px] shadow-lg flex-shrink-0">
                                         <Image
                                             src={
                                                 article.thumbnailUrl ??
@@ -198,7 +198,7 @@ export default function PressMediaSection({
                                     <span className="text-brand-yellow text-xs font-bold uppercase tracking-widest">
                                         {article.categoryName}
                                     </span>
-                                    <h4 className="text-xl font-bold text-brand-black mt-2 leading-tight group-hover/art:text-brand-yellow transition-colors">
+                                    <h4 className="text-xl font-bold text-brand-black mt-2 leading-tight group-hover/art:text-brand-yellow transition-colors line-clamp-3">
                                         {article.title}
                                     </h4>
                                 </a>

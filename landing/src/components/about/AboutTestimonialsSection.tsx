@@ -126,7 +126,7 @@ export default function AboutTestimonialsSection({
                     {items.map((item, idx) => {
                         const isDark = idx % 3 === 1;
                         return (
-                            <SwiperSlide key={idx} className="h-auto !flex">
+                            <SwiperSlide key={idx} className="!h-[280px] !flex">
                                 <div
                                     className={`h-full rounded-3xl p-8 flex flex-col w-full ${
                                         isDark
@@ -146,7 +146,7 @@ export default function AboutTestimonialsSection({
 
                                     {/* Quote */}
                                     <p
-                                        className={`italic leading-relaxed mb-6 flex-grow ${
+                                        className={`italic leading-relaxed mb-6 flex-grow overflow-hidden line-clamp-4 ${
                                             isDark ? "text-gray-300" : "text-gray-700"
                                         }`}
                                     >

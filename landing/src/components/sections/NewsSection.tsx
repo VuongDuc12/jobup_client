@@ -82,7 +82,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             này.
           </p>
           <Link
-            href="/tin-tuc"
+            href="/tin-noi-bo"
             className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellow-hover transition"
           >
             Xem tất cả tin tức <i className="fa-solid fa-arrow-right-long" />
@@ -95,7 +95,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
           <Link
             href={
               highlight?.slug
-                ? `/tin-tuc/${highlight.slug}`
+                ? `/tin-noi-bo/${highlight.slug}`
                 : fallbackHighlight.slug
             }
             className="lg:col-span-8 group cursor-pointer"

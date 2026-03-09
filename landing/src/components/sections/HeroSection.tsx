@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { PartnerResponse, ProvinceDropdown } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
@@ -215,6 +216,7 @@ export default function HeroSection({
                   <div className="flex gap-16 items-center animate-loop-scroll whitespace-nowrap">
                     {/* First set */}
                     {partnerItems.map((logo, idx) => (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         key={`a-${idx}`}
                         src={logo.src}
@@ -225,6 +227,7 @@ export default function HeroSection({
                     ))}
                     {/* Duplicate for seamless loop */}
                     {partnerItems.map((logo, idx) => (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         key={`b-${idx}`}
                         src={logo.src}
@@ -249,6 +252,7 @@ export default function HeroSection({
 
               {/* Main Image */}
               <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] ring-[6px] ring-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={getAssetUrl(heroImage) || "/hero-image.jpg"}
                   alt="Chuyên viên tuyển dụng JobUp"
@@ -259,7 +263,8 @@ export default function HeroSection({
               </div>
 
               {/* Floating Card 1: Tìm Việc Ngay */}
-              <div
+              <Link
+                href="/tuyen-dung"
                 className="absolute -left-6 lg:-left-16 top-12 animate-float-slow group/card cursor-pointer"
                 style={{ animationDelay: "0s" }}
               >
@@ -290,7 +295,7 @@ export default function HeroSection({
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Floating Card 2: Gửi CV Ngay */}
               <div
@@ -331,15 +336,21 @@ export default function HeroSection({
                       </div>
                       <div className="flex items-center gap-2 text-[11px] font-bold text-gray-600 bg-emerald-50/80 px-3 py-1.5 rounded-lg border border-emerald-100/50">
                         <div className="flex -space-x-2">
-                          <img
+                          <Image
                             src="https://ui-avatars.com/api/?name=HR&background=10b981&color=fff"
+                            width={16}
+                            height={16}
                             className="w-4 h-4 rounded-full border border-white"
                             alt="HR"
+                            unoptimized
                           />
-                          <img
+                          <Image
                             src="https://ui-avatars.com/api/?name=JD&background=3b82f6&color=fff"
+                            width={16}
+                            height={16}
                             className="w-4 h-4 rounded-full border border-white"
                             alt="HR"
+                            unoptimized
                           />
                         </div>
                         <span>Nhận tư vấn 1-1 miễn phí</span>

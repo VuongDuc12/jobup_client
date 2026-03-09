@@ -7,7 +7,7 @@ import {
   JobSearchHub,
   JobListings,
   SpotlightBanner,
-  CVReviewCTA,
+  SidebarBannerFallback,
   UrgentJobsWidget,
   CareerHandbook,
   StaffInfoSlider,
@@ -188,8 +188,8 @@ export default function JobsPage() {
             <aside className="lg:col-span-4 space-y-8">
               <DynamicBanner
                 position="jobs_sidebar"
-                variant="compact"
-                fallback={<CVReviewCTA />}
+                variant="sidebar"
+                fallback={<SidebarBannerFallback />}
               />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
