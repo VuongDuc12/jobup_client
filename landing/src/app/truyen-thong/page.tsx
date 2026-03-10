@@ -157,7 +157,7 @@ export default function MediaMentionsPage() {
     <>
       <Navbar />
       <main className="pt-20 bg-white text-gray-800 overflow-x-hidden">
-        <section className="relative py-32 overflow-hidden flex items-center justify-center min-h-[65vh]">
+        <section className="relative py-20 md:py-32 overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[65vh]">
           <div className="absolute inset-0 z-0">
             <img
               src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=2000"
@@ -175,18 +175,18 @@ export default function MediaMentionsPage() {
               </span>
               <span className="w-12 h-px bg-brand-yellow" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-6 md:mb-8 leading-tight">
               Nơi khẳng định <span className="text-brand-yellow">Vị Thế</span>
               <br />
               trong lòng công chúng.
             </h1>
-            <p className="text-white/80 text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed font-light">
               Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi
               dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi
               qua lăng kính báo chí.
             </p>
-            <div className="mt-10 mx-auto max-w-2xl flex gap-3">
-              <div className="flex-1 relative">
+            <div className="mt-8 md:mt-10 mx-auto max-w-2xl flex flex-col sm:flex-row gap-3">
+              <div className="flex-1 relative w-full">
                 <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
                 <input
                   value={keywordInput}
@@ -202,7 +202,7 @@ export default function MediaMentionsPage() {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
+                className="w-full sm:w-auto px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
               >
                 Tìm kiếm
               </button>
@@ -227,8 +227,8 @@ export default function MediaMentionsPage() {
 
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              <div className="bg-white border border-gray-100 shadow-soft rounded-[3rem] p-10 md:p-14 hover:border-brand-yellow hover:-translate-y-1 transition-all">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
+              <div className="bg-white border border-gray-100 shadow-soft rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-14 hover:border-brand-yellow hover:-translate-y-1 transition-all">
                 <div className="flex items-center gap-4 mb-8">
                   <img
                     src={featuredLogo}
@@ -240,7 +240,7 @@ export default function MediaMentionsPage() {
                   </span>
                 </div>
                 <i className="fa-solid fa-quote-left text-brand-yellow text-5xl mb-8 block opacity-20" />
-                <h2 className="text-3xl md:text-4xl font-black text-brand-black leading-tight mb-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-black leading-tight mb-6 md:mb-8">
                   “{featured.title}”
                 </h2>
                 <div className="flex items-center gap-4 mb-10 text-gray-500">
@@ -276,12 +276,12 @@ export default function MediaMentionsPage() {
                       <a
                         key={item.id}
                         href={item.articleUrl || "#"}
-                        className="group flex gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
+                        className="group flex flex-col sm:flex-row gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
                         target="_blank"
                         rel="noreferrer"
                         onClick={() => trackPublicMediaMentionView(item.id)}
                       >
-                        <div className="shrink-0 w-24 h-24 bg-brand-light-gray rounded-2xl flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
+                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-brand-light-gray rounded-2xl flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors mx-auto sm:mx-0">
                           <img
                             src={itemLogo}
                             className="w-16 h-auto object-contain"
@@ -295,7 +295,7 @@ export default function MediaMentionsPage() {
                               {item.categoryName}
                             </span>
                           </div>
-                          <h3 className="text-xl font-extrabold text-brand-black mb-4 group-hover:text-brand-yellow transition-colors leading-snug">
+                          <h3 className="text-lg sm:text-xl font-extrabold text-brand-black mb-3 sm:mb-4 group-hover:text-brand-yellow transition-colors leading-snug">
                             {item.title}
                           </h3>
                           <p className="text-gray-400 text-sm font-bold flex items-center gap-2">

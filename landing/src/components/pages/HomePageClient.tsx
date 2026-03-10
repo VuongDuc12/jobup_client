@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Navbar, Footer } from "@/components/layout";
 import {
   HeroSection,
-  JobsSection,
   SpecialtySectors,
   FeaturesSection,
   TestimonialsSection,
@@ -28,6 +27,7 @@ import type {
   StatisticResponse,
   TestimonialResponse,
 } from "@/lib/types";
+import JobsSection from "@/components/sections/JobsSection";
 interface HomePageClientProps {
   initialSettings: HomepageSettingsResponse | null;
 }
@@ -47,7 +47,9 @@ export default function HomePageClient({
     null,
   );
   const [provinces, setProvinces] = useState<ProvinceDropdown[] | null>(null);
-  const [articles, setArticles] = useState<PublicArticleListItemResponse[] | null>(null);
+  const [articles, setArticles] = useState<
+    PublicArticleListItemResponse[] | null
+  >(null);
 
   useEffect(() => {
     let isMounted = true;

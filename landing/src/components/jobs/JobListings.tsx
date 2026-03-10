@@ -61,7 +61,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
 
         {/* Company Logo */}
         {companyAvatar ? (
-          <div className="w-20 h-20 rounded-2xl border-2 border-brand-yellow p-1.5 bg-white shrink-0 shadow-sm">
+          <div className="hidden md:block w-20 h-20 rounded-2xl border-2 border-brand-yellow p-1.5 bg-white shrink-0 shadow-sm">
             <img
               src={companyAvatar}
               className="w-full h-full object-contain rounded-xl"
@@ -69,7 +69,7 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
             />
           </div>
         ) : (
-          <div className="w-20 h-20 rounded-2xl bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-lg border-2 border-white p-2 overflow-hidden">
+          <div className="hidden md:flex w-20 h-20 rounded-2xl bg-[#1a1a1a] items-center justify-center shrink-0 shadow-lg border-2 border-white p-2 overflow-hidden">
             <img
               src="/Logo.png"
               alt="Jobup"
@@ -78,19 +78,19 @@ function VipJobCard({ job }: { job: PublicJobResponse }) {
           </div>
         )}
 
-        <div className="flex-grow">
-          <h3 className="text-xl font-black text-gray-900 group-hover:text-brand-yellow transition-colors leading-tight mb-2">
+        <div className="flex-grow min-w-0">
+          <h3 className="text-xl font-black text-gray-900 group-hover:text-brand-yellow transition-colors leading-tight mb-2 break-words">
             {job.title}
           </h3>
-          <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
-            <span className="flex items-center gap-1.5 text-brand-black">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-gray-500 font-bold text-sm min-w-0">
+            <span className="flex items-center gap-1.5 text-brand-black min-w-0 max-w-full">
               <i className="fa-solid fa-building text-brand-yellow" />
-              {job.displayCompanyName}
+              <span className="truncate">{job.displayCompanyName}</span>
             </span>
             <span className="w-1 h-1 bg-gray-300 rounded-full" />
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1.5 min-w-0 max-w-full">
               <i className="fa-solid fa-location-dot" />
-              {job.provinceName}
+              <span className="truncate">{job.provinceName}</span>
             </span>
           </div>
           <div className="flex gap-2 mt-4 flex-wrap">
@@ -136,7 +136,7 @@ function NormalJobCard({ job }: { job: PublicJobResponse }) {
       className="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center"
     >
       {companyAvatar ? (
-        <div className="w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
+        <div className="hidden md:block w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
           <img
             src={companyAvatar}
             className="w-full h-full object-contain"
@@ -144,7 +144,7 @@ function NormalJobCard({ job }: { job: PublicJobResponse }) {
           />
         </div>
       ) : (
-        <div className="w-14 h-14 rounded-lg bg-[#1a1a1a] flex items-center justify-center shrink-0 shadow-md p-1.5 overflow-hidden">
+        <div className="hidden md:flex w-14 h-14 rounded-lg bg-[#1a1a1a] items-center justify-center shrink-0 shadow-md p-1.5 overflow-hidden">
           <img
             src="/Logo.png"
             alt="Jobup"

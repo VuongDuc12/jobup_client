@@ -109,7 +109,7 @@ export default function HeroSection({
   return (
     <section
       id="hero"
-      className="relative min-h-screen  pb-16 overflow-hidden bg-[#FFFDF8] "
+      className="relative min-h-[90vh] overflow-hidden bg-[#FFFDF8] "
     >
       {/* Subtle Background Pattern */}
       <div
