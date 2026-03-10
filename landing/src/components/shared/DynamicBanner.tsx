@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "@/lib/config";
 import type { BannerPublicResponse } from "@/lib/types";
-import { fetchBannerPublic, trackBannerView, trackBannerClick } from "@/lib/api";
+import {
+  fetchBannerPublic,
+  trackBannerView,
+  trackBannerClick,
+} from "@/lib/api";
 
 type BannerVariant = "sidebar" | "spotlight" | "compact" | "infeed";
 
@@ -29,7 +33,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
       href={link}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
-      className="relative rounded-[32px] overflow-hidden h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100 block"
+      className="relative rounded-[24px] md:rounded-[32px] overflow-hidden h-[360px] md:h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100 block"
     >
       {imgSrc && (
         <img
@@ -39,7 +43,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
           loading="lazy"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-8">
+      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-5 md:p-8">
         {data.badgeText && (
           <div className="mb-4">
             <span className="px-4 py-1 bg-amber-400 text-[#111827] text-[10px] font-extrabold rounded-full tracking-wider uppercase shadow-lg shadow-amber-400/20">
@@ -48,7 +52,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
           </div>
         )}
         {data.title && (
-          <h3 className="text-white text-3xl font-extrabold mb-3 leading-tight">
+          <h3 className="text-white text-2xl md:text-3xl font-extrabold mb-3 leading-tight">
             {data.title} <br />
             {data.highlightText && (
               <span className="text-amber-400">{data.highlightText}</span>
@@ -85,7 +89,7 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
       href={link}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
-      className="relative rounded-2xl overflow-hidden h-auto min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer block"
+      className="relative rounded-2xl overflow-hidden h-auto min-h-[280px] md:min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer block"
     >
       {imgSrc && (
         <img
@@ -95,14 +99,14 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
           loading="lazy"
         />
       )}
-      <div className="relative h-full bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-8 lg:p-14">
+      <div className="relative h-full bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-5 md:p-8 lg:p-14">
         {data.badgeText && (
           <span className="text-brand-yellow font-black uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2">
             <span className="w-8 h-px bg-brand-yellow" /> {data.badgeText}
           </span>
         )}
         {data.title && (
-          <h3 className="text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">
+          <h3 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">
             {data.title} <br />
             {data.highlightText && (
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">
@@ -182,15 +186,15 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
       className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md block"
     >
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2" />
         <div className="relative z-10 flex items-center gap-4">
-          <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white text-2xl shrink-0">
+          <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white text-xl md:text-2xl shrink-0">
             <i className="fa-solid fa-graduation-cap" />
           </div>
           <div className="text-white">
             {data.title && (
-              <h4 className="font-bold text-xl uppercase tracking-wide">
+              <h4 className="font-bold text-base md:text-xl uppercase tracking-wide">
                 {data.title}
               </h4>
             )}
@@ -200,7 +204,7 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
           </div>
         </div>
         {data.buttonText && (
-          <span className="relative z-10 bg-white text-blue-700 px-6 py-2.5 rounded-full font-bold shadow-lg hover:scale-105 transition-transform whitespace-nowrap inline-block">
+          <span className="relative z-10 bg-white text-blue-700 px-5 md:px-6 py-2.5 rounded-full font-bold shadow-lg hover:scale-105 transition-transform whitespace-nowrap inline-block text-sm md:text-base">
             {data.buttonText}
           </span>
         )}
@@ -210,8 +214,8 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
 }
 
 const skeletonClass: Record<BannerVariant, string> = {
-  sidebar: "rounded-[32px] h-[420px]",
-  spotlight: "rounded-2xl min-h-[320px] lg:h-[350px]",
+  sidebar: "rounded-[24px] md:rounded-[32px] h-[360px] md:h-[420px]",
+  spotlight: "rounded-2xl min-h-[280px] md:min-h-[320px] lg:h-[350px]",
   compact: "rounded-[2rem] h-[220px]",
   infeed: "rounded-2xl h-[100px]",
 };
@@ -272,9 +276,5 @@ export default function DynamicBanner({
     }
   })();
 
-  return (
-    <div onClick={handleClick}>
-      {banner}
-    </div>
-  );
+  return <div onClick={handleClick}>{banner}</div>;
 }

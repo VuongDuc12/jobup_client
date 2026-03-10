@@ -106,6 +106,7 @@ export interface PublicArticleListItemResponse {
   authorName: string;
   authorAvatar: string | null;
   isHot: boolean;
+  viewCount: number;
   publishedAt: string | null;
 }
 
@@ -365,6 +366,7 @@ export interface PublicArticleListItemResponse {
   categoryName: string;
   categorySlug: string | null;
   isHot: boolean;
+  viewCount: number;
   publishedAt: string | null;
 }
 

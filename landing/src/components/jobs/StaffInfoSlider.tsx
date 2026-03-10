@@ -134,25 +134,25 @@ export default function StaffInfoSlider() {
 
             return (
               <div key={member.id} className="w-full flex-shrink-0">
-                <div className="rounded-3xl border border-gray-100 bg-gray-50 p-6 md:p-7 flex items-center gap-5 md:gap-6">
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-100 bg-white shrink-0">
+                <div className="rounded-3xl border border-gray-100 bg-gray-50 p-4 sm:p-5 md:p-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5 md:gap-6 text-center sm:text-left">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto sm:mx-0 rounded-2xl overflow-hidden border border-gray-100 bg-white shrink-0">
                     <img
                       src={avatar}
                       alt={member.fullName}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h5 className="text-lg font-bold text-gray-900 truncate">
+                  <div className="flex-1 min-w-0 w-full">
+                    <h5 className="text-base sm:text-lg font-bold text-gray-900 truncate">
                       {member.fullName}
                     </h5>
 
-                    <div className="mt-3 space-y-1.5">
-                      <p className="text-xs text-gray-500 flex items-center gap-2 truncate">
+                    <div className="mt-3 space-y-1.5 max-w-full">
+                      <p className="text-xs text-gray-500 flex items-center justify-center sm:justify-start gap-2 truncate">
                         <i className="fa-regular fa-envelope text-gray-400" />
                         {member.email || "Đang cập nhật email"}
                       </p>
-                      <p className="text-xs text-gray-500 flex items-center gap-2 truncate">
+                      <p className="text-xs text-gray-500 flex items-center justify-center sm:justify-start gap-2 truncate">
                         <i className="fa-solid fa-phone text-gray-400" />
                         {member.zaloPhone || "Đang cập nhật số điện thoại"}
                       </p>
@@ -160,7 +160,7 @@ export default function StaffInfoSlider() {
 
                     <Link
                       href="/tuyen-dung"
-                      className="inline-flex items-center gap-2 text-xs font-bold text-brand-yellow uppercase tracking-wide mt-4"
+                      className="inline-flex items-center justify-center sm:justify-start gap-2 text-xs font-bold text-brand-yellow uppercase tracking-wide mt-4"
                     >
                       Kết nối ngay
                       <i className="fa-solid fa-arrow-right text-xs" />

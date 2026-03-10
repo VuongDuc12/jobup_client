@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Navbar, Footer } from "@/components/layout";
 import {
   HeroSection,
-  JobsSection,
   SpecialtySectors,
   FeaturesSection,
   TestimonialsSection,
@@ -47,7 +46,9 @@ export default function HomePageClient({
     null,
   );
   const [provinces, setProvinces] = useState<ProvinceDropdown[] | null>(null);
-  const [articles, setArticles] = useState<PublicArticleListItemResponse[] | null>(null);
+  const [articles, setArticles] = useState<
+    PublicArticleListItemResponse[] | null
+  >(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -92,7 +93,6 @@ export default function HomePageClient({
           partners={partners}
           provinces={provinces}
         />
-        <JobsSection />
         <SpecialtySectors />
         <FeaturesSection features={features} statistics={statistics} />
         <TestimonialsSection testimonials={testimonials} />

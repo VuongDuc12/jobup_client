@@ -5,7 +5,7 @@ import { fetchHomepageSettingsPublic } from "@/lib/api";
 const DEFAULT_META = {
   title: "JobUp",
   description:
-    "JobUp - nen tang viec lam uy tin. Tim viec nhanh, luong cao, dai ngo tot.",
+    "JobUp - nền tảng tìm việc làm uy tín. Tìm việc nhanh, lương cao, đời sống tốt.",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
