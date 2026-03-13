@@ -88,8 +88,8 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4"
     >
       {/* Company Logo / Fallback */}
-      <div className="flex items-center gap-3 flex-grow">
-        <div className="relative shrink-0">
+      <div className="flex items-center gap-0 md:gap-3 flex-grow">
+        <div className="relative shrink-0 hidden md:block">
           {avatar ? (
             <img
               src={avatar}

@@ -150,7 +150,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
                   )
                 : (news as (typeof fallbackSideNews)[0]).date;
               const href = isApi
-                ? `/tin-tuc/${(news as PublicArticleListItemResponse).slug}`
+                ? `/tin-noi-bo/${(news as PublicArticleListItemResponse).slug}`
                 : "#";
 
               return (

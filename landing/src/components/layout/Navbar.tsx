@@ -112,7 +112,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="#footer"
+              href="/lien-he"
               className="font-semibold text-gray-600 hover:text-brand-yellow-hover transition relative group py-2"
             >
               Liên hệ

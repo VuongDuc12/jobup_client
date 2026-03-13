@@ -7,168 +7,89 @@ import {
   formatSalary,
   workTypeLabel,
   timeAgo,
-  companyInitial,
   resolveAssetUrl,
 } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 import DynamicBanner from "@/components/shared/DynamicBanner";
 
-/* ── Color palette for logo fallback ── */
-const FALLBACK_COLORS = [
-  "bg-blue-600",
-  "bg-orange-500",
-  "bg-purple-600",
-  "bg-teal-600",
-  "bg-pink-600",
-  "bg-emerald-600",
-  "bg-rose-600",
-  "bg-indigo-600",
-];
-
-function colorForCompany(name: string): string {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++)
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
-}
-
-/* ── VIP Job Card (promoted / isHot) ── */
-function VipJobCard({ job }: { job: PublicJobResponse }) {
-  const initial = companyInitial(job.displayCompanyName);
-  const bgColor = colorForCompany(job.displayCompanyName);
+function JobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
-  const wt = workTypeLabel(job.workType);
-  const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
-  const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
-
-  return (
-    <div className="relative bg-gradient-to-r from-yellow-50 to-white p-1 rounded-2xl shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group isolation-auto">
-      {/* HOT Badge */}
-      <div className="absolute -top-3 -right-3 z-20">
-        <span className="relative flex h-10 w-10">
-          <span className="relative inline-flex rounded-full h-10 w-10 bg-red-600 items-center justify-center text-white text-[10px] font-black shadow-lg border-2 border-white">
-            HOT
-          </span>
-        </span>
-      </div>
-
-      <Link
-        href={jobHref}
-        className="bg-white p-6 rounded-xl flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10 overflow-hidden block"
-      >
-        {/* Background Accent */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/5 rounded-full translate-x-16 -translate-y-16 -z-10" />
-
-        {/* Company Logo */}
-        {companyAvatar ? (
-          <div className="hidden md:block w-20 h-20 rounded-2xl border-2 border-brand-yellow p-1.5 bg-white shrink-0 shadow-sm">
-            <img
-              src={companyAvatar}
-              className="w-full h-full object-contain rounded-xl"
-              alt={job.displayCompanyName}
-            />
-          </div>
-        ) : (
-          <div className="hidden md:flex w-20 h-20 rounded-2xl bg-[#1a1a1a] items-center justify-center shrink-0 shadow-lg border-2 border-white p-2 overflow-hidden">
-            <img
-              src="/Logo.png"
-              alt="Jobup"
-              className="w-full h-full object-contain"
-            />
-          </div>
-        )}
-
-        <div className="flex-grow min-w-0">
-          <h3 className="text-xl font-black text-gray-900 group-hover:text-brand-yellow transition-colors leading-tight mb-2 break-words">
-            {job.title}
-          </h3>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-gray-500 font-bold text-sm min-w-0">
-            <span className="flex items-center gap-1.5 text-brand-black min-w-0 max-w-full">
-              <i className="fa-solid fa-building text-brand-yellow" />
-              <span className="truncate">{job.displayCompanyName}</span>
-            </span>
-            <span className="w-1 h-1 bg-gray-300 rounded-full" />
-            <span className="flex items-center gap-1.5 min-w-0 max-w-full">
-              <i className="fa-solid fa-location-dot" />
-              <span className="truncate">{job.provinceName}</span>
-            </span>
-          </div>
-          <div className="flex gap-2 mt-4 flex-wrap">
-            <span className="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-lg shadow-sm shadow-red-200">
-              {salary}
-            </span>
-            <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase rounded-lg border border-blue-100">
-              {wt}
-            </span>
-            {(job.tags ?? []).slice(0, 2).map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-gray-100 text-gray-600 text-[10px] font-black uppercase rounded-lg"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="shrink-0 w-full md:w-auto">
-          <span className="block w-full md:w-auto px-8 py-4 bg-brand-black text-white font-black rounded-xl hover:bg-brand-yellow hover:text-brand-black transition-all shadow-xl hover:shadow-yellow-400/30 active:scale-95 text-center text-sm">
-            ỨNG TUYỂN NGAY
-          </span>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
-/* ── Normal Job Card ── */
-function NormalJobCard({ job }: { job: PublicJobResponse }) {
-  const initial = companyInitial(job.displayCompanyName);
-  const bgColor = colorForCompany(job.displayCompanyName);
-  const salary = formatSalary(job.salaryFrom, job.salaryTo);
+  const workType = workTypeLabel(job.workType);
   const time = timeAgo(job.createdAt);
   const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
-  const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
+  const avatar = resolveAssetUrl(job.contactStaff?.avatar);
 
   return (
     <Link
       href={jobHref}
-      className="bg-white p-5 rounded-2xl border border-gray-100 hover:border-brand-yellow/50 hover:shadow-md transition-all cursor-pointer flex gap-4 items-center"
+      className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4"
     >
-      {companyAvatar ? (
-        <div className="hidden md:block w-14 h-14 rounded-lg bg-gray-50 p-2 border border-gray-100 shrink-0">
-          <img
-            src={companyAvatar}
-            className="w-full h-full object-contain"
-            alt={job.displayCompanyName}
-          />
+      <div className="flex items-center gap-0 md:gap-3 flex-grow">
+        <div className="relative shrink-0 hidden md:block">
+          {avatar ? (
+            <img
+              src={avatar}
+              className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
+              alt={job.displayCompanyName}
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+              <img
+                src="/Logo.png"
+                alt="Jobup"
+                className="w-10 h-10 object-contain"
+              />
+            </div>
+          )}
+
+          {job.isHot && (
+            <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
+              Hot
+            </span>
+          )}
         </div>
-      ) : (
-        <div className="hidden md:flex w-14 h-14 rounded-lg bg-[#1a1a1a] items-center justify-center shrink-0 shadow-md p-1.5 overflow-hidden">
-          <img
-            src="/Logo.png"
-            alt="Jobup"
-            className="w-full h-full object-contain"
-          />
+
+        <div className="flex-grow min-w-0">
+          <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+            {job.title}
+          </h3>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <p className="text-sm text-gray-500 font-medium">
+              {job.displayCompanyName}
+            </p>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <p className="text-sm text-gray-400">
+              <i className="fa-solid fa-location-dot mr-1" />
+              {job.provinceName || "Toàn quốc"}
+            </p>
+          </div>
         </div>
-      )}
-      <div className="flex-grow min-w-0">
-        <h3 className="font-bold text-gray-900 text-lg truncate">
-          {job.title}
-        </h3>
-        <p className="text-gray-500 text-sm truncate">
-          {job.displayCompanyName} • {job.provinceName}
-        </p>
       </div>
-      <div className="text-right hidden md:block shrink-0">
-        <p className="text-green-600 font-bold">{salary}</p>
-        <p className="text-gray-400 text-xs mt-1">{time}</p>
+
+      <div className="flex flex-wrap items-center gap-2 md:w-52">
+        <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100">
+          {workType}
+        </span>
+        {(job.tags ?? []).slice(0, 2).map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
+        <span className="text-green-600 font-extrabold text-sm md:text-base">
+          {salary}
+        </span>
+        <span className="text-gray-400 text-xs mt-0.5">{time}</span>
       </div>
     </Link>
   );
 }
 
-/* ── In-feed Banner ── */
 function InFeedBanner() {
   return (
     <div className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md">
@@ -195,7 +116,6 @@ function InFeedBanner() {
   );
 }
 
-/* ── Loading Skeleton ── */
 function JobCardSkeleton() {
   return (
     <div className="bg-white p-5 rounded-2xl border border-gray-100 flex gap-4 items-center animate-pulse">
@@ -212,7 +132,6 @@ function JobCardSkeleton() {
   );
 }
 
-/* ── Main Component ── */
 interface JobListingsProps {
   keyword?: string;
   provinceId?: string;
@@ -249,6 +168,7 @@ export default function JobListings({
         setLoadingMore(true);
       }
       setError(null);
+
       try {
         const response = await fetchPublicJobs({
           Keyword: keyword?.trim() || undefined,
@@ -262,6 +182,7 @@ export default function JobListings({
           PageSize: 10,
           SortBy: sortBy || "newest",
         });
+
         setTotalPages(response.totalPages || 1);
         setJobs((prev) =>
           replace ? response.list : [...prev, ...response.list],
@@ -291,13 +212,8 @@ export default function JobListings({
     loadJobs(1, true);
   }, [loadJobs]);
 
-  // Separate VIP (isHot) from normal jobs
-  const vipJobs = jobs.filter((j) => j.isHot);
-  const normalJobs = jobs.filter((j) => !j.isHot);
-
   return (
     <div className="space-y-4">
-      {/* Loading */}
       {loading && (
         <div className="space-y-4">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -306,7 +222,6 @@ export default function JobListings({
         </div>
       )}
 
-      {/* Error */}
       {!loading && error && (
         <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
           <i className="fa-solid fa-triangle-exclamation text-red-400 text-3xl mb-3" />
@@ -320,7 +235,6 @@ export default function JobListings({
         </div>
       )}
 
-      {/* Empty */}
       {!loading && !error && jobs.length === 0 && (
         <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
           <i className="fa-solid fa-briefcase text-gray-300 text-4xl mb-4" />
@@ -330,20 +244,11 @@ export default function JobListings({
         </div>
       )}
 
-      {/* VIP Jobs */}
       {!loading &&
         !error &&
-        vipJobs.map((job) => <VipJobCard key={job.id} job={job} />)}
+        jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} />)}
 
-      {/* Normal Jobs — first batch */}
-      {!loading &&
-        !error &&
-        normalJobs
-          .slice(0, 3)
-          .map((job) => <NormalJobCard key={job.id} job={job} />)}
-
-      {/* In-feed Banner */}
-      {!loading && !error && normalJobs.length > 3 && (
+      {!loading && !error && jobs.length > 3 && (
         <DynamicBanner
           position="jobs_infeed"
           variant="infeed"
@@ -351,14 +256,10 @@ export default function JobListings({
         />
       )}
 
-      {/* Normal Jobs — remaining */}
       {!loading &&
         !error &&
-        normalJobs
-          .slice(3)
-          .map((job) => <NormalJobCard key={job.id} job={job} />)}
+        jobs.slice(3).map((job) => <JobCard key={job.id} job={job} />)}
 
-      {/* Load More */}
       {!loading && !error && jobs.length > 0 && (
         <div className="flex justify-center pt-8">
           <button

@@ -65,6 +65,9 @@ export default function InternalNewsPage() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null,
   );
+  const [initialCategorySlug, setInitialCategorySlug] = useState<string | null>(
+    null,
+  );
   const [keywordInput, setKeywordInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
@@ -76,10 +79,16 @@ export default function InternalNewsPage() {
     if (!raw) return;
 
     try {
-      const parsed = JSON.parse(raw) as { categoryId?: string | null };
+      const parsed = JSON.parse(raw) as {
+        categoryId?: string | null;
+        categorySlug?: string | null;
+      };
       if (parsed.categoryId) {
         setSelectedCategoryId(parsed.categoryId);
         setPageNumber(1);
+      }
+      if (parsed.categorySlug) {
+        setInitialCategorySlug(parsed.categorySlug);
       }
     } catch {
       // no-op
@@ -115,6 +124,16 @@ export default function InternalNewsPage() {
           }))
           .filter((item) => Boolean(item.label?.trim()));
 
+        if (initialCategorySlug) {
+          const matchedCategory = categoryResult.find(
+            (item) => item.slug === initialCategorySlug,
+          );
+          if (matchedCategory) {
+            setSelectedCategoryId(matchedCategory.id);
+            setPageNumber(1);
+          }
+        }
+
         if (apiPills.length > 0) {
           setCategoryPills([
             { id: null, label: "Tất cả bài viết" },
@@ -136,7 +155,7 @@ export default function InternalNewsPage() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [initialCategorySlug]);
 
   useEffect(() => {
     let mounted = true;
