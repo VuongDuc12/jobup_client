@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { fetchPublicArticles } from "@/lib/api";
+import { fetchPublicArticlesByCategorySlug } from "@/lib/api";
 import { getAssetUrl } from "@/lib/utils";
 
 interface Slide {
@@ -20,11 +20,8 @@ const badgeColorByIndex = [
   "bg-brand-black text-white",
 ];
 
-const camnangCategoryId =
-  process.env.NEXT_PUBLIC_CAMNANGCATEGORYID ||
-  process.env.NEXT_PUBLIC_camnangcategoryID ||
-  process.env.NEXT_PUBLIC_CAMNANG_CATEGORY_ID ||
-  "";
+const CAMNANG_CATEGORY_SLUG = "cam-nang-cv";
+const FALLBACK_IMAGE = "/images/news8.jpg";
 
 export default function CareerHandbook() {
   const [current, setCurrent] = useState(0);
@@ -55,21 +52,20 @@ export default function CareerHandbook() {
     let mounted = true;
 
     const loadCamNangArticles = async () => {
-      if (!camnangCategoryId) return;
-
       try {
-        const result = await fetchPublicArticles({
-          PageNumber: 1,
-          PageSize: 3,
-          NewsCategoryId: camnangCategoryId,
-        });
+        const result = await fetchPublicArticlesByCategorySlug(
+          CAMNANG_CATEGORY_SLUG,
+          {
+            PageNumber: 1,
+            PageSize: 3,
+          },
+        );
 
         if (!mounted) return;
         const nextSlides = (result.list || [])
           .slice(0, 3)
           .map((item, index) => ({
-            image:
-              getAssetUrl(item.avatar) || slides[index % slides.length].image,
+            image: getAssetUrl(item.avatar) || FALLBACK_IMAGE,
             badge: item.categoryName || "Cẩm nang",
             badgeColor: badgeColorByIndex[index % badgeColorByIndex.length],
             title: item.title,
@@ -97,7 +93,7 @@ export default function CareerHandbook() {
       sessionStorage.setItem(
         "jobup_news_filters",
         JSON.stringify({
-          categoryId: camnangCategoryId || null,
+          categorySlug: CAMNANG_CATEGORY_SLUG,
           label: "Cẩm nang",
         }),
       );

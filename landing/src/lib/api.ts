@@ -235,6 +235,40 @@ export async function fetchPublicJobs(
   return json.data;
 }
 
+export interface CreateEmployerContactPayload {
+  companyName: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  position?: string;
+  companySize?: string;
+  message?: string;
+}
+
+export async function createEmployerContactPublic(
+  payload: CreateEmployerContactPayload,
+): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/EmployerContacts/public`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    let apiMessage = "";
+    try {
+      const json = (await res.json()) as ApiResponse<unknown>;
+      apiMessage = json.message || "";
+    } catch {
+      // Ignore parse errors and throw with status fallback.
+    }
+    throw new Error(apiMessage || `Submit contact failed: ${res.status}`);
+  }
+}
+
 /* ────────────────────────────────────────────────
  *  GET /api/Jobs/public/{slug}
  * ──────────────────────────────────────────────── */
@@ -384,6 +418,36 @@ export async function fetchPublicArticles(
   const res = await fetch(url.toString(), { next: { revalidate: 120 } });
   if (!res.ok) {
     throw new Error(`Failed to fetch public articles: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
+}
+
+export async function fetchPublicArticlesByCategorySlug(
+  categorySlug: string,
+  params: PublicArticleSearchParams = {},
+): Promise<PublicArticleSearchResponse> {
+  const encodedSlug = encodeURIComponent(categorySlug.trim());
+  const url = new URL(
+    `${API_BASE_URL}/api/Articles/public/by-category-slug/${encodedSlug}`,
+  );
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch public articles by category slug: ${res.status}`,
+    );
   }
 
   const json: ApiResponse<PublicArticleSearchResponse> = await res.json();
