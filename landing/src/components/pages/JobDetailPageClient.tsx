@@ -682,31 +682,6 @@ export default function JobDetailPage() {
                   <DynamicBanner
                     position="job_detail_sidebar"
                     variant="compact"
-                    fallback={
-                      <Link
-                        href="/lien-he"
-                        className="group relative block overflow-hidden rounded-[2rem] border border-[#f1df9f] bg-gradient-to-br from-[#fff8dc] via-white to-[#fff4c7] p-6 shadow-[0_12px_30px_rgba(217,161,0,0.18)] hover:shadow-[0_16px_34px_rgba(217,161,0,0.26)] transition-all duration-300"
-                      >
-                        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-brand-yellow/30 blur-2xl" />
-                        <div className="absolute -left-10 -bottom-10 h-24 w-24 rounded-full bg-brand-yellow/20 blur-2xl" />
-                        <div className="relative z-10">
-                          <span className="inline-flex items-center rounded-full border border-brand-yellow/50 bg-white/80 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-brand-yellow">
-                            JobUp Support
-                          </span>
-                          <h4 className="mt-3 text-xl font-black leading-tight text-brand-black">
-                            Cần tuyển gấp ứng viên chất lượng?
-                          </h4>
-                          <p className="mt-2 text-sm font-medium leading-relaxed text-gray-600">
-                            Đội ngũ JobUp hỗ trợ lọc hồ sơ, tư vấn JD và đẩy tin
-                            đúng tệp ứng viên.
-                          </p>
-                          <span className="mt-4 inline-flex items-center gap-2 rounded-xl bg-brand-black px-4 py-2.5 text-xs font-black uppercase tracking-wide text-white transition-colors group-hover:bg-brand-yellow group-hover:text-brand-black">
-                            Liên hệ tư vấn
-                            <i className="fa-solid fa-arrow-right text-[10px]" />
-                          </span>
-                        </div>
-                      </Link>
-                    }
                   />
                 </div>
               </div>
