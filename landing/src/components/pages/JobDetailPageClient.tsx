@@ -201,7 +201,7 @@ export default function JobDetailPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <nav className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-gray-500">
               <Link href="/" className="hover:text-brand-yellow transition">
-                Trang chu
+                Trang chủ
               </Link>
               <i className="fa-solid fa-chevron-right text-[9px] sm:text-[10px]" />
               <Link
@@ -353,129 +353,125 @@ export default function JobDetailPage() {
                 </div>
               </div>
 
-              <div className="lg:col-span-4 group">
-                <div className="relative bg-gradient-to-b from-white to-[#fffdf5] rounded-[2rem] p-6 border border-[#f4e7b7] shadow-[0_8px_20px_rgba(217,161,0,0.12)] hover:shadow-[0_10px_24px_rgba(217,161,0,0.18)] transition-all duration-500 hover:-translate-y-1 flex flex-col h-full overflow-hidden">
-                  <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-brand-yellow/20 blur-2xl pointer-events-none" />
-                  <div className="relative flex flex-col rounded-3xl overflow-hidden border border-[#f4edd4] bg-white/80 backdrop-blur-sm">
-                    {companyAvatar ? (
-                      <>
-                        <img
-                          src={companyAvatar}
-                          alt={job.contactStaff?.fullName || "Người phụ trách"}
-                          className="absolute inset-0 w-full h-full object-cover opacity-15"
-                        />
-                        <div className="absolute inset-0 bg-white/85 backdrop-blur-sm" />
-                      </>
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf0] to-white" />
-                    )}
+              <div className="lg:col-span-4 group h-fit">
+                {" "}
+                {/* Thêm h-fit để không bị kéo giãn */}
+                <div className="relative bg-white rounded-[2rem] p-4 border border-slate-100 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(245,158,11,0.12)] transition-all duration-500 hover:-translate-y-1 flex flex-col overflow-hidden">
+                  {/* Decor nhẹ nhàng hơn */}
+                  <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-amber-50 blur-2xl pointer-events-none" />
 
-                    <div className="relative z-10 mb-4 border-b border-[#f4edd4] bg-brand-yellow px-4 pt-4 pb-3 text-center">
-                      <h3 className="text-sm font-black uppercase tracking-wider text-brand-black">
-                        Đừng bỏ lỡ cơ hội này
+                  <div className="relative z-10 flex flex-col bg-slate-50/50 rounded-[1.5rem] border border-white overflow-hidden">
+                    {/* Header mỏng hơn */}
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50/30 px-4 py-3 text-center border-b border-amber-100/40">
+                      <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-amber-700/80">
+                        Đừng bỏ lỡ cơ hội này!          
                       </h3>
                     </div>
 
                     {job.contactStaff ? (
-                      <div className="relative z-10 flex flex-col px-4 pb-4">
+                      <div className="flex flex-col p-4">
+                        {/* Avatar & Name - Bố cục ngang để tiết kiệm diện tích */}
                         <div className="flex items-center gap-3 mb-4">
                           <div className="relative shrink-0">
                             {companyAvatar ? (
                               <img
                                 src={companyAvatar}
                                 alt={job.contactStaff.fullName}
-                                className="w-20 h-20 rounded-full object-cover ring-4 ring-brand-yellow/30 shadow-md"
+                                className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm"
                               />
                             ) : (
-                              <div className="w-20 h-20 rounded-full bg-brand-black text-white flex items-center justify-center font-bold text-xl ring-4 ring-brand-yellow/20 shadow-md">
+                              <div className="w-14 h-14 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-lg border-2 border-white uppercase">
                                 {companyInitial(job.contactStaff.fullName)}
                               </div>
                             )}
+                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full shadow-sm" />
                           </div>
 
-                          <div className="flex-1 min-w-0">
-                            <p className="font-bold text-brand-black text-base leading-tight mb-2">
+                          <div className="min-w-0">
+                            <p className="font-bold text-slate-800 text-sm leading-tight truncate">
                               {job.contactStaff.fullName}
                             </p>
-                            <div className="grid grid-cols-1 gap-2.5">
-                              <div className="flex items-center p-2.5 rounded-xl bg-white/90 border border-[#efe6c6] shadow-sm">
-                                <div className="w-6 h-6 flex items-center justify-center mr-2 text-brand-yellow">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-3.5 h-3.5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    />
-                                  </svg>
-                                </div>
-                                <p className="text-xs font-semibold text-gray-600 truncate">
-                                  {job.contactStaff.email || "Chưa cập nhật"}
-                                </p>
-                              </div>
-
-                              <div className="flex items-center p-2.5 rounded-xl bg-white/90 border border-[#efe6c6] shadow-sm">
-                                <div className="w-6 h-6 flex items-center justify-center mr-2 text-brand-yellow">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-3.5 h-3.5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                    />
-                                  </svg>
-                                </div>
-                                <p className="text-xs font-semibold text-gray-600 truncate">
-                                  {job.contactStaff.zaloPhone ||
-                                    "Chưa cập nhật"}
-                                </p>
-                              </div>
-                            </div>
+                            <p className="text-[10px] text-slate-500 font-medium mt-0.5">
+                              Chuyên viên tư vấn
+                            </p>
                           </div>
                         </div>
 
-                        <div className="mt-4">
-                          {zaloLink ? (
-                            <a
-                              href={zaloLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => trackPublicJobApply(job.id)}
-                              className="w-full py-3 bg-brand-yellow text-gray-700 font-black rounded-xl border border-[#e3c45f] hover:bg-[#f3cc4c] hover:text-gray-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_10px_22px_rgba(217,161,0,0.28)] hover:shadow-[0_14px_28px_rgba(217,161,0,0.38)] active:scale-[0.98]"
-                            >
-                              <i className="fa-solid fa-paper-plane text-xs" />
-                              <span className="text-xs uppercase tracking-wider">
-                                Liên hệ tư vấn ngay
-                              </span>
-                            </a>
-                          ) : (
-                            <div className="w-full py-3 bg-[#fff6d6] text-gray-500 font-semibold rounded-xl text-center text-[11px] border border-dashed border-[#e8d6a0]">
-                              Zalo chưa cập nhật
+                        {/* Contact Info - Nén lại bằng cách dùng background chung */}
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-100 hover:border-amber-200 transition-colors">
+                            <div className="w-7 h-7 flex items-center justify-center rounded-lg bg-amber-50 text-amber-600 shrink-0">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                              </svg>
                             </div>
-                          )}
+                            <p className="text-[11px] font-semibold text-slate-600 truncate">
+                              {job.contactStaff.email || "Chưa cập nhật"}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-100 hover:border-amber-200 transition-colors">
+                            <div className="w-7 h-7 flex items-center justify-center rounded-lg bg-amber-50 text-amber-600 shrink-0">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                />
+                              </svg>
+                            </div>
+                            <p className="text-[11px] font-semibold text-slate-600 truncate">
+                              {job.contactStaff.zaloPhone || "Chưa cập nhật"}
+                            </p>
+                          </div>
                         </div>
+
+                        {/* Action Button - Nhỏ gọn hơn */}
+                        {zaloLink ? (
+                          <a
+                            href={zaloLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackPublicJobApply(job.id)}
+                            className="w-full py-3 bg-slate-900 hover:bg-amber-400 hover:text-slate-900 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md text-white shadow-slate-200"
+                          >
+                            <i className="fa-solid fa-paper-plane text-[10px]" />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Liên hệ ngay
+                            </span>
+                          </a>
+                        ) : (
+                          <div className="w-full py-3 bg-slate-100 text-slate-400 font-bold rounded-xl text-center text-[10px] border border-dashed border-slate-200">
+                            Chưa có Zalo
+                          </div>
+                        )}
                       </div>
                     ) : (
-                      <p className="relative z-10 text-[11px] text-gray-400 text-center py-4">
-                        Chưa có thông tin liên hệ
-                      </p>
+                      <div className="p-6 text-center text-[11px] text-slate-400 italic">
+                        Đang cập nhật...
+                      </div>
                     )}
                   </div>
                 </div>
               </div>
-
               <div className="lg:col-span-8 space-y-6">
                 <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm space-y-10">
                   <div>
