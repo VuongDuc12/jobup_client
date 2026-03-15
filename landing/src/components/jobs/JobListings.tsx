@@ -90,32 +90,6 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   );
 }
 
-function InFeedBanner() {
-  return (
-    <div className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md">
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2" />
-        <div className="relative z-10 flex items-center gap-4">
-          <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white text-2xl shrink-0">
-            <i className="fa-solid fa-graduation-cap" />
-          </div>
-          <div className="text-white">
-            <h4 className="font-bold text-xl uppercase tracking-wide">
-              Bạn chưa có kinh nghiệm?
-            </h4>
-            <p className="text-blue-100 text-sm">
-              Tham gia khóa đào tạo thực chiến - Cam kết việc làm 100%.
-            </p>
-          </div>
-        </div>
-        <button className="relative z-10 bg-white text-blue-700 px-6 py-2.5 rounded-full font-bold shadow-lg hover:scale-105 transition-transform whitespace-nowrap cursor-pointer">
-          Tư vấn miễn phí
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function JobCardSkeleton() {
   return (
     <div className="bg-white p-5 rounded-2xl border border-gray-100 flex gap-4 items-center animate-pulse">
@@ -249,11 +223,7 @@ export default function JobListings({
         jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} />)}
 
       {!loading && !error && jobs.length > 3 && (
-        <DynamicBanner
-          position="jobs_infeed"
-          variant="infeed"
-          fallback={<InFeedBanner />}
-        />
+        <DynamicBanner position="jobs_infeed" variant="infeed" />
       )}
 
       {!loading &&

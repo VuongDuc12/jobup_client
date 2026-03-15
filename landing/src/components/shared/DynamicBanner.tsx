@@ -14,7 +14,6 @@ type BannerVariant = "sidebar" | "spotlight" | "compact" | "infeed";
 interface DynamicBannerProps {
   position: string;
   variant: BannerVariant;
-  fallback?: React.ReactNode;
 }
 
 function resolveImage(path: string | null | undefined): string | null {
@@ -25,14 +24,14 @@ function resolveImage(path: string | null | undefined): string | null {
 /* ── Sidebar variant (home_sidebar, jobs_sidebar) ── */
 function SidebarBanner({ data }: { data: BannerPublicResponse }) {
   const imgSrc = resolveImage(data.image);
-  const link = data.linkUrl || "#";
-  const target = data.target || "_self";
+  const link = data.linkUrl?.trim();
+  const target = data.target?.trim();
 
   return (
     <a
       href={link}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      target={link ? target : undefined}
+      rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
       className="relative rounded-[24px] md:rounded-[32px] overflow-hidden h-[360px] md:h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100 block"
     >
       {imgSrc && (
@@ -81,14 +80,14 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
 /* ── Spotlight variant (jobs_spotlight) ── */
 function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
   const imgSrc = resolveImage(data.image);
-  const link = data.linkUrl || "#";
-  const target = data.target || "_self";
+  const link = data.linkUrl?.trim();
+  const target = data.target?.trim();
 
   return (
     <a
       href={link}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      target={link ? target : undefined}
+      rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
       className="relative rounded-2xl overflow-hidden h-auto min-h-[280px] md:min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer block"
     >
       {imgSrc && (
@@ -132,14 +131,14 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
 
 /* ── Compact variant (jobs_sidebar / CV Review CTA) ── */
 function CompactBanner({ data }: { data: BannerPublicResponse }) {
-  const link = data.linkUrl || "#";
-  const target = data.target || "_self";
+  const link = data.linkUrl?.trim();
+  const target = data.target?.trim();
 
   return (
     <a
       href={link}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      target={link ? target : undefined}
+      rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
       className="relative overflow-hidden rounded-[2rem] border border-brand-yellow bg-gradient-to-br from-brand-yellow via-white to-white p-6 text-brand-black shadow-lg block"
     >
       <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-brand-yellow blur-2xl" />
@@ -176,14 +175,14 @@ function CompactBanner({ data }: { data: BannerPublicResponse }) {
 
 /* ── In-feed variant (jobs_infeed) ── */
 function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
-  const link = data.linkUrl || "#";
-  const target = data.target || "_self";
+  const link = data.linkUrl?.trim();
+  const target = data.target?.trim();
 
   return (
     <a
       href={link}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      target={link ? target : undefined}
+      rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
       className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md block"
     >
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden">
@@ -224,7 +223,6 @@ const skeletonClass: Record<BannerVariant, string> = {
 export default function DynamicBanner({
   position,
   variant,
-  fallback,
 }: DynamicBannerProps) {
   const [data, setData] = useState<BannerPublicResponse | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -258,8 +256,8 @@ export default function DynamicBanner({
     );
   }
 
-  // No API data — show fallback (original hardcoded content)
-  if (!data) return fallback || null;
+  // No API data for this position: render nothing.
+  if (!data) return null;
 
   const banner = (() => {
     switch (variant) {
@@ -272,7 +270,7 @@ export default function DynamicBanner({
       case "infeed":
         return <InFeedBannerDynamic data={data} />;
       default:
-        return fallback || null;
+        return null;
     }
   })();
 
