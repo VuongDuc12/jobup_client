@@ -6,8 +6,6 @@ import { FloatingActions } from "@/components/sections";
 import {
   JobSearchHub,
   JobListings,
-  SpotlightBanner,
-  SidebarBannerFallback,
   UrgentJobsWidget,
   CareerHandbook,
   StaffInfoSlider,
@@ -178,19 +176,11 @@ export default function JobsPage() {
                 workType={searchWorkType}
                 sortBy={searchSortBy}
               />
-              <DynamicBanner
-                position="jobs_spotlight"
-                variant="spotlight"
-                fallback={<SpotlightBanner />}
-              />
+              <DynamicBanner position="jobs_spotlight" variant="spotlight" />
             </div>
 
             <aside className="lg:col-span-4 min-w-0 space-y-8">
-              <DynamicBanner
-                position="jobs_sidebar"
-                variant="sidebar"
-                fallback={<SidebarBannerFallback />}
-              />
+              <DynamicBanner position="jobs_sidebar" variant="sidebar" />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />
                 <CareerHandbook />
