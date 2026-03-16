@@ -248,15 +248,7 @@ export default function JobDetailPage() {
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
 
                   <div className="flex flex-col md:flex-row gap-6 items-start relative z-10">
-                    {companyAvatar ? (
-                      <div className="w-20 h-20 rounded-2xl border border-gray-100 p-3 bg-white shadow-sm flex items-center justify-center shrink-0">
-                        <img
-                          src={companyAvatar}
-                          alt={job.displayCompanyName || "Logo công ty"}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                    ) : (
+                    
                       <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
                         <img
                           src="/Logo.png"
@@ -264,7 +256,6 @@ export default function JobDetailPage() {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                    )}
 
                     <div className="flex-grow space-y-3">
                       {infoChips.length > 0 && (
@@ -370,77 +361,45 @@ export default function JobDetailPage() {
 
                     {job.contactStaff ? (
                       <div className="flex flex-col p-4">
-                        {/* Avatar & Name - Bố cục ngang để tiết kiệm diện tích */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="relative shrink-0">
+                        {/* Avatar (portrait rectangle) + Information */}
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="shrink-0">
                             {companyAvatar ? (
                               <img
                                 src={companyAvatar}
                                 alt={job.contactStaff.fullName}
-                                className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm"
+                                className="w-28 h-36 rounded-xl object-cover border border-gray-100 shadow-sm"
                               />
                             ) : (
-                              <div className="w-14 h-14 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-lg border-2 border-white uppercase">
+                              <div className="w-28 h-36 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-2xl border border-gray-100 uppercase overflow-hidden">
                                 {companyInitial(job.contactStaff.fullName)}
                               </div>
                             )}
-                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full shadow-sm" />
                           </div>
 
-                          <div className="min-w-0">
-                            <p className="font-bold text-slate-800 text-sm leading-tight truncate">
+                          <div className="min-w-0 flex-1">
+                            <p className="font-bold text-slate-800 text-lg leading-tight truncate">
                               {job.contactStaff.fullName}
                             </p>
-                            <p className="text-[10px] text-slate-500 font-medium mt-0.5">
+                            <p className="text-sm text-slate-500 font-medium mt-1">
                               Chuyên viên tư vấn
                             </p>
-                          </div>
-                        </div>
 
-                        {/* Contact Info - Nén lại bằng cách dùng background chung */}
-                        <div className="space-y-2 mb-4">
-                          <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-100 hover:border-amber-200 transition-colors">
-                            <div className="w-7 h-7 flex items-center justify-center rounded-lg bg-amber-50 text-amber-600 shrink-0">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-3.5 h-3.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                              </svg>
-                            </div>
-                            <p className="text-[11px] font-semibold text-slate-600 truncate">
-                              {job.contactStaff.email || "Chưa cập nhật"}
-                            </p>
-                          </div>
+                            <div className="mt-3 space-y-2">
+                              <div className="flex items-center gap-3 text-sm text-slate-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span className="truncate">{job.contactStaff.email || "Chưa cập nhật"}</span>
+                              </div>
 
-                          <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-100 hover:border-amber-200 transition-colors">
-                            <div className="w-7 h-7 flex items-center justify-center rounded-lg bg-amber-50 text-amber-600 shrink-0">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-3.5 h-3.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                />
-                              </svg>
+                              <div className="flex items-center gap-3 text-sm text-slate-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                <span className="truncate">{job.contactStaff.zaloPhone || "Chưa cập nhật"}</span>
+                              </div>
                             </div>
-                            <p className="text-[11px] font-semibold text-slate-600 truncate">
-                              {job.contactStaff.zaloPhone || "Chưa cập nhật"}
-                            </p>
                           </div>
                         </div>
 
@@ -451,7 +410,7 @@ export default function JobDetailPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackPublicJobApply(job.id)}
-                            className="w-full py-3 bg-slate-900 hover:bg-amber-400 hover:text-slate-900 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md text-white shadow-slate-200"
+                            className="w-full py-3 bg-slate-900 hover:bg-[#F9C11C] hover:text-slate-900 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md text-white shadow-slate-200"
                           >
                             <i className="fa-solid fa-paper-plane text-[10px]" />
                             <span className="text-[10px] uppercase font-bold tracking-wider">
@@ -528,17 +487,7 @@ export default function JobDetailPage() {
                         >
                           <div className="flex items-center gap-0 md:gap-3 flex-grow">
                             <div className="relative shrink-0 hidden md:block">
-                              {resolveAssetUrl(item.contactStaff?.avatar) ? (
-                                <img
-                                  src={
-                                    resolveAssetUrl(
-                                      item.contactStaff?.avatar,
-                                    ) as string
-                                  }
-                                  className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
-                                  alt={item.displayCompanyName}
-                                />
-                              ) : (
+                              
                                 <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
                                   <img
                                     src="/Logo.png"
@@ -546,7 +495,6 @@ export default function JobDetailPage() {
                                     className="w-full h-full object-contain"
                                   />
                                 </div>
-                              )}
                               {item.isHot && (
                                 <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
                                   Hot
