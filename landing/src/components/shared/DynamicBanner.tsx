@@ -16,14 +16,97 @@ interface DynamicBannerProps {
   variant: BannerVariant;
 }
 
+const DEFAULT_BANNER_IMAGE = "/banner.jpg";
+
+const DEFAULT_BANNER_BY_VARIANT: Record<BannerVariant, BannerPublicResponse> = {
+  sidebar: {
+    position: null,
+    badgeText: "Headhunting",
+    title: "Tìm việc",
+    highlightText: "đúng người, đúng việc",
+    description:
+      "Đội ngũ chuyên gia JobUp kết nối bạn với những cơ hội phù hợp nhất.",
+    buttonText: "Khám phá ngay",
+    linkUrl: null,
+    target: "_self",
+    image: DEFAULT_BANNER_IMAGE,
+    imageMobile: DEFAULT_BANNER_IMAGE,
+  },
+  spotlight: {
+    position: null,
+    badgeText: "Chương trình đặc biệt",
+    title: "Ngày hội tuyển dụng",
+    highlightText: "Big Tech 2026",
+    description:
+      "Cơ hội phỏng vấn trực tiếp với Google, Microsoft, VNG. Nhận Offer ngay tại sự kiện ngày mai.",
+    buttonText: "ĐĂNG KÝ THAM GIA NGAY",
+    linkUrl: null,
+    target: "_self",
+    image: DEFAULT_BANNER_IMAGE,
+    imageMobile: DEFAULT_BANNER_IMAGE,
+  },
+  compact: {
+    position: null,
+    badgeText: "Nhận xét CV",
+    title: "CV của bạn đã đủ tốt?",
+    highlightText: null,
+    description:
+      "80% nhà tuyển dụng loại hồ sơ vì CV xấu. Để chuyên gia JobUp giúp bạn.",
+    buttonText: "Review CV miễn phí",
+    linkUrl: null,
+    target: "_self",
+    image: DEFAULT_BANNER_IMAGE,
+    imageMobile: DEFAULT_BANNER_IMAGE,
+  },
+  infeed: {
+    position: null,
+    badgeText: null,
+    title: "Cẩm nang sự nghiệp",
+    highlightText: null,
+    description:
+      "Mẹo tối ưu CV, phỏng vấn và phát triển nghề nghiệp cùng JobUp.",
+    buttonText: "Xem ngay",
+    linkUrl: null,
+    target: "_self",
+    image: DEFAULT_BANNER_IMAGE,
+    imageMobile: DEFAULT_BANNER_IMAGE,
+  },
+};
+
 function resolveImage(path: string | null | undefined): string | null {
   if (!path) return null;
   return path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
 }
 
+function resolveBannerImage(path: string | null | undefined): string {
+  if (!path) return DEFAULT_BANNER_IMAGE;
+  if (path === DEFAULT_BANNER_IMAGE) return DEFAULT_BANNER_IMAGE;
+  return resolveImage(path) || DEFAULT_BANNER_IMAGE;
+}
+
+function mergeBannerData(
+  fallback: BannerPublicResponse,
+  input: BannerPublicResponse | null,
+): BannerPublicResponse {
+  if (!input) return fallback;
+
+  return {
+    position: input.position ?? fallback.position,
+    badgeText: input.badgeText ?? fallback.badgeText,
+    title: input.title ?? fallback.title,
+    highlightText: input.highlightText ?? fallback.highlightText,
+    description: input.description ?? fallback.description,
+    buttonText: input.buttonText ?? fallback.buttonText,
+    linkUrl: input.linkUrl ?? fallback.linkUrl,
+    target: input.target ?? fallback.target,
+    image: input.image ?? fallback.image,
+    imageMobile: input.imageMobile ?? fallback.imageMobile,
+  };
+}
+
 /* ── Sidebar variant (home_sidebar, jobs_sidebar) ── */
 function SidebarBanner({ data }: { data: BannerPublicResponse }) {
-  const imgSrc = resolveImage(data.image);
+  const imgSrc = resolveBannerImage(data.image);
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
 
@@ -79,7 +162,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
 
 /* ── Spotlight variant (jobs_spotlight) ── */
 function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
-  const imgSrc = resolveImage(data.image);
+  const imgSrc = resolveBannerImage(data.image);
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
 
@@ -131,6 +214,7 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
 
 /* ── Compact variant (jobs_sidebar / CV Review CTA) ── */
 function CompactBanner({ data }: { data: BannerPublicResponse }) {
+  const imgSrc = resolveBannerImage(data.image);
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
 
@@ -139,8 +223,15 @@ function CompactBanner({ data }: { data: BannerPublicResponse }) {
       href={link}
       target={link ? target : undefined}
       rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
-      className="relative overflow-hidden rounded-[2rem] border border-brand-yellow bg-gradient-to-br from-brand-yellow via-white to-white p-6 text-brand-black shadow-lg block"
+      className="relative overflow-hidden rounded-[2rem] border border-brand-yellow p-6 text-brand-black shadow-lg block"
     >
+      <img
+        src={imgSrc}
+        alt={data.title || "Banner"}
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/75 via-white/80 to-white/90" />
       <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-brand-yellow blur-2xl" />
       <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-brand-yellow blur-2xl" />
       <div className="relative z-10">
@@ -175,6 +266,7 @@ function CompactBanner({ data }: { data: BannerPublicResponse }) {
 
 /* ── In-feed variant (jobs_infeed) ── */
 function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
+  const imgSrc = resolveBannerImage(data.image);
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
 
@@ -185,7 +277,14 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
       rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
       className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md block"
     >
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden">
+      <div className="p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden">
+        <img
+          src={imgSrc}
+          alt={data.title || "Banner"}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-700/85 to-indigo-800/85" />
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2" />
         <div className="relative z-10 flex items-center gap-4">
           <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white text-xl md:text-2xl shrink-0">
@@ -229,10 +328,16 @@ export default function DynamicBanner({
   const viewTracked = useRef(false);
 
   useEffect(() => {
-    fetchBannerPublic(position).then((result) => {
-      setData(result);
-      setLoaded(true);
-    });
+    fetchBannerPublic(position)
+      .then((result) => {
+        setData(result);
+      })
+      .catch(() => {
+        setData(null);
+      })
+      .finally(() => {
+        setLoaded(true);
+      });
   }, [position]);
 
   // Track view once when banner data is loaded
@@ -256,19 +361,19 @@ export default function DynamicBanner({
     );
   }
 
-  // No API data for this position: render nothing.
-  if (!data) return null;
+  const fallbackData = DEFAULT_BANNER_BY_VARIANT[variant];
+  const bannerData = mergeBannerData(fallbackData, data);
 
   const banner = (() => {
     switch (variant) {
       case "sidebar":
-        return <SidebarBanner data={data} />;
+        return <SidebarBanner data={bannerData} />;
       case "spotlight":
-        return <SpotlightBannerDynamic data={data} />;
+        return <SpotlightBannerDynamic data={bannerData} />;
       case "compact":
-        return <CompactBanner data={data} />;
+        return <CompactBanner data={bannerData} />;
       case "infeed":
-        return <InFeedBannerDynamic data={data} />;
+        return <InFeedBannerDynamic data={bannerData} />;
       default:
         return null;
     }

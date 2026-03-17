@@ -2,7 +2,7 @@ export default function SidebarBannerFallback() {
   return (
     <div className="relative rounded-[24px] md:rounded-[32px] overflow-hidden h-[360px] md:h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group border border-gray-100">
       <img
-        src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=600&q=80"
+        src="/banner.jpg"
         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         alt="Tuyển dụng chuyên gia"
         loading="lazy"

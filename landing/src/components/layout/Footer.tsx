@@ -142,27 +142,26 @@ export default function Footer() {
       <div className="bg-black/50 border-t border-white/5 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-500 text-sm font-medium">
-            &copy; 2026 JobUp Corporation. Crafted with passion for recruitment
-            excellence.
+            &copy; 2026 JobUp Corporation.
           </p>
           <div className="flex items-center gap-8">
             <a
               href="#"
               className="text-gray-500 hover:text-brand-yellow text-sm font-medium transition"
             >
-              Privacy Policy
+              Chính sách bảo mật
             </a>
             <a
               href="#"
               className="text-gray-500 hover:text-brand-yellow text-sm font-medium transition"
             >
-              Terms & Conditions
+              Điều khoản và điều kiện
             </a>
             <a
               href="#"
               className="text-gray-500 hover:text-brand-yellow text-sm font-medium transition"
             >
-              Cookie Policy
+              Chính sách cookie
             </a>
           </div>
         </div>
