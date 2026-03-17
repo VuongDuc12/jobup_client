@@ -3,12 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { fetchPublicJobs } from "@/lib/api";
-import {
-  formatSalary,
-  workTypeLabel,
-  timeAgo,
-  resolveAssetUrl,
-} from "@/lib/utils";
+import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 import DynamicBanner from "@/components/shared/DynamicBanner";
 
@@ -17,7 +12,6 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   const workType = workTypeLabel(job.workType);
   const time = timeAgo(job.createdAt);
   const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
-  const avatar = resolveAssetUrl(job.contactStaff?.avatar);
 
   return (
     <Link
@@ -26,21 +20,13 @@ function JobCard({ job }: { job: PublicJobResponse }) {
     >
       <div className="flex items-center gap-0 md:gap-3 flex-grow">
         <div className="relative shrink-0 hidden md:block">
-          {avatar ? (
+          <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
             <img
-              src={avatar}
-              className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
-              alt={job.displayCompanyName}
+              src="/Logo.png"
+              alt="Jobup"
+              className="w-10 h-10 object-contain"
             />
-          ) : (
-            <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
-              <img
-                src="/Logo.png"
-                alt="Jobup"
-                className="w-10 h-10 object-contain"
-              />
-            </div>
-          )}
+          </div>
 
           {job.isHot && (
             <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
@@ -244,7 +230,7 @@ export default function JobListings({
             {loadingMore
               ? "Đang tải..."
               : page >= totalPages
-                ? "Đã hết việc làm"
+                ? "Đã hết việc làm phù hợp"
                 : "Xem thêm việc làm"}
           </button>
         </div>

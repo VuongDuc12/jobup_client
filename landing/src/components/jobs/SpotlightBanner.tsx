@@ -2,7 +2,7 @@ export default function SpotlightBanner() {
   return (
     <div className="relative rounded-2xl overflow-hidden h-auto min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer">
       <img
-        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+        src="/banner.jpg"
         className="w-full h-full absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
         alt="Event Banner"
         loading="lazy"
