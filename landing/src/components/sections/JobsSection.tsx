@@ -90,13 +90,7 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       {/* Company Logo / Fallback */}
       <div className="flex items-center gap-0 md:gap-3 flex-grow">
         <div className="relative shrink-0 hidden md:block">
-          {avatar ? (
-            <img
-              src={avatar}
-              className="w-12 h-12 object-cover rounded-xl bg-gray-50 border border-gray-100"
-              alt={job.displayCompanyName}
-            />
-          ) : (
+         
             <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
               <img
                 src="/Logo.png"
@@ -104,7 +98,6 @@ function JobCard({ job }: { job: PublicJobResponse }) {
                 className="w-10 h-10 object-contain"
               />
             </div>
-          )}
           {job.isHot && (
             <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
               Hot
