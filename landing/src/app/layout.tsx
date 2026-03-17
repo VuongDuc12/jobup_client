@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Suspense } from "react";
 import { SystemConfigProvider } from "@/contexts/SystemConfigContext";
 import GoogleAnalytics from "@/components/shared/GoogleAnalytics";
 import "./globals.css";
@@ -46,7 +47,9 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} font-sans bg-brand-white text-gray-800 flex flex-col min-h-screen antialiased`}
       >
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         <SystemConfigProvider>{children}</SystemConfigProvider>
       </body>
     </html>
