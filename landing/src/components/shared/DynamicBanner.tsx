@@ -213,17 +213,29 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
 }
 
 /* ── Compact variant (jobs_sidebar / CV Review CTA) ── */
-function CompactBanner({ data }: { data: BannerPublicResponse }) {
+function CompactBanner({
+  data,
+  position,
+}: {
+  data: BannerPublicResponse;
+  position: string;
+}) {
   const imgSrc = resolveBannerImage(data.image);
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
+  const isSubtleCompact =
+    position === "home_banner_2" || position === "internal_news_detail_sidebar";
 
   return (
     <a
       href={link}
       target={link ? target : undefined}
       rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
-      className="relative overflow-hidden rounded-[2rem] border border-brand-yellow p-6 text-brand-black shadow-lg block"
+      className={`relative overflow-hidden rounded-[2rem] p-6 block ${
+        isSubtleCompact
+          ? "min-h-[280px] md:min-h-[320px] border border-slate-400/45 border-t-4 border-t-brand-yellow text-slate-100 shadow-md hover:shadow-lg transition-shadow"
+          : "border border-brand-yellow text-brand-black shadow-lg"
+      }`}
     >
       <img
         src={imgSrc}
@@ -231,32 +243,80 @@ function CompactBanner({ data }: { data: BannerPublicResponse }) {
         className="absolute inset-0 h-full w-full object-cover"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/75 via-white/80 to-white/90" />
-      <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-brand-yellow blur-2xl" />
-      <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-brand-yellow blur-2xl" />
-      <div className="relative z-10">
-        {data.badgeText && (
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-yellow bg-white/80 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-yellow">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />
-            {data.badgeText}
-          </span>
-        )}
-        {data.title && (
-          <h3 className="text-xl font-black mt-4 mb-2">
-            {data.title}
-            {data.highlightText && (
-              <span className="text-amber-600"> {data.highlightText}</span>
-            )}
-          </h3>
-        )}
-        {data.description && (
-          <p className="text-sm font-medium text-gray-700 mb-5">
-            {data.description}
-          </p>
-        )}
+      <div
+        className={`absolute inset-0 ${
+          isSubtleCompact
+            ? "bg-gradient-to-br from-slate-900/78 via-slate-800/74 to-slate-700/76"
+            : "bg-gradient-to-br from-brand-yellow/75 via-white/80 to-white/90"
+        }`}
+      />
+      {!isSubtleCompact && (
+        <>
+          <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-brand-yellow blur-2xl" />
+          <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-brand-yellow blur-2xl" />
+        </>
+      )}
+      <div className="relative z-10 min-h-[228px] h-full flex flex-col justify-between">
+        <div>
+          {data.badgeText && (
+            <span
+              className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] uppercase tracking-widest ${
+                isSubtleCompact
+                  ? "border border-brand-yellow/60 bg-brand-yellow/15 font-semibold text-brand-yellow"
+                  : "border border-brand-yellow bg-white/80 font-black text-brand-yellow"
+              }`}
+            >
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${
+                  isSubtleCompact ? "bg-brand-yellow" : "bg-brand-yellow"
+                }`}
+              />
+              {data.badgeText}
+            </span>
+          )}
+          {data.title && (
+            <h3
+              className={`text-xl mt-4 mb-2 ${
+                isSubtleCompact ? "font-bold text-slate-50" : "font-black"
+              }`}
+            >
+              {data.title}
+              {data.highlightText && (
+                <span
+                  className={
+                    isSubtleCompact ? "text-brand-yellow" : "text-amber-600"
+                  }
+                >
+                  {" "}
+                  {data.highlightText}
+                </span>
+              )}
+            </h3>
+          )}
+          {data.description && (
+            <p
+              className={`text-sm mb-5 ${
+                isSubtleCompact
+                  ? "font-normal text-slate-200"
+                  : "font-medium text-gray-700"
+              }`}
+            >
+              {data.description}
+            </p>
+          )}
+        </div>
         {data.buttonText && (
-          <span className="w-full py-3 bg-brand-black text-white font-black rounded-xl shadow-md hover:bg-brand-yellow hover:text-brand-black transition-all flex items-center justify-center gap-2">
-            <i className="fa-solid fa-wand-magic-sparkles" /> {data.buttonText}
+          <span
+            className={`w-full py-3 rounded-xl transition-all flex items-center justify-center gap-2 uppercase tracking-wide ${
+              isSubtleCompact
+                ? "bg-brand-yellow/10 border border-brand-yellow/60 text-brand-yellow font-semibold"
+                : "bg-brand-black text-white font-black shadow-md hover:bg-brand-yellow hover:text-brand-black"
+            }`}
+          >
+            {!isSubtleCompact && (
+              <i className="fa-solid fa-wand-magic-sparkles" />
+            )}{" "}
+            {data.buttonText}
           </span>
         )}
       </div>
@@ -371,7 +431,7 @@ export default function DynamicBanner({
       case "spotlight":
         return <SpotlightBannerDynamic data={bannerData} />;
       case "compact":
-        return <CompactBanner data={bannerData} />;
+        return <CompactBanner data={bannerData} position={position} />;
       case "infeed":
         return <InFeedBannerDynamic data={bannerData} />;
       default:
