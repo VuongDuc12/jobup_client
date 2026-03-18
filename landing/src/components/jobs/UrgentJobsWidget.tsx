@@ -36,7 +36,7 @@ export default function UrgentJobsWidget() {
     try {
       // Fetch latest 5 hot/urgent jobs
       const data = await fetchLatestJobs({ limit: 5 });
-      setJobs(data.slice(0, 5));
+      setJobs(Array.isArray(data) ? data.slice(0, 5) : []);
     } catch {
       // Silent fail — widget is supplementary
     } finally {
