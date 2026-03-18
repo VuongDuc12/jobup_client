@@ -116,7 +116,11 @@ export default function InternalNewsPage() {
         const mostViewed = mostViewedResult.list[0];
         setFeatured(mostViewed || fallbackItems[0] || null);
 
-        const apiPills: CategoryPill[] = categoryResult
+        const safeCategories = Array.isArray(categoryResult)
+          ? categoryResult
+          : [];
+
+        const apiPills: CategoryPill[] = safeCategories
           .slice(0, 3)
           .map((item: PublicNewsCategoryResponse) => ({
             id: item.id,
@@ -125,7 +129,7 @@ export default function InternalNewsPage() {
           .filter((item) => Boolean(item.label?.trim()));
 
         if (initialCategorySlug) {
-          const matchedCategory = categoryResult.find(
+          const matchedCategory = safeCategories.find(
             (item) => item.slug === initialCategorySlug,
           );
           if (matchedCategory) {
