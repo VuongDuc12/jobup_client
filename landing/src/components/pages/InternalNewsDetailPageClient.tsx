@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import DynamicBanner from "@/components/shared/DynamicBanner";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import {
@@ -506,6 +507,11 @@ export default function InternalNewsDetailPage() {
                     </div>
                   </div>
                 )}
+
+                <DynamicBanner
+                  position="internal_news_detail_sidebar"
+                  variant="compact"
+                />
               </div>
             </aside>
           </div>
