@@ -302,7 +302,7 @@ export default function InternalNewsPage() {
           </div>
         </section>
 
-        <section className="py-20 bg-white">
+        <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
               {others.map((article) =>

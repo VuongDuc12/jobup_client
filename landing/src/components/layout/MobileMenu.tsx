@@ -77,7 +77,7 @@ export default function MobileMenu({
 
       <div className="p-8 border-t border-gray-50">
         <a
-          href={`mailto:${config.email}`}
+          href={`tel:${config.hotline}`}
           className="block w-full py-5 bg-brand-black text-white text-center rounded-[1.5rem] font-bold shadow-xl shadow-gray-200 active:scale-95 transition-transform"
         >
           Gửi CV Ngay
