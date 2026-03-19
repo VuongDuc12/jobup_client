@@ -90,20 +90,20 @@ export default function RecommendedJobsWidget({
               href={job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung"}
               className="block rounded-xl border border-gray-100 p-3 hover:border-brand-yellow hover:shadow-md transition-all"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-sm font-bold text-brand-black line-clamp-2">
+              <div className="flex items-start justify-between gap-3 min-w-0">
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-brand-black line-clamp-2 wrap-break-word">
                     {job.title}
                   </p>
-                  <p className="text-xs text-gray-500 font-medium mt-1">
+                  <p className="text-xs text-gray-500 font-medium mt-1 truncate">
                     {job.displayCompanyName || "Doanh nghiệp"}
                   </p>
                 </div>
-                <span className="text-xs font-bold text-green-600 whitespace-nowrap">
+                <span className="text-xs font-bold text-green-600 whitespace-nowrap shrink-0 max-w-[45%] truncate text-right">
                   {formatSalary(job.salaryFrom, job.salaryTo)}
                 </span>
               </div>
-              <div className="mt-2 text-[11px] text-gray-400 font-medium">
+              <div className="mt-2 text-[11px] text-gray-400 font-medium truncate">
                 {job.provinceName || "Toàn quốc"} • {timeAgo(job.createdAt)}
               </div>
             </Link>

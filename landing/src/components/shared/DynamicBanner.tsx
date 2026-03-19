@@ -224,7 +224,9 @@ function CompactBanner({
   const link = data.linkUrl?.trim();
   const target = data.target?.trim();
   const isSubtleCompact =
-    position === "home_banner_2" || position === "internal_news_detail_sidebar";
+    position === "home_banner_2" ||
+    position === "internal_news_detail_sidebar" ||
+    position === "job_detail_sidebar";
 
   return (
     <a
