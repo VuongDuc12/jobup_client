@@ -43,6 +43,17 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="canonical" href="https://ducdev04.pro.vn/" />
+        {/* Preconnect to critical third-party origins */}
+        <link rel="preconnect" href="https://upload.wikimedia.org" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://i.pravatar.cc" />
+        <link rel="preconnect" href="https://ui-avatars.com" />
+        <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://i.pravatar.cc" />
+        <link rel="dns-prefetch" href="https://ui-avatars.com" />
+        <link rel="dns-prefetch" href="https://www.transparenttextures.com" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
       </head>
       <body
         className={`${plusJakartaSans.variable} font-sans bg-brand-white text-gray-800 flex flex-col min-h-screen antialiased`}

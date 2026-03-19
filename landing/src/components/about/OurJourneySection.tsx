@@ -3,19 +3,19 @@ import { getAssetUrl } from "@/lib/utils";
 
 const defaultImages = [
     {
-        src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80",
+        src: "/images/journey-team-collab.jpg",
         alt: "Đội ngũ JobUp làm việc nhóm",
     },
     {
-        src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=80",
+        src: "/images/news-meeting.jpg",
         alt: "Cuộc họp chiến lược tuyển dụng",
     },
     {
-        src: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=500&q=80",
+        src: "/images/journey-office.jpg",
         alt: "Brainstorming giải pháp nhân sự",
     },
     {
-        src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80",
+        src: "/images/journey-workshop.jpg",
         alt: "Văn hóa doanh nghiệp JobUp",
     },
 ];

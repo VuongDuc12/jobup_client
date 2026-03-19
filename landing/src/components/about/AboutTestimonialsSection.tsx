@@ -23,7 +23,7 @@ const fallbackTestimonials = [
     name: "Quốc Huy",
     position: "Project Manager",
     avatarUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "/images/about-avatar-man.jpg",
     content:
       "Điểm tôi thích nhất là sự chân thành. Các chuyên gia không chỉ tìm việc mà còn tư vấn định hướng sự nghiệp sâu sắc.",
     rating: 5,
@@ -32,7 +32,7 @@ const fallbackTestimonials = [
     name: "Minh Châu",
     position: "Marketing Director",
     avatarUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+      "/images/about-avatar-woman.jpg",
     content:
       "Uy tín là điều tôi cảm nhận rõ nhất. JobUp giữ đúng cam kết về thời gian và chất lượng. Recommend cho nhân sự cấp cao.",
     rating: 5,
@@ -162,7 +162,6 @@ export default function AboutTestimonialsSection({
                           isDark ? "border border-brand-yellow/30" : ""
                         }`}
                         loading="lazy"
-                        unoptimized
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
+import Image from "next/image";
 import { fetchPublicJobCategories } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/config";
 import type { JobCategoryTreeItem } from "@/lib/types";
@@ -45,12 +46,14 @@ export default function SpecialtySectors() {
         <div className="flex justify-center gap-3">
           <button
             onClick={scrollPrev}
+            aria-label="Cuộn danh mục sang trái"
             className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-[#111827] hover:text-white hover:border-[#111827] transition-all duration-300 cursor-pointer"
           >
             <i className="fa-solid fa-arrow-left" />
           </button>
           <button
             onClick={scrollNext}
+            aria-label="Cuộn danh mục sang phải"
             className="w-12 h-12 rounded-full bg-[#111827] text-white flex items-center justify-center hover:bg-[#F0B429] hover:text-[#111827] transition-all duration-300 cursor-pointer"
           >
             <i className="fa-solid fa-arrow-right" />
@@ -90,12 +93,6 @@ export default function SpecialtySectors() {
                     ? cat.backgroundImage
                     : `${API_BASE_URL}${cat.backgroundImage}`
                   : null;
-                const bgStyle = resolvedBg
-                  ? { backgroundImage: `url('${resolvedBg}')` }
-                  : {
-                      background:
-                        "linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)",
-                    };
 
                 return (
                   <div
@@ -106,10 +103,25 @@ export default function SpecialtySectors() {
                       href="/tuyen-dung"
                       className="block h-[440px] rounded-[2.5rem] relative overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-500"
                     >
-                      <div
-                        className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
-                        style={bgStyle}
-                      />
+                      {resolvedBg ? (
+                        <Image
+                          src={resolvedBg}
+                          alt={cat.name}
+                          fill
+                          sizes="(max-width: 768px) 300px, 380px"
+                          className="object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
+                          unoptimized
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              "linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)",
+                          }}
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
                       <div className="relative z-10 h-full flex flex-col justify-end p-8">

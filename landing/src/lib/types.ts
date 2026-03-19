@@ -33,7 +33,7 @@ export interface PublicJobResponse {
   experience: number;
   workType: number; // 0 = Full-time, 1 = Part-time, 2 = Remote, …
   isHot: boolean;
-  tags: string[];
+  tags: string[] | null;
   deadline: string; // ISO 8601
   createdAt: string; // ISO 8601
   viewCount: number;

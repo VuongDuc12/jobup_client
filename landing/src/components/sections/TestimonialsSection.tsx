@@ -1,4 +1,5 @@
 import type { TestimonialResponse } from "@/lib/types";
+import Image from "next/image";
 import { getAssetUrl } from "@/lib/utils";
 
 interface TestimonialsSectionProps {
@@ -11,7 +12,7 @@ const defaultTestimonials = [
       "Nhờ JobUp, mình đã tìm được vị trí Senior React Developer tại VNG chỉ sau 2 tuần ứng tuyển. Quy trình cực kỳ minh bạch và chuyên nghiệp.",
     name: "Minh Hoàng",
     role: "Software Engineer tại VNG",
-    avatar: "https://i.pravatar.cc/150?u=1",
+    avatar: "/images/testimonial-avatar-1.jpg",
     rating: 5,
   },
   {
@@ -19,7 +20,7 @@ const defaultTestimonials = [
       "Giao diện dễ sử dụng, nhiều việc làm chất lượng. Mình rất ấn tượng với tính năng nhận tin tuyển dụng qua email rất đúng mục tiêu.",
     name: "Thùy Chi",
     role: "Digital Marketing Manager",
-    avatar: "https://i.pravatar.cc/150?u=2",
+    avatar: "/images/testimonial-avatar-2.svg",
     rating: 5,
   },
   {
@@ -27,7 +28,7 @@ const defaultTestimonials = [
       "Là nhà tuyển dụng, mình thấy JobUp cung cấp nguồn ứng viên rất chất lượng, phù hợp với tiêu chí khắt khe của Microsoft.",
     name: "James Wilson",
     role: "HR Director @ Microsoft",
-    avatar: "https://i.pravatar.cc/150?u=3",
+    avatar: "/images/testimonial-avatar-3.png",
     rating: 5,
   },
 ];
@@ -44,7 +45,7 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
         quote: t.content || "",
         name: t.name || "Ẩn danh",
         role: t.position || "",
-        avatar: getAssetUrl(t.avatarUrl) || "https://i.pravatar.cc/150?u=default",
+        avatar: getAssetUrl(t.avatarUrl) || "/images/testimonial-avatar-1.jpg",
         rating: t.rating,
       }))
     : defaultTestimonials;
@@ -55,7 +56,7 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
         className="absolute top-0 left-0 w-full h-full opacity-10"
         style={{
           backgroundImage:
-            "url('https://www.transparenttextures.com/patterns/carbon-fibre.png')",
+            "url('/images/carbon-fibre-texture.png')",
         }}
       />
 
@@ -87,8 +88,10 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
               </p>
 
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src={testimonial.avatar}
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow"
                   alt={testimonial.name}
                   loading="lazy"

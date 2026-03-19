@@ -1,4 +1,5 @@
 import type { FeatureResponse, StatisticResponse } from "@/lib/types";
+import Image from "next/image";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
@@ -23,8 +24,7 @@ const defaultFeatures: {
     description:
       'Thuật toán thông minh tự động "ghép đôi" bạn với Job ngon dựa trên 50+ tiêu chí dữ liệu. Tìm việc chuẩn xác như tìm người yêu!',
     iconClass: "fa-solid fa-brain",
-    imageUrl:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "/images/feature-ai.jpg",
     tag1: "AI TECHNOLOGY",
     tag2: null,
     linkUrl: null,
@@ -35,8 +35,7 @@ const defaultFeatures: {
     description:
       'Bạn thức, JobUp cũng thức! Đội ngũ CSKH nhiệt tình "cân" mọi thắc mắc, hỗ trợ tìm việc và nộp hồ sơ siêu tốc mọi khung giờ.',
     iconClass: "fa-solid fa-headset",
-    imageUrl:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600",
+    imageUrl: "/images/feature-professional.jpg",
     tag1: null,
     tag2: null,
     linkUrl: "tel:0979334143",
@@ -47,8 +46,7 @@ const defaultFeatures: {
     description:
       'Nhận và "khám" CV miễn phí. Biến hồ sơ nhạt nhòa thành bản CV "sát thủ", đánh bại mọi đối thủ cạnh tranh.',
     iconClass: "fa-solid fa-file-signature",
-    imageUrl:
-      "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=400",
+    imageUrl: "/images/feature-document.jpg",
     tag1: null,
     tag2: null,
     linkUrl: "#",
@@ -59,8 +57,7 @@ const defaultFeatures: {
     description:
       'Trang bị "vũ khí" tận răng: Bộ câu hỏi phỏng vấn thường gặp, mẹo deal lương khéo léo để bạn tự tin chinh phục mọi HR khó tính.',
     iconClass: "fa-solid fa-rocket",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507679799987-c7377f5da5b2?auto=format&fit=crop&q=80&w=600",
+    imageUrl: "/images/feature-handshake.jpg",
     tag1: null,
     tag2: null,
     linkUrl: "#",
@@ -151,10 +148,13 @@ export default function FeaturesSection({
               <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
                 {items[0].imageUrl && (
                   <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                    <img
+                    <Image
                       src={items[0].imageUrl}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
                       alt={items[0].title}
+                      fill
+                      sizes="400px"
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -187,7 +187,7 @@ export default function FeaturesSection({
                       </span>
                     </div>
                     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%] animate-pulse" />
+                      <div className="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%]" />
                     </div>
                     <p className="mt-3 text-[11px] text-gray-400 font-medium uppercase tracking-widest text-center">
                       Kết quả hiển thị sau 1.2s
@@ -203,10 +203,14 @@ export default function FeaturesSection({
             <div className="md:row-span-2 bg-[#111827] rounded-[3rem] p-1 border border-gray-800 hover:shadow-2xl transition-all duration-700 group overflow-hidden">
               <div className="bg-gray-900/40 rounded-[2.9rem] p-8 lg:p-10 h-full flex flex-col relative overflow-hidden">
                 {items[1].imageUrl && (
-                  <img
+                  <Image
                     src={items[1].imageUrl}
-                    className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
                     alt={items[1].title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
+                    loading="lazy"
+                    unoptimized
                   />
                 )}
                 <div className="relative z-10 flex flex-col h-full">
@@ -252,10 +256,14 @@ export default function FeaturesSection({
           {items[2] && (
             <div className="bg-white rounded-[3rem] p-8 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
               {items[2].imageUrl && (
-                <img
+                <Image
                   src={items[2].imageUrl}
-                  className="absolute inset-0 w-full h-full object-cover opacity-5 group-hover:opacity-15 transition-opacity duration-700"
                   alt={items[2].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover opacity-5 group-hover:opacity-15 transition-opacity duration-700"
+                  loading="lazy"
+                  unoptimized
                 />
               )}
               <div className="relative z-10">
@@ -287,10 +295,14 @@ export default function FeaturesSection({
           {items[3] && (
             <div className="bg-gradient-to-br from-brand-yellow to-brand-yellow rounded-[3rem] p-8 text-white shadow-2xl shadow-brand-yellow hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
               {items[3].imageUrl && (
-                <img
+                <Image
                   src={items[3].imageUrl}
-                  className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"
                   alt={items[3].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover opacity-20 group-hover:scale-120 group-hover:opacity-40 transition-all duration-1000"
+                  loading="lazy"
+                  unoptimized
                 />
               )}
               <div className="relative z-10">

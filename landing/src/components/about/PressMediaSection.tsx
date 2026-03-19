@@ -11,27 +11,27 @@ import { resolveAssetUrl } from "@/lib/utils";
 
 const fallbackMediaLogos = [
   {
-    src: "https://vtv1.vtv.vn/Content/Main/Images/logo-vtv.png",
+    src: "/images/logo-vtv.svg",
     alt: "VTV",
     height: "h-8 md:h-12",
   },
   {
-    src: "https://static.znews.vn/images/logo-znews.svg",
+    src: "/images/logo-znews.svg",
     alt: "ZNews",
     height: "h-6 md:h-8",
   },
   {
-    src: "https://vneconomy.vn/images/logo.png",
+    src: "/images/logo-vneconomy.svg",
     alt: "VnEconomy",
     height: "h-6 md:h-8",
   },
   {
-    src: "https://cafefcdn.com/web_images/logo-cafef.png",
+    src: "/images/logo-cafef.png",
     alt: "CafeF",
     height: "h-10 md:h-14",
   },
   {
-    src: "https://vtcnews.vn/Content/Images/logo.svg",
+    src: "/images/logo-vtcnews.svg",
     alt: "VTC News",
     height: "h-10 md:h-12",
   },
@@ -49,7 +49,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceLogo: null,
     articleUrl: null,
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
+      "/images/press-business.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -65,7 +65,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceLogo: null,
     articleUrl: null,
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&q=80&w=800",
+      "/images/press-community.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -80,7 +80,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceLogo: null,
     articleUrl: null,
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1573163231367-4e5083c07044?auto=format&fit=crop&q=80&w=800",
+      "/images/press-workplace.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -95,7 +95,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceLogo: null,
     articleUrl: null,
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800",
+      "/images/press-women-office.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -151,47 +151,6 @@ export default function PressMediaSection({
           </p>
         </div>
 
-        {/* Media Partner Logos */}
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20 mb-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-          {hasPartnerLogos
-            ? partners
-                .filter((p) => p.isActive)
-                .sort((a, b) => a.displayOrder - b.displayOrder)
-                .map((partner) => (
-                  <div
-                    key={partner.id}
-                    className="h-8 md:h-12 flex items-center justify-center"
-                  >
-                    {partner.logoUrl && (
-                      <Image
-                        src={
-                          resolveAssetUrl(partner.logoUrl) || partner.logoUrl
-                        }
-                        alt={partner.name ?? "Partner"}
-                        width={120}
-                        height={48}
-                        className="h-full w-auto block hover:scale-110 transition-transform object-contain"
-                        loading="lazy"
-                        unoptimized
-                      />
-                    )}
-                  </div>
-                ))
-            : fallbackMediaLogos.map((logo, idx) => (
-                <div
-                  key={idx}
-                  className={`${logo.height} flex items-center justify-center`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={logo.src}
-                    className="h-full w-auto block hover:scale-110 transition-transform"
-                    alt={logo.alt}
-                  />
-                </div>
-              ))}
-        </div>
-
         {/* Press Slider */}
         <div className="relative group">
           <div
@@ -214,7 +173,7 @@ export default function PressMediaSection({
                     <Image
                       src={
                         resolveAssetUrl(article.thumbnailUrl) ??
-                        "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800"
+                        "/images/press-business.jpg"
                       }
                       alt={article.title}
                       fill

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   fetchLatestJobs,
   fetchPublicStaff,
@@ -55,19 +56,19 @@ const fallbackStaff: PublicStaffResponse[] = [
     id: "1",
     fullName: "Nguyen Minh Anh",
     roleName: "Talent Acquisition Lead",
-    avatar: "https://i.pravatar.cc/150?u=jobup-1",
+    avatar: "/images/staff-avatar-1.jpg",
   },
   {
     id: "2",
     fullName: "Tran Hoang Viet",
     roleName: "HR Business Partner",
-    avatar: "https://i.pravatar.cc/150?u=jobup-2",
+    avatar: "/images/staff-avatar-2.jpg",
   },
   {
     id: "3",
     fullName: "Le Thu Trang",
     roleName: "Career Advisor",
-    avatar: "https://i.pravatar.cc/150?u=jobup-3",
+    avatar: "/images/staff-avatar-3.svg",
   },
 ];
 
@@ -94,10 +95,13 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
         <div className="relative shrink-0 hidden md:block">
           <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
-            <img
+            <Image
               src="/Logo.png"
               alt="Jobup"
+              width={40}
+              height={40}
               className="w-10 h-10 object-contain"
+              loading="lazy"
             />
           </div>
           {job.isHot && (
@@ -293,6 +297,8 @@ export default function JobsSection() {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
+                aria-label={`Lọc việc làm: ${tab.label}`}
+                aria-pressed={activeTab === tab.key}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 whitespace-nowrap cursor-pointer ${
                   activeTab === tab.key
                     ? "bg-[#111827] text-white shadow-md"
@@ -320,8 +326,9 @@ export default function JobsSection() {
                 <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
                   <i className="fa-solid fa-triangle-exclamation text-red-400 text-3xl mb-3" />
                   <p className="text-red-600 font-semibold mb-4">{error}</p>
-                  <button
+                   <button
                     onClick={() => loadJobs()}
+                    aria-label="Thử tải lại danh sách việc làm"
                     className="px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition-colors cursor-pointer"
                   >
                     Thử lại

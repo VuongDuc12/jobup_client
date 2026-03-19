@@ -35,7 +35,7 @@ export default function DifferenceSection({
     "Chúng tôi không chỉ tìm ứng viên — chúng tôi kiến tạo giải pháp nhân sự bền vững.";
   const displayImage =
     getAssetUrl(image) ||
-    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
+    "/images/leadership-woman-1.jpg";
   const displayH1 =
     heading1 || "Chúng tôi tập trung vào kết quả thực, không chỉ hồ sơ.";
   const displayP1 =

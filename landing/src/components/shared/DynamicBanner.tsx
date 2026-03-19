@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { API_BASE_URL } from "@/lib/config";
 import type { BannerPublicResponse } from "@/lib/types";
 import {
@@ -118,11 +119,14 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
       className="relative rounded-[24px] md:rounded-[32px] overflow-hidden h-[360px] md:h-[420px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] group cursor-pointer border border-gray-100 block"
     >
       {imgSrc && (
-        <img
+        <Image
           src={imgSrc}
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
           alt={data.title || "Banner"}
+          fill
+          sizes="(max-width: 1024px) 100vw, 33vw"
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
           loading="lazy"
+          unoptimized
         />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-5 md:p-8">
@@ -174,11 +178,14 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
       className="relative rounded-2xl overflow-hidden h-auto min-h-[280px] md:min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer block"
     >
       {imgSrc && (
-        <img
+        <Image
           src={imgSrc}
-          className="w-full h-full absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
           alt={data.title || "Spotlight Banner"}
+          fill
+          sizes="100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
+          unoptimized
         />
       )}
       <div className="relative h-full bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-5 md:p-8 lg:p-14">
@@ -239,11 +246,14 @@ function CompactBanner({
           : "border border-brand-yellow text-brand-black shadow-lg"
       }`}
     >
-      <img
+      <Image
         src={imgSrc}
         alt={data.title || "Banner"}
-        className="absolute inset-0 h-full w-full object-cover"
+        fill
+        sizes="(max-width: 1024px) 100vw, 33vw"
+        className="object-cover"
         loading="lazy"
+        unoptimized
       />
       <div
         className={`absolute inset-0 ${
@@ -340,11 +350,14 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
       className="my-6 rounded-2xl overflow-hidden relative group cursor-pointer shadow-md block"
     >
       <div className="p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden">
-        <img
+        <Image
           src={imgSrc}
           alt={data.title || "Banner"}
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
           loading="lazy"
+          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-700/85 to-indigo-800/85" />
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2" />

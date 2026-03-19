@@ -20,15 +20,20 @@ export default function FloatingActions() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Build Zalo link from hotline setting only
-  const zaloPhone = (config.hotline || "").replace(/\D/g, "");
-  const zaloLink = zaloPhone ? `https://zalo.me/${zaloPhone}` : "#";
+  // Build Zalo link from systemConfig zaloUrl, fallback to hotline
+  const zaloLink =
+    config.zaloUrl && config.zaloUrl !== "#"
+      ? config.zaloUrl
+      : config.hotline
+        ? `https://zalo.me/${config.hotline.replace(/\D/g, "")}`
+        : "#";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end group">
       {/* Back to Top */}
       <button
         onClick={scrollToTop}
+        aria-label="Cuộn lên đầu trang"
         className={`w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:bg-brand-yellow hover:text-black hover:-translate-y-1 focus:outline-none cursor-pointer ${
           showBackToTop
             ? "translate-y-0 opacity-100 pointer-events-auto"
@@ -103,7 +108,7 @@ export default function FloatingActions() {
           rel="noopener noreferrer"
           className="pointer-events-auto relative block"
         >
-          <div className="absolute -inset-2 bg-[#0068FF]/10 rounded-full animate-ping group-hover:scale-150 transition-transform duration-700" />
+          <div className="absolute -inset-2 bg-[#0068FF]/10 rounded-full animate-mini-ping group-hover:scale-150 transition-transform duration-700" />
           <div className="relative w-16 h-16 hover:scale-110 transition-all duration-300 drop-shadow-[0_8px_15px_rgba(0,104,255,0.2)]">
             <Image
               src="/Icon_of_Zalo.svg"
@@ -119,10 +124,11 @@ export default function FloatingActions() {
       {/* Hotline */}
       <a
         href={`tel:${config.hotline || "0979334143"}`}
-        className="w-14 h-14 bg-gradient-to-tr from-red-500 to-pink-500 text-white rounded-full flex items-center justify-center shadow-lg animate-pulse hover:animate-none hover:scale-110 transition-transform relative"
+        aria-label="Gọi hotline hỗ trợ"
+        className="w-14 h-14 bg-gradient-to-tr from-red-500 to-pink-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform relative"
       >
         <i className="fa-solid fa-phone text-2xl" />
-        <span className="absolute inset-0 rounded-full border-2 border-red-500 opacity-75 animate-ping" />
+        <span className="absolute inset-0 rounded-full border-2 border-red-500 opacity-75 animate-mini-ping" />
       </a>
     </div>
   );

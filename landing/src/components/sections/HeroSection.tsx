@@ -6,38 +6,38 @@ import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 const partnerLogos = [
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
+    src: "/images/google-logo.svg",
     alt: "Google",
     height: "h-5",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/2048px-Facebook_f_logo_%282019%29.svg.png",
+    src: "/images/meta-logo.svg",
     alt: "Meta",
     height: "h-6",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png",
+    src: "/images/microsoft-logo.svg",
     alt: "Microsoft",
     height: "h-5",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png",
+    src: "/images/amazon-logo.svg",
     alt: "Amazon",
     height: "h-5",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png",
+    src: "/images/netflix-logo.svg",
     alt: "Netflix",
     height: "h-4",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Linkedin_icon.svg/2048px-Linkedin_icon.svg.png",
+    src: "/images/linkedin-logo.svg",
     alt: "LinkedIn",
     height: "h-6",
   },
 ];
 
-const trendingKeywords = ["Java Spring", "AI/ML", "Product Manager", "Remote"];
+const trendingKeywords = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
 interface HeroSectionProps {
   badgeText?: string | null;
@@ -167,6 +167,7 @@ export default function HeroSection({
                   name="keyword"
                   type="text"
                   placeholder="Tên công việc, vị trí..."
+                  aria-label="Tìm kiếm việc làm theo từ khóa"
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent text-sm"
                 />
               </div>
@@ -174,6 +175,7 @@ export default function HeroSection({
                 <i className="fa-solid fa-location-dot text-gray-400 mr-3" />
                 <select
                   name="provinceId"
+                  aria-label="Chọn địa điểm làm việc"
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent appearance-none text-sm focus:ring-0"
                 >
                   <option value="">Tất cả địa điểm</option>
@@ -195,14 +197,35 @@ export default function HeroSection({
             {/* Trending Keywords */}
             <div className="mt-5 flex flex-wrap items-center gap-2 text-sm">
               <span className="text-slate-500 font-medium">Hot:</span>
-              {trendingKeywords.map((keyword) => (
-                <a
-                  key={keyword}
-                  href="#"
-                  className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 font-medium text-xs hover:border-amber-300 hover:text-amber-700 hover:bg-amber-50 transition-all duration-200"
+              {trendingKeywords.map((kw) => (
+                <button
+                  key={kw}
+                  type="button"
+                  onClick={() => {
+                    const payload = {
+                      keyword: kw,
+                      provinceId: "",
+                      categoryId: "",
+                      salaryFrom: "",
+                      salaryTo: "",
+                      experience: "",
+                      workType: "",
+                      sortBy: "newest",
+                    };
+                    try {
+                      sessionStorage.setItem(
+                        "jobup_jobs_filters",
+                        JSON.stringify(payload),
+                      );
+                    } catch {
+                      // no-op
+                    }
+                    window.location.href = "/tuyen-dung";
+                  }}
+                  className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 font-medium text-xs hover:border-amber-300 hover:text-amber-700 hover:bg-amber-50 transition-all duration-200 cursor-pointer"
                 >
-                  {keyword}
-                </a>
+                  {kw}
+                </button>
               ))}
             </div>
 
@@ -216,24 +239,28 @@ export default function HeroSection({
                   <div className="flex gap-16 items-center animate-loop-scroll whitespace-nowrap">
                     {/* First set */}
                     {partnerItems.map((logo, idx) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         key={`a-${idx}`}
                         src={logo.src}
+                        width={120}
+                        height={24}
                         className={`${logo.height} w-auto opacity-50 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0`}
                         alt={logo.alt}
                         loading="lazy"
+                        unoptimized
                       />
                     ))}
                     {/* Duplicate for seamless loop */}
                     {partnerItems.map((logo, idx) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         key={`b-${idx}`}
                         src={logo.src}
+                        width={120}
+                        height={24}
                         className={`${logo.height} w-auto opacity-50 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0`}
                         alt={logo.alt}
                         loading="lazy"
+                        unoptimized
                       />
                     ))}
                   </div>
@@ -252,12 +279,15 @@ export default function HeroSection({
 
               {/* Main Image */}
               <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] ring-[6px] ring-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={getAssetUrl(heroImage) || "/hero-image.jpg"}
                   alt="Chuyên viên tuyển dụng JobUp"
+                  width={560}
+                  height={700}
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 560px"
                   className="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-[1.5s] ease-out"
-                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
               </div>
@@ -274,7 +304,7 @@ export default function HeroSection({
                     <div className="relative z-10 flex flex-col gap-3">
                       <div className="flex items-center gap-3">
                         <div className="relative">
-                          <div className="absolute inset-0 bg-amber-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity animate-pulse" />
+                          <div className="absolute inset-0 bg-amber-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity" />
                           <div className="relative w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover/card:scale-110 transition-transform duration-300">
                             <i className="fa-solid fa-magnifying-glass text-white text-lg" />
                           </div>
@@ -321,7 +351,7 @@ export default function HeroSection({
                               className="w-12 h-12 object-contain"
                               alt="Zalo"
                             />
-                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-ping" />
+                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-mini-ping" />
                             <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
                           </div>
                         </div>
@@ -337,20 +367,18 @@ export default function HeroSection({
                       <div className="flex items-center gap-2 text-[11px] font-bold text-gray-600 bg-emerald-50/80 px-3 py-1.5 rounded-lg border border-emerald-100/50">
                         <div className="flex -space-x-2">
                           <Image
-                            src="https://ui-avatars.com/api/?name=HR&background=10b981&color=fff"
+                            src="/images/avatar-hr.png"
                             width={16}
                             height={16}
                             className="w-4 h-4 rounded-full border border-white"
                             alt="HR"
-                            unoptimized
                           />
                           <Image
-                            src="https://ui-avatars.com/api/?name=JD&background=3b82f6&color=fff"
+                            src="/images/avatar-jd.svg"
                             width={16}
                             height={16}
                             className="w-4 h-4 rounded-full border border-white"
                             alt="HR"
-                            unoptimized
                           />
                         </div>
                         <span>Nhận tư vấn 1-1 miễn phí</span>
@@ -373,11 +401,11 @@ export default function HeroSection({
                     <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10 flex items-center gap-3">
                       <div className="relative">
-                        <div className="absolute inset-0 bg-violet-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity animate-pulse" />
+                        <div className="absolute inset-0 bg-violet-500 blur-lg opacity-40 group-hover/card:opacity-70 transition-opacity" />
                         <div className="relative w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-500/30 group-hover/card:scale-110 transition-transform duration-300">
                           <i className="fa-solid fa-headset text-white text-base" />
                           <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
+                            <span className="animate-mini-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-violet-500 border-2 border-white" />
                           </span>
                         </div>
@@ -392,7 +420,7 @@ export default function HeroSection({
                             : "0979.334.143"}
                         </h4>
                         <div className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                          <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
                           <p className="text-[10px] text-violet-600 font-bold uppercase tracking-wider">
                             Hotline 24/7
                           </p>

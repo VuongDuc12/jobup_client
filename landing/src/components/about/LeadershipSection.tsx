@@ -32,13 +32,13 @@ export default function LeadershipSection({
     const displayCeoName = ceoName || "Mrs. Ha Phan, MHRM";
     const displayCeoImage =
         getAssetUrl(ceoImage) ||
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80";
+        "/images/leadership-woman-1.jpg";
     const displayAdvisorRole = advisorRoleLabel || "Ban Cố Vấn";
     const displayAdvisorName =
         advisorName || "Mrs. Diep Nguyen Ngoc, MHRM";
     const displayAdvisorImage =
         getAssetUrl(advisorImage) ||
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80";
+        "/images/leadership-woman.jpg";
 
     return (
         <section className="py-16 bg-brand-light-gray">

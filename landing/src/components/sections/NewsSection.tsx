@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { PublicArticleListItemResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 
@@ -6,7 +7,7 @@ import { getAssetUrl } from "@/lib/utils";
 const fallbackHighlight = {
   title: "Chào đón thành viên thứ 200 gia nhập đại gia đình JobUp",
   image:
-    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
+    "/images/news-main.jpg",
   category: "Tin tiêu biểu",
   date: "20/05/2026",
   slug: "#",
@@ -15,7 +16,7 @@ const fallbackHighlight = {
 const fallbackSideNews = [
   {
     image:
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=300",
+      "/images/news-event.jpg",
     category: "Sự kiện",
     title: "Team Building 2026: Vượt Sóng Cùng JobUp tại Phú Quốc",
     date: "15/05/2026",
@@ -23,7 +24,7 @@ const fallbackSideNews = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=300",
+      "/images/news-meeting.jpg",
     category: "Hoạt động chuyên môn",
     title: "Workshop: Ứng dụng AI trong tối ưu hóa quy trình HR",
     date: "12/05/2026",
@@ -31,7 +32,7 @@ const fallbackSideNews = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=300",
+      "/images/news-community.jpg",
     category: "Văn hóa",
     title: "Happy Friday: Gắn kết tình thân giữa các phòng ban",
     date: "08/05/2026",
@@ -101,13 +102,15 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             className="lg:col-span-8 group cursor-pointer"
           >
             <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-xl">
-              <img
+              <Image
                 src={
                   (highlight && getAssetUrl(highlight.avatar)) ||
                   fallbackHighlight.image
                 }
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                 alt={highlight?.title || fallbackHighlight.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 66vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-1000"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -159,12 +162,15 @@ export default function NewsSection({ articles }: NewsSectionProps) {
                   href={href}
                   className="group flex gap-4 cursor-pointer"
                 >
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-md">
-                    <img
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-md relative">
+                    <Image
                       src={imgSrc!}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       alt={title}
+                      fill
+                      sizes="96px"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
+                      unoptimized
                     />
                   </div>
                   <div>

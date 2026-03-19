@@ -26,7 +26,7 @@ export default function Footer() {
   ].filter((link) => link.href && link.href !== "#");
   return (
     <footer
-      className="bg-brand-black pt-24 font-sans relative overflow-hidden text-white"
+      className="bg-[#111827] pt-24 font-sans relative overflow-hidden text-white"
       id="footer"
     >
       {/* Decorative glow */}

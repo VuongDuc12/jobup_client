@@ -13,7 +13,7 @@ const fallbackStaff: PublicStaffResponse[] = [
     roleName: "Talent Acquisition Lead",
     email: "staff@jopup.vn",
     zaloPhone: "0979334143",
-    avatar: "https://i.pravatar.cc/150?u=jobup-1",
+    avatar: "/images/staff-avatar-1.jpg",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ const fallbackStaff: PublicStaffResponse[] = [
     roleName: "HR Business Partner",
     email: "staff@jopup.vn",
     zaloPhone: "0979334143",
-    avatar: "https://i.pravatar.cc/150?u=jobup-2",
+    avatar: "/images/staff-avatar-2.jpg",
   },
   {
     id: "3",
@@ -29,7 +29,7 @@ const fallbackStaff: PublicStaffResponse[] = [
     roleName: "Career Advisor",
     email: "staff@jopup.vn",
     zaloPhone: "0979334143",
-    avatar: "https://i.pravatar.cc/150?u=jobup-3",
+    avatar: "/images/staff-avatar-3.svg",
   },
 ];
 
@@ -130,7 +130,7 @@ export default function StaffInfoSlider() {
           {staff.map((member) => {
             const avatar =
               resolveAssetUrl(member.avatar) ||
-              `https://ui-avatars.com/api/?name=${encodeURIComponent(member.fullName)}&background=111827&color=fff&size=160`;
+              "/images/staff-avatar-1.jpg";
 
             return (
               <div key={member.id} className="w-full flex-shrink-0">
