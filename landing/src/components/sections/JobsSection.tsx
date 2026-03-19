@@ -81,11 +81,14 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   const initial = companyInitial(job.displayCompanyName);
   const bgColor = colorForCompany(job.displayCompanyName);
   const avatar = resolveAssetUrl(job.contactStaff?.avatar);
+  const rawTags = job.tags ?? [];
+  const tagChips =
+    rawTags.length <= 2 ? rawTags : [...rawTags.slice(0, 2), "Khác"];
 
   return (
     <Link
       href={`/tuyen-dung/${job.slug}`}
-      className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4 min-w-0"
+      className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col gap-3 md:grid md:grid-cols-[minmax(0,1fr)_13rem_8.75rem] md:items-center md:gap-4 min-w-0"
     >
       {/* Company Logo / Fallback */}
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
@@ -123,13 +126,13 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       </div>
 
       {/* Tags */}
-      <div className="flex flex-wrap items-center gap-2 md:w-52 min-w-0">
+      <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
         <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100 max-w-full truncate">
           {workType}
         </span>
-        {(job.tags ?? []).slice(0, 2).map((tag) => (
+        {tagChips.map((tag, idx) => (
           <span
-            key={tag}
+            key={`${tag}-${idx}`}
             className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100 max-w-full truncate"
           >
             {tag}
@@ -138,7 +141,7 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       </div>
 
       {/* Salary & Time */}
-      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-35 min-w-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-50 gap-2 md:gap-1">
+      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center min-w-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-50 gap-2 md:gap-1">
         <span className="text-green-600 font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
           {salary}
         </span>
