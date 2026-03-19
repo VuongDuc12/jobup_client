@@ -7,7 +7,9 @@
 @theme inline {
   --color-brand-yellow: #f0b429;
   --color-brand-yellow-hover: #d99f1f;
-  --color-brand-black: #111827;
+  --color-brand-black: #5b5a5d;
+  --color-black: #5b5a5d;
+  --color-gray-900: #5b5a5d;
   --color-brand-gray: #6b7280;
   --color-brand-light-gray: #f9fafb;
   --color-brand-white: #ffffff;
@@ -39,6 +41,33 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: var(--font-sans);
+}
+
+@layer utilities {
+  .text-black,
+  .text-gray-900,
+  .text-brand-black,
+  .text-\[\#111827\] {
+    color: #5b5a5d;
+  }
+
+  .hover\:text-black:hover,
+  .hover\:text-gray-900:hover,
+  .hover\:text-brand-black:hover,
+  .hover\:text-\[\#111827\]:hover,
+  .focus\:text-black:focus,
+  .focus\:text-gray-900:focus,
+  .focus\:text-brand-black:focus,
+  .focus\:text-\[\#111827\]:focus {
+    color: #5b5a5d;
+  }
+
+  .group:hover .group-hover\:text-black,
+  .group:hover .group-hover\:text-gray-900,
+  .group:hover .group-hover\:text-brand-black,
+  .group:hover .group-hover\:text-\[\#111827\] {
+    color: #5b5a5d;
+  }
 }
 
 /* ═══════════════════════════════════════════════ */
