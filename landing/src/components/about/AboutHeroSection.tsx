@@ -56,7 +56,7 @@ export default function AboutHeroSection({
           <span className="w-12 h-px bg-brand-yellow" />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-8 md:mb-10 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-brand-yellow mb-8 md:mb-10 leading-tight">
           {displayTitle}
         </h1>
 
