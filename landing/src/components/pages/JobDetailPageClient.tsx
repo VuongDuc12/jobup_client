@@ -248,14 +248,13 @@ export default function JobDetailPage() {
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
 
                   <div className="flex flex-col md:flex-row gap-6 items-start relative z-10">
-                    
-                      <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
-                        <img
-                          src="/Logo.png"
-                          alt="Jobup"
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
+                    <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
+                      <img
+                        src="/Logo.png"
+                        alt="Jobup"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
 
                     <div className="flex-grow space-y-3">
                       {infoChips.length > 0 && (
@@ -355,7 +354,7 @@ export default function JobDetailPage() {
                     {/* Header mỏng hơn */}
                     <div className="bg-gradient-to-r from-amber-50 to-orange-50/30 px-4 py-3 text-center border-b border-amber-100/40">
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-amber-700/80">
-                        Đừng bỏ lỡ cơ hội này!          
+                        Đừng bỏ lỡ cơ hội này!
                       </h3>
                     </div>
 
@@ -387,17 +386,44 @@ export default function JobDetailPage() {
 
                             <div className="mt-3 space-y-2">
                               <div className="flex items-center gap-3 text-sm text-slate-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="w-4 h-4 text-amber-600"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                  />
                                 </svg>
-                                <span className="truncate">{job.contactStaff.email || "Chưa cập nhật"}</span>
+                                <span className="truncate">
+                                  {job.contactStaff.email || "Chưa cập nhật"}
+                                </span>
                               </div>
 
                               <div className="flex items-center gap-3 text-sm text-slate-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="w-4 h-4 text-amber-600"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                  />
                                 </svg>
-                                <span className="truncate">{job.contactStaff.zaloPhone || "Chưa cập nhật"}</span>
+                                <span className="truncate">
+                                  {job.contactStaff.zaloPhone ||
+                                    "Chưa cập nhật"}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -483,18 +509,17 @@ export default function JobDetailPage() {
                               ? `/tuyen-dung/${item.slug}`
                               : "/tuyen-dung"
                           }
-                          className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col md:flex-row md:items-center gap-3 md:gap-4"
+                          className="group bg-white rounded-2xl p-3 md:p-4 border border-gray-100 hover:border-amber-300/50 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col gap-3 md:grid md:grid-cols-[minmax(0,1fr)_13rem_8.75rem] md:items-center md:gap-4 min-w-0"
                         >
-                          <div className="flex items-center gap-0 md:gap-3 flex-grow">
+                          <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
                             <div className="relative shrink-0 hidden md:block">
-                              
-                                <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
-                                  <img
-                                    src="/Logo.png"
-                                    alt="Jobup"
-                                    className="w-full h-full object-contain"
-                                  />
-                                </div>
+                              <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
+                                <img
+                                  src="/Logo.png"
+                                  alt="Jobup"
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
                               {item.isHot && (
                                 <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-red-500 text-white text-[8px] font-bold uppercase rounded-full shadow-sm">
                                   Hot
@@ -502,16 +527,16 @@ export default function JobDetailPage() {
                               )}
                             </div>
 
-                            <div className="flex-grow min-w-0">
-                              <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors truncate">
+                            <div className="grow min-w-0">
+                              <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-amber-600 transition-colors line-clamp-2 wrap-break-word">
                                 {item.title}
                               </h3>
-                              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                                <p className="text-sm text-gray-500 font-medium">
+                              <div className="flex items-center gap-x-2 gap-y-1 min-w-0">
+                                <p className="text-sm text-gray-500 font-medium truncate min-w-0">
                                   {item.displayCompanyName}
                                 </p>
-                                <span className="w-1 h-1 rounded-full bg-gray-300" />
-                                <p className="text-sm text-gray-400">
+                                <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                                <p className="text-sm text-gray-400 truncate min-w-0">
                                   <i className="fa-solid fa-location-dot mr-1" />
                                   {item.provinceName || "Toàn quốc"}
                                 </p>
@@ -519,24 +544,24 @@ export default function JobDetailPage() {
                             </div>
                           </div>
 
-                          <div className="flex flex-wrap items-center gap-2 md:w-52">
+                          <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
                             {item.workType !== undefined && (
-                              <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100">
+                              <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100 max-w-full truncate">
                                 {WORK_TYPE_LABELS[item.workType] || "Khác"}
                               </span>
                             )}
                             {item.categoryName && (
-                              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100">
+                              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100 max-w-full truncate">
                                 {item.categoryName}
                               </span>
                             )}
                           </div>
 
-                          <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center md:min-w-[140px] pt-3 md:pt-0 border-t md:border-t-0 border-gray-50">
-                            <span className="text-green-600 font-extrabold text-sm md:text-base">
+                          <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center min-w-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-50 gap-2 md:gap-1">
+                            <span className="text-green-600 font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
                               {formatSalary(item.salaryFrom, item.salaryTo)}
                             </span>
-                            <span className="text-gray-400 text-xs mt-0.5">
+                            <span className="text-gray-400 text-xs mt-0.5 shrink-0">
                               {timeAgo(item.createdAt)}
                             </span>
                           </div>

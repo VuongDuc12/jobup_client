@@ -118,15 +118,17 @@ export default function UrgentJobsWidget() {
                     />
                   </div>
                 )}
-                <div className="flex-grow min-w-0">
-                  <h5 className="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors truncate">
+                <div className="grow min-w-0">
+                  <h5 className="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors line-clamp-2 wrap-break-word">
                     {job.title}
                   </h5>
-                  <div className="flex items-center justify-between mt-1">
-                    <p className="text-brand-yellow font-extrabold text-[11px] tracking-tight">
+                  <div className="flex items-center justify-between mt-1 gap-2 min-w-0">
+                    <p className="text-brand-yellow font-extrabold text-[11px] tracking-tight truncate min-w-0">
                       {salary}
                     </p>
-                    <p className="text-gray-400 text-[9px] font-bold">{time}</p>
+                    <p className="text-gray-400 text-[9px] font-bold shrink-0">
+                      {time}
+                    </p>
                   </div>
                 </div>
               </Link>
