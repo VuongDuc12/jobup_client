@@ -256,7 +256,7 @@ export default function InternalNewsPage() {
                 </div>
                 <h1 className="text-3xl md:text-5xl font-black text-brand-black leading-tight mb-6 md:mb-8">
                   Nơi chia sẻ kiến thức{" "}
-                  <span className="text-brand-yellow">vươn tầm</span> sự nghiệp.
+                  <span className="text-brand-yellow">vươn tầm</span> sự nghiệp
                 </h1>
                 <p className="text-gray-500 text-base md:text-lg leading-relaxed mb-8 md:mb-10">
                   Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất.

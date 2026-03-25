@@ -139,19 +139,19 @@ export default function HeroSection({
             </div>
 
             {/* Main Heading */}
-            <h1 className="mb-6">
-              <span className="block text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold text-[#111827] leading-[1.1] tracking-tight">
-                {title1 || "Khơi Nguồn"}
+            <h1 className="mb-4">
+              <span className=" text-[clamp(2rem,4vw,3.5rem)] font-extrabold text-[#111827] leading-[1.15] tracking-tight">
+                {title1 || "Đơn vị cung cấp dịch vụ"}
               </span>
-              <span className="block text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-tight mt-1">
+              <span className="ml-2 text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.15] tracking-tight mt-1">
                 <span className="text-brand-yellow">
-                  {titleHighlight || "Sự Nghiệp Vàng"}
+                  {titleHighlight || "Tư vấn tuyển dụng"}
                 </span>
               </span>
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg md:text-xl text-[#4B5563] leading-[1.7] font-light max-w-md mb-8">
+            <p className="text-base md:text-lg text-[#4B5563] leading-[1.7] font-light max-w-2xl mb-8">
               {subtitle ||
                 "Kết nối ứng viên tài năng với hơn 15,000+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
             </p>
@@ -171,7 +171,7 @@ export default function HeroSection({
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent text-sm"
                 />
               </div>
-              <div className="flex-grow flex items-center px-4">
+              <div className="flex-grow flex items-center ">
                 <i className="fa-solid fa-location-dot text-gray-400 mr-3" />
                 <select
                   name="provinceId"
@@ -188,7 +188,7 @@ export default function HeroSection({
               </div>
               <button
                 type="submit"
-                className="bg-brand-yellow text-brand-black font-bold px-8 py-3 rounded-xl md:rounded-full hover:bg-brand-black hover:text-white transition-all text-sm whitespace-nowrap cursor-pointer"
+                className="bg-brand-yellow text-brand-black font-bold px-4 py-3 rounded-xl md:rounded-full hover:bg-brand-black hover:text-white transition-all text-sm whitespace-nowrap cursor-pointer"
               >
                 Tìm kiếm
               </button>
@@ -233,7 +233,7 @@ export default function HeroSection({
             <div className="relative z-10 mt-12 lg:mt-0 pt-12 border-t border-slate-100/70">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <p className="text-center text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">
-                  Được tin tưởng bởi 500+ doanh nghiệp hàng đầu
+                  Được tin tưởng bởi 300+ doanh nghiệp hàng đầu
                 </p>
                 <div className="relative overflow-hidden mask-image-gradient pb-4">
                   <div className="flex gap-16 items-center animate-loop-scroll whitespace-nowrap">
@@ -314,7 +314,7 @@ export default function HeroSection({
                             TÌM VIỆC NGAY!
                           </h4>
                           <p className="text-[10px] text-amber-600 font-bold uppercase tracking-wider">
-                            15,400+ cơ hội
+                            100+ cơ hội
                           </p>
                         </div>
                       </div>
