@@ -104,6 +104,8 @@ interface JobListingsProps {
   experience?: number;
   workType?: number;
   sortBy?: string;
+  pageSize?: number;
+  viewAllHref?: string;
 }
 
 export default function JobListings({
@@ -115,6 +117,8 @@ export default function JobListings({
   experience,
   workType,
   sortBy,
+  pageSize = 10,
+  viewAllHref,
 }: JobListingsProps) {
   const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -142,7 +146,7 @@ export default function JobListings({
           Experience: experience,
           WorkType: workType,
           PageNumber: pageNumber,
-          PageSize: 10,
+          PageSize: pageSize,
           SortBy: sortBy || "newest",
         });
 
@@ -211,9 +215,7 @@ export default function JobListings({
         !error &&
         jobs.slice(0, 3).map((job) => <JobCard key={job.id} job={job} />)}
 
-      {!loading && !error && jobs.length > 3 && (
-        <DynamicBanner position="jobs_infeed" variant="infeed" />
-      )}
+      {/* in-feed banner removed per request */}
 
       {!loading &&
         !error &&
@@ -221,21 +223,93 @@ export default function JobListings({
 
       {!loading && !error && jobs.length > 0 && (
         <div className="flex justify-center pt-8">
-          <button
-            className="px-6 py-2 border border-gray-300 rounded-full hover:bg-black hover:text-white transition-all font-medium cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-            onClick={() => {
-              const nextPage = page + 1;
-              setPage(nextPage);
-              loadJobs(nextPage);
-            }}
-            disabled={loadingMore || page >= totalPages}
-          >
-            {loadingMore
-              ? "Đang tải..."
-              : page >= totalPages
-                ? "Đã hết việc làm phù hợp"
-                : "Xem thêm việc làm"}
-          </button>
+          {viewAllHref ? (
+            <a
+              href={viewAllHref}
+              className="px-6 py-2 border border-gray-300 rounded-full hover:bg-black hover:text-white transition-all font-medium"
+            >
+              Xem thêm việc làm
+            </a>
+          ) : (
+            <nav className="inline-flex items-center space-x-2" aria-label="Pagination">
+              <button
+                className="px-3 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
+                onClick={() => {
+                  if (page <= 1) return;
+                  const prev = page - 1;
+                  setPage(prev);
+                  loadJobs(prev, true);
+                }}
+                disabled={loading || page <= 1}
+              >
+                Trước
+              </button>
+
+              {/* Page numbers (windowed) */}
+              {(() => {
+                const visible = 5;
+                let start = Math.max(1, page - 2);
+                let end = Math.min(totalPages, page + 2);
+                if (page <= 3) {
+                  start = 1;
+                  end = Math.min(totalPages, visible);
+                }
+                if (page > totalPages - 3) {
+                  end = totalPages;
+                  start = Math.max(1, totalPages - (visible - 1));
+                }
+
+                const nodes: (number | string)[] = [];
+                if (start > 1) {
+                  nodes.push(1);
+                  if (start > 2) nodes.push("...");
+                }
+
+                for (let p = start; p <= end; p++) nodes.push(p);
+
+                if (end < totalPages) {
+                  if (end < totalPages - 1) nodes.push("...");
+                  nodes.push(totalPages);
+                }
+
+                return nodes.map((n, idx) =>
+                  typeof n === "string" ? (
+                    <span key={`sep-${idx}`} className="px-2 text-sm text-gray-400">{n}</span>
+                  ) : (
+                    <button
+                      key={n}
+                      onClick={() => {
+                        if (n === page) return;
+                        setPage(Number(n));
+                        loadJobs(Number(n), true);
+                      }}
+                      className={
+                        `px-3 py-2 rounded-full text-sm font-medium border ` +
+                        (n === page
+                          ? "bg-brand-yellow text-white border-brand-yellow"
+                          : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100")
+                      }
+                    >
+                      {n}
+                    </button>
+                  ),
+                );
+              })()}
+
+              <button
+                className="px-3 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
+                onClick={() => {
+                  if (page >= totalPages) return;
+                  const next = page + 1;
+                  setPage(next);
+                  loadJobs(next, true);
+                }}
+                disabled={loading || page >= totalPages}
+              >
+                Sau
+              </button>
+            </nav>
+          )}
         </div>
       )}
     </div>

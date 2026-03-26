@@ -509,7 +509,7 @@ export default function InternalNewsDetailPage() {
                 )}
 
                 <DynamicBanner
-                  position="internal_news_detail_sidebar"
+                  position="news_detail_sidebar"
                   variant="compact"
                 />
               </div>

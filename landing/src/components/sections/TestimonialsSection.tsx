@@ -36,8 +36,9 @@ const defaultTestimonials = [
 export default function TestimonialsSection({ testimonials: apiTestimonials }: TestimonialsSectionProps) {
   const activeItems =
     apiTestimonials && apiTestimonials.length > 0
-      ? apiTestimonials
+      ? [...apiTestimonials]
             .sort((a, b) => a.displayOrder - b.displayOrder)
+            .slice(0, 6)
       : null;
 
   const items = activeItems
@@ -51,7 +52,7 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
     : defaultTestimonials;
 
   return (
-    <section className="py-16 bg-brand-black relative overflow-hidden">
+    <section className="py-16 bg-brand-black relative overflow-visible">
       <div
         className="absolute top-0 left-0 w-full h-full opacity-10"
         style={{
@@ -69,10 +70,10 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {items.map((testimonial, idx) => (
-            <div key={idx} className="relative group">
-              <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500">
+            <div key={idx} className="relative group overflow-visible z-0">
+              <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500 h-full flex flex-col justify-between">
                 {/* Stars */}
                 <div className="flex gap-1 text-brand-yellow mb-4">
                   {[...Array(testimonial.rating || 5)].map((_, i) => (
@@ -104,8 +105,8 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
               </div>
 
               {/* 🔥 Hover overlay */}
-              <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <div className="bg-gray-900 p-6 rounded-[2rem] shadow-2xl border border-brand-yellow scale-95 group-hover:scale-100 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-full z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto flex items-start justify-center">
+                <div className="bg-gray-900/95 backdrop-blur-md p-6 rounded-[2rem] shadow-2xl border border-brand-yellow transform scale-95 group-hover:scale-100 group-hover:-translate-y-3 transition-transform duration-300 flex flex-col justify-between w-full">
                   <div className="flex gap-1 text-brand-yellow mb-4">
                     {[...Array(testimonial.rating || 5)].map((_, i) => (
                       <i key={i} className="fa-solid fa-star text-sm" />

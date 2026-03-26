@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import { fetchPublicJobCategories } from "@/lib/api";
@@ -99,7 +100,7 @@ export default function SpecialtySectors() {
                     key={cat.id}
                     className="snap-center shrink-0 w-[300px] md:w-[380px] group"
                   >
-                    <a
+                    <Link
                       href="/tuyen-dung"
                       className="block h-[440px] rounded-[2.5rem] relative overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-500"
                     >
@@ -151,14 +152,14 @@ export default function SpecialtySectors() {
                           <i className="fa-solid fa-arrow-right text-white group-hover:text-[#111827] -rotate-45 group-hover:rotate-0 transition-all duration-300" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
 
           {/* View All Card */}
           <div className="snap-center shrink-0 w-[220px] flex items-center justify-center">
-            <a
+            <Link
               href="/tuyen-dung"
               className="group flex flex-col items-center gap-4 text-center py-8"
             >
@@ -169,7 +170,7 @@ export default function SpecialtySectors() {
                 Xem tất cả <br />
                 24+ Lĩnh vực
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

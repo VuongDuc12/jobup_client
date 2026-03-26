@@ -62,16 +62,15 @@ const DEFAULT_BANNER_BY_VARIANT: Record<BannerVariant, BannerPublicResponse> = {
   infeed: {
     position: null,
     badgeText: null,
-    title: "Cẩm nang sự nghiệp",
+    title: "Khám phá cơ hội mới cùng JobUp",
     highlightText: null,
-    description:
-      "Mẹo tối ưu CV, phỏng vấn và phát triển nghề nghiệp cùng JobUp.",
+    description: "Cập nhật nhanh các vị trí phù hợp và nhận tư vấn từ đội ngũ JobUp.",
     buttonText: "Xem ngay",
     linkUrl: null,
     target: "_self",
     image: DEFAULT_BANNER_IMAGE,
     imageMobile: DEFAULT_BANNER_IMAGE,
-  },
+  }
 };
 
 function resolveImage(path: string | null | undefined): string | null {
@@ -175,7 +174,7 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
       href={link}
       target={link ? target : undefined}
       rel={link && target === "_blank" ? "noopener noreferrer" : undefined}
-      className="relative rounded-2xl overflow-hidden h-auto min-h-[280px] md:min-h-[320px] lg:h-[350px] group shadow-xl cursor-pointer block"
+      className="relative rounded-2xl overflow-hidden min-h-[280px] md:min-h-[320px] lg:min-h-[380px] group shadow-xl cursor-pointer block"
     >
       {imgSrc && (
         <Image
@@ -188,14 +187,14 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
           unoptimized
         />
       )}
-      <div className="relative h-full bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-5 md:p-8 lg:p-14">
+      <div className="relative bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-6 md:p-8 lg:p-12 min-h-[280px] md:min-h-[320px] lg:min-h-[380px]">
         {data.badgeText && (
           <span className="text-brand-yellow font-black uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2">
             <span className="w-8 h-px bg-brand-yellow" /> {data.badgeText}
           </span>
         )}
         {data.title && (
-          <h3 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 leading-tight">
             {data.title} <br />
             {data.highlightText && (
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">
@@ -205,12 +204,12 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
           </h3>
         )}
         {data.description && (
-          <p className="text-gray-200 mb-8 max-w-lg text-base lg:text-lg font-medium leading-relaxed opacity-90">
+          <p className="text-gray-200 mb-6 max-w-lg text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90">
             {data.description}
           </p>
         )}
         {data.buttonText && (
-          <span className="bg-brand-yellow text-brand-black px-8 py-4 rounded-full font-black w-fit hover:bg-white transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/20 inline-block">
+          <span className="bg-brand-yellow text-brand-black px-6 py-3 md:px-8 md:py-4 rounded-full font-black w-fit hover:bg-white transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/20 inline-block text-sm md:text-base">
             {data.buttonText}
           </span>
         )}
@@ -232,7 +231,7 @@ function CompactBanner({
   const target = data.target?.trim();
   const isSubtleCompact =
     position === "home_banner_2" ||
-    position === "internal_news_detail_sidebar" ||
+    position === "news_detail_sidebar" ||
     position === "job_detail_sidebar";
 
   return (
@@ -388,7 +387,7 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
 
 const skeletonClass: Record<BannerVariant, string> = {
   sidebar: "rounded-[24px] md:rounded-[32px] h-[360px] md:h-[420px]",
-  spotlight: "rounded-2xl min-h-[280px] md:min-h-[320px] lg:h-[350px]",
+  spotlight: "rounded-2xl min-h-[280px] md:min-h-[320px] lg:min-h-[380px]",
   compact: "rounded-[2rem] h-[220px]",
   infeed: "rounded-2xl h-[100px]",
 };

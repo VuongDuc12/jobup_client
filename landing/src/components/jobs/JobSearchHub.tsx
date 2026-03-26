@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 
 const broadcasts = [
-  "🔥 Tuyển gấp 50 CSKH lương 15Tr không yêu cầu kinh nghiệm",
-  "🚀 Top 100+ việc làm IT lương nghìn đô tại HCM & Hà Nội",
-  "🎓 Khóa học Tester cam kết đầu ra giảm 50% hôm nay!",
-  "✨ JobUp Connect 2026: Ngày hội tuyển dụng trực tuyến lớn nhất năm",
+  "🔥 JobUp đồng hành cùng Ngày hội định hướng nghề nghiệp và kết nối việc làm cho Sinh viên 2026 ",
+  "🚀 Top 100+ việc làm hot hôm nay",
+  "✨ Liên hệ ngay đội ngũ JobUp để được tư vấn việc làm tận tình 24/7",
 ];
 
 const hotTags = ["Kinh doanh", "Bán hàng", "Giao hàng", "Part-time"];
@@ -54,25 +53,22 @@ export default function JobSearchHub({
   onSortByChange,
   onSearch,
 }: JobSearchHubProps) {
-  const [broadcastDate, setBroadcastDate] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const broadcastDate = useMemo(
+    () =>
+      new Date().toLocaleDateString("vi-VN", {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit",
+      }),
+    [],
+  );
 
   const formatSalaryInput = (value: string) => {
     const digits = value.replace(/[^0-9]/g, "");
     if (!digits) return "";
     return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-
-  useEffect(() => {
-    const now = new Date();
-    setBroadcastDate(
-      now.toLocaleDateString("vi-VN", {
-        weekday: "short",
-        day: "2-digit",
-        month: "2-digit",
-      }),
-    );
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

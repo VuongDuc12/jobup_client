@@ -217,7 +217,7 @@ export default function JobsSection() {
     setError(null);
     try {
       const data = await fetchLatestJobs({
-        limit: 10,
+        limit: 8,
         categoryId,
       });
       setJobs(data);
@@ -317,7 +317,7 @@ export default function JobsSection() {
             <div className="grid grid-cols-1 gap-3 transition-all duration-200">
               {/* Loading */}
               {loading &&
-                Array.from({ length: 6 }).map((_, i) => (
+                Array.from({ length: 8 }).map((_, i) => (
                   <JobCardSkeleton key={i} />
                 ))}
 
