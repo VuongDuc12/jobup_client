@@ -172,27 +172,6 @@ export default function FeaturesSection({
                     &ldquo;{items[0].description}&rdquo;
                   </p>
                   {/* Analytical UI */}
-                  <div className="bg-[#F8FAFC] p-6 rounded-[2rem] border border-gray-100 shadow-sm group-hover:border-brand-yellow transition-colors">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center text-white shadow-lg shadow-brand-yellow">
-                          <i className={items[0].iconClass} />
-                        </div>
-                        <span className="font-bold text-gray-800">
-                          Đang quét hồ sơ...
-                        </span>
-                      </div>
-                      <span className="text-green-600 font-black text-xl">
-                        98%
-                      </span>
-                    </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-brand-yellow to-green-500 w-[98%]" />
-                    </div>
-                    <p className="mt-3 text-[11px] text-gray-400 font-medium uppercase tracking-widest text-center">
-                      Kết quả hiển thị sau 1.2s
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
