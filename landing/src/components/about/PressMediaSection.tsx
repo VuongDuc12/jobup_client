@@ -48,8 +48,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceName: null,
     sourceLogo: null,
     articleUrl: null,
-    thumbnailUrl:
-      "/images/press-business.jpg",
+    thumbnailUrl: "/images/press-business.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -64,8 +63,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceName: null,
     sourceLogo: null,
     articleUrl: null,
-    thumbnailUrl:
-      "/images/press-community.jpg",
+    thumbnailUrl: "/images/press-community.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -79,8 +77,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceName: null,
     sourceLogo: null,
     articleUrl: null,
-    thumbnailUrl:
-      "/images/press-workplace.jpg",
+    thumbnailUrl: "/images/press-workplace.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -94,8 +91,7 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
     sourceName: null,
     sourceLogo: null,
     articleUrl: null,
-    thumbnailUrl:
-      "/images/press-women-office.jpg",
+    thumbnailUrl: "/images/press-women-office.jpg",
     isFeatured: false,
     isHot: false,
     publishedAt: null,
@@ -143,7 +139,7 @@ export default function PressMediaSection({
             <span className="w-8 h-px bg-brand-yellow" />
           </div>
           <h2 className="text-4xl font-extrabold text-brand-black mb-4">
-            JobUp &amp; CEO Hà Phan trên truyền thông
+            JobUp &amp; CEO Hạ Phan trên truyền thông
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
             Sứ mệnh kết nối nhân tài của chúng tôi được lan tỏa bởi các cơ quan

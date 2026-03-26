@@ -178,7 +178,7 @@ export default function MediaMentionsPage() {
             <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-6 md:mb-8 leading-tight">
               Nơi khẳng định <span className="text-brand-yellow">Vị Thế</span>
               <br />
-              trong lòng công chúng.
+              trong lòng công chúng
             </h1>
             <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed font-light">
               Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi
