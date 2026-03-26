@@ -55,8 +55,7 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
       <div
         className="absolute top-0 left-0 w-full h-full opacity-10"
         style={{
-          backgroundImage:
-            "url('/images/carbon-fibre-texture.png')",
+          backgroundImage: "url('/images/carbon-fibre-texture.png')",
         }}
       />
 
@@ -72,35 +71,68 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
 
         <div className="grid md:grid-cols-3 gap-6">
           {items.map((testimonial, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500"
-            >
-              {/* Stars */}
-              <div className="flex gap-1 text-brand-yellow mb-4">
-                {[...Array(testimonial.rating || 5)].map((_, i) => (
-                  <i key={i} className="fa-solid fa-star text-sm" />
-                ))}
+            <div key={idx} className="relative group">
+              <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500">
+                {/* Stars */}
+                <div className="flex gap-1 text-brand-yellow mb-4">
+                  {[...Array(testimonial.rating || 5)].map((_, i) => (
+                    <i key={i} className="fa-solid fa-star text-sm" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-gray-300 italic leading-relaxed text-sm line-clamp-3">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+
+                {/* User */}
+                <div className="flex items-center gap-4 mt-6">
+                  <Image
+                    src={testimonial.avatar}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow"
+                    alt={testimonial.name}
+                  />
+                  <div>
+                    <h4 className="font-bold text-white">{testimonial.name}</h4>
+                    <p className="text-xs text-gray-500 font-medium">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <p className="text-gray-300 italic mb-6 leading-relaxed">
-                &ldquo;{testimonial.quote}&rdquo;
-              </p>
+              {/* 🔥 Hover overlay */}
+              <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-gray-900 p-6 rounded-[2rem] shadow-2xl border border-brand-yellow scale-95 group-hover:scale-100 transition-all duration-300">
+                  <div className="flex gap-1 text-brand-yellow mb-4">
+                    {[...Array(testimonial.rating || 5)].map((_, i) => (
+                      <i key={i} className="fa-solid fa-star text-sm" />
+                    ))}
+                  </div>
 
-              <div className="flex items-center gap-4">
-                <Image
-                  src={testimonial.avatar}
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow"
-                  alt={testimonial.name}
-                  loading="lazy"
-                />
-                <div>
-                  <h4 className="font-bold text-white">{testimonial.name}</h4>
-                  <p className="text-xs text-gray-500 font-medium">
-                    {testimonial.role}
+                  <p className="text-gray-200 italic leading-relaxed text-sm">
+                    &ldquo;{testimonial.quote}&rdquo;
                   </p>
+
+                  <div className="flex items-center gap-4 mt-6">
+                    <Image
+                      src={testimonial.avatar}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow"
+                      alt={testimonial.name}
+                    />
+                    <div>
+                      <h4 className="font-bold text-white">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-xs text-gray-400 font-medium">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
