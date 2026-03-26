@@ -178,7 +178,7 @@ export default function HeroSection({
                   aria-label="Chọn địa điểm làm việc"
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent appearance-none text-sm focus:ring-0"
                 >
-                  <option value="">Tất cả địa điểm</option>
+                  <option value="">Địa điểm</option>
                   {(provinces || []).map((province) => (
                     <option key={province.id} value={province.id}>
                       {province.name}
@@ -188,7 +188,7 @@ export default function HeroSection({
               </div>
               <button
                 type="submit"
-                className="bg-brand-yellow text-brand-black font-bold px-4 py-3 rounded-xl md:rounded-full hover:bg-brand-black hover:text-white transition-all text-sm whitespace-nowrap cursor-pointer"
+                className="bg-brand-yellow text-brand-black font-bold px-8 py-3 rounded-xl md:rounded-full hover:bg-brand-black hover:text-white transition-all text-sm whitespace-nowrap cursor-pointer"
               >
                 Tìm kiếm
               </button>

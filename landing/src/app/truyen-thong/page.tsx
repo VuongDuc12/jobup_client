@@ -151,7 +151,7 @@ export default function MediaMentionsPage() {
   }, [mentionList]);
 
   const featuredLogo =
-    resolveAssetUrl(featured?.sourceLogo) || safeFallbackLogo;
+    resolveAssetUrl(featured?.thumbnailUrl) || safeFallbackLogo;
 
   return (
     <>
@@ -230,11 +230,6 @@ export default function MediaMentionsPage() {
             <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
               <div className="bg-white border border-gray-100 shadow-soft rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-14 hover:border-brand-yellow hover:-translate-y-1 transition-all">
                 <div className="flex items-center gap-4 mb-8">
-                  <img
-                    src={featuredLogo}
-                    className="h-8 object-contain"
-                    alt={featured.sourceName || "Báo chí"}
-                  />
                   <span className="text-gray-400 text-sm font-bold tracking-widest uppercase">
                     | {featured.categoryName}
                   </span>
@@ -270,7 +265,7 @@ export default function MediaMentionsPage() {
                 {list.map((item) =>
                   (() => {
                     const itemLogo =
-                      resolveAssetUrl(item.sourceLogo) || safeFallbackLogo;
+                      resolveAssetUrl(item.thumbnailUrl) || safeFallbackLogo;
 
                     return (
                       <a
@@ -281,10 +276,10 @@ export default function MediaMentionsPage() {
                         rel="noreferrer"
                         onClick={() => trackPublicMediaMentionView(item.id)}
                       >
-                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-brand-light-gray rounded-2xl flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors mx-auto sm:mx-0">
+                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200 mx-auto sm:mx-0">
                           <img
                             src={itemLogo}
-                            className="w-16 h-auto object-contain"
+                            className="w-full h-full object-cover"
                             alt={item.sourceName || "Nguồn tin"}
                           />
                         </div>
