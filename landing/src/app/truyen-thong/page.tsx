@@ -210,50 +210,66 @@ export default function MediaMentionsPage() {
           </div>
         </section>
 
-        <section className="py-8 bg-white border-y border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
-              {mediaLogosData.map((logo, index) => (
-                <img
-                  key={`${logo}-${index}`}
-                  src={logo}
-                  className="h-8 md:h-12 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-110 transition-all"
-                  alt="Media logo"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
-              <div className="bg-white border border-gray-100 shadow-soft rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-14 hover:border-brand-yellow hover:-translate-y-1 transition-all">
-                <div className="flex items-center gap-4 mb-8">
-                  <span className="text-gray-400 text-sm font-bold tracking-widest uppercase">
-                    | {featured.categoryName}
-                  </span>
+              <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2">
+                {/* Content Area */}
+                <div className="p-8 sm:p-10 flex flex-col h-full">
+                  {/* Header: Category & Quote */}
+                  <div className="flex justify-between items-start mb-6">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-yellow/10 text-brand-yellow text-xs font-bold tracking-widest uppercase">
+                      {featured.categoryName}
+                    </span>
+                    <i className="fa-solid fa-quote-right text-3xl text-brand-yellow/20 group-hover:text-brand-yellow/40 transition-colors" />
+                  </div>
+
+                  {/* Title: Tăng trải nghiệm đọc */}
+                  <h2 className="text-2xl sm:text-3xl font-black text-brand-black leading-[1.2] mb-6 group-hover:text-brand-yellow transition-colors duration-300">
+                    “{featured.title}”
+                  </h2>
+
+                  {/* Source Tag: Làm gọn lại */}
+                  <div className="flex items-center gap-3 mb-8">
+                    <span className="text-gray-400 text-xs font-medium italic">
+                      Nguồn:
+                    </span>
+                    <span className="px-3 py-1 rounded-lg bg-gray-50 border border-gray-100 text-[11px] font-bold uppercase text-gray-600 tracking-tight">
+                      {featured.sourceName || "Truyền thông"}
+                    </span>
+                  </div>
+
+                  {/* Link: Thêm hiệu ứng underline giả */}
+                  <div className="mt-auto">
+                    <a
+                      href={featured.articleUrl || "#"}
+                      className="inline-flex items-center gap-2 text-brand-black font-black text-sm tracking-wider group/link transition-all"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => trackPublicMediaMentionView(featured.id)}
+                    >
+                      <span className="relative">
+                        XEM BÀI GỐC
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-yellow transition-all duration-300 group-hover/link:w-full"></span>
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-brand-yellow/10 flex items-center justify-center group-hover/link:bg-brand-yellow transition-colors">
+                        <i className="fa-solid fa-arrow-up-right-from-square text-[10px] group-hover/link:text-white transition-colors" />
+                      </div>
+                    </a>
+                  </div>
                 </div>
-                <i className="fa-solid fa-quote-left text-brand-yellow text-5xl mb-8 block opacity-20" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-black leading-tight mb-6 md:mb-8">
-                  “{featured.title}”
-                </h2>
-                <div className="flex items-center gap-4 mb-10 text-gray-500">
-                  <span className="font-bold text-sm">Nguồn:</span>
-                  <span className="px-4 py-1.5 rounded-full bg-brand-light-gray text-[10px] font-black uppercase text-gray-500 tracking-wider">
-                    {featured.sourceName || "Truyền thông"}
-                  </span>
+
+                {/* Image: Thêm Overlay gradient nhẹ phía trên để tách biệt với nội dung */}
+                <div className="relative h-56 sm:h-64 w-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-12 z-10" />
+                  <img
+                    src={resolveAssetUrl(featured.thumbnailUrl) || featuredLogo}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    alt={featured.title}
+                  />
+                  {/* Một lớp phủ màu khi hover giúp ảnh sâu hơn */}
+                  <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <a
-                  href={featured.articleUrl || "#"}
-                  className="inline-flex items-center gap-3 text-brand-yellow-hover font-black text-lg"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => trackPublicMediaMentionView(featured.id)}
-                >
-                  XEM BÀI GỐC
-                  <i className="fa-solid fa-arrow-up-right-from-square" />
-                </a>
               </div>
 
               <div className="space-y-6">
