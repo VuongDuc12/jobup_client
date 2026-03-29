@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import NumberedPagination from "@/components/shared/NumberedPagination";
 import { internalNewsArticles } from "@/lib/mockNews";
 import { fetchPublicArticles, fetchPublicNewsCategories } from "@/lib/api";
 import { resolveAssetUrl } from "@/lib/utils";
@@ -48,7 +49,7 @@ function fallbackArticleList(): PublicArticleListItemResponse[] {
 }
 
 export default function InternalNewsPage() {
-  const PAGE_SIZE = 9;
+  const PAGE_SIZE = 6;
   const safeFallbackCover =
     internalNewsArticles[0]?.coverImage ||
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'%3E%3Crect width='1200' height='675' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='28'%3EJobUp News%3C/text%3E%3C/svg%3E";
@@ -71,8 +72,8 @@ export default function InternalNewsPage() {
   const [keywordInput, setKeywordInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isPaginating, setIsPaginating] = useState(false);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("jobup_news_filters");
@@ -166,7 +167,7 @@ export default function InternalNewsPage() {
 
     const loadCategoryArticles = async () => {
       const isFirstPage = pageNumber === 1;
-      if (!isFirstPage) setIsLoadingMore(true);
+      if (!isFirstPage) setIsPaginating(true);
 
       try {
         const articleResult = await fetchPublicArticles({
@@ -178,17 +179,17 @@ export default function InternalNewsPage() {
 
         if (!mounted) return;
         const nextList = articleResult.list || [];
-        setOthers((prev) => (isFirstPage ? nextList : [...prev, ...nextList]));
-        setHasMore(nextList.length === PAGE_SIZE);
+        setOthers(nextList);
+        setTotalPages(Math.max(articleResult.totalPages || 1, 1));
       } catch {
         if (!mounted) return;
         if (isFirstPage) {
           setOthers(fallbackItems);
-          setHasMore(false);
+          setTotalPages(1);
         }
       } finally {
         if (!mounted) return;
-        if (!isFirstPage) setIsLoadingMore(false);
+        if (!isFirstPage) setIsPaginating(false);
       }
     };
 
@@ -209,9 +210,10 @@ export default function InternalNewsPage() {
     setPageNumber(1);
   };
 
-  const handleLoadMore = () => {
-    if (isLoadingMore || !hasMore) return;
-    setPageNumber((prev) => prev + 1);
+  const handlePageChange = (nextPage: number) => {
+    if (nextPage === pageNumber || nextPage < 1 || nextPage > totalPages)
+      return;
+    setPageNumber(nextPage);
   };
 
   const featuredLink = useMemo(() => {
@@ -355,9 +357,18 @@ export default function InternalNewsPage() {
                               {formatDate(article.publishedAt)}
                             </span>
                           </div>
-                          <h3 className="text-xl md:text-2xl font-black text-brand-black leading-snug hover:text-brand-yellow transition-colors mb-4 line-clamp-2">
-                            {article.title}
-                          </h3>
+                          <div className="relative group/title mb-4">
+                            <h3 className="text-xl md:text-2xl font-black text-brand-black leading-snug hover:text-brand-yellow transition-colors line-clamp-2">
+                              {article.title}
+                            </h3>
+
+                            <div className="pointer-events-none absolute left-0 right-0 -top-3 -translate-y-full z-30 opacity-0 group-hover/title:opacity-100 transition-opacity duration-200 hidden md:block">
+                              <div className="rounded-xl bg-brand-black text-white text-sm font-bold leading-snug p-3 shadow-2xl border border-brand-yellow/30">
+                                {article.title}
+                              </div>
+                              <div className="ml-5 h-2.5 w-2.5 rotate-45 bg-brand-black border-r border-b border-brand-yellow/30" />
+                            </div>
+                          </div>
                           <p className="text-gray-500 line-clamp-2 mb-6 text-sm">
                             {article.summary ||
                               "Đang cập nhật nội dung bài viết."}
@@ -390,18 +401,13 @@ export default function InternalNewsPage() {
             </div>
 
             <div className="mt-12 flex justify-center">
-              {hasMore ? (
-                <button
-                  type="button"
-                  onClick={handleLoadMore}
-                  disabled={isLoadingMore}
-                  className="px-8 py-3 rounded-full bg-brand-black text-white font-bold text-sm hover:bg-brand-yellow hover:text-brand-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {isLoadingMore ? "Đang tải..." : "Xem thêm"}
-                </button>
-              ) : (
-                <span className="text-sm text-gray-400 font-medium"></span>
-              )}
+              <NumberedPagination
+                page={pageNumber}
+                totalPages={totalPages}
+                disabled={isPaginating}
+                showWhenSinglePage
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </section>

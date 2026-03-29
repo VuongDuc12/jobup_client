@@ -26,12 +26,15 @@ export default function LeadershipSection({
   advisorImage,
   advisorAchievements,
 }: LeadershipSectionProps) {
+  // Khai báo các giá trị hiển thị (fallback values)
   const displayBadge = badgeText || "Đội ngũ lãnh đạo";
   const displayTitle = title || "Những người dẫn dắt JobUp";
+
   const displayCeoRole = ceoRoleLabel || "CEO & Founder";
   const displayCeoName = ceoName || "Mrs. Ha Phan, MHRM";
   const displayCeoImage =
     getAssetUrl(ceoImage) || "/images/leadership-woman-1.jpg";
+
   const displayAdvisorRole = advisorRoleLabel || "Ban Cố Vấn";
   const displayAdvisorName = advisorName || "Mrs. Diep Nguyen Ngoc, MHRM";
   const displayAdvisorImage =
@@ -49,20 +52,21 @@ export default function LeadershipSection({
             </span>
             <span className="w-8 h-px bg-brand-yellow" />
           </div>
-          <h2 className="text-4xl font-extrabold text-brand-black">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black">
             {displayTitle}
           </h2>
         </div>
 
-        {/* CEO */}
-        <div className="grid lg:grid-cols-5 gap-12 items-center mb-20">
-          <div className="lg:col-span-2 rounded-3xl overflow-hidden shadow-xl">
+        {/* CEO Section */}
+        <div className="grid lg:grid-cols-5 gap-12 items-start mb-20">
+          <div className="lg:col-span-2 max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
               src={displayCeoImage}
               alt={`${displayCeoName} – ${displayCeoRole} JobUp`}
               width={600}
               height={800}
-              className="w-full aspect-[3/4] object-cover"
+              // Sửa position-top thành object-top
+              className="w-full h-auto max-h-[500px] object-cover"
               loading="lazy"
             />
           </div>
@@ -73,10 +77,11 @@ export default function LeadershipSection({
             <h3 className="text-3xl font-extrabold text-brand-black mt-2 mb-6">
               {displayCeoName}
             </h3>
+
             {ceoAchievements ? (
               <div className="space-y-3 text-gray-600">
                 {ceoAchievements
-                  ?.split(/<\/p>/i)
+                  .split(/<\/p>/i)
                   .map((item) =>
                     item
                       .replace(/<p>/i, "")
@@ -87,7 +92,7 @@ export default function LeadershipSection({
                   .map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex gap-3 items-start leading-relaxed"
+                      className="flex gap-3 items-start leading-relaxed my-4"
                     >
                       <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
                       <span dangerouslySetInnerHTML={{ __html: item }} />
@@ -117,27 +122,13 @@ export default function LeadershipSection({
                     <strong>HRBP</strong> tại TPBank
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                  <span>
-                    Giảng viên khóa &ldquo;Tuyển dụng thực tế cho người
-                    mới&rdquo; tại <strong>Gitiho</strong> – 300+ học viên
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                  <span>
-                    Chuyên gia đào tạo &amp; tư vấn tuyển dụng cho{" "}
-                    <strong>doanh nghiệp vừa và nhỏ</strong>
-                  </span>
-                </li>
               </ul>
             )}
           </div>
         </div>
 
-        {/* Advisor */}
-        <div className="grid lg:grid-cols-5 gap-12 items-center">
+        {/* Advisor Section */}
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
           <div className="lg:col-span-3 order-2 lg:order-1">
             <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
               {displayAdvisorRole}
@@ -145,19 +136,23 @@ export default function LeadershipSection({
             <h3 className="text-3xl font-extrabold text-brand-black mt-2 mb-6">
               {displayAdvisorName}
             </h3>
+
             {advisorAchievements ? (
               <div className="space-y-3 text-gray-600">
                 {advisorAchievements
-                  ?.split(/<\/p>/i) // tách từng đoạn </p>
+                  .split(/<\/p>/i)
                   .map((item) =>
                     item
-                      .replace(/<p>/i, "") // bỏ <p>
-                      .replace(/<br\s*\/?>/gi, "") // bỏ <br> nếu có
+                      .replace(/<p>/i, "")
+                      .replace(/<br\s*\/?>/gi, "")
                       .trim(),
                   )
-                  .filter((item) => item && item !== "") // bỏ rỗng
+                  .filter(Boolean)
                   .map((item, idx) => (
-                    <div key={idx} className="flex gap-3 items-start">
+                    <div
+                      key={idx}
+                      className="flex gap-3 items-start leading-relaxed my-4"
+                    >
                       <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
                       <span dangerouslySetInnerHTML={{ __html: item }} />
                     </div>
@@ -175,26 +170,19 @@ export default function LeadershipSection({
                   <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
                   <span>
                     <strong>15 năm</strong> kinh nghiệm Quản lý Nhân sự tại Tập
-                    đoàn <strong>Lotus, Vingroup, Seaferico</strong>
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                  <span>
-                    Nguyên Giảng viên{" "}
-                    <strong>Khoa Quản trị nguồn nhân lực</strong>
+                    đoàn <strong>Lotus, Vingroup</strong>
                   </span>
                 </li>
               </ul>
             )}
           </div>
-          <div className="lg:col-span-2 order-1 lg:order-2 rounded-3xl overflow-hidden shadow-xl">
+          <div className="lg:col-span-2 order-1 lg:order-2 max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
               src={displayAdvisorImage}
               alt={`${displayAdvisorName} – ${displayAdvisorRole} JobUp`}
               width={600}
               height={800}
-              className="w-full aspect-[3/4] object-cover"
+              className="w-full h-auto max-h-[500px] object-cover"
               loading="lazy"
             />
           </div>

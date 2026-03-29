@@ -33,12 +33,14 @@ const defaultTestimonials = [
   },
 ];
 
-export default function TestimonialsSection({ testimonials: apiTestimonials }: TestimonialsSectionProps) {
+export default function TestimonialsSection({
+  testimonials: apiTestimonials,
+}: TestimonialsSectionProps) {
   const activeItems =
     apiTestimonials && apiTestimonials.length > 0
       ? [...apiTestimonials]
-            .sort((a, b) => a.displayOrder - b.displayOrder)
-            .slice(0, 6)
+          .sort((a, b) => a.displayOrder - b.displayOrder)
+          .slice(0, 6)
       : null;
 
   const items = activeItems
@@ -72,7 +74,10 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
 
         <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {items.map((testimonial, idx) => (
-            <div key={idx} className="relative group overflow-visible z-0">
+            <div
+              key={idx}
+              className="relative group overflow-visible z-0 hover:z-40"
+            >
               <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-[2rem] border border-gray-700 hover:border-brand-yellow transition-all duration-500 h-full flex flex-col justify-between">
                 {/* Stars */}
                 <div className="flex gap-1 text-brand-yellow mb-4">
@@ -104,36 +109,12 @@ export default function TestimonialsSection({ testimonials: apiTestimonials }: T
                 </div>
               </div>
 
-              {/* 🔥 Hover overlay */}
-              <div className="absolute top-0 left-0 w-full z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto flex items-start justify-center">
-                <div className="bg-gray-900/95 backdrop-blur-md p-6 rounded-[2rem] shadow-2xl border border-brand-yellow transform scale-95 group-hover:scale-100 group-hover:-translate-y-3 transition-transform duration-300 flex flex-col justify-between w-full">
-                  <div className="flex gap-1 text-brand-yellow mb-4">
-                    {[...Array(testimonial.rating || 5)].map((_, i) => (
-                      <i key={i} className="fa-solid fa-star text-sm" />
-                    ))}
-                  </div>
-
-                  <p className="text-gray-200 italic leading-relaxed text-sm">
+              {/* Hover quote-only card */}
+              <div className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:flex items-center justify-center p-3">
+                <div className="bg-gray-900/95 backdrop-blur-md p-6 rounded-[2rem] shadow-2xl border border-brand-yellow transform scale-95 group-hover:scale-100 transition-transform duration-300 w-full">
+                  <p className="text-gray-200 italic leading-relaxed text-sm text-center">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
-
-                  <div className="flex items-center gap-4 mt-6">
-                    <Image
-                      src={testimonial.avatar}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow"
-                      alt={testimonial.name}
-                    />
-                    <div>
-                      <h4 className="font-bold text-white">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-xs text-gray-400 font-medium">
-                        {testimonial.role}
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

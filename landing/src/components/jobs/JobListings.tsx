@@ -6,6 +6,7 @@ import { fetchPublicJobs } from "@/lib/api";
 import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 import DynamicBanner from "@/components/shared/DynamicBanner";
+import NumberedPagination from "@/components/shared/NumberedPagination";
 
 function JobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
@@ -231,84 +232,22 @@ export default function JobListings({
               Xem thêm việc làm
             </a>
           ) : (
-            <nav className="inline-flex items-center space-x-2" aria-label="Pagination">
-              <button
-                className="px-3 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
-                onClick={() => {
-                  if (page <= 1) return;
-                  const prev = page - 1;
-                  setPage(prev);
-                  loadJobs(prev, true);
-                }}
-                disabled={loading || page <= 1}
-              >
-                Trước
-              </button>
-
-              {/* Page numbers (windowed) */}
-              {(() => {
-                const visible = 5;
-                let start = Math.max(1, page - 2);
-                let end = Math.min(totalPages, page + 2);
-                if (page <= 3) {
-                  start = 1;
-                  end = Math.min(totalPages, visible);
+            <NumberedPagination
+              page={page}
+              totalPages={totalPages}
+              disabled={loading || loadingMore}
+              onPageChange={(nextPage) => {
+                if (
+                  nextPage === page ||
+                  nextPage < 1 ||
+                  nextPage > totalPages
+                ) {
+                  return;
                 }
-                if (page > totalPages - 3) {
-                  end = totalPages;
-                  start = Math.max(1, totalPages - (visible - 1));
-                }
-
-                const nodes: (number | string)[] = [];
-                if (start > 1) {
-                  nodes.push(1);
-                  if (start > 2) nodes.push("...");
-                }
-
-                for (let p = start; p <= end; p++) nodes.push(p);
-
-                if (end < totalPages) {
-                  if (end < totalPages - 1) nodes.push("...");
-                  nodes.push(totalPages);
-                }
-
-                return nodes.map((n, idx) =>
-                  typeof n === "string" ? (
-                    <span key={`sep-${idx}`} className="px-2 text-sm text-gray-400">{n}</span>
-                  ) : (
-                    <button
-                      key={n}
-                      onClick={() => {
-                        if (n === page) return;
-                        setPage(Number(n));
-                        loadJobs(Number(n), true);
-                      }}
-                      className={
-                        `px-3 py-2 rounded-full text-sm font-medium border ` +
-                        (n === page
-                          ? "bg-brand-yellow text-white border-brand-yellow"
-                          : "bg-white text-gray-700 border-gray-200 hover:bg-gray-100")
-                      }
-                    >
-                      {n}
-                    </button>
-                  ),
-                );
-              })()}
-
-              <button
-                className="px-3 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
-                onClick={() => {
-                  if (page >= totalPages) return;
-                  const next = page + 1;
-                  setPage(next);
-                  loadJobs(next, true);
-                }}
-                disabled={loading || page >= totalPages}
-              >
-                Sau
-              </button>
-            </nav>
+                setPage(nextPage);
+                loadJobs(nextPage, true);
+              }}
+            />
           )}
         </div>
       )}
