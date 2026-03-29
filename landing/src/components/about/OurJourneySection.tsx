@@ -88,7 +88,7 @@ export default function OurJourneySection({
             <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black leading-tight mb-8">
               {displayTitle}
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed  text-justify">
+            <p className="text-gray-500 leading-relaxed  text-justify">
               {displayP1}
             </p>
             <p className="mt-4 text-gray-500 leading-relaxed text-justify">

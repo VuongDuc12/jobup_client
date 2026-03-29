@@ -162,7 +162,7 @@ export default function HeroSection({
               className="bg-white p-2 md:p-2.5 rounded-2xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-2 max-w-3xl mt-0 hero-search-form"
             >
               <div className="flex-grow flex items-center px-4 border-b md:border-b-0 md:border-r border-gray-100">
-                <i className="fa-solid fa-magnifying-glass text-gray-400 mr-3" />
+                <i className="fa-solid fa-magnifying-glass text-gray-400 mr-3 flex-shrink-0" />
                 <input
                   name="keyword"
                   type="text"
@@ -171,8 +171,8 @@ export default function HeroSection({
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent text-sm"
                 />
               </div>
-              <div className="flex-grow flex items-center ">
-                <i className="fa-solid fa-location-dot text-gray-400 mr-3" />
+              <div className="flex-grow flex items-center px-4 border-b md:border-b-0 border-gray-100">
+                <i className="fa-solid fa-location-dot text-gray-400 mr-3 flex-shrink-0" />
                 <select
                   name="provinceId"
                   aria-label="Chọn địa điểm làm việc"
@@ -233,7 +233,7 @@ export default function HeroSection({
             <div className="relative z-10 mt-12 lg:mt-0 pt-12 border-t border-slate-100/70">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <p className="text-center text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">
-                  Được tin tưởng bởi 300+ doanh nghiệp hàng đầu
+                  Được tin tưởng bởi 250+ doanh nghiệp hàng đầu
                 </p>
                 <div className="relative overflow-hidden mask-image-gradient pb-4">
                   <div className="flex gap-16 items-center animate-loop-scroll whitespace-nowrap">
