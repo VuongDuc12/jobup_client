@@ -1,5 +1,6 @@
 import type { FeatureResponse, StatisticResponse } from "@/lib/types";
 import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
@@ -72,11 +73,31 @@ const defaultStats = [
   { value: "Free", label: "Tư vấn miễn phí" },
 ];
 
+function parseLeadingNumber(raw: string) {
+  const value = raw.trim();
+  const match = value.match(/^(\d+(?:[.,]\d+)?)(.*)$/);
+  if (!match) return null;
+
+  const numberPart = match[1];
+  const suffix = match[2] ?? "";
+  const decimalPart = numberPart.split(/[.,]/)[1];
+
+  return {
+    target: Number(numberPart.replace(",", ".")),
+    decimals: decimalPart ? decimalPart.length : 0,
+    suffix,
+  };
+}
+
 export default function FeaturesSection({
   features,
   statistics,
 }: FeaturesSectionProps) {
   const { config } = useSystemConfig();
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const lastAnimatedKeyRef = useRef<string>("");
+  const [animatedValues, setAnimatedValues] = useState<number[]>([]);
+  const [statsVisible, setStatsVisible] = useState(false);
 
   // Build fallback features with dynamic hotline from config
   const fallbackFeatures = defaultFeatures.map((f) => {
@@ -86,38 +107,127 @@ export default function FeaturesSection({
     return f;
   });
 
-  const activeFeatures =
-    features && features.length > 0
-      ? features.sort((a, b) => a.displayOrder - b.displayOrder)
-      : null;
+  const activeFeatures = useMemo(() => {
+    if (!features || features.length === 0) return null;
+    return [...features].sort((a, b) => a.displayOrder - b.displayOrder);
+  }, [features]);
 
-  const activeStats =
-    statistics && statistics.length > 0
-      ? statistics
-          .filter((s) => s.isActive)
-          .sort((a, b) => a.displayOrder - b.displayOrder)
-      : null;
+  const activeStats = useMemo(() => {
+    if (!statistics || statistics.length === 0) return null;
+    return [...statistics]
+      .filter((s) => s.isActive)
+      .sort((a, b) => a.displayOrder - b.displayOrder);
+  }, [statistics]);
 
   /* Map API features to a uniform shape (first 4) */
-  const items = activeFeatures
-    ? activeFeatures.slice(0, 4).map((f) => ({
-        title: f.title,
-        description: f.description || "",
-        iconClass: f.iconClass || "fa-solid fa-star",
-        imageUrl: getAssetUrl(f.imageUrl),
-        tag1: f.tag1,
-        tag2: f.tag2,
-        linkUrl: f.linkUrl,
-        buttonText: f.buttonText,
-      }))
-    : fallbackFeatures;
+  const items = useMemo(
+    () =>
+      activeFeatures
+        ? activeFeatures.slice(0, 4).map((f) => ({
+            title: f.title,
+            description: f.description || "",
+            iconClass: f.iconClass || "fa-solid fa-star",
+            imageUrl: getAssetUrl(f.imageUrl),
+            tag1: f.tag1,
+            tag2: f.tag2,
+            linkUrl: f.linkUrl,
+            buttonText: f.buttonText,
+          }))
+        : fallbackFeatures,
+    [activeFeatures, fallbackFeatures],
+  );
 
-  const stats = activeStats
-    ? activeStats.map((s) => ({
-        value: s.numberText || "",
-        label: s.label || "",
-      }))
-    : defaultStats;
+  const stats = useMemo(
+    () =>
+      activeStats
+        ? activeStats.map((s) => ({
+            value: s.numberText || "",
+            label: s.label || "",
+          }))
+        : defaultStats,
+    [activeStats],
+  );
+
+  const parsedStats = useMemo(
+    () => stats.map((stat) => parseLeadingNumber(stat.value)),
+    [stats],
+  );
+
+  const statsAnimationKey = useMemo(
+    () =>
+      parsedStats
+        .map((parsed) =>
+          parsed
+            ? `${parsed.target}|${parsed.decimals}|${parsed.suffix}`
+            : "non-numeric",
+        )
+        .join("||"),
+    [parsedStats],
+  );
+
+  useEffect(() => {
+    const node = statsRef.current;
+    if (!node) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setStatsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!statsVisible) return;
+    if (lastAnimatedKeyRef.current === statsAnimationKey) return;
+
+    lastAnimatedKeyRef.current = statsAnimationKey;
+
+    setAnimatedValues(parsedStats.map(() => 0));
+
+    let frameId = 0;
+    const duration = 1200;
+    const startAt = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - startAt;
+
+      const nextValues = parsedStats.map((parsed, idx) => {
+        if (!parsed) return 0;
+
+        const localElapsed = Math.max(0, elapsed - idx * 120);
+        const progress = Math.min(1, localElapsed / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        return parsed.target * eased;
+      });
+
+      setAnimatedValues(nextValues);
+
+      const isDone = parsedStats.every((parsed, idx) => {
+        if (!parsed) return true;
+        return elapsed - idx * 120 >= duration;
+      });
+
+      if (!isDone) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [parsedStats, statsAnimationKey, statsVisible]);
 
   return (
     <section id="features" className="py-16 bg-white relative overflow-hidden">
@@ -307,13 +417,32 @@ export default function FeaturesSection({
         </div>
 
         {/* Stats */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-t border-gray-100">
+        <div
+          ref={statsRef}
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-10 border-t border-amber-100"
+        >
           {stats.map((stat, idx) => (
-            <div key={idx} className="text-center">
-              <div className="text-3xl font-extrabold text-[#111827] mb-1">
-                {stat.value}
+            <div
+              key={idx}
+              className="text-center rounded-2xl border border-amber-100/70 bg-gradient-to-br from-white to-amber-50/60 px-3 py-5 md:py-6 shadow-[0_10px_30px_-20px_rgba(245,158,11,0.55)] transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_20px_45px_-22px_rgba(245,158,11,0.65)] opacity-100 translate-y-0"
+              style={{ transitionDelay: `${idx * 80}ms` }}
+            >
+              <div className="text-3xl md:text-4xl font-extrabold text-[#111827] mb-1 tracking-tight">
+                {(() => {
+                  const parsed = parsedStats[idx];
+                  if (!parsed) return stat.value;
+
+                  const current = animatedValues[idx] ?? 0;
+                  const value =
+                    parsed.decimals > 0
+                      ? current.toFixed(parsed.decimals)
+                      : String(Math.round(current));
+
+                  return `${value}${parsed.suffix}`;
+                })()}
               </div>
-              <div className="text-xs text-gray-500 font-medium uppercase tracking-wider">
+              <div className="mx-auto mb-2 h-0.5 w-8 rounded-full bg-brand-yellow/70" />
+              <div className="text-[11px] text-gray-500 font-semibold uppercase tracking-[0.16em]">
                 {stat.label}
               </div>
             </div>

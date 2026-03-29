@@ -5,14 +5,16 @@ import Link from "next/link";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 const footerAbout = [
-  { href: "/ve-chung-toi", label: "Giới thiệu chung" },
-  { href: "#", label: "Tuyển dụng nội bộ", badge: "Hiring" },
-  { href: "/truyen-thong", label: "Truyền thông" },
+  { href: "/", label: "Trang chủ" },
+  { href: "/tuyen-dung", label: "Tuyển dụng" },
+  { href: "/ve-chung-toi", label: "Giới thiệu" },
+  { href: "/lien-he", label: "Liên hệ" },
 ];
 
 const footerCandidate = [
   { href: "/tuyen-dung", label: "Việc làm mới nhất" },
-  { href: "/tin-noi-bo", label: "Cẩm nang xin việc" },
+  { href: "/tin-noi-bo", label: "Tin tức" },
+  { href: "/truyen-thong", label: "Tin truyền thông" },
 ];
 
 export default function Footer() {
@@ -49,8 +51,9 @@ export default function Footer() {
               />
             </Link>
             <p className="text-gray-400 text-base leading-relaxed font-medium">
-              Nền tảng tuyển dụng & quản trị nhân sự 4.0 hàng đầu Việt Nam. Kiến
-              tạo sự nghiệp rực rỡ cho hàng triệu nhân tài Việt.
+              "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
+              tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
+              viên, kiến tạo hành trình sự nghiệp bền vững."
             </p>
 
             <div className="flex gap-3">
@@ -80,11 +83,6 @@ export default function Footer() {
                   >
                     {item.label}
                   </Link>
-                  {item.badge && (
-                    <span className="text-[10px] font-bold bg-brand-yellow text-brand-black px-2 py-0.5 rounded-full ml-2">
-                      {item.badge}
-                    </span>
-                  )}
                 </li>
               ))}
             </ul>
@@ -93,7 +91,7 @@ export default function Footer() {
           {/* For Candidates */}
           <div className="lg:col-span-3">
             <h4 className="font-bold text-white text-lg mb-6 tracking-wide">
-              Dành cho Ứng viên
+              Tin tức & Tuyển dụng
             </h4>
             <ul className="space-y-4">
               {footerCandidate.map((item, idx) => (
@@ -139,7 +137,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-black/50 border-t border-white/5 py-8">
+      {/* <div className="bg-black/50 border-t border-white/5 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-500 text-sm font-medium">
             &copy; 2026 JobUp Corporation.
@@ -165,7 +163,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
     </footer>
   );
 }

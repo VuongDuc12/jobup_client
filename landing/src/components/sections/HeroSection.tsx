@@ -171,7 +171,7 @@ export default function HeroSection({
                   className="w-full py-2 focus:outline-none text-gray-700 bg-transparent text-sm"
                 />
               </div>
-              <div className="flex-grow flex items-center ">
+              <div className="flex items-center md:flex-[0_0_120px]">
                 <i className="fa-solid fa-location-dot text-gray-400 mr-3" />
                 <select
                   name="provinceId"

@@ -14,7 +14,7 @@ const FALLBACK_PHONE = "+84 979334143";
 const FALLBACK_EMAIL = "tuyendung@jobup.vn";
 const FALLBACK_FANPAGE = "jobup.vn";
 const FALLBACK_LINKEDIN = "JobUp";
-const FALLBACK_MAP = "";
+const FALLBACK_MAP: string | null = null;
 
 type ContactFormState = {
   companyName: string;
@@ -43,7 +43,7 @@ function hostLabel(raw?: string | null, fallback = ""): string {
   }
 }
 
-function resolveMapEmbedSrc(raw?: string | null): string {
+function resolveMapEmbedSrc(raw?: string | null): string | null {
   if (!raw || !raw.trim()) return FALLBACK_MAP;
 
   const value = raw.trim();
@@ -52,6 +52,9 @@ function resolveMapEmbedSrc(raw?: string | null): string {
   if (value.includes("<iframe")) {
     const srcMatch = value.match(/src\s*=\s*"([^"]+)"/i);
     if (srcMatch?.[1]) return srcMatch[1];
+
+    const singleQuoteSrcMatch = value.match(/src\s*=\s*'([^']+)'/i);
+    if (singleQuoteSrcMatch?.[1]) return singleQuoteSrcMatch[1];
   }
 
   return value;
@@ -361,14 +364,20 @@ export default function ContactPageClient() {
                 </div>
 
                 <div className="rounded-2xl border border-slate-200 overflow-hidden min-h-[280px] bg-white shadow-[0_12px_30px_-16px_rgba(15,23,42,0.25)]">
-                  <iframe
-                    title="JobUp Map"
-                    src={mapEmbedUrl}
-                    className="w-full h-[320px]"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
+                  {mapEmbedUrl ? (
+                    <iframe
+                      title="JobUp Map"
+                      src={mapEmbedUrl}
+                      className="w-full h-[320px]"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <div className="w-full h-[320px] flex items-center justify-center text-sm text-slate-500 bg-slate-50">
+                      Bản đồ đang được cập nhật
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
