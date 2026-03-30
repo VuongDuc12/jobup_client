@@ -247,7 +247,7 @@ export default function FeaturesSection({
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
             Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên
-            từng bước ngoặt sự nghiệp với nền tảng công nghệ dẫn đầu.
+            từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu.
           </p>
         </div>
 
