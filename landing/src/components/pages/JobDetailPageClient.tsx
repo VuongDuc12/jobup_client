@@ -457,8 +457,8 @@ export default function JobDetailPage() {
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-8 space-y-6">
-                <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm space-y-10">
+              <div className="contents lg:col-span-8 lg:block lg:space-y-6">
+                <div className="order-3 bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm space-y-10">
                   <div>
                     <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
                       <span className="w-2 h-8 bg-brand-yellow rounded-full" />
@@ -495,7 +495,7 @@ export default function JobDetailPage() {
                 </div>
 
                 {relatedJobs.length > 0 && (
-                  <div className="pt-10">
+                  <div className="order-5 pt-10">
                     <h3 className="text-xl font-black text-brand-black mb-6">
                       Việc làm liên quan
                     </h3>
@@ -572,7 +572,7 @@ export default function JobDetailPage() {
                 )}
               </div>
 
-              <div className="lg:col-span-4 relative">
+              <div className="order-4 lg:order-none lg:col-span-4 relative">
                 <div className="sticky top-24 space-y-4">
                   <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
                     <h3 className="text-lg font-black text-brand-black">

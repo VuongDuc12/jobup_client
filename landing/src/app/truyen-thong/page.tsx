@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import NumberedPagination from "@/components/shared/NumberedPagination";
 import { mediaMentions } from "@/lib/mockNews";
 import {
   fetchPublicMediaMentions,
@@ -55,15 +56,15 @@ export default function MediaMentionsPage() {
   const [keywordInput, setKeywordInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isPaginating, setIsPaginating] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
     const loadData = async () => {
       const isFirstPage = pageNumber === 1;
-      if (!isFirstPage) setIsLoadingMore(true);
+      if (!isFirstPage) setIsPaginating(true);
 
       try {
         const mentionResult = await fetchPublicMediaMentions({
@@ -75,14 +76,10 @@ export default function MediaMentionsPage() {
         if (!mounted) return;
 
         const nextList = mentionResult.list || [];
-        setMentionList((prev) =>
-          isFirstPage ? nextList : [...prev, ...nextList],
-        );
-        setHasMore(nextList.length === PAGE_SIZE);
+        setMentionList(nextList);
+        setTotalPages(Math.max(mentionResult.totalPages || 1, 1));
 
-        const logosFromApi = (
-          isFirstPage ? nextList : [...mentionList, ...nextList]
-        )
+        const logosFromApi = nextList
           .map((item) => resolveAssetUrl(item.sourceLogo))
           .filter((logo): logo is string => Boolean(logo && logo.trim()));
 
@@ -96,12 +93,12 @@ export default function MediaMentionsPage() {
         if (isFirstPage) {
           const fallbackItems = fallbackMediaList();
           setMentionList(keyword ? [] : fallbackItems);
-          setHasMore(false);
+          setTotalPages(1);
         }
         setMediaLogosData([...mediaLogos]);
       } finally {
         if (!mounted) return;
-        if (!isFirstPage) setIsLoadingMore(false);
+        if (!isFirstPage) setIsPaginating(false);
       }
     };
 
@@ -117,9 +114,11 @@ export default function MediaMentionsPage() {
     setKeyword(keywordInput.trim());
   };
 
-  const handleLoadMore = () => {
-    if (isLoadingMore || !hasMore) return;
-    setPageNumber((prev) => prev + 1);
+  const handlePageChange = (nextPage: number) => {
+    if (nextPage === pageNumber || nextPage < 1 || nextPage > totalPages) {
+      return;
+    }
+    setPageNumber(nextPage);
   };
 
   const { featured, list } = useMemo(() => {
@@ -230,7 +229,7 @@ export default function MediaMentionsPage() {
                   </h2>
 
                   {/* Source Tag: Làm gọn lại */}
-                  <div className="flex items-center gap-3 mb-8">
+                  <div className="flex items-center justify-end gap-3 mb-8">
                     <span className="text-gray-400 text-xs font-medium italic">
                       Nguồn:
                     </span>
@@ -240,7 +239,7 @@ export default function MediaMentionsPage() {
                   </div>
 
                   {/* Link: Thêm hiệu ứng underline giả */}
-                  <div className="mt-auto">
+                  <div className="mt-auto flex items-center justify-end">
                     <a
                       href={featured.articleUrl || "#"}
                       className="inline-flex items-center gap-2 text-brand-black font-black text-sm tracking-wider group/link transition-all"
@@ -287,29 +286,29 @@ export default function MediaMentionsPage() {
                       <a
                         key={item.id}
                         href={item.articleUrl || "#"}
-                        className="group flex flex-col sm:flex-row gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
+                        className="group flex flex-row items-start gap-3 sm:gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
                         target="_blank"
                         rel="noreferrer"
                         onClick={() => trackPublicMediaMentionView(item.id)}
                       >
-                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200 mx-auto sm:mx-0">
+                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200">
                           <img
                             src={itemLogo}
                             className="w-full h-full object-cover"
                             alt={item.sourceName || "Nguồn tin"}
                           />
                         </div>
-                        <div className="flex-grow">
+                        <div className="flex-grow min-w-0">
                           <div className="flex items-center gap-3 mb-2">
                             <span className="w-2 h-2 rounded-full bg-brand-yellow" />
                             <span className="text-brand-yellow text-xs font-black tracking-widest uppercase">
                               {item.categoryName}
                             </span>
                           </div>
-                          <h3 className="text-lg sm:text-xl font-extrabold text-brand-black mb-3 sm:mb-4 group-hover:text-brand-yellow transition-colors leading-snug">
+                          <h3 className="text-base sm:text-xl font-extrabold text-brand-black mb-2 sm:mb-4 group-hover:text-brand-yellow transition-colors leading-snug line-clamp-2">
                             {item.title}
                           </h3>
-                          <p className="text-gray-400 text-sm font-bold flex items-center gap-2">
+                          <p className="text-gray-400 text-xs sm:text-sm font-bold flex items-center gap-2 line-clamp-1">
                             Đọc bài tại {item.sourceName || "Nguồn báo chí"} •{" "}
                             {formatDate(item.publishedAt)}
                             <i className="fa-solid fa-arrow-right text-[10px]" />
@@ -322,18 +321,13 @@ export default function MediaMentionsPage() {
 
                 {list.length > 0 && (
                   <div className="pt-2 flex justify-center">
-                    {hasMore ? (
-                      <button
-                        type="button"
-                        onClick={handleLoadMore}
-                        disabled={isLoadingMore}
-                        className="px-8 py-3 rounded-full bg-brand-black text-white font-bold text-sm hover:bg-brand-yellow hover:text-brand-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
-                        {isLoadingMore ? "Đang tải..." : "Xem thêm"}
-                      </button>
-                    ) : (
-                      <span className="text-sm text-gray-400 font-medium" />
-                    )}
+                    <NumberedPagination
+                      page={pageNumber}
+                      totalPages={totalPages}
+                      disabled={isPaginating}
+                      showWhenSinglePage
+                      onPageChange={handlePageChange}
+                    />
                   </div>
                 )}
               </div>
