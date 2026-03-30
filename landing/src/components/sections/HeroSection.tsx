@@ -300,17 +300,17 @@ export default function HeroSection({
                   Được tin tưởng bởi 250+ doanh nghiệp hàng đầu
                 </p>
                 <div className="mask-image-gradient relative overflow-hidden pb-4">
-                  <div className="animate-loop-scroll flex items-center gap-2 whitespace-nowrap sm:gap-3 lg:gap-4">
+                  <div className="animate-loop-scroll flex items-center gap-0.5 whitespace-nowrap sm:gap-1 lg:gap-1.5">
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`a-${idx}`}
-                        className="flex h-16 min-w-[110px] items-center justify-center px-1 transition-transform duration-300 hover:-translate-y-1 sm:h-[4.5rem] sm:min-w-[124px] sm:px-3 lg:h-20 lg:min-w-[146px] lg:px-4"
+                        className="flex h-16 min-w-[88px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[100px] sm:px-0.5 lg:h-20 lg:min-w-[112px] lg:px-0.5"
                       >
                         <Image
                           src={logo.src}
                           width={150}
                           height={40}
-                          className="h-7 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-8 lg:h-9"
+                          className="h-8 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
@@ -320,13 +320,13 @@ export default function HeroSection({
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`b-${idx}`}
-                        className="flex h-16 min-w-[110px] items-center justify-center px-1 transition-transform duration-300 hover:-translate-y-1 sm:h-[4.5rem] sm:min-w-[124px] sm:px-3 lg:h-20 lg:min-w-[146px] lg:px-4"
+                        className="flex h-16 min-w-[100px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[114px] sm:px-1 lg:h-20 lg:min-w-[128px] lg:px-1"
                       >
                         <Image
                           src={logo.src}
                           width={150}
                           height={40}
-                          className="h-7 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-8 lg:h-9"
+                          className="h-8 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
