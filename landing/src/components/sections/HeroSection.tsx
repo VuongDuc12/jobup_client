@@ -211,14 +211,14 @@ export default function HeroSection({
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/5 to-transparent" />
 
-                  <div className="absolute left-4 top-4 max-w-[11.5rem] rounded-[1.35rem] border border-white/80 bg-white/90 px-4 py-3 text-left shadow-[0_20px_45px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl">
+                  {/* <div className="absolute left-4 top-4 max-w-[11.5rem] rounded-[1.35rem] border border-white/80 bg-white/90 px-4 py-3 text-left shadow-[0_20px_45px_-24px_rgba(15,23,42,0.45)] backdrop-blur-xl">
                     <p className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-amber-700">
                       Tư vấn tuyển dụng premium
                     </p>
                     <p className="mt-1 text-sm font-black leading-snug text-[#111827]">
                       Kết nối đúng người, đúng thời điểm.
                     </p>
-                  </div>
+                  </div> */}
 
                   <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
                     <div className="rounded-[1.35rem] bg-[#111827]/78 px-4 py-3 text-left text-white shadow-[0_20px_45px_-24px_rgba(15,23,42,0.5)] backdrop-blur-md">
@@ -246,21 +246,21 @@ export default function HeroSection({
               className="hero-search-form mt-0 flex w-full max-w-3xl flex-col gap-2.5 rounded-[1.75rem] border border-slate-200/70 bg-white/90 p-3 shadow-[0_25px_60px_-25px_rgba(15,23,42,0.25)] ring-1 ring-white/60 backdrop-blur-xl md:flex-row md:gap-2 md:rounded-full md:p-2.5"
             >
               <div className="flex flex-grow items-center rounded-2xl border border-slate-100 border-b border-gray-100 bg-slate-50/85 px-4 md:rounded-none md:border-0 md:border-r md:bg-transparent">
-                <i className="fa-solid fa-magnifying-glass mr-3 shrink-0 text-gray-400" />
+                <i className="fa-solid fa-magnifying-glass mr-3 w-5 text-center text-gray-400" />
                 <input
                   name="keyword"
                   type="text"
                   placeholder="Tên công việc, vị trí..."
                   aria-label="Tìm kiếm việc làm theo từ khóa"
-                  className="w-full bg-transparent py-3 text-sm text-gray-700 focus:outline-none md:py-2"
+                  className="w-full bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none md:py-2"
                 />
               </div>
-              <div className="flex flex-grow md:flex-[0_0_120px] items-center rounded-2xl border border-slate-100 border-b border-gray-100 bg-slate-50/85 md:rounded-none md:border-0 md:bg-transparent">
-                <i className="fa-solid fa-location-dot mr-3 shrink-0 text-gray-400" />
+              <div className="flex flex-grow md:flex-[0_0_120px] items-center rounded-2xl border border-slate-100 border-b border-gray-100 bg-slate-50/85 px-4 md:rounded-none md:border-0 md:bg-transparent">
+                <i className="fa-solid fa-location-dot mr-3 w-5 text-center text-gray-400" />
                 <select
                   name="provinceId"
                   aria-label="Chọn địa điểm làm việc"
-                  className="w-full appearance-none bg-transparent py-3 text-sm text-gray-700 focus:outline-none focus:ring-0 md:py-2"
+                  className="w-full appearance-none bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none focus:ring-0 md:py-2"
                 >
                   <option value="">Địa điểm</option>
                   {(provinces || []).map((province) => (
