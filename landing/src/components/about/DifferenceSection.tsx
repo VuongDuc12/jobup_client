@@ -34,9 +34,7 @@ export default function DifferenceSection({
   const displaySubtitle =
     subtitle ||
     "Chúng tôi không chỉ tìm ứng viên — chúng tôi kiến tạo giải pháp nhân sự bền vững.";
-  const displayImage =
-    getAssetUrl(image) ||
-    "/images/leadership-woman-1.jpg";
+  const displayImage = getAssetUrl(image) || "/images/leadership-woman-1.jpg";
   const displayH1 =
     heading1 || "Chúng tôi tập trung vào kết quả thực, không chỉ hồ sơ.";
   const displayP1 =
@@ -86,7 +84,7 @@ export default function DifferenceSection({
             <p className="text-gray-500 leading-relaxed mb-8">{displayP2}</p>
 
             {/* Stat Card */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
+            {/* <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-brand-yellow/10 flex items-center justify-center shrink-0">
                   <i
@@ -100,7 +98,7 @@ export default function DifferenceSection({
                   <p className="text-sm text-gray-400">{displayStatSubtitle}</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

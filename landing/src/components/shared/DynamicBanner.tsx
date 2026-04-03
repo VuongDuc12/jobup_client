@@ -65,13 +65,14 @@ const DEFAULT_BANNER_BY_VARIANT: Record<BannerVariant, BannerPublicResponse> = {
     badgeText: null,
     title: "Khám phá cơ hội mới cùng JobUp",
     highlightText: null,
-    description: "Cập nhật nhanh các vị trí phù hợp và nhận tư vấn từ đội ngũ JobUp.",
+    description:
+      "Cập nhật nhanh các vị trí phù hợp và nhận tư vấn từ đội ngũ JobUp.",
     buttonText: "Xem ngay",
     linkUrl: null,
     target: "_self",
     image: DEFAULT_BANNER_IMAGE,
     imageMobile: DEFAULT_BANNER_IMAGE,
-  }
+  },
 };
 
 function resolveImage(path: string | null | undefined): string | null {
@@ -148,7 +149,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
           </h3>
         )}
         {data.description && (
-          <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
+          <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium text-justify">
             {data.description}
           </p>
         )}
@@ -209,7 +210,7 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
           </h3>
         )}
         {data.description && (
-          <p className="text-gray-200 mb-6 max-w-lg text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90">
+          <p className="text-gray-200 mb-6 max-w-lg text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90 text-justify">
             {data.description}
           </p>
         )}
@@ -307,7 +308,7 @@ function CompactBanner({
           )}
           {data.description && (
             <p
-              className={`text-sm mb-5 ${
+              className={`text-sm mb-5 text-justify ${
                 isSubtleCompact
                   ? "font-normal text-slate-200"
                   : "font-medium text-gray-700"
@@ -372,7 +373,9 @@ function InFeedBannerDynamic({ data }: { data: BannerPublicResponse }) {
               </h4>
             )}
             {data.description && (
-              <p className="text-blue-100 text-sm">{data.description}</p>
+              <p className="text-blue-100 text-sm text-justify">
+                {data.description}
+              </p>
             )}
           </div>
         </div>

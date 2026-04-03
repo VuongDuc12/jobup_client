@@ -50,10 +50,10 @@ export default function Footer() {
                 className="h-11 w-auto object-contain"
               />
             </Link>
-            <p className="text-gray-400 text-base leading-relaxed max-w-md">
-              &ldquo;Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối
-              ưu tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
-              viên, kiến tạo hành trình sự nghiệp bền vững.&rdquo;
+            <p className="text-gray-400 text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
+              "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
+              tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
+              viên, kiến tạo hành trình sự nghiệp bền vững."
             </p>
 
             <div className="flex gap-3">
@@ -128,7 +128,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base" />
                 <span className="text-gray-300 leading-relaxed">
-                  29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội
+                  {loading ? "..." : config.address}
                 </span>
               </li>
             </ul>

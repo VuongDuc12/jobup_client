@@ -75,7 +75,7 @@ export default function AboutHeroSection({
             href={displayCta2Url}
             className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full border-2 border-white/40 text-white font-black text-base md:text-lg hover:bg-white hover:text-brand-black hover:border-white hover:scale-105 transition-all active:scale-95 backdrop-blur-md"
           >
-            Khám phá cơ hội
+            Tìm việc làm ngay
           </Link>
         </div>
       </div>
