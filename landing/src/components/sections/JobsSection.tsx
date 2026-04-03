@@ -251,9 +251,9 @@ export default function JobsSection() {
 
   return (
     <section id="jobs" className="landing-section bg-gray-50 scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center py-5 px-4 sm:px-0">
+        <div className="text-center">
           <SectionHeader
             badge="Cơ hội nghề nghiệp"
             title={

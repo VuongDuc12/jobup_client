@@ -68,10 +68,10 @@ export default function NewsSection({ articles }: NewsSectionProps) {
   const sides = hasData ? articles.slice(1) : null;
 
   return (
-    <section id="news" className="landing-section relative bg-white">
+    <section id="news" className="landing-section relative bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center py-5 px-4 sm:px-0">
+        <div className="text-center">
           <SectionHeader
             badge="Tin tức & Hoạt động"
             title={

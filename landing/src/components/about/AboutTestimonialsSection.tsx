@@ -71,7 +71,7 @@ export default function AboutTestimonialsSection({
       : fallbackTestimonials;
 
   return (
-    <section className="landing-section-compact bg-brand-light-gray overflow-hidden">
+    <section className="landing-section bg-brand-light-gray overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <SectionHeader

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 interface FeaturesSectionProps {
   features?: FeatureResponse[] | null;
@@ -236,19 +237,17 @@ export default function FeaturesSection({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center landing-section-header">
-          <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
-            Giải pháp toàn diện
-          </span>
-          <h2 className="text-3xl md:text-5xl font-[1000] text-[#111827] mb-5 tracking-tight">
-            Hệ sinh thái{" "}
-            <span className="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
-          </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên
-            từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Giải pháp toàn diện"
+          title={
+            <>
+              Hệ sinh thái{" "}
+              <span className="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
+            </>
+          }
+          description="Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu."
+          align="center"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* Feature 1 — wide card (2 cols) */}
