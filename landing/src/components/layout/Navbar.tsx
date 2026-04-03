@@ -14,7 +14,7 @@ const navLinks = [
 
 const newsDropdown = [
   { href: "/tin-noi-bo", label: "Tin nội bộ" },
-  { href: "/truyen-thong", label: "Truyền thông" },
+  { href: "/truyen-thong", label: "Tin báo chí, truyền hình" },
 ];
 
 function formatPhone(phone: string | null): string {
@@ -127,7 +127,7 @@ export default function Navbar() {
               className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-brand-yellow transition-colors"
             >
               <i className="fa-solid fa-phone text-xs" />
-              <span className="font-medium">{formatPhone(config.hotline)}</span>
+              <span className="font-medium">{config.hotline}</span>
             </a>
             <span className="hidden md:block w-px h-4 bg-gray-200" />
             <a

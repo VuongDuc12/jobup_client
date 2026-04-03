@@ -101,14 +101,14 @@ export default function OurJourneySection({
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className={`rounded-2xl overflow-hidden shadow-lg ${img.offset ? "mt-8" : ""}`}
+                className={`aspect-video rounded-2xl overflow-hidden shadow-lg ${img.offset ? "mt-8" : ""}`}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  width={500}
-                  height={375}
-                  className="w-full aspect-[4/3] object-cover"
+                  width={1600}
+                  height={900}
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>

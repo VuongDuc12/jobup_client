@@ -287,7 +287,7 @@ export default function JobsSection() {
             Việc làm <span className="text-brand-yellow">Mới Nhất</span>
           </h2>
           <p className="text-gray-500 text-base max-w-2xl mx-auto mb-8">
-            Hơn 500+ việc làm mới được cập nhật hôm nay từ các tập đoàn công
+            Hơn 100+ việc làm mới được cập nhật hôm nay từ các tập đoàn công
             nghệ hàng đầu.
           </p>
 
@@ -326,7 +326,7 @@ export default function JobsSection() {
                 <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
                   <i className="fa-solid fa-triangle-exclamation text-red-400 text-3xl mb-3" />
                   <p className="text-red-600 font-semibold mb-4">{error}</p>
-                   <button
+                  <button
                     onClick={() => loadJobs()}
                     aria-label="Thử tải lại danh sách việc làm"
                     className="px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition-colors cursor-pointer"

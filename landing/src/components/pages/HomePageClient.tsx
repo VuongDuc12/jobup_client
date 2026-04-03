@@ -97,7 +97,7 @@ export default function HomePageClient({
         <JobsSection />
         <SpecialtySectors />
         <FeaturesSection features={features} statistics={statistics} />
-        <TestimonialsSection testimonials={testimonials} />
+        {/* <TestimonialsSection testimonials={testimonials} /> */}
         <NewsSection articles={articles} />
       </main>
       <Footer />

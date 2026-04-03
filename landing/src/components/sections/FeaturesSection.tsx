@@ -278,7 +278,7 @@ export default function FeaturesSection({
                   <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
                     {items[0].title}
                   </h3>
-                  <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic">
+                  <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic text-justify [text-justify:inter-word]">
                     &ldquo;{items[0].description}&rdquo;
                   </p>
                   {/* Analytical UI */}
@@ -311,7 +311,7 @@ export default function FeaturesSection({
                   <h3 className="text-3xl font-black text-white mb-4">
                     {items[1].title}
                   </h3>
-                  <p className="text-gray-400 mb-8 leading-relaxed font-light">
+                  <p className="text-gray-400 mb-8 leading-relaxed font-light text-justify [text-justify:inter-word]">
                     {items[1].description}
                   </p>
                   <div className="mt-auto space-y-4">
@@ -364,7 +364,7 @@ export default function FeaturesSection({
                 <h3 className="text-xl font-black text-[#111827] mb-3">
                   {items[2].title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                <p className="text-gray-500 text-sm leading-relaxed mb-6 text-justify [text-justify:inter-word]">
                   {items[2].description}
                 </p>
                 {items[2].linkUrl && (
@@ -399,7 +399,7 @@ export default function FeaturesSection({
                   <i className={`${items[3].iconClass} text-xl text-white`} />
                 </div>
                 <h3 className="text-xl font-black mb-3">{items[3].title}</h3>
-                <p className="text-white/80 text-sm leading-relaxed mb-6">
+                <p className="text-white/80 text-sm leading-relaxed mb-6 text-justify [text-justify:inter-word]">
                   {items[3].description}
                 </p>
                 {items[3].linkUrl && (

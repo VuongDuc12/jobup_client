@@ -17,7 +17,7 @@ export default function SidebarBannerFallback() {
           Tìm việc <br />
           <span className="text-amber-400">đúng người, đúng việc</span>
         </h3>
-        <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
+        <p className="text-gray-300 text-sm mb-6 leading-relaxed font-medium text-justify">
           Đội ngũ chuyên gia JobUp kết nối bạn với những cơ hội phù hợp nhất.
         </p>
         <div className="flex items-center gap-2 group/btn">
