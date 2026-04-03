@@ -48,7 +48,7 @@ export default function AboutHeroSection({
       </div>
 
       {/* Text Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-12 md:pt-16 lg:pt-20 pb-4 md:pb-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-12 md:pt-16 lg:pt-20 pb-2 md:pb-4">
         <SectionHeader
           badge={displayBadge}
           title={displayTitle}

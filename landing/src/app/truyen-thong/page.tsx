@@ -142,8 +142,8 @@ export default function MediaMentionsPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-20 bg-white text-gray-800 overflow-x-hidden">
-        <section className="relative py-20 md:py-32 overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[65vh]">
+      <main className="pt-20 landing-page-shell-tight bg-white text-gray-800 overflow-x-hidden">
+        <section className="relative landing-section overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[65vh]">
           <div className="absolute inset-0 z-0">
             <img
               src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=2000"
@@ -166,13 +166,13 @@ export default function MediaMentionsPage() {
               description="Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi qua lăng kính báo chí."
               align="center"
               headingTag="h1"
-              className="mb-8 md:mb-10"
+              className="mb-6 md:mb-8"
               contentClassName="max-w-4xl"
               badgeClassName="tracking-[0.24em]"
               titleClassName="text-3xl font-black leading-tight text-white sm:text-4xl md:text-7xl"
               descriptionClassName="max-w-4xl text-base font-light leading-relaxed text-white/80 sm:text-lg md:text-2xl"
             />
-            <div className="mt-8 md:mt-10 mx-auto max-w-2xl flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 md:mt-8 mx-auto max-w-2xl flex flex-col sm:flex-row gap-3">
               <div className="flex-1 relative w-full">
                 <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
                 <input
@@ -197,9 +197,9 @@ export default function MediaMentionsPage() {
           </div>
         </section>
 
-        <section className="py-12 bg-white">
+        <section className="landing-section-compact bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start">
               <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2">
                 {/* Content Area */}
                 <div className="p-8 sm:p-10 flex flex-col h-full">

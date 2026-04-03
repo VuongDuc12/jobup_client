@@ -53,7 +53,7 @@ export default function SectionHeader({
   );
 
   return (
-    <div className={cn("mb-16", className)}>
+    <div className={cn("landing-section-header", className)}>
       <div
         className={cn(
           "max-w-3xl",

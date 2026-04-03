@@ -52,7 +52,7 @@ export default function DifferenceSection({
     statSubtitle || "Trong 15+ ngành nghề trên khắp Việt Nam";
 
   return (
-    <section className="py-16  bg-brand-light-gray">
+    <section className="landing-section bg-brand-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <SectionHeader
@@ -60,11 +60,11 @@ export default function DifferenceSection({
           title={displayTitle}
           description={displaySubtitle}
           align="center"
-          className="mb-20"
+          className="mb-12"
         />
 
         {/* Block: Image left, content right */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center ">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center ">
           <div className="rounded-3xl overflow-hidden shadow-xl">
             <Image
               src={displayImage}

@@ -196,7 +196,7 @@ export default function JobDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-grow pt-24 pb-20 bg-[#FAFAFA]">
+      <main className="flex-grow pt-24 landing-page-shell bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <nav className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-gray-500">
@@ -242,7 +242,7 @@ export default function JobDetailPage() {
           )}
 
           {!loading && job && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative">
               <div className="lg:col-span-8">
                 <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm relative overflow-hidden h-full">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
@@ -495,7 +495,7 @@ export default function JobDetailPage() {
                 </div>
 
                 {relatedJobs.length > 0 && (
-                  <div className="order-5 pt-10">
+                  <div className="order-5 pt-8">
                     <h3 className="text-xl font-black text-brand-black mb-6">
                       Việc làm liên quan
                     </h3>
@@ -573,7 +573,7 @@ export default function JobDetailPage() {
               </div>
 
               <div className="order-4 lg:order-none lg:col-span-4 relative">
-                <div className="sticky top-24 space-y-4">
+              <div className="sticky top-24 space-y-4">
                   <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
                     <h3 className="text-lg font-black text-brand-black">
                       Thông tin tuyển dụng

@@ -157,9 +157,9 @@ export default function ContactPageClient() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20 bg-gradient-to-b from-[#f8fafc] via-white to-[#fff8e7] overflow-x-hidden">
+      <main className="pt-24 landing-page-shell bg-gradient-to-b from-[#f8fafc] via-white to-[#fff8e7] overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             <section className="lg:col-span-6 min-w-0 rounded-3xl border border-slate-200/70 bg-white/90 shadow-soft p-5 sm:p-7 lg:p-8">
               <BadgeText
                 text="Kết nối cùng JobUp"

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { fetchPublicJobs } from "@/lib/api";
 import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
-import DynamicBanner from "@/components/shared/DynamicBanner";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 
 function JobCard({ job }: { job: PublicJobResponse }) {
@@ -171,6 +170,7 @@ export default function JobListings({
       salaryTo,
       experience,
       workType,
+      pageSize,
       sortBy,
     ],
   );

@@ -203,7 +203,7 @@ export default function JobsSection() {
   useEffect(() => {
     const tab = tabs.find((t) => t.key === activeTab);
     loadJobs(tab?.categoryId);
-  }, [activeTab, loadJobs]);
+  }, [activeTab, loadJobs, tabs]);
 
   const startStaffAutoPlay = useCallback(() => {
     if (staff.length <= 1) return;
@@ -250,10 +250,10 @@ export default function JobsSection() {
   }, []);
 
   return (
-    <section id="jobs" className="py-12 bg-gray-50 scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="jobs" className="landing-section bg-gray-50 scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
         {/* Section Header */}
-        <div className="text-center mb-10">
+        <div className="text-center py-5 px-4 sm:px-0">
           <SectionHeader
             badge="Cơ hội nghề nghiệp"
             title={
@@ -263,7 +263,7 @@ export default function JobsSection() {
             }
             description="Hơn 500+ việc làm mới được cập nhật hôm nay từ các tập đoàn công nghệ hàng đầu."
             align="center"
-            className="mb-8"
+            className="mb-6"
             badgeClassName="text-[#B45309]"
             badgeContainerClassName="justify-center"
             lineClassName="bg-[#B45309]"
@@ -290,7 +290,7 @@ export default function JobsSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-7">
           {/* Job List */}
           <div className="lg:col-span-8">
             <div className="grid grid-cols-1 gap-3 transition-all duration-200">
@@ -333,7 +333,7 @@ export default function JobsSection() {
 
             {/* View More */}
             {!loading && !error && jobs.length > 0 && (
-              <div className="mt-8 text-center">
+              <div className="mt-6 text-center">
                 <Link
                   href="/tuyen-dung"
                   className="inline-block px-8 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-full hover:bg-[#111827] hover:text-white hover:border-[#111827] transition-all shadow-sm"
@@ -345,7 +345,7 @@ export default function JobsSection() {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-5">
             {/* Brand Trust Banner */}
             <DynamicBanner position="home_sidebar" variant="sidebar" />
 

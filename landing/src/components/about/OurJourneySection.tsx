@@ -75,16 +75,16 @@ export default function OurJourneySection({
   ];
 
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="landing-section bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
           {/* Text */}
           <div>
             <SectionHeader
               badge={displayBadge}
               title={displayTitle}
               align="left"
-              className="mb-8"
+              className="mb-6"
             />
             <p className="text-gray-500 leading-relaxed  text-justify">
               {displayP1}

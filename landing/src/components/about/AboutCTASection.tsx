@@ -38,7 +38,7 @@ export default function AboutCTASection({
     displayBtn2Url.startsWith("http") || displayBtn2Url.startsWith("mailto:");
 
   return (
-    <section className="py-16 bg-white">
+    <section className="landing-section-compact bg-white">
       <div className="max-w-5xl mx-auto px-4">
         <div className="bg-brand-yellow rounded-[2rem] md:rounded-[3rem] p-8 md:p-20 text-center relative overflow-hidden">
           {/* Watermark */}

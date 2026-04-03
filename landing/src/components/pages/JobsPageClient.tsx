@@ -139,8 +139,8 @@ export default function JobsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-grow pt-24 bg-[#F8F9FA] overflow-x-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <main className="flex-grow pt-24 landing-page-shell bg-[#F8F9FA] overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-9">
           <JobSearchHub
             keyword={keyword}
             provinceId={provinceId}
@@ -163,7 +163,7 @@ export default function JobsPage() {
             onSearch={handleSearch}
           />
 
-          <div className="grid lg:grid-cols-12 gap-8">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-7">
             <div className="lg:col-span-8 min-w-0 flex flex-col gap-6">
               <JobListings
                 keyword={searchKeyword}
@@ -178,7 +178,7 @@ export default function JobsPage() {
               <DynamicBanner position="jobs_spotlight" variant="spotlight" />
             </div>
 
-            <aside className="lg:col-span-4 min-w-0 space-y-8">
+            <aside className="lg:col-span-4 min-w-0 space-y-6">
               <DynamicBanner position="jobs_sidebar" variant="sidebar" />
               <div className="sticky top-24 space-y-6">
                 <UrgentJobsWidget />

@@ -68,10 +68,10 @@ export default function NewsSection({ articles }: NewsSectionProps) {
   const sides = hasData ? articles.slice(1) : null;
 
   return (
-    <section id="news" className="py-16 relative bg-white">
+    <section id="news" className="landing-section relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center py-5 px-4 sm:px-0">
           <SectionHeader
             badge="Tin tức & Hoạt động"
             title={
@@ -81,7 +81,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             }
             description="Những sự kiện, văn hoá và workshop chuyển đổi số nổi bật nhất tháng này."
             align="center"
-            className="mb-5"
+            className="mb-4"
             titleClassName="text-gray-900"
             descriptionClassName="text-base"
           />
@@ -94,7 +94,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
         </div>
 
         {/* News Grid */}
-        <div className="grid lg:grid-cols-12 gap-6">
+        <div className="grid lg:grid-cols-12 gap-5 md:gap-6">
           {/* Highlighted Post */}
           <Link
             href={

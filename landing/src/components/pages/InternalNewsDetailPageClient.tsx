@@ -202,7 +202,7 @@ export default function InternalNewsDetailPage() {
     return (
       <>
         <Navbar />
-        <main className="pt-24 pb-20 bg-brand-light-gray min-h-[50vh]">
+        <main className="pt-24 landing-page-shell bg-brand-light-gray min-h-[50vh]">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <p className="text-lg font-bold text-brand-black mb-3">
               {error || "Không tìm thấy bài viết"}
@@ -234,7 +234,7 @@ export default function InternalNewsDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-20 bg-white">
+      <main className="pt-24 landing-page-shell bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center text-sm font-medium text-gray-500 mb-8 overflow-hidden">
@@ -257,7 +257,7 @@ export default function InternalNewsDetailPage() {
             </span>
           </nav>
 
-          <div className="grid lg:grid-cols-12 gap-12">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
             {/* Left Column: Article Content */}
             <article className="lg:col-span-8">
               {/* Header Info */}
@@ -357,8 +357,8 @@ export default function InternalNewsDetailPage() {
             </article>
 
             {/* Right Column: Sidebar */}
-            <aside className="lg:col-span-4 space-y-8">
-              <div className="sticky top-24 space-y-8">
+            <aside className="lg:col-span-4 space-y-6">
+              <div className="sticky top-24 space-y-6">
                 {/* Search Widget */}
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
                   <h4 className="font-bold text-gray-900 mb-4 text-lg">

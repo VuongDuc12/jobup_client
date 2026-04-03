@@ -3,30 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { fetchLatestJobs } from "@/lib/api";
-import {
-  formatSalary,
-  timeAgo,
-  companyInitial,
-  resolveAssetUrl,
-} from "@/lib/utils";
+import { formatSalary, timeAgo, resolveAssetUrl } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
-
-const FALLBACK_COLORS = [
-  "bg-blue-600",
-  "bg-orange-500",
-  "bg-purple-600",
-  "bg-teal-600",
-  "bg-pink-600",
-  "bg-emerald-600",
-  "bg-rose-600",
-  "bg-indigo-600",
-];
-
-function colorFor(name: string): string {
-  let h = 0;
-  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
-  return FALLBACK_COLORS[Math.abs(h) % FALLBACK_COLORS.length];
-}
 
 export default function UrgentJobsWidget() {
   const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
@@ -89,8 +67,6 @@ export default function UrgentJobsWidget() {
 
         {!loading &&
           jobs.map((job) => {
-            const initial = companyInitial(job.displayCompanyName);
-            const bgColor = colorFor(job.displayCompanyName);
             const salary = formatSalary(job.salaryFrom, job.salaryTo);
             const time = timeAgo(job.createdAt);
             const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);

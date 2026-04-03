@@ -55,7 +55,7 @@ export default function TestimonialsSection({
     : defaultTestimonials;
 
   return (
-    <section className="py-16 bg-brand-black relative overflow-visible">
+    <section className="landing-section bg-brand-black relative overflow-visible">
       <div
         className="absolute top-0 left-0 w-full h-full opacity-10"
         style={{
@@ -72,11 +72,11 @@ export default function TestimonialsSection({
             </>
           }
           align="center"
-          className="mb-12"
+          className="mb-8"
           titleClassName="text-white"
         />
 
-        <div className="grid md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6 items-stretch">
           {items.map((testimonial, idx) => (
             <div
               key={idx}

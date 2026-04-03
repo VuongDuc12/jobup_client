@@ -24,9 +24,9 @@ export default function StatsBarSection({ statistics }: StatsBarSectionProps) {
             : fallbackStats;
 
     return (
-        <section className="py-16 bg-brand-black">
+        <section className="landing-section-compact bg-brand-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-center">
                     {stats.map((stat, idx) => {
                         // Split numberText into number and suffix (e.g. "100+" → "100" + "+")
                         const match = stat.numberText.match(

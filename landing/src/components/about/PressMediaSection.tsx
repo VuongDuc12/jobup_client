@@ -92,7 +92,7 @@ export default function PressMediaSection({
   };
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="landing-section bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <SectionHeader

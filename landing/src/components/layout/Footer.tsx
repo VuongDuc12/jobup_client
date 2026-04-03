@@ -51,9 +51,9 @@ export default function Footer() {
               />
             </Link>
             <p className="text-gray-400 text-base leading-relaxed font-medium">
-              "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
-              tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
-              viên, kiến tạo hành trình sự nghiệp bền vững."
+              &ldquo;Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối
+              ưu tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
+              viên, kiến tạo hành trình sự nghiệp bền vững.&rdquo;
             </p>
 
             <div className="flex gap-3">

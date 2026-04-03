@@ -65,16 +65,16 @@ export default function CoreValuesSection({
     ];
 
     return (
-        <section className="py-16 bg-white border-t border-gray-100">
+        <section className="landing-section bg-white border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="text-center mb-16">
+                <div className="text-center mb-12">
                     <h2 className="text-4xl font-extrabold text-brand-black">
                         {displayTitle}
                     </h2>
                     <div className="w-12 h-1 bg-brand-yellow mx-auto mt-4 rounded-full" />
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-10">
+                <div className="grid md:grid-cols-3 gap-8 md:gap-9">
                     {coreValues.map((value, idx) => (
                         <div key={idx} className="text-center group">
                             <div className="w-16 h-16 rounded-full bg-brand-light-gray flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-yellow transition-all">

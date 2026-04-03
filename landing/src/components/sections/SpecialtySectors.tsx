@@ -31,10 +31,10 @@ export default function SpecialtySectors() {
   return (
     <section
       id="services"
-      className="max-w-[100vw] overflow-hidden py-14 bg-[#F5F5F4] relative"
+      className="landing-section max-w-[100vw] overflow-hidden bg-[#F5F5F4] relative"
     >
       {/* Section Header */}
-      <div className="text-center mb-12">
+      <div className="text-center">
         <SectionHeader
           badge="Lĩnh vực chuyên môn"
           title={
@@ -44,7 +44,7 @@ export default function SpecialtySectors() {
           }
           description="Tìm kiếm vị trí phù hợp với thế mạnh của bạn trong hơn 24+ lĩnh vực khác nhau."
           align="center"
-          className="mb-6"
+          className="mb-5"
           badgeClassName="text-[#B45309]"
           lineClassName="bg-[#B45309]"
           titleClassName="text-[#111827]"
@@ -77,7 +77,7 @@ export default function SpecialtySectors() {
         {/* Track */}
         <div
           ref={trackRef}
-          className="flex gap-6 overflow-x-auto pb-8 pt-4 px-4 md:px-[max(1rem,calc((100vw-80rem)/2))] snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
+          className="flex gap-6 overflow-x-auto pb-6 pt-3 px-4 md:px-[max(1rem,calc((100vw-80rem)/2))] snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
         >
           {loading
             ? Array.from({ length: 4 }).map((_, idx) => (

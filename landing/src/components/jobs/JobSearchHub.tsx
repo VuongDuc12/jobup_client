@@ -76,7 +76,7 @@ export default function JobSearchHub({
   };
 
   return (
-    <div className="mb-10">
+    <div className="mb-8 md:mb-9">
       <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border border-white/20">
         {/* Live Broadcast Bar */}
         <div className="absolute top-0 inset-x-0 z-20 bg-white/10 backdrop-blur-md border-b border-white/10 py-3 overflow-hidden">
@@ -139,8 +139,8 @@ export default function JobSearchHub({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 p-6 lg:p-14 pt-16 lg:pt-20">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <div className="relative z-10 p-6 lg:p-12 pt-16 lg:pt-[4.5rem]">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-7 gap-4">
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Tìm việc làm{" "}
@@ -223,7 +223,7 @@ export default function JobSearchHub({
           </form>
 
           {showAdvanced && (
-            <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-5">
+            <div className="mt-5 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-5">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <label className="text-xs font-bold text-white/80">
@@ -370,7 +370,7 @@ export default function JobSearchHub({
           )}
 
           {/* Hot Tags */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-4">
             <span className="text-[9px] font-black text-white/50 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
               Tìm kiếm nhiều nhất:

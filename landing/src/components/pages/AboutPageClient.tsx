@@ -38,7 +38,7 @@ export default function AboutPageClient({
     return (
         <>
             <Navbar />
-            <main className="flex-grow pt-20">
+            <main className="flex-grow pt-20 landing-page-shell-tight">
                 <AboutHeroSection
                     badgeText={s?.heroBadgeText}
                     title={s?.heroTitle}

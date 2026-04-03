@@ -35,9 +35,7 @@ interface HomePageClientProps {
 export default function HomePageClient({
   initialSettings,
 }: HomePageClientProps) {
-  const [settings, setSettings] = useState<HomepageSettingsResponse | null>(
-    initialSettings,
-  );
+  const settings: HomepageSettingsResponse | null = initialSettings;
   const [partners, setPartners] = useState<PartnerResponse[] | null>(null);
   const [features, setFeatures] = useState<FeatureResponse[] | null>(null);
   const [testimonials, setTestimonials] = useState<
@@ -84,7 +82,7 @@ export default function HomePageClient({
   return (
     <>
       <Navbar />
-      <main className="flex-grow pt-20">
+      <main className="flex-grow pt-20 landing-page-shell-tight">
         <HeroSection
           badgeText={settings?.heroBadgeText}
           title1={settings?.heroTitle1}

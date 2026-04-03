@@ -97,7 +97,11 @@ export default function FeaturesSection({
   const statsRef = useRef<HTMLDivElement | null>(null);
   const lastAnimatedKeyRef = useRef<string>("");
   const [animatedValues, setAnimatedValues] = useState<number[]>([]);
-  const [statsVisible, setStatsVisible] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      typeof window.IntersectionObserver === "undefined",
+  );
 
   // Build fallback features with dynamic hotline from config
   const fallbackFeatures = defaultFeatures.map((f) => {
@@ -169,10 +173,7 @@ export default function FeaturesSection({
     const node = statsRef.current;
     if (!node) return;
 
-    if (typeof IntersectionObserver === "undefined") {
-      setStatsVisible(true);
-      return;
-    }
+    if (typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -193,8 +194,6 @@ export default function FeaturesSection({
     if (lastAnimatedKeyRef.current === statsAnimationKey) return;
 
     lastAnimatedKeyRef.current = statsAnimationKey;
-
-    setAnimatedValues(parsedStats.map(() => 0));
 
     let frameId = 0;
     const duration = 1200;
@@ -230,14 +229,14 @@ export default function FeaturesSection({
   }, [parsedStats, statsAnimationKey, statsVisible]);
 
   return (
-    <section id="features" className="py-16 bg-white relative overflow-hidden">
+    <section id="features" className="landing-section bg-white relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-50/50 rounded-full blur-[120px] -z-10 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50/30 rounded-full blur-[100px] -z-10 translate-y-1/4" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center landing-section-header">
           <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
             Giải pháp toàn diện
           </span>
@@ -419,7 +418,7 @@ export default function FeaturesSection({
         {/* Stats */}
         <div
           ref={statsRef}
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-10 border-t border-amber-100"
+          className="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8 md:pt-9 border-t border-amber-100"
         >
           {stats.map((stat, idx) => (
             <div

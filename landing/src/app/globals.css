@@ -47,6 +47,26 @@ body {
 }
 
 @layer utilities {
+  .landing-page-shell {
+    padding-bottom: 30px;
+  }
+
+  .landing-page-shell-tight {
+    padding-bottom: 30px;
+  }
+
+  .landing-section {
+    padding-block: 50px;
+  }
+
+  .landing-section-compact {
+    padding-block: 30px;
+  }
+
+  .landing-section-header {
+    margin-bottom: 30px;
+  }
+
   .text-black,
   .text-gray-900,
   .text-brand-black,

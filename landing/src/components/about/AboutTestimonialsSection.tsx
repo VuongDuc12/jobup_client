@@ -71,17 +71,17 @@ export default function AboutTestimonialsSection({
       : fallbackTestimonials;
 
   return (
-    <section className="py-12 bg-brand-light-gray overflow-hidden">
+    <section className="landing-section-compact bg-brand-light-gray overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <SectionHeader
           badge="Phản hồi ứng viên"
           title="Họ nói gì về JobUp?"
           align="center"
-          className="mb-8"
+          className="mb-6"
         />
 
-        <div className="mb-14 flex justify-center gap-3">
+        <div className="mb-10 flex justify-center gap-3">
           <button
             onClick={() => swiperRef.current?.slidePrev()}
             className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-brand-yellow hover:bg-brand-yellow hover:text-brand-black cursor-pointer"
