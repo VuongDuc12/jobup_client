@@ -15,7 +15,7 @@ const mobileLinks = [
   { href: "/", label: "Trang chủ" },
   { href: "/tuyen-dung", label: "Tuyển dụng" },
   { href: "/tin-noi-bo", label: "Tin tức nội bộ" },
-  { href: "/truyen-thong", label: "Truyền thông" },
+  { href: "/truyen-thong", label: "Tin báo chí, truyền hình" },
   { href: "/ve-chung-toi", label: "Về chúng tôi" },
   { href: "/lien-he", label: "Liên hệ" },
 ];

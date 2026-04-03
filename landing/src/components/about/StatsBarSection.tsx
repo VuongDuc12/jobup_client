@@ -36,19 +36,19 @@ export default function StatsBarSection({ statistics }: StatsBarSectionProps) {
                         const suffix = match ? match[2] : "";
 
                         return (
-                            <div key={idx}>
-                                <p className="text-4xl md:text-5xl font-extrabold text-brand-yellow">
-                                    {number}
-                                    {suffix && (
-                                        <span className="text-white/30">
-                                            {suffix}
-                                        </span>
-                                    )}
-                                </p>
-                                <p className="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">
-                                    {stat.label}
-                                </p>
-                            </div>
+                          <div key={idx}>
+                            <p className="text-4xl md:text-5xl font-extrabold text-brand-yellow">
+                              {number}
+                              {suffix && (
+                                <span className="text-brand-yellow">
+                                  {suffix}
+                                </span>
+                              )}
+                            </p>
+                            <p className="text-gray-400 text-sm font-bold mt-1 uppercase tracking-wider">
+                              {stat.label}
+                            </p>
+                          </div>
                         );
                     })}
                 </div>

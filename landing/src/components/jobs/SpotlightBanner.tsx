@@ -17,7 +17,7 @@ export default function SpotlightBanner() {
             Big Tech 2026
           </span>
         </h3>
-        <p className="text-gray-200 mb-6 max-w-lg text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90">
+        <p className="text-gray-200 mb-6 max-w-lg text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90 text-justify">
           Cơ hội phỏng vấn trực tiếp với Google, Microsoft, VNG.{" "}
           <br className="hidden lg:block" />
           Nhận Offer ngay tại sự kiện ngày mai.

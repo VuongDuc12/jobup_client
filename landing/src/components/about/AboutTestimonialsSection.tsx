@@ -22,8 +22,7 @@ const fallbackTestimonials = [
   {
     name: "Quốc Huy",
     position: "Project Manager",
-    avatarUrl:
-      "/images/about-avatar-man.jpg",
+    avatarUrl: "/images/about-avatar-man.jpg",
     content:
       "Điểm tôi thích nhất là sự chân thành. Các chuyên gia không chỉ tìm việc mà còn tư vấn định hướng sự nghiệp sâu sắc.",
     rating: 5,
@@ -31,8 +30,7 @@ const fallbackTestimonials = [
   {
     name: "Minh Châu",
     position: "Marketing Director",
-    avatarUrl:
-      "/images/about-avatar-woman.jpg",
+    avatarUrl: "/images/about-avatar-woman.jpg",
     content:
       "Uy tín là điều tôi cảm nhận rõ nhất. JobUp giữ đúng cam kết về thời gian và chất lượng. Recommend cho nhân sự cấp cao.",
     rating: 5,
@@ -82,7 +80,7 @@ export default function AboutTestimonialsSection({
               </span>
             </div>
             <h2 className="text-4xl font-extrabold text-brand-black">
-              Họ nói gì về JobUp?
+              Ứng viên nói gì về JobUp?
             </h2>
           </div>
           <div className="flex gap-3">
@@ -128,7 +126,7 @@ export default function AboutTestimonialsSection({
             return (
               <SwiperSlide key={idx} className="!h-[280px] !flex">
                 <div
-                  className={`h-full rounded-3xl p-8 flex flex-col w-full ${
+                  className={`group relative overflow-visible z-0 hover:z-40 h-full rounded-3xl p-8 flex flex-col w-full ${
                     isDark
                       ? "bg-brand-black text-white"
                       : "bg-white border border-gray-100 hover:-translate-y-1 transition-transform"
@@ -187,6 +185,20 @@ export default function AboutTestimonialsSection({
                         }`}
                       >
                         {item.position}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:flex items-center justify-center p-3">
+                    <div
+                      className={`backdrop-blur-md p-6 rounded-[2rem] shadow-2xl border transform scale-95 group-hover:scale-100 transition-transform duration-300 w-full ${
+                        isDark
+                          ? "bg-brand-black/95 text-gray-200 border-brand-yellow/30"
+                          : "bg-white/95 text-gray-700 border-gray-200"
+                      }`}
+                    >
+                      <p className="italic leading-relaxed text-sm text-center">
+                        &ldquo;{item.content}&rdquo;
                       </p>
                     </div>
                   </div>

@@ -180,7 +180,7 @@ export default function HeroSection({
               </span>
             </h1>
 
-            <p className="mb-8 max-w-2xl text-base font-light leading-[1.75] text-[#4B5563] md:text-lg lg:max-w-xl">
+            <p className="mb-8 max-w-2xl text-base font-light leading-[1.75] text-[#4B5563] md:text-lg lg:max-w-xl text-justify">
               {subtitle ||
                 "Kết nối ứng viên tài năng với hơn 1200+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
             </p>

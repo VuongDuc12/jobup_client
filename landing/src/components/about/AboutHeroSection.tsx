@@ -60,7 +60,7 @@ export default function AboutHeroSection({
           {displayTitle}
         </h1>
 
-        <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10 md:mb-16 font-light">
+        <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10 md:mb-16 font-light text-justify">
           {displaySubtitle}
         </p>
 
@@ -77,7 +77,7 @@ export default function AboutHeroSection({
             href={displayCta2Url}
             className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full border-2 border-white/40 text-white font-black text-base md:text-lg hover:bg-white hover:text-brand-black hover:border-white hover:scale-105 transition-all active:scale-95 backdrop-blur-md"
           >
-            Khám phá cơ hội
+            Tìm việc làm ngay
           </Link>
         </div>
       </div>

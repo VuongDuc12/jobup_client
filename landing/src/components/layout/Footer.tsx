@@ -50,7 +50,7 @@ export default function Footer() {
                 className="h-10 w-auto object-contain"
               />
             </Link>
-            <p className="text-gray-400 text-base leading-relaxed font-medium">
+            <p className="text-gray-400 text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
               "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
               tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
               viên, kiến tạo hành trình sự nghiệp bền vững."
@@ -127,7 +127,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <i className="fa-solid fa-location-dot text-brand-yellow mt-1" />
-                <span className="text-gray-400 leading-relaxed text-sm">
+                <span className="text-gray-400 leading-relaxed text-sm text-justify [text-justify:inter-word]">
                   {loading ? "..." : config.address}
                 </span>
               </li>
