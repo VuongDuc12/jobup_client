@@ -80,64 +80,75 @@ export default function CoreValuesSection({
   ];
 
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-black">
+    <section className="border-t border-gray-100 bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mb-24 grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="text-center lg:col-span-4 lg:text-left">
+            <h2 className="text-3xl font-extrabold tracking-tight text-brand-black md:text-4xl">
               Tầm nhìn & Sứ mệnh
             </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-gray-500 leading-relaxed">
+            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-gray-500 lg:mx-0 md:text-lg">
               JobUp là một đơn vị cung cấp dịch vụ tư vấn tuyển dụng chuyên
               nghiệp.
             </p>
-            <div className="w-12 h-1 bg-brand-yellow mx-auto mt-4 rounded-full" />
+            <div className="mx-auto mt-6 h-1.5 w-16 rounded-full bg-brand-yellow lg:mx-0" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {missionVisionData.map((item) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:col-span-8">
+            {missionVisionData.map((item, idx) => (
               <article
                 key={item.label}
-                className="rounded-3xl border border-gray-100 bg-[#FCFCFC] p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow"
+                className={`group rounded-[1.75rem] border border-gray-100 bg-[#FCFCFC] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-yellow/30 hover:bg-white hover:shadow-[0_18px_34px_-20px_rgba(0,0,0,0.3)] ${
+                  idx === 1 ? "sm:mt-8" : ""
+                }`}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-brand-yellow/10 flex items-center justify-center shrink-0">
-                    <i className={`${item.icon} text-brand-yellow text-sm`} />
+                <div className="mb-5 flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-yellow/10 transition-colors group-hover:bg-brand-yellow">
+                    <i
+                      className={`${item.icon} text-brand-yellow text-lg transition-colors group-hover:text-brand-black`}
+                    />
                   </div>
-                  <span className="text-md font-extrabold uppercase tracking-wider text-brand-black">
+                  <span className="text-lg font-extrabold uppercase tracking-wide text-brand-black">
                     {item.label}
                   </span>
                 </div>
-
-                <p className="text-gray-500 leading-relaxed">{item.title}</p>
+                <p className="text-base leading-relaxed text-gray-500 md:text-lg">
+                  {item.title}
+                </p>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-brand-black">
+        <div className="mb-14 border-t border-gray-100 pt-14 text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-brand-black md:text-4xl">
             {displayTitle}
           </h2>
-          <div className="w-12 h-1 bg-brand-yellow mx-auto mt-4 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-10">
-          {coreValues.map((value, idx) => (
-            <div key={idx} className="text-center group">
-              <div className="w-16 h-16 rounded-full bg-brand-light-gray flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-yellow transition-all">
-                <i
-                  className={`${value.icon} text-brand-yellow text-2xl group-hover:text-brand-black transition-colors`}
-                />
-              </div>
-              <h4 className="text-xl font-extrabold text-brand-black mb-3">
-                {value.title}
-              </h4>
-              <p className="text-gray-500 leading-relaxed">
-                {value.description}
-              </p>
-            </div>
-          ))}
+        <div className="relative">
+          <div className="absolute left-0 right-0 top-10 hidden h-px bg-gray-200 md:block" />
+          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+            {coreValues.map((value, idx) => (
+              <article
+                key={idx}
+                className="group relative rounded-[1.75rem] border border-gray-100 bg-white p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-yellow/30 hover:shadow-[0_16px_32px_-20px_rgba(0,0,0,0.35)]"
+              >
+                <div className="absolute left-1/2 top-10 z-10 hidden h-2 w-2 -translate-x-1/2 rounded-full bg-brand-yellow md:block" />
+                <div className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-yellow/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-brand-yellow">
+                  <i
+                    className={`${value.icon} text-brand-yellow text-3xl transition-colors duration-300 group-hover:text-brand-black`}
+                  />
+                </div>
+                <h4 className="mb-4 text-xl font-extrabold text-brand-black">
+                  {value.title}
+                </h4>
+                <p className="leading-relaxed text-gray-500">
+                  {value.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
