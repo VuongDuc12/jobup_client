@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 
 interface DifferenceSectionProps {
@@ -54,19 +55,13 @@ export default function DifferenceSection({
     <section className="py-16  bg-brand-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-brand-yellow" />
-            <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-              {displayBadge}
-            </span>
-            <span className="w-8 h-px bg-brand-yellow" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black">
-            {displayTitle}
-          </h2>
-          <p className="text-gray-500 mt-4 text-lg">{displaySubtitle}</p>
-        </div>
+        <SectionHeader
+          badge={displayBadge}
+          title={displayTitle}
+          description={displaySubtitle}
+          align="center"
+          className="mb-20"
+        />
 
         {/* Block: Image left, content right */}
         <div className="grid lg:grid-cols-2 gap-16 items-center ">

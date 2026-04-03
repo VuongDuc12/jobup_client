@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import {
   fetchLatestJobs,
   fetchPublicStaff,
@@ -13,38 +14,12 @@ import {
   formatSalary,
   workTypeLabel,
   timeAgo,
-  companyInitial,
-  resolveAssetUrl,
 } from "@/lib/utils";
 import type {
   JobCategoryTreeItem,
   PublicJobResponse,
   PublicStaffResponse,
 } from "@/lib/types";
-
-/* ────────────────────────────────────────────────
- *  Color palette for logo-fallback initials
- * ──────────────────────────────────────────────── */
-const FALLBACK_COLORS = [
-  "bg-blue-600",
-  "bg-orange-500",
-  "bg-purple-600",
-  "bg-teal-600",
-  "bg-pink-600",
-  "bg-emerald-600",
-  "bg-rose-600",
-  "bg-indigo-600",
-  "bg-cyan-600",
-  "bg-amber-600",
-];
-
-function colorForCompany(name: string): string {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
-}
 
 type Tab = { key: string; label: string; categoryId: string | undefined };
 
@@ -79,9 +54,6 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const workType = workTypeLabel(job.workType);
   const time = timeAgo(job.createdAt);
-  const initial = companyInitial(job.displayCompanyName);
-  const bgColor = colorForCompany(job.displayCompanyName);
-  const avatar = resolveAssetUrl(job.contactStaff?.avatar);
   const rawTags = job.tags ?? [];
   const tagChips =
     rawTags.length <= 2 ? rawTags : [...rawTags.slice(0, 2), "Khác"];
@@ -190,7 +162,6 @@ export default function JobsSection() {
   ]);
   const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
   const [staff, setStaff] = useState<PublicStaffResponse[]>(fallbackStaff);
-  const [staffIndex, setStaffIndex] = useState(0);
   const staffIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -238,7 +209,11 @@ export default function JobsSection() {
     if (staff.length <= 1) return;
 
     staffIntervalRef.current = setInterval(() => {
-      setStaffIndex((prev) => (prev + 1) % staff.length);
+      setStaff((prev) => {
+        if (prev.length <= 1) return prev;
+        const [first, ...rest] = prev;
+        return [...rest, first];
+      });
     }, 4000);
   }, [staff.length]);
 
@@ -262,7 +237,6 @@ export default function JobsSection() {
         const result = await fetchPublicStaff(8);
         if (!mounted || result.length === 0) return;
         setStaff(result);
-        setStaffIndex(0);
       } catch {
         // Keep fallback staff
       }
@@ -280,16 +254,21 @@ export default function JobsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-10">
-          <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
-            Cơ hội nghề nghiệp
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#111827] mb-3">
-            Việc làm <span className="text-brand-yellow">Mới Nhất</span>
-          </h2>
-          <p className="text-gray-500 text-base max-w-2xl mx-auto mb-8">
-            Hơn 500+ việc làm mới được cập nhật hôm nay từ các tập đoàn công
-            nghệ hàng đầu.
-          </p>
+          <SectionHeader
+            badge="Cơ hội nghề nghiệp"
+            title={
+              <>
+                Việc làm <span className="text-brand-yellow">Mới Nhất</span>
+              </>
+            }
+            description="Hơn 500+ việc làm mới được cập nhật hôm nay từ các tập đoàn công nghệ hàng đầu."
+            align="center"
+            className="mb-8"
+            badgeClassName="text-[#B45309]"
+            badgeContainerClassName="justify-center"
+            lineClassName="bg-[#B45309]"
+            titleClassName="text-[#111827]"
+          />
 
           {/* Tabs */}
           <div className="flex items-center justify-start md:justify-center gap-2 p-1.5 bg-white rounded-full border border-gray-200 shadow-sm overflow-x-auto max-w-fit md:mx-auto no-scrollbar">

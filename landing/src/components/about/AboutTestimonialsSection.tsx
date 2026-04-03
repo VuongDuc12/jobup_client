@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import type { TestimonialResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -73,32 +74,28 @@ export default function AboutTestimonialsSection({
     <section className="py-12 bg-brand-light-gray overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-4 mb-14">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="w-8 h-px bg-brand-yellow" />
-              <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-                Phản hồi ứng viên
-              </span>
-            </div>
-            <h2 className="text-4xl font-extrabold text-brand-black">
-              Họ nói gì về JobUp?
-            </h2>
-          </div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all cursor-pointer"
-            >
-              <i className="fa-solid fa-chevron-left text-sm" />
-            </button>
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all cursor-pointer"
-            >
-              <i className="fa-solid fa-chevron-right text-sm" />
-            </button>
-          </div>
+        <SectionHeader
+          badge="Phản hồi ứng viên"
+          title="Họ nói gì về JobUp?"
+          align="center"
+          className="mb-8"
+        />
+
+        <div className="mb-14 flex justify-center gap-3">
+          <button
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-brand-yellow hover:bg-brand-yellow hover:text-brand-black cursor-pointer"
+            aria-label="Xem phản hồi trước"
+          >
+            <i className="fa-solid fa-chevron-left text-sm" />
+          </button>
+          <button
+            onClick={() => swiperRef.current?.slideNext()}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-brand-yellow hover:bg-brand-yellow hover:text-brand-black cursor-pointer"
+            aria-label="Xem phản hồi tiếp theo"
+          >
+            <i className="fa-solid fa-chevron-right text-sm" />
+          </button>
         </div>
 
         {/* Swiper Slider */}

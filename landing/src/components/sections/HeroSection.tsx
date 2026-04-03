@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BadgeText from "@/components/shared/BadgeText";
 import type { PartnerResponse, ProvinceDropdown } from "@/lib/types";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 import { getAssetUrl } from "@/lib/utils";
@@ -161,12 +162,18 @@ export default function HeroSection({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-150px)] grid-cols-12 items-center gap-8 py-8 sm:py-10 md:min-h-[calc(100vh-180px)] lg:gap-12 lg:py-0">
           <div className="order-2 col-span-12 flex flex-col items-center justify-center text-center lg:order-1 lg:col-span-5 lg:items-start lg:text-left">
-            <div className="mb-6 mt-7 inline-flex items-center gap-2.5 self-center rounded-full border border-amber-200/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#B45309] shadow-[0_2px_20px_rgba(180,83,9,0.1)] backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(180,83,9,0.18)] lg:self-start">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#B45309]" />
-              </span>
-              {badgeText || "Top #1 Nền tảng Tuyển dụng 2026"}
+            <div className="mb-6 mt-7 self-center lg:self-start">
+              <BadgeText
+                text={badgeText || "Top #1 Nền tảng Tuyển dụng 2026"}
+                variant="pill"
+                className="border border-amber-200/60 bg-white/90 font-semibold text-[#B45309] shadow-[0_2px_20px_rgba(180,83,9,0.1)] backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(180,83,9,0.18)]"
+                prefix={
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#B45309]" />
+                  </span>
+                }
+              />
             </div>
 
             <h1 className="mb-4 max-w-3xl">

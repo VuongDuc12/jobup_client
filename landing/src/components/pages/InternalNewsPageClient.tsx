@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import SectionHeader from "@/components/shared/SectionHeader";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 import { internalNewsArticles } from "@/lib/mockNews";
 import { fetchPublicArticles, fetchPublicNewsCategories } from "@/lib/api";
@@ -250,21 +251,20 @@ export default function InternalNewsPage() {
               </Link>
 
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-px bg-brand-yellow" />
-                  <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-                    Góc chuyên gia JobUp
-                  </span>
-                </div>
-                <h1 className="text-3xl md:text-5xl font-black text-brand-black leading-tight mb-6 md:mb-8">
-                  Nơi chia sẻ kiến thức{" "}
-                  <span className="text-brand-yellow">vươn tầm</span> sự nghiệp
-                </h1>
-                <p className="text-gray-500 text-base md:text-lg leading-relaxed mb-8 md:mb-10">
-                  Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất.
-                  Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực
-                  chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá.
-                </p>
+                <SectionHeader
+                  badge="Góc chuyên gia JobUp"
+                  title={
+                    <>
+                      Nơi chia sẻ kiến thức <span className="text-brand-yellow">vươn tầm</span> sự nghiệp
+                    </>
+                  }
+                  description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
+                  align="left"
+                  headingTag="h1"
+                  className="mb-8 md:mb-10"
+                  titleClassName="text-3xl font-black leading-tight text-brand-black md:text-5xl"
+                  descriptionClassName="text-base md:text-lg"
+                />
                 <div className="mb-5 flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative w-full">
                     <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import BadgeText from "@/components/shared/BadgeText";
 import { API_BASE_URL } from "@/lib/config";
 import type { BannerPublicResponse } from "@/lib/types";
 import {
@@ -131,9 +132,11 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
       <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-5 md:p-8">
         {data.badgeText && (
           <div className="mb-4">
-            <span className="px-4 py-1 bg-amber-400 text-[#111827] text-[10px] font-extrabold rounded-full tracking-wider uppercase shadow-lg shadow-amber-400/20">
-              {data.badgeText}
-            </span>
+            <BadgeText
+              text={data.badgeText}
+              variant="pill"
+              className="bg-amber-400 font-extrabold text-[#111827] shadow-lg shadow-amber-400/20"
+            />
           </div>
         )}
         {data.title && (
@@ -189,9 +192,11 @@ function SpotlightBannerDynamic({ data }: { data: BannerPublicResponse }) {
       )}
       <div className="relative bg-gradient-to-r from-black/95 via-black/60 to-transparent flex flex-col justify-center p-6 md:p-8 lg:p-12 min-h-[280px] md:min-h-[320px] lg:min-h-[380px]">
         {data.badgeText && (
-          <span className="text-brand-yellow font-black uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2">
-            <span className="w-8 h-px bg-brand-yellow" /> {data.badgeText}
-          </span>
+          <BadgeText
+            text={data.badgeText}
+            containerClassName="mb-3"
+            className="font-black"
+          />
         )}
         {data.title && (
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 leading-tight">
@@ -270,20 +275,16 @@ function CompactBanner({
       <div className="relative z-10 min-h-[228px] h-full flex flex-col justify-between">
         <div>
           {data.badgeText && (
-            <span
-              className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] uppercase tracking-widest ${
+            <BadgeText
+              text={data.badgeText}
+              variant="pill"
+              className={
                 isSubtleCompact
                   ? "border border-brand-yellow/60 bg-brand-yellow/15 font-semibold text-brand-yellow"
                   : "border border-brand-yellow bg-white/80 font-black text-brand-yellow"
-              }`}
-            >
-              <span
-                className={`h-1.5 w-1.5 rounded-full ${
-                  isSubtleCompact ? "bg-brand-yellow" : "bg-brand-yellow"
-                }`}
-              />
-              {data.badgeText}
-            </span>
+              }
+              prefix={<span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />}
+            />
           )}
           {data.title && (
             <h3

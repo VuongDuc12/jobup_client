@@ -16,7 +16,6 @@ import { FloatingActions } from "@/components/sections";
 import type {
     TestimonialResponse,
     StatisticResponse,
-    PartnerResponse,
     PublicMediaMentionListItemResponse,
     AboutSettingResponse,
 } from "@/lib/types";
@@ -24,7 +23,6 @@ import type {
 interface AboutPageClientProps {
     initialTestimonials: TestimonialResponse[] | null;
     initialStatistics: StatisticResponse[] | null;
-    initialPartners: PartnerResponse[] | null;
     initialMediaMentions: PublicMediaMentionListItemResponse[] | null;
     initialAboutSettings: AboutSettingResponse | null;
 }
@@ -32,7 +30,6 @@ interface AboutPageClientProps {
 export default function AboutPageClient({
     initialTestimonials,
     initialStatistics,
-    initialPartners,
     initialMediaMentions,
     initialAboutSettings,
 }: AboutPageClientProps) {
@@ -97,7 +94,6 @@ export default function AboutPageClient({
                 />
                 <StatsBarSection statistics={initialStatistics} />
                 <PressMediaSection
-                    partners={initialPartners}
                     mediaMentions={initialMediaMentions}
                 />
                 <AboutTestimonialsSection testimonials={initialTestimonials} />

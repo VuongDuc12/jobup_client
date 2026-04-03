@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import SectionHeader from "@/components/shared/SectionHeader";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 import { mediaMentions } from "@/lib/mockNews";
 import {
@@ -50,9 +51,6 @@ export default function MediaMentionsPage() {
 
   const [mentionList, setMentionList] =
     useState<PublicMediaMentionListItemResponse[]>(fallbackMediaList());
-  const [mediaLogosData, setMediaLogosData] = useState<string[]>([
-    ...mediaLogos,
-  ]);
   const [keywordInput, setKeywordInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
@@ -78,16 +76,6 @@ export default function MediaMentionsPage() {
         const nextList = mentionResult.list || [];
         setMentionList(nextList);
         setTotalPages(Math.max(mentionResult.totalPages || 1, 1));
-
-        const logosFromApi = nextList
-          .map((item) => resolveAssetUrl(item.sourceLogo))
-          .filter((logo): logo is string => Boolean(logo && logo.trim()));
-
-        if (logosFromApi.length > 0) {
-          setMediaLogosData(Array.from(new Set(logosFromApi)).slice(0, 6));
-        } else {
-          setMediaLogosData([...mediaLogos]);
-        }
       } catch {
         if (!mounted) return;
         if (isFirstPage) {
@@ -95,7 +83,6 @@ export default function MediaMentionsPage() {
           setMentionList(keyword ? [] : fallbackItems);
           setTotalPages(1);
         }
-        setMediaLogosData([...mediaLogos]);
       } finally {
         if (!mounted) return;
         if (!isFirstPage) setIsPaginating(false);
@@ -147,7 +134,7 @@ export default function MediaMentionsPage() {
       featured: first,
       list: items.filter((item) => item.id !== first.id),
     };
-  }, [mentionList]);
+  }, [keyword, mentionList]);
 
   const featuredLogo =
     resolveAssetUrl(featured?.thumbnailUrl) || safeFallbackLogo;
@@ -167,23 +154,24 @@ export default function MediaMentionsPage() {
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="w-12 h-px bg-brand-yellow" />
-              <span className="text-brand-yellow font-bold text-sm uppercase tracking-[0.3em]">
-                Tin tức truyền thông
-              </span>
-              <span className="w-12 h-px bg-brand-yellow" />
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-6 md:mb-8 leading-tight">
-              Nơi khẳng định <span className="text-brand-yellow">Vị Thế</span>
-              <br />
-              trong lòng công chúng
-            </h1>
-            <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed font-light">
-              Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi
-              dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi
-              qua lăng kính báo chí.
-            </p>
+            <SectionHeader
+              badge="Tin tức truyền thông"
+              title={
+                <>
+                  Nơi khẳng định <span className="text-brand-yellow">Vị Thế</span>
+                  <br />
+                  trong lòng công chúng
+                </>
+              }
+              description="Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi qua lăng kính báo chí."
+              align="center"
+              headingTag="h1"
+              className="mb-8 md:mb-10"
+              contentClassName="max-w-4xl"
+              badgeClassName="tracking-[0.24em]"
+              titleClassName="text-3xl font-black leading-tight text-white sm:text-4xl md:text-7xl"
+              descriptionClassName="max-w-4xl text-base font-light leading-relaxed text-white/80 sm:text-lg md:text-2xl"
+            />
             <div className="mt-8 md:mt-10 mx-auto max-w-2xl flex flex-col sm:flex-row gap-3">
               <div className="flex-1 relative w-full">
                 <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />

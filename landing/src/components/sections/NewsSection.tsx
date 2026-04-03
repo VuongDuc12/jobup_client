@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import type { PublicArticleListItemResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 
@@ -71,17 +72,19 @@ export default function NewsSection({ articles }: NewsSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-brand-yellow font-bold tracking-widest uppercase text-xs mb-3 block">
-            Tin tức & Hoạt động
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">
-            Cập nhật mới nhất từ{" "}
-            <span className="text-brand-yellow">Gia đình JobUp</span>
-          </h2>
-          <p className="text-gray-500 text-base max-w-2xl mx-auto mb-5">
-            Những sự kiện, văn hoá và workshop chuyển đổi số nổi bật nhất tháng
-            này.
-          </p>
+          <SectionHeader
+            badge="Tin tức & Hoạt động"
+            title={
+              <>
+                Cập nhật mới nhất từ <span className="text-brand-yellow">Gia đình JobUp</span>
+              </>
+            }
+            description="Những sự kiện, văn hoá và workshop chuyển đổi số nổi bật nhất tháng này."
+            align="center"
+            className="mb-5"
+            titleClassName="text-gray-900"
+            descriptionClassName="text-base"
+          />
           <Link
             href="/tin-noi-bo"
             className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellow-hover transition"

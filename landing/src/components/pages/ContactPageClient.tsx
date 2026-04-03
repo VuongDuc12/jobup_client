@@ -3,6 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import BadgeText from "@/components/shared/BadgeText";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 import { createEmployerContactPublic } from "@/lib/api";
 
@@ -160,9 +161,12 @@ export default function ContactPageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             <section className="lg:col-span-6 min-w-0 rounded-3xl border border-slate-200/70 bg-white/90 shadow-soft p-5 sm:p-7 lg:p-8">
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-brand-yellow mb-3">
-                Kết nối cùng JobUp
-              </p>
+              <BadgeText
+                text="Kết nối cùng JobUp"
+                align="left"
+                linePlacement="leading"
+                containerClassName="mb-3"
+              />
               <h2 className="text-3xl sm:text-4xl font-black text-brand-black mb-2 uppercase leading-tight">
                 Liên hệ chúng tôi
               </h2>
@@ -280,9 +284,12 @@ export default function ContactPageClient() {
             </section>
 
             <section className="lg:col-span-6 min-w-0 rounded-3xl border border-slate-200/70 bg-white/90 shadow-soft p-5 sm:p-7 lg:p-8">
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-brand-yellow mb-3">
-                Thông tin liên hệ
-              </p>
+              <BadgeText
+                text="Thông tin liên hệ"
+                align="left"
+                linePlacement="leading"
+                containerClassName="mb-3"
+              />
               <h3 className="text-3xl sm:text-4xl font-black text-brand-black mb-4 uppercase leading-tight">
                 Tìm việc - tìm đến JobUp
               </h3>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 
 const defaultImages = [
@@ -79,15 +80,12 @@ export default function OurJourneySection({
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-brand-yellow" />
-              <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-                {displayBadge}
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black leading-tight mb-8">
-              {displayTitle}
-            </h2>
+            <SectionHeader
+              badge={displayBadge}
+              title={displayTitle}
+              align="left"
+              className="mb-8"
+            />
             <p className="text-gray-500 leading-relaxed  text-justify">
               {displayP1}
             </p>
