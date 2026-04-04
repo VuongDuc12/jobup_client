@@ -36,12 +36,12 @@ export default function StatsBarSection({ statistics }: StatsBarSectionProps) {
                         const suffix = match ? match[2] : "";
 
                         return (
-                          <div key={idx}>
-                            <p className="text-4xl md:text-5xl font-extrabold text-brand-yellow">
-                              {number}
+                          <div key={idx} className="text-center">
+                            <p className="inline-flex items-center justify-center gap-0.5 text-4xl md:text-5xl font-extrabold text-brand-yellow">
+                              <span className="tabular-nums">{number}</span>
                               {suffix && (
-                                <span className="text-brand-yellow">
-                                  {suffix}
+                                <span className="text-3xl md:text-4xl">
+                                  {suffix.trim()}
                                 </span>
                               )}
                             </p>

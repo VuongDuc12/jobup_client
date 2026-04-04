@@ -425,10 +425,10 @@ export default function FeaturesSection({
               className="text-center rounded-2xl border border-amber-100/70 bg-gradient-to-br from-white to-amber-50/60 px-3 py-5 md:py-6 shadow-[0_10px_30px_-20px_rgba(245,158,11,0.55)] transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_20px_45px_-22px_rgba(245,158,11,0.65)] opacity-100 translate-y-0"
               style={{ transitionDelay: `${idx * 80}ms` }}
             >
-              <div className="text-3xl md:text-4xl font-extrabold text-[#111827] mb-1 tracking-tight">
+              <div className="flex items-center justify-center gap-0.5 text-3xl md:text-4xl font-extrabold text-[#111827] mb-1 tracking-tight">
                 {(() => {
                   const parsed = parsedStats[idx];
-                  if (!parsed) return stat.value;
+                  if (!parsed) return <span>{stat.value}</span>;
 
                   const current = animatedValues[idx] ?? 0;
                   const value =
@@ -436,7 +436,15 @@ export default function FeaturesSection({
                       ? current.toFixed(parsed.decimals)
                       : String(Math.round(current));
 
-                  return `${value}${parsed.suffix}`;
+                  const suffix = parsed.suffix.trim();
+                  return (
+                    <>
+                      <span className="tabular-nums">{value}</span>
+                      {suffix && (
+                        <span className="text-2xl md:text-3xl text-brand-yellow">{suffix}</span>
+                      )}
+                    </>
+                  );
                 })()}
               </div>
               <div className="mx-auto mb-2 h-0.5 w-8 rounded-full bg-brand-yellow/70" />
