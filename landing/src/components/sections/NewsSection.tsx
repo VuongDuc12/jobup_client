@@ -71,7 +71,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
     <section id="news" className="landing-section relative bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center py-6 md:py-10 lg:py-12">
+        <div className="text-center pb-6 md:pb-10 lg:pb-12">
           <SectionHeader
             badge="Tin tức & Hoạt động"
             title={
