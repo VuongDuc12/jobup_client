@@ -69,6 +69,8 @@ export default function AboutPageClient({
                     statSubtitle={s?.differenceStatSubtitle}
                 />
                 <CoreValuesSection
+                    visionDescription={s?.visionDescription}
+                    missionDescription={s?.missionDescription}
                     title={s?.coreValuesTitle}
                     value1Icon={s?.coreValue1Icon}
                     value1Title={s?.coreValue1Title}

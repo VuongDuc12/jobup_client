@@ -46,7 +46,7 @@ function fallbackMediaList(): PublicMediaMentionListItemResponse[] {
 }
 
 export default function MediaMentionsPage() {
-  const PAGE_SIZE = 8;
+  const PAGE_SIZE = 5;
   const safeFallbackLogo = mediaLogos[0] || "";
 
   const [mentionList, setMentionList] =

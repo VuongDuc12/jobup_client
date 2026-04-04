@@ -51,9 +51,9 @@ export default function Footer() {
               />
             </Link>
             <p className="text-gray-400 text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
-              "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
+              Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
               tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
-              viên, kiến tạo hành trình sự nghiệp bền vững."
+              viên, kiến tạo hành trình sự nghiệp bền vững.
             </p>
 
             <div className="flex gap-3">
@@ -115,20 +115,20 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <i className="fa-solid fa-phone text-brand-yellow mt-0.5 text-base" />
-                <span className="text-white font-semibold text-base">
-                  0979334143
+                <span className="text-white text-base">
+                  {loading ? "0979334143" : config.hotline || "0979334143"}
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <i className="fa-solid fa-envelope text-brand-yellow mt-0.5 text-base" />
                 <span className="text-gray-300">
-                  tuyendung@jobup.vn
+                  {loading ? "tuyendung@jobup.vn" : config.email || "tuyendung@jobup.vn"}
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base" />
                 <span className="text-gray-300 leading-relaxed">
-                  {loading ? "..." : config.address}
+                  {loading ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam" : config.address || "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
                 </span>
               </li>
             </ul>

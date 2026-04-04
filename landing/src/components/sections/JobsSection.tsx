@@ -66,9 +66,9 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       {/* Company Logo / Fallback */}
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
         <div className="relative shrink-0 hidden md:block">
-          <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+          <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden shrink-0 border-2 border-black">
             <Image
-              src="/Logo.png"
+              src="/favicon.png"
               alt="Jobup"
               width={40}
               height={40}
@@ -253,7 +253,7 @@ export default function JobsSection() {
     <section id="jobs" className="landing-section bg-gray-50 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center">
+        <div className="text-center py-6 md:py-10 lg:py-12">
           <SectionHeader
             badge="Cơ hội nghề nghiệp"
             title={

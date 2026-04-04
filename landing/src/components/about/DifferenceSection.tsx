@@ -63,13 +63,13 @@ export default function DifferenceSection({
 
         {/* Block: Image left, content right */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center ">
-          <div className="rounded-3xl overflow-hidden shadow-xl">
+          <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-100">
             <Image
               src={displayImage}
               alt="Mrs. Ha Phan - CEO & Founder JobUp, chuyên gia tư vấn tuyển dụng"
               width={800}
               height={600}
-              className="w-full aspect-[4/3] object-cover"
+              className="w-full aspect-video object-contain"
               loading="lazy"
             />
           </div>

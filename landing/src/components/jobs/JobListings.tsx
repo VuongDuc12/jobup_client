@@ -23,9 +23,9 @@ function JobCard({ job }: { job: PublicJobResponse }) {
     >
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
         <div className="relative shrink-0 hidden md:block">
-          <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+          <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden shrink-0 border-2 border-black">
             <img
-              src="/Logo.png"
+              src="/favicon.png"
               alt="Jobup"
               className="w-10 h-10 object-contain"
             />

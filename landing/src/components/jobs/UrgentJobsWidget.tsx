@@ -77,23 +77,13 @@ export default function UrgentJobsWidget() {
                 href={`/tuyen-dung/${job.slug}`}
                 className="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20"
               >
-                {companyAvatar ? (
-                  <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 group-hover/item:bg-white shadow-sm border border-gray-100 transition-colors overflow-hidden">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-sm p-1 overflow-hidden border-2 border-black">
                     <img
-                      src={companyAvatar}
-                      className="w-full h-full object-contain"
-                      alt={job.displayCompanyName}
-                    />
-                  </div>
-                ) : (
-                  <div className="w-10 h-10 bg-[#1a1a1a] rounded-xl flex items-center justify-center shrink-0 shadow-sm p-1 overflow-hidden">
-                    <img
-                      src="/Logo.png"
+                      src="/favicon.png"
                       alt="Jobup"
                       className="w-full h-full object-contain"
                     />
                   </div>
-                )}
                 <div className="grow min-w-0">
                   <h5 className="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors line-clamp-2 wrap-break-word">
                     {job.title}

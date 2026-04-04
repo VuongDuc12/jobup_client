@@ -4,6 +4,7 @@ import BadgeText from "@/components/shared/BadgeText";
 import type { PartnerResponse, ProvinceDropdown } from "@/lib/types";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 import { getAssetUrl } from "@/lib/utils";
+import { useState } from "react";
 
 const partnerLogos = [
   {
@@ -39,6 +40,8 @@ const partnerLogos = [
 ];
 
 const trendingKeywords = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
+
+const PLACEHOLDER_TEXT = "Nhập ngay công việc bạn đang tìm kiếm.";
 
 interface HeroSearchPayload {
   keyword: string;
@@ -84,6 +87,9 @@ export default function HeroSection({
     "$1.$2.$3",
   );
   const heroImageSrc = getAssetUrl(heroImage) || "/hero-image.jpg";
+
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const partnerItems =
     partners && partners.length > 0
@@ -162,19 +168,7 @@ export default function HeroSection({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-150px)] grid-cols-12 items-center gap-8 py-8 sm:py-10 md:min-h-[calc(100vh-180px)] lg:gap-12 lg:py-0">
           <div className="order-2 col-span-12 flex flex-col items-center justify-center text-center lg:order-1 lg:col-span-5 lg:items-start lg:text-left">
-            <div className="mb-6 mt-7 self-center lg:self-start">
-              <BadgeText
-                text={badgeText || "Top #1 Nền tảng Tuyển dụng 2026"}
-                variant="pill"
-                className="border border-amber-200/60 bg-white/90 font-semibold text-[#B45309] shadow-[0_2px_20px_rgba(180,83,9,0.1)] backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(180,83,9,0.18)]"
-                prefix={
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#B45309]" />
-                  </span>
-                }
-              />
-            </div>
+           
 
             <h1 className="mb-4 max-w-3xl">
               <span className="block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight text-[#111827]">
@@ -200,7 +194,7 @@ export default function HeroSection({
                   Trusted
                 </p>
                 <p className="mt-0.5 text-sm font-black text-[#111827]">
-                  250+ doanh nghiệp
+                  200+ doanh nghiệp
                 </p>
               </div>
 
@@ -254,13 +248,27 @@ export default function HeroSection({
             >
               <div className="flex flex-grow items-center rounded-2xl border border-slate-100 border-b border-gray-100 bg-slate-50/85 px-4 md:rounded-none md:border-0 md:border-r md:bg-transparent">
                 <i className="fa-solid fa-magnifying-glass mr-3 w-5 text-center text-gray-400" />
-                <input
-                  name="keyword"
-                  type="text"
-                  placeholder="Tên công việc, vị trí..."
-                  aria-label="Tìm kiếm việc làm theo từ khóa"
-                  className="w-full bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none md:py-2"
-                />
+                <div className="relative flex-1 overflow-hidden">
+                  {!isInputFocused && !inputValue && (
+                    <div
+                      className="pointer-events-none absolute top-1/2 -translate-y-1/2 flex whitespace-nowrap"
+                      style={{ animation: 'var(--animate-placeholder-pan)' }}
+                    >
+                      <span className="text-sm text-gray-400">{PLACEHOLDER_TEXT}</span>
+                    </div>
+                  )}
+                  <input
+                    name="keyword"
+                    type="text"
+                    placeholder=""
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onFocus={() => setIsInputFocused(true)}
+                    onBlur={() => setIsInputFocused(false)}
+                    aria-label="Tìm kiếm việc làm theo từ khóa"
+                    className="w-full bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none md:py-2"
+                  />
+                </div>
               </div>
               <div className="flex flex-grow md:flex-[0_0_120px] items-center rounded-2xl border border-slate-100 border-b border-gray-100 bg-slate-50/85 px-4 md:rounded-none md:border-0 md:bg-transparent">
                 <i className="fa-solid fa-location-dot mr-3 w-5 text-center text-gray-400" />
@@ -270,11 +278,15 @@ export default function HeroSection({
                   className="w-full appearance-none bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none focus:ring-0 md:py-2"
                 >
                   <option value="">Địa điểm</option>
-                  {(provinces || []).map((province) => (
-                    <option key={province.id} value={province.id}>
-                      {province.name}
-                    </option>
-                  ))}
+                  {(provinces || [])
+                    .filter((p) =>
+                      ["Thành phố Hà Nội", "Thành phố Đà Nẵng", "Thành phố Hồ Chí Minh"].includes(p.name),
+                    )
+                    .map((province) => (
+                      <option key={province.id} value={province.id}>
+                        {province.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <button
@@ -304,7 +316,7 @@ export default function HeroSection({
             <div className="relative z-10 mt-7 w-full border-t border-slate-100/70 pt-6 sm:mt-8 sm:pt-7 lg:mt-0 lg:pt-12">
               <div className="mx-auto w-full max-w-7xl">
                 <p className="mb-5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 sm:mb-6 lg:mb-8">
-                  Được tin tưởng bởi 250+ doanh nghiệp hàng đầu
+                  Được tin tưởng bởi 200+ doanh nghiệp hàng đầu
                 </p>
                 <div className="mask-image-gradient relative overflow-hidden pb-4">
                   <div className="animate-loop-scroll flex items-center gap-0.5 whitespace-nowrap sm:gap-1 lg:gap-1.5">
