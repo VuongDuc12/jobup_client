@@ -22,7 +22,7 @@ export default function AboutHeroSection({
   const displayBadge = badgeText || "Về chúng tôi";
   const displaySubtitle =
     subtitle ||
-    "Chuyên gia tư vấn tuyển dụng chuyên nghiệp, đồng hành cùng hơn 100+ doanh nghiệp trong hành trình tìm kiếm và phát triển nguồn nhân lực chất lượng cao.";
+    "Chuyên gia tư vấn tuyển dụng chuyên nghiệp, đồng hành cùng 100+ doanh nghiệp trong hành trình tìm kiếm và phát triển nguồn nhân lực chất lượng cao.";
   const displayBg = getAssetUrl(backgroundImage) || "/hero-workspace.png";
 
   // Title: CMS string hoặc fallback JSX đẹp
