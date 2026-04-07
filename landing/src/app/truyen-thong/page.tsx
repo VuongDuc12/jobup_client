@@ -198,8 +198,10 @@ export default function MediaMentionsPage() {
               badge="Tin tức báo chí, truyền hình"
               title={
                 <>
-                  <span className="text-white">Nơi khẳng định{" "}</span>
-                  <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">vị thế</span>
+                  <span className="text-white">Nơi khẳng định </span>
+                  <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
+                    vị thế
+                  </span>
                   <br />
                   <span className="text-white">trong lòng công chúng</span>
                 </>

@@ -245,7 +245,7 @@ export default function FeaturesSection({
           title={
             <>
               Hệ sinh thái{" "}
-              <span className="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
+              <span className="text-brand-yellow">hỗ trợ toàn diện</span>
             </>
           }
           description="Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu."
@@ -326,6 +326,7 @@ export default function FeaturesSection({
                         Anh chị cần tối ưu CV ạ?
                       </p>
                     </div>
+                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1"></div>
                     {items[1].linkUrl && (
                       <a
                         href={items[1].linkUrl}
