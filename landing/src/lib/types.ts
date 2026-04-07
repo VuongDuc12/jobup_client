@@ -317,6 +317,10 @@ export interface AboutSettingResponse {
   differenceStatTitle: string | null;
   differenceStatSubtitle: string | null;
 
+  // Vision & Mission
+  visionDescription: string | null;
+  missionDescription: string | null;
+
   // Core Values
   coreValuesTitle: string | null;
   coreValue1Icon: string | null;

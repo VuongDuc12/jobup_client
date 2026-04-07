@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import { fetchPublicArticlesByCategorySlug } from "@/lib/api";
 import { getAssetUrl } from "@/lib/utils";
 
@@ -10,6 +11,7 @@ interface Slide {
   badgeColor: string;
   title: string;
   description: string;
+  slug: string | null;
 }
 
 const slides: Slide[] = [];
@@ -20,7 +22,7 @@ const badgeColorByIndex = [
   "bg-brand-black text-white",
 ];
 
-const CAMNANG_CATEGORY_SLUG = "cam-nang-cv";
+const CAMNANG_CATEGORY_SLUG = "cam-nang";
 const FALLBACK_IMAGE = "/images/news8.jpg";
 
 export default function CareerHandbook() {
@@ -70,6 +72,7 @@ export default function CareerHandbook() {
             badgeColor: badgeColorByIndex[index % badgeColorByIndex.length],
             title: item.title,
             description: item.summary || "Đang cập nhật nội dung bài viết...",
+            slug: item.slug,
           }));
 
         if (nextSlides.length > 0) {
@@ -142,7 +145,10 @@ export default function CareerHandbook() {
               key={i}
               className="w-full flex-shrink-0 px-6 flex flex-col h-full"
             >
-              <div className="relative rounded-2xl overflow-hidden h-48 mb-4 shadow-sm group cursor-pointer shrink-0">
+              <Link
+                href={slide.slug ? `/tin-noi-bo/${slide.slug}` : "/tin-noi-bo"}
+                className="relative rounded-2xl overflow-hidden h-48 mb-4 shadow-sm group cursor-pointer shrink-0 block"
+              >
                 <img
                   src={slide.image}
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -150,15 +156,18 @@ export default function CareerHandbook() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent" />
-              </div>
-              <div className="overflow-hidden">
-                <h5 className="font-black text-gray-900 text-base leading-tight group-hover/handbook:text-brand-yellow transition-colors line-clamp-2">
+              </Link>
+              <Link
+                href={slide.slug ? `/tin-noi-bo/${slide.slug}` : "/tin-noi-bo"}
+                className="overflow-hidden block"
+              >
+                <h5 className="font-black text-gray-900 text-base leading-tight hover:text-brand-yellow transition-colors line-clamp-2">
                   {slide.title}
                 </h5>
                 <p className="text-gray-500 text-sm mt-3 font-medium leading-relaxed line-clamp-2">
                   {slide.description}
                 </p>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 
 interface LeadershipSectionProps {
@@ -41,24 +42,17 @@ export default function LeadershipSection({
     getAssetUrl(advisorImage) || "/images/leadership-woman.jpg";
 
   return (
-    <section className="py-16 bg-brand-light-gray">
+    <section className="landing-section bg-brand-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-brand-yellow" />
-            <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-              {displayBadge}
-            </span>
-            <span className="w-8 h-px bg-brand-yellow" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black">
-            {displayTitle}
-          </h2>
-        </div>
+        <SectionHeader
+          badge={displayBadge}
+          title={displayTitle}
+          align="center"
+        />
 
         {/* CEO Section */}
-        <div className="grid lg:grid-cols-5 gap-12 items-start mb-20">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start mb-14">
           <div className="lg:col-span-2 max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
               src={displayCeoImage}
@@ -128,7 +122,7 @@ export default function LeadershipSection({
         </div>
 
         {/* Advisor Section */}
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-3 order-2 lg:order-1">
             <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
               {displayAdvisorRole}

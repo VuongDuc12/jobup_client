@@ -2,17 +2,15 @@ import AboutPageClient from "@/components/pages/AboutPageClient";
 import {
     fetchTestimonialsPublic,
     fetchStatisticsPublic,
-    fetchPartnersPublic,
     fetchMediaMentionsPublic,
     fetchAboutSettingsPublic,
 } from "@/lib/api";
 
 export default async function AboutPage() {
-    const [testimonials, statistics, partners, mediaMentions, aboutSettings] =
+    const [testimonials, statistics, mediaMentions, aboutSettings] =
         await Promise.all([
             fetchTestimonialsPublic().catch(() => null),
             fetchStatisticsPublic().catch(() => null),
-            fetchPartnersPublic().catch(() => null),
             fetchMediaMentionsPublic({ PageSize: 12 }).catch(() => null),
             fetchAboutSettingsPublic().catch(() => null),
         ]);
@@ -86,7 +84,6 @@ export default async function AboutPage() {
             <AboutPageClient
                 initialTestimonials={testimonials}
                 initialStatistics={statistics}
-                initialPartners={partners}
                 initialMediaMentions={mediaMentions?.list ?? null}
                 initialAboutSettings={aboutSettings}
             />

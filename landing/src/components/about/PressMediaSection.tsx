@@ -2,40 +2,10 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import type {
-  PartnerResponse,
-  PublicMediaMentionListItemResponse,
-} from "@/lib/types";
+import SectionHeader from "@/components/shared/SectionHeader";
+import type { PublicMediaMentionListItemResponse } from "@/lib/types";
 import { trackPublicMediaMentionView } from "@/lib/api";
 import { resolveAssetUrl } from "@/lib/utils";
-
-const fallbackMediaLogos = [
-  {
-    src: "/images/logo-vtv.svg",
-    alt: "VTV",
-    height: "h-8 md:h-12",
-  },
-  {
-    src: "/images/logo-znews.svg",
-    alt: "ZNews",
-    height: "h-6 md:h-8",
-  },
-  {
-    src: "/images/logo-vneconomy.svg",
-    alt: "VnEconomy",
-    height: "h-6 md:h-8",
-  },
-  {
-    src: "/images/logo-cafef.png",
-    alt: "CafeF",
-    height: "h-10 md:h-14",
-  },
-  {
-    src: "/images/logo-vtcnews.svg",
-    alt: "VTC News",
-    height: "h-10 md:h-12",
-  },
-];
 
 const fallbackArticles: PublicMediaMentionListItemResponse[] = [
   {
@@ -99,12 +69,10 @@ const fallbackArticles: PublicMediaMentionListItemResponse[] = [
 ];
 
 interface PressMediaSectionProps {
-  partners: PartnerResponse[] | null;
   mediaMentions: PublicMediaMentionListItemResponse[] | null;
 }
 
 export default function PressMediaSection({
-  partners,
   mediaMentions,
 }: PressMediaSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -123,29 +91,16 @@ export default function PressMediaSection({
     });
   };
 
-  // Determine media logos — use partners if available, otherwise fallback
-  const hasPartnerLogos = partners && partners.length > 0;
-
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="landing-section bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-brand-yellow" />
-            <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-              Tin tức &amp; Truyền thông
-            </span>
-            <span className="w-8 h-px bg-brand-yellow" />
-          </div>
-          <h2 className="text-4xl font-extrabold text-brand-black mb-4">
-            JobUp &amp; CEO Hạ Phan trên truyền thông
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            Sứ mệnh kết nối nhân tài của chúng tôi được lan tỏa bởi các cơ quan
-            báo chí và truyền hình uy tín hàng đầu Việt Nam.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Tin tức & Truyền thông"
+          title="JobUp & CEO Hạ Phan trên truyền thông"
+          description="Sứ mệnh kết nối nhân tài của chúng tôi được lan tỏa bởi các cơ quan báo chí và truyền hình uy tín hàng đầu Việt Nam."
+          align="center"
+        />
 
         {/* Press Slider */}
         <div className="relative group">

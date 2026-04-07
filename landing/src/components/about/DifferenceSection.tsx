@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 
 interface DifferenceSectionProps {
@@ -49,32 +50,26 @@ export default function DifferenceSection({
     statSubtitle || "Trong 15+ ngành nghề trên khắp Việt Nam";
 
   return (
-    <section className="py-16  bg-brand-light-gray">
+    <section className="landing-section bg-brand-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-brand-yellow" />
-            <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-              {displayBadge}
-            </span>
-            <span className="w-8 h-px bg-brand-yellow" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-black">
-            {displayTitle}
-          </h2>
-          <p className="text-gray-500 mt-4 text-lg">{displaySubtitle}</p>
-        </div>
+        <SectionHeader
+          badge={displayBadge}
+          title={displayTitle}
+          description={displaySubtitle}
+          align="center"
+          className="mb-12"
+        />
 
         {/* Block: Image left, content right */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center ">
-          <div className="rounded-3xl overflow-hidden shadow-xl">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center ">
+          <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-100">
             <Image
               src={displayImage}
               alt="Mrs. Ha Phan - CEO & Founder JobUp, chuyên gia tư vấn tuyển dụng"
               width={800}
               height={600}
-              className="w-full aspect-[4/3] object-cover"
+              className="w-full aspect-video object-contain"
               loading="lazy"
             />
           </div>

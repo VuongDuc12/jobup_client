@@ -1,5 +1,6 @@
 import type { TestimonialResponse } from "@/lib/types";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 
 interface TestimonialsSectionProps {
@@ -54,7 +55,7 @@ export default function TestimonialsSection({
     : defaultTestimonials;
 
   return (
-    <section className="py-16 bg-brand-black relative overflow-visible">
+    <section className="landing-section bg-brand-black relative overflow-visible">
       <div
         className="absolute top-0 left-0 w-full h-full opacity-10"
         style={{
@@ -63,16 +64,19 @@ export default function TestimonialsSection({
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-12">
-          <span className="text-brand-yellow font-bold uppercase tracking-widest text-xs mb-3 block">
-            Câu chuyện thành công
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">
-            Ứng viên nói gì về <span className="text-brand-yellow">JobUp?</span>
-          </h2>
-        </div>
+        <SectionHeader
+          badge="Câu chuyện thành công"
+          title={
+            <>
+              Ứng viên nói gì về <span className="text-brand-yellow">JobUp?</span>
+            </>
+          }
+          align="center"
+          className="mb-8"
+          titleClassName="text-white"
+        />
 
-        <div className="grid md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6 items-stretch">
           {items.map((testimonial, idx) => (
             <div
               key={idx}

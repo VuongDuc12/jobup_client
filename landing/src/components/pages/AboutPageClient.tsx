@@ -16,7 +16,6 @@ import { FloatingActions } from "@/components/sections";
 import type {
     TestimonialResponse,
     StatisticResponse,
-    PartnerResponse,
     PublicMediaMentionListItemResponse,
     AboutSettingResponse,
 } from "@/lib/types";
@@ -24,7 +23,6 @@ import type {
 interface AboutPageClientProps {
     initialTestimonials: TestimonialResponse[] | null;
     initialStatistics: StatisticResponse[] | null;
-    initialPartners: PartnerResponse[] | null;
     initialMediaMentions: PublicMediaMentionListItemResponse[] | null;
     initialAboutSettings: AboutSettingResponse | null;
 }
@@ -32,7 +30,6 @@ interface AboutPageClientProps {
 export default function AboutPageClient({
     initialTestimonials,
     initialStatistics,
-    initialPartners,
     initialMediaMentions,
     initialAboutSettings,
 }: AboutPageClientProps) {
@@ -41,7 +38,7 @@ export default function AboutPageClient({
     return (
         <>
             <Navbar />
-            <main className="flex-grow pt-20">
+            <main className="flex-grow pt-20 landing-page-shell-tight">
                 <AboutHeroSection
                     badgeText={s?.heroBadgeText}
                     title={s?.heroTitle}
@@ -72,6 +69,8 @@ export default function AboutPageClient({
                     statSubtitle={s?.differenceStatSubtitle}
                 />
                 <CoreValuesSection
+                    visionDescription={s?.visionDescription}
+                    missionDescription={s?.missionDescription}
                     title={s?.coreValuesTitle}
                     value1Icon={s?.coreValue1Icon}
                     value1Title={s?.coreValue1Title}
@@ -97,7 +96,6 @@ export default function AboutPageClient({
                 />
                 <StatsBarSection statistics={initialStatistics} />
                 <PressMediaSection
-                    partners={initialPartners}
                     mediaMentions={initialMediaMentions}
                 />
                 <AboutTestimonialsSection testimonials={initialTestimonials} />

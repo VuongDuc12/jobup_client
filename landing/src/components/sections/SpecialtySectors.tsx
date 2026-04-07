@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useCallback, useState, useEffect } from "react";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { fetchPublicJobCategories } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/config";
 import type { JobCategoryTreeItem } from "@/lib/types";
@@ -30,20 +31,25 @@ export default function SpecialtySectors() {
   return (
     <section
       id="services"
-      className="max-w-[100vw] overflow-hidden py-14 bg-[#F5F5F4] relative"
+      className="landing-section max-w-[100vw] overflow-hidden bg-[#F5F5F4] relative"
     >
       {/* Section Header */}
-      <div className="text-center mb-12">
-        <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
-          Lĩnh vực chuyên môn
-        </span>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-[#111827] mb-3">
-          Khám phá cơ hội <span className="text-brand-yellow">Tiềm Năng</span>
-        </h2>
-        <p className="text-gray-500 text-base max-w-2xl mx-auto mb-6">
-          Tìm kiếm vị trí phù hợp với thế mạnh của bạn trong hơn 24+ lĩnh vực
-          khác nhau.
-        </p>
+      <div className="text-center">
+        <SectionHeader
+          badge="Lĩnh vực chuyên môn"
+          title={
+            <>
+              Khám phá cơ hội <span className="text-brand-yellow">Tiềm Năng</span>
+            </>
+          }
+          description="Tìm kiếm vị trí phù hợp với thế mạnh của bạn trong hơn 24+ lĩnh vực khác nhau."
+          align="center"
+          className="mb-5"
+          badgeClassName="text-[#B45309]"
+          lineClassName="bg-[#B45309]"
+          titleClassName="text-[#111827]"
+          descriptionClassName="text-base"
+        />
         <div className="flex justify-center gap-3">
           <button
             onClick={scrollPrev}
@@ -71,7 +77,7 @@ export default function SpecialtySectors() {
         {/* Track */}
         <div
           ref={trackRef}
-          className="flex gap-6 overflow-x-auto pb-8 pt-4 px-4 md:px-[max(1rem,calc((100vw-80rem)/2))] snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
+          className="flex gap-6 overflow-x-auto pb-6 pt-3 px-4 md:px-[max(1rem,calc((100vw-80rem)/2))] snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
         >
           {loading
             ? Array.from({ length: 4 }).map((_, idx) => (

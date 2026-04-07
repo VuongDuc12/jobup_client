@@ -1,4 +1,8 @@
+import SectionHeader from "@/components/shared/SectionHeader";
+
 interface CoreValuesSectionProps {
+  visionDescription?: string | null;
+  missionDescription?: string | null;
   title?: string | null;
   value1Icon?: string | null;
   value1Title?: string | null;
@@ -48,6 +52,8 @@ const missionVisionData = [
 ];
 
 export default function CoreValuesSection({
+  visionDescription,
+  missionDescription,
   title,
   value1Icon,
   value1Title,
@@ -79,76 +85,105 @@ export default function CoreValuesSection({
     },
   ];
 
+  // All 5 items in one unified array: Vision, Mission, then 3 Core Values
+  const allItems = [
+    ...[
+      {
+        label: "Tầm nhìn",
+        title: visionDescription || missionVisionData[0].title,
+        icon: missionVisionData[0].icon,
+      },
+      {
+        label: "Sứ mệnh",
+        title: missionDescription || missionVisionData[1].title,
+        icon: missionVisionData[1].icon,
+      },
+    ].map((item) => ({
+      type: "pillar" as const,
+      icon: item.icon,
+      label: item.label,
+      title: item.title,
+      description: null,
+    })),
+    ...coreValues.map((value) => ({
+      type: "value" as const,
+      icon: value.icon,
+      label: displayTitle,
+      title: value.title,
+      description: value.description,
+    })),
+  ];
+
   return (
-    <section className="border-t border-gray-100 bg-white py-20 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-24 grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="text-center lg:col-span-4 lg:text-left">
-            <h2 className="text-3xl font-extrabold tracking-tight text-brand-black md:text-4xl">
-              Tầm nhìn & Sứ mệnh
-            </h2>
-            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-gray-500 lg:mx-0 md:text-lg">
-              JobUp là một đơn vị cung cấp dịch vụ tư vấn tuyển dụng chuyên
-              nghiệp.
-            </p>
-            <div className="mx-auto mt-6 h-1.5 w-16 rounded-full bg-brand-yellow lg:mx-0" />
-          </div>
+    <section className="landing-section bg-white border-t border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Single Section Header */}
+        <SectionHeader
+          badge="DNA của chúng tôi"
+          title="Tầm nhìn · Sứ mệnh · Giá trị cốt lõi"
+          description="Những nguyên tắc định hướng mọi hoạt động tư vấn tuyển dụng tại JobUp."
+          align="center"
+        />
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:col-span-8">
-            {missionVisionData.map((item, idx) => (
-              <article
-                key={item.label}
-                className={`group rounded-[1.75rem] border border-gray-100 bg-[#FCFCFC] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-yellow/30 hover:bg-white hover:shadow-[0_18px_34px_-20px_rgba(0,0,0,0.3)] ${
-                  idx === 1 ? "sm:mt-8" : ""
-                }`}
-              >
-                <div className="mb-5 flex items-center gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-yellow/10 transition-colors group-hover:bg-brand-yellow">
-                    <i
-                      className={`${item.icon} text-brand-yellow text-lg transition-colors group-hover:text-brand-black`}
-                    />
-                  </div>
-                  <span className="text-lg font-extrabold uppercase tracking-wide text-brand-black">
-                    {item.label}
-                  </span>
-                </div>
-                <p className="text-base leading-relaxed text-gray-500 md:text-lg">
-                  {item.title}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-14 border-t border-gray-100 pt-14 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-brand-black md:text-4xl">
-            {displayTitle}
-          </h2>
-        </div>
-
-        <div className="relative">
-          <div className="absolute left-0 right-0 top-10 hidden h-px bg-gray-200 md:block" />
-          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-            {coreValues.map((value, idx) => (
+        {/* Unified 5-item grid: 2 pillars top, 3 values bottom — one visual flow */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-7">
+          {allItems.map((item, idx) => {
+            const isPillar = item.type === "pillar";
+            return (
               <article
                 key={idx}
-                className="group relative rounded-[1.75rem] border border-gray-100 bg-white p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-yellow/30 hover:shadow-[0_16px_32px_-20px_rgba(0,0,0,0.35)]"
+                className={`group relative rounded-3xl border p-7 md:p-9 transition-all duration-300 overflow-hidden ${
+                  isPillar
+                    ? "md:col-span-3 bg-brand-black border-brand-black hover:shadow-hover"
+                    : "md:col-span-2 bg-brand-light-gray border-gray-100 hover:border-brand-yellow/30 hover:shadow-hover"
+                }`}
               >
-                <div className="absolute left-1/2 top-10 z-10 hidden h-2 w-2 -translate-x-1/2 rounded-full bg-brand-yellow md:block" />
-                <div className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-yellow/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-brand-yellow">
+                {/* Icon */}
+                <div
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 ${
+                    isPillar
+                      ? "bg-brand-yellow/15 group-hover:bg-brand-yellow"
+                      : "bg-white shadow-soft group-hover:bg-brand-yellow group-hover:shadow-glow"
+                  }`}
+                >
                   <i
-                    className={`${value.icon} text-brand-yellow text-3xl transition-colors duration-300 group-hover:text-brand-black`}
+                    className={`${item.icon} text-xl transition-colors duration-300 ${
+                      isPillar
+                        ? "text-brand-yellow group-hover:text-brand-black"
+                        : "text-brand-yellow group-hover:text-white"
+                    }`}
                   />
                 </div>
-                <h4 className="mb-4 text-xl font-extrabold text-brand-black">
-                  {value.title}
+
+                {/* Label */}
+                <span
+                  className={`text-xs font-bold uppercase tracking-[0.18em] ${
+                    isPillar ? "text-brand-yellow" : "text-brand-yellow"
+                  }`}
+                >
+                  {item.label}
+                </span>
+
+                {/* Title */}
+                <h4
+                  className={`mt-3 font-extrabold leading-snug ${
+                    isPillar
+                      ? "text-xl md:text-2xl text-white"
+                      : "text-lg text-brand-black"
+                  }`}
+                >
+                  {item.title}
                 </h4>
-                <p className="leading-relaxed text-gray-500">
-                  {value.description}
-                </p>
+
+                {/* Description (only for core values) */}
+                {item.description && (
+                  <p className="mt-3 text-gray-400 leading-relaxed text-[15px]">
+                    {item.description}
+                  </p>
+                )}
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { fetchPublicJobs } from "@/lib/api";
 import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
-import DynamicBanner from "@/components/shared/DynamicBanner";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 
 function JobCard({ job }: { job: PublicJobResponse }) {
@@ -24,9 +23,9 @@ function JobCard({ job }: { job: PublicJobResponse }) {
     >
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
         <div className="relative shrink-0 hidden md:block">
-          <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+          <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden shrink-0 border-2 border-black">
             <img
-              src="/Logo.png"
+              src="/favicon.png"
               alt="Jobup"
               className="w-10 h-10 object-contain"
             />
@@ -171,6 +170,7 @@ export default function JobListings({
       salaryTo,
       experience,
       workType,
+      pageSize,
       sortBy,
     ],
   );
@@ -223,7 +223,7 @@ export default function JobListings({
         jobs.slice(3).map((job) => <JobCard key={job.id} job={job} />)}
 
       {!loading && !error && jobs.length > 0 && (
-        <div className="flex justify-center pt-8">
+        <div className="flex justify-center ">
           {viewAllHref ? (
             <a
               href={viewAllHref}

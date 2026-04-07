@@ -8,7 +8,7 @@ const broadcasts = [
   "✨ Liên hệ ngay đội ngũ JobUp để được tư vấn việc làm tận tình 24/7",
 ];
 
-const hotTags = ["Kinh doanh", "Bán hàng", "Giao hàng", "Part-time"];
+const hotTags = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
 interface JobSearchHubProps {
   keyword: string;
@@ -76,7 +76,7 @@ export default function JobSearchHub({
   };
 
   return (
-    <div className="mb-10">
+    <div className="mb-8 md:mb-9">
       <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border border-white/20">
         {/* Live Broadcast Bar */}
         <div className="absolute top-0 inset-x-0 z-20 bg-white/10 backdrop-blur-md border-b border-white/10 py-3 overflow-hidden">
@@ -87,7 +87,7 @@ export default function JobSearchHub({
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-yellow" />
               </span>
               <span className="text-[10px] font-black text-white uppercase tracking-widest">
-                Live Broadcast
+                Bảng tin
               </span>
             </div>
             <div className="flex-grow whitespace-nowrap overflow-hidden relative">
@@ -139,8 +139,8 @@ export default function JobSearchHub({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 p-6 lg:p-14 pt-16 lg:pt-20">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <div className="relative z-10 p-6 lg:p-12 pt-16 lg:pt-[4.5rem]">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-7 gap-4">
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Tìm việc làm{" "}
@@ -217,13 +217,13 @@ export default function JobSearchHub({
               type="submit"
               className="bg-brand-yellow text-brand-black px-12 py-4 rounded-2xl font-black hover:bg-white transition-all transform hover:scale-[1.03] shadow-[0_10px_20px_rgba(255,193,7,0.3)] active:scale-95 flex items-center justify-center gap-3 cursor-pointer"
             >
-              TÌM KIẾM{" "}
+              Tìm kiếm{" "}
               <i className="fa-solid fa-magnifying-glass-plus text-lg" />
             </button>
           </form>
 
           {showAdvanced && (
-            <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-5">
+            <div className="mt-5 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-5">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <label className="text-xs font-bold text-white/80">
@@ -370,7 +370,7 @@ export default function JobSearchHub({
           )}
 
           {/* Hot Tags */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-4">
             <span className="text-[9px] font-black text-white/50 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
               Tìm kiếm nhiều nhất:
@@ -380,7 +380,7 @@ export default function JobSearchHub({
                 <button
                   key={tag}
                   onClick={() => onKeywordChange(tag)}
-                  className="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
+                  className="px-6 py-2.5 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-xs font-extrabold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
                 >
                   {tag}
                 </button>

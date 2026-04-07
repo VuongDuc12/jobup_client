@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 interface FeaturesSectionProps {
   features?: FeatureResponse[] | null;
@@ -97,7 +98,11 @@ export default function FeaturesSection({
   const statsRef = useRef<HTMLDivElement | null>(null);
   const lastAnimatedKeyRef = useRef<string>("");
   const [animatedValues, setAnimatedValues] = useState<number[]>([]);
-  const [statsVisible, setStatsVisible] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      typeof window.IntersectionObserver === "undefined",
+  );
 
   // Build fallback features with dynamic hotline from config
   const fallbackFeatures = defaultFeatures.map((f) => {
@@ -169,10 +174,7 @@ export default function FeaturesSection({
     const node = statsRef.current;
     if (!node) return;
 
-    if (typeof IntersectionObserver === "undefined") {
-      setStatsVisible(true);
-      return;
-    }
+    if (typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -193,8 +195,6 @@ export default function FeaturesSection({
     if (lastAnimatedKeyRef.current === statsAnimationKey) return;
 
     lastAnimatedKeyRef.current = statsAnimationKey;
-
-    setAnimatedValues(parsedStats.map(() => 0));
 
     let frameId = 0;
     const duration = 1200;
@@ -230,58 +230,64 @@ export default function FeaturesSection({
   }, [parsedStats, statsAnimationKey, statsVisible]);
 
   return (
-    <section id="features" className="py-16 bg-white relative overflow-hidden">
+    <section
+      id="features"
+      className="landing-section bg-white relative overflow-hidden"
+    >
       {/* Decorative Background */}
       <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-50/50 rounded-full blur-[120px] -z-10 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50/30 rounded-full blur-[100px] -z-10 translate-y-1/4" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
-            Giải pháp toàn diện
-          </span>
-          <h2 className="text-3xl md:text-5xl font-[1000] text-[#111827] mb-5 tracking-tight">
-            Hệ sinh thái{" "}
-            <span className="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
-          </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên
-            từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Giải pháp toàn diện"
+          title={
+            <>
+              Hệ sinh thái{" "}
+              <span className="text-brand-yellow">Hỗ Trợ Toàn Diện</span>
+            </>
+          }
+          description="Không chỉ dừng lại ở việc kết nối, JobUp đồng hành cùng bạn trên từng bước ngoặt sự nghiệp với dịch vụ tuyển dụng hàng đầu."
+          align="center"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* Feature 1 — wide card (2 cols) */}
           {items[0] && (
             <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow hover:shadow-[0_40px_80px_-20px_rgba(245,185,20,0.15)] transition-all duration-700 group relative overflow-hidden">
               <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
-                {items[0].imageUrl && (
-                  <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                    <Image
-                      src={items[0].imageUrl}
-                      alt={items[0].title}
-                      fill
-                      sizes="400px"
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                      loading="lazy"
-                    />
+                <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+                  <div className="relative z-10 order-2 lg:order-1">
+                    {items[0].tag1 && (
+                      <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-md mb-4">
+                        <span className="w-8 h-[2px] bg-brand-yellow" />{" "}
+                        {items[0].tag1}
+                      </div>
+                    )}
+                    <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
+                      {items[0].title}
+                    </h3>
+                    <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic text-justify [text-justify:inter-word]">
+                      &ldquo;{items[0].description}&rdquo;
+                    </p>
+                    {/* Analytical UI */}
                   </div>
-                )}
-                <div className="relative z-10 max-w-md">
-                  {items[0].tag1 && (
-                    <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-sm mb-4">
-                      <span className="w-8 h-[2px] bg-brand-yellow" />{" "}
-                      {items[0].tag1}
+
+                  {items[0].imageUrl && (
+                    <div className="order-1 lg:order-2">
+                      <div className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-gray-50 aspect-[4/3] lg:aspect-[16/12]">
+                        <Image
+                          src={items[0].imageUrl}
+                          alt={items[0].title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover transition-all duration-1000 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   )}
-                  <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
-                    {items[0].title}
-                  </h3>
-                  <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic text-justify [text-justify:inter-word]">
-                    &ldquo;{items[0].description}&rdquo;
-                  </p>
-                  {/* Analytical UI */}
                 </div>
               </div>
             </div>
@@ -317,13 +323,7 @@ export default function FeaturesSection({
                   <div className="mt-auto space-y-4">
                     <div className="bg-white/5 backdrop-blur-md p-4 rounded-[1.5rem] rounded-tl-none border border-white/5 self-start max-w-[90%] transform -rotate-1">
                       <p className="text-xs text-gray-200">
-                        Em cần tối ưu CV ngành Tech ạ?
-                      </p>
-                    </div>
-                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1">
-                      <p className="text-xs font-bold leading-relaxed italic">
-                        &ldquo;JobUp đã lọc ra Job ngon đúng ý bạn. Apply luôn
-                        kẻo lỡ nhé! 🚀&rdquo;
+                        Anh chị cần tối ưu CV ạ?
                       </p>
                     </div>
                     {items[1].linkUrl && (
@@ -419,7 +419,7 @@ export default function FeaturesSection({
         {/* Stats */}
         <div
           ref={statsRef}
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-10 border-t border-amber-100"
+          className="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8 md:pt-9 border-t border-amber-100"
         >
           {stats.map((stat, idx) => (
             <div
@@ -427,10 +427,10 @@ export default function FeaturesSection({
               className="text-center rounded-2xl border border-amber-100/70 bg-gradient-to-br from-white to-amber-50/60 px-3 py-5 md:py-6 shadow-[0_10px_30px_-20px_rgba(245,158,11,0.55)] transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_20px_45px_-22px_rgba(245,158,11,0.65)] opacity-100 translate-y-0"
               style={{ transitionDelay: `${idx * 80}ms` }}
             >
-              <div className="text-3xl md:text-4xl font-extrabold text-[#111827] mb-1 tracking-tight">
+              <div className="flex items-center justify-center gap-0.5 text-3xl md:text-4xl font-extrabold text-[#111827] mb-1 tracking-tight">
                 {(() => {
                   const parsed = parsedStats[idx];
-                  if (!parsed) return stat.value;
+                  if (!parsed) return <span>{stat.value}</span>;
 
                   const current = animatedValues[idx] ?? 0;
                   const value =
@@ -438,7 +438,17 @@ export default function FeaturesSection({
                       ? current.toFixed(parsed.decimals)
                       : String(Math.round(current));
 
-                  return `${value}${parsed.suffix}`;
+                  const suffix = parsed.suffix.trim();
+                  return (
+                    <>
+                      <span className="tabular-nums">{value}</span>
+                      {suffix && (
+                        <span className="text-2xl md:text-3xl text-brand-yellow">
+                          {suffix}
+                        </span>
+                      )}
+                    </>
+                  );
                 })()}
               </div>
               <div className="mx-auto mb-2 h-0.5 w-8 rounded-full bg-brand-yellow/70" />

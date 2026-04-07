@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import type { TestimonialResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -68,38 +69,36 @@ export default function AboutTestimonialsSection({
       : fallbackTestimonials;
 
   return (
-    <section className="py-12 bg-brand-light-gray overflow-hidden">
+    <section className="landing-section bg-brand-light-gray overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-4 mb-14">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="w-8 h-px bg-brand-yellow" />
-              <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-                Phản hồi ứng viên
-              </span>
-            </div>
-            <h2 className="text-4xl font-extrabold text-brand-black">
-              Ứng viên nói gì về JobUp?
-            </h2>
-          </div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all cursor-pointer"
-            >
-              <i className="fa-solid fa-chevron-left text-sm" />
-            </button>
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all cursor-pointer"
-            >
-              <i className="fa-solid fa-chevron-right text-sm" />
-            </button>
-          </div>
+        <SectionHeader
+          badge="Phản hồi của ứng viên"
+          title="Ứng viên nói gì về JobUp?"
+          align="center"
+          className="mb-6"
+        />
+
+        <div className="mb-10 flex justify-center gap-3">
+          <button
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-brand-yellow hover:bg-brand-yellow hover:text-brand-black cursor-pointer"
+            aria-label="Xem phản hồi trước"
+          >
+            <i className="fa-solid fa-chevron-left text-sm" />
+          </button>
+          <button
+            onClick={() => swiperRef.current?.slideNext()}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-brand-yellow hover:bg-brand-yellow hover:text-brand-black cursor-pointer"
+            aria-label="Xem phản hồi tiếp theo"
+          >
+            <i className="fa-solid fa-chevron-right text-sm" />
+          </button>
         </div>
 
-        {/* Swiper Slider */}
+        {/* Swiper Slider — wrapper uses overflow-x:clip so side slides are hidden
+             but the hover tooltip can overflow vertically without clipping */}
+        <div className="[overflow-x:clip]">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -119,12 +118,12 @@ export default function AboutTestimonialsSection({
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="pb-12 [&_.swiper-pagination-bullet-active]:!bg-brand-yellow [&_.swiper-pagination]:!static [&_.swiper-pagination]:mt-8"
+          className="pb-12 !overflow-visible [&_.swiper-pagination-bullet-active]:!bg-brand-yellow [&_.swiper-pagination]:!static [&_.swiper-pagination]:mt-8"
         >
           {items.map((item, idx) => {
             const isDark = idx % 3 === 1;
             return (
-              <SwiperSlide key={idx} className="!h-[280px] !flex">
+              <SwiperSlide key={idx} className="!h-[280px] !flex !overflow-visible">
                 <div
                   className={`group relative overflow-visible z-0 hover:z-40 h-full rounded-3xl p-8 flex flex-col w-full ${
                     isDark
@@ -189,17 +188,50 @@ export default function AboutTestimonialsSection({
                     </div>
                   </div>
 
-                  <div className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:flex items-center justify-center p-3">
+                  {/* Hover tooltip — anchored to top of card, expands downward freely */}
+                  <div className="absolute inset-x-0 top-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:block">
                     <div
-                      className={`backdrop-blur-md p-6 rounded-[2rem] shadow-2xl border transform scale-95 group-hover:scale-100 transition-transform duration-300 w-full ${
+                      className={`rounded-3xl shadow-2xl border p-8 transform scale-95 group-hover:scale-100 transition-transform duration-300 ${
                         isDark
-                          ? "bg-brand-black/95 text-gray-200 border-brand-yellow/30"
-                          : "bg-white/95 text-gray-700 border-gray-200"
+                          ? "bg-brand-black/97 text-gray-200 border-brand-yellow/30"
+                          : "bg-white/97 text-gray-700 border-gray-200"
                       }`}
+                      style={{ backdropFilter: "blur(12px)" }}
                     >
-                      <p className="italic leading-relaxed text-sm text-center">
+                      {/* Stars */}
+                      <div className="flex gap-1 text-brand-yellow mb-4">
+                        {[...Array(item.rating)].map((_, i) => (
+                          <i key={i} className="fa-solid fa-star text-sm" />
+                        ))}
+                      </div>
+                      {/* Full quote — no line-clamp */}
+                      <p className="italic leading-relaxed text-sm mb-5">
                         &ldquo;{item.content}&rdquo;
                       </p>
+                      {/* Name row */}
+                      <div className="flex items-center gap-3 pt-4 border-t border-current/10">
+                        {item.avatarUrl ? (
+                          <Image
+                            src={item.avatarUrl}
+                            alt={item.name}
+                            width={36}
+                            height={36}
+                            className="w-9 h-9 rounded-full object-cover shrink-0"
+                          />
+                        ) : (
+                          <div className="w-9 h-9 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold text-xs shrink-0">
+                            {item.name.split(" ").map((w) => w[0]).slice(-2).join("").toUpperCase()}
+                          </div>
+                        )}
+                        <div>
+                          <p className={`font-bold text-sm ${isDark ? "text-white" : "text-brand-black"}`}>
+                            {item.name}
+                          </p>
+                          <p className={`text-xs ${isDark ? "text-brand-yellow" : "text-gray-400"}`}>
+                            {item.position}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -207,6 +239,7 @@ export default function AboutTestimonialsSection({
             );
           })}
         </Swiper>
+        </div>
       </div>
     </section>
   );

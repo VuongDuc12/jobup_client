@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
@@ -32,14 +33,14 @@ export default function AboutHeroSection({
   const displayCta2Url = "/tuyen-dung";
 
   return (
-    <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full aspect-video flex items-start justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src={displayBg}
           alt="Không gian làm việc hiện đại của JobUp – nơi kết nối nhân tài và doanh nghiệp"
           fill
-          className="object-cover"
+          className="object-contain"
           priority
         />
         {/* Dark gradient overlay */}
@@ -47,22 +48,19 @@ export default function AboutHeroSection({
       </div>
 
       {/* Text Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-20 md:pt-24 pb-20 md:pb-32">
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <span className="w-12 h-px bg-brand-yellow" />
-          <span className="text-brand-yellow font-bold text-sm uppercase tracking-[0.3em]">
-            {displayBadge}
-          </span>
-          <span className="w-12 h-px bg-brand-yellow" />
-        </div>
-
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-black text-brand-yellow mb-8 md:mb-10 leading-tight">
-          {displayTitle}
-        </h1>
-
-        <p className="text-white/80 text-base sm:text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10 md:mb-16 font-light text-justify">
-          {displaySubtitle}
-        </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-12 md:pt-16 lg:pt-20 pb-2 md:pb-4">
+        <SectionHeader
+          badge={displayBadge}
+          title={displayTitle}
+          description={displaySubtitle}
+          align="center"
+          headingTag="h1"
+          className="mb-6 md:mb-10"
+          contentClassName="max-w-4xl"
+          badgeClassName="tracking-[0.24em]"
+          titleClassName="mt-6 text-4xl !text-brand-yellow font-bold leading-[1.15] tracking-[-0.02em] sm:text-5xl md:text-6xl xl:text-7xl [text-shadow:_0_2px_20px_rgba(240,180,41,0.25),_0_1px_4px_rgba(0,0,0,0.3)] antialiased"
+          descriptionClassName="mt-8 max-w-3xl text-base font-normal leading-relaxed text-white/90 sm:text-lg md:text-xl antialiased"
+        />
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6">
           <a

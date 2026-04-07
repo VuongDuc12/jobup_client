@@ -23,21 +23,24 @@ export default function Footer() {
   const socialLinks = [
     { icon: "fa-brands fa-facebook-f", href: config.facebookUrl || "#" },
     { icon: "fa-brands fa-linkedin-in", href: config.linkedInUrl || "#" },
-    { icon: "fa-brands fa-instagram", href: config.instagramUrl || "#" },
+    {
+      icon: "fa-brands fa-threads",
+      href: config.threadUrl || "#",
+    },
     { icon: "fa-brands fa-tiktok", href: config.tiktokUrl || "#" },
   ].filter((link) => link.href && link.href !== "#");
   return (
     <footer
-      className="bg-[#111827] pt-24 font-sans relative overflow-hidden text-white"
+      className="bg-[#111827] pt-12 font-sans relative overflow-hidden text-white"
       id="footer"
     >
       {/* Decorative glow */}
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px] -z-10 translate-y-1/2" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Brand */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-5 space-y-6">
             <Link
               href="/"
               className="inline-block transition-transform hover:scale-105"
@@ -45,15 +48,15 @@ export default function Footer() {
               <Image
                 src="/Logo.png"
                 alt="JobUp"
-                width={120}
-                height={40}
-                className="h-10 w-auto object-contain"
+                width={140}
+                height={46}
+                className="h-11 w-auto object-contain"
               />
             </Link>
             <p className="text-gray-400 text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
-              "Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
+              Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
               tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
-              viên, kiến tạo hành trình sự nghiệp bền vững."
+              viên, kiến tạo hành trình sự nghiệp bền vững.
             </p>
 
             <div className="flex gap-3">
@@ -61,25 +64,23 @@ export default function Footer() {
                 <a
                   key={idx}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all duration-300 shadow-sm"
+                  className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all duration-300 shadow-sm"
                 >
-                  <i className={social.icon} />
+                  <i className={`${social.icon} text-base`} />
                 </a>
               ))}
             </div>
           </div>
 
           {/* About */}
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-white text-lg mb-6 tracking-wide">
-              Về chúng tôi
-            </h4>
+          <div className="lg:col-span-2">
+            <h4 className="font-bold text-white text-lg mb-6">Về chúng tôi</h4>
             <ul className="space-y-4">
               {footerAbout.map((item, idx) => (
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block font-medium"
+                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -89,16 +90,16 @@ export default function Footer() {
           </div>
 
           {/* For Candidates */}
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-white text-lg mb-6 tracking-wide">
-              Tin tức & Tuyển dụng
+          <div className="lg:col-span-2">
+            <h4 className="font-bold text-white text-lg mb-6">
+              Tuyển dụng và Tin tức
             </h4>
             <ul className="space-y-4">
               {footerCandidate.map((item, idx) => (
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block font-medium"
+                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -108,27 +109,31 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="lg:col-span-2">
-            <h4 className="font-bold text-white text-lg mb-6 tracking-wide">
-              Liên hệ
-            </h4>
+          <div className="lg:col-span-3">
+            <h4 className="font-bold text-white text-lg mb-6">Liên hệ</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-phone text-brand-yellow mt-1" />
-                <span className="text-white font-bold tracking-wider">
-                  {loading ? "..." : config.hotline}
+                <i className="fa-solid fa-phone text-brand-yellow mt-0.5 text-base mt-[4px]" />
+                <span className="text-white text-base">
+                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms.
+                  Hạ Phan)
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-envelope text-brand-yellow mt-1" />
-                <span className="text-gray-400">
-                  {loading ? "..." : config.email}
+                <i className="fa-solid fa-envelope text-brand-yellow mt-0.5 text-base mt-[4px]" />
+                <span className="text-gray-300">
+                  {loading
+                    ? "tuyendung@jobup.vn"
+                    : config.email || "tuyendung@jobup.vn"}
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-location-dot text-brand-yellow mt-1" />
-                <span className="text-gray-400 leading-relaxed text-sm text-justify [text-justify:inter-word]">
-                  {loading ? "..." : config.address}
+                <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base mt-[4px]" />
+                <span className="text-gray-300 leading-relaxed">
+                  {loading
+                    ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"
+                    : config.address ||
+                      "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
                 </span>
               </li>
             </ul>

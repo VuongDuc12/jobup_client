@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
+import SectionHeader from "@/components/shared/SectionHeader";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 import { internalNewsArticles } from "@/lib/mockNews";
 import { fetchPublicArticles, fetchPublicNewsCategories } from "@/lib/api";
@@ -54,7 +55,7 @@ export default function InternalNewsPage() {
     internalNewsArticles[0]?.coverImage ||
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'%3E%3Crect width='1200' height='675' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='28'%3EJobUp News%3C/text%3E%3C/svg%3E";
 
-  const fallbackItems = fallbackArticleList();
+  const fallbackItems = useMemo(() => fallbackArticleList(), []);
   const [featured, setFeatured] =
     useState<PublicArticleListItemResponse | null>(fallbackItems[0] || null);
   const [others, setOthers] = useState<PublicArticleListItemResponse[]>(
@@ -160,7 +161,7 @@ export default function InternalNewsPage() {
     return () => {
       mounted = false;
     };
-  }, [initialCategorySlug]);
+  }, [fallbackItems, initialCategorySlug]);
 
   useEffect(() => {
     let mounted = true;
@@ -198,7 +199,7 @@ export default function InternalNewsPage() {
     return () => {
       mounted = false;
     };
-  }, [selectedCategoryId, keyword, pageNumber]);
+  }, [fallbackItems, selectedCategoryId, keyword, pageNumber]);
 
   const handleSearch = () => {
     setPageNumber(1);
@@ -226,10 +227,10 @@ export default function InternalNewsPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-20">
-        <section className="py-16 bg-brand-light-gray">
+      <main className="pt-20 landing-page-shell-tight">
+        <section className="landing-section bg-brand-light-gray">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
               <Link
                 href={featuredLink}
                 className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl group block"
@@ -250,22 +251,23 @@ export default function InternalNewsPage() {
               </Link>
 
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-px bg-brand-yellow" />
-                  <span className="text-brand-yellow font-bold text-sm uppercase tracking-widest">
-                    Góc chuyên gia JobUp
-                  </span>
-                </div>
-                <h1 className="text-3xl md:text-5xl font-black text-brand-black leading-tight mb-6 md:mb-8">
-                  Nơi chia sẻ kiến thức{" "}
-                  <span className="text-brand-yellow">vươn tầm</span> sự nghiệp
-                </h1>
-                <p className="text-gray-500 text-base md:text-lg leading-relaxed mb-8 md:mb-10">
-                  Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất.
-                  Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực
-                  chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá.
-                </p>
-                <div className="mb-5 flex flex-col sm:flex-row gap-3">
+                <SectionHeader
+                  badge="Góc chuyên gia JobUp"
+                  title={
+                    <>
+                      Nơi chia sẻ kiến thức{" "}
+                      <span className="text-brand-yellow">vươn tầm</span> sự
+                      nghiệp
+                    </>
+                  }
+                  description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
+                  align="left"
+                  headingTag="h1"
+                  className="mb-6 md:mb-7"
+                  titleClassName="text-3xl font-black leading-tight text-brand-black md:text-5xl"
+                  descriptionClassName="text-base md:text-lg"
+                />
+                <div className="mb-4 flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative w-full">
                     <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
                     <input
@@ -308,9 +310,9 @@ export default function InternalNewsPage() {
           </div>
         </section>
 
-        <section className="py-10 bg-white">
+        <section className="landing-section-compact bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {others.map((article) =>
                 (() => {
                   const cardImage =
@@ -400,7 +402,7 @@ export default function InternalNewsPage() {
               )}
             </div>
 
-            <div className="mt-12 flex justify-center">
+            <div className="mt-6 flex justify-center">
               <NumberedPagination
                 page={pageNumber}
                 totalPages={totalPages}

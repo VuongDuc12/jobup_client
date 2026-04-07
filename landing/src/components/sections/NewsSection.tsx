@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import type { PublicArticleListItemResponse } from "@/lib/types";
 import { getAssetUrl } from "@/lib/utils";
 
 /* ─── Fallback data (shown when API returns nothing) ─── */
 const fallbackHighlight = {
   title: "Chào đón thành viên thứ 200 gia nhập đại gia đình JobUp",
-  image:
-    "/images/news-main.jpg",
+  image: "/images/news-main.jpg",
   category: "Tin tiêu biểu",
   date: "20/05/2026",
   slug: "#",
@@ -15,24 +15,21 @@ const fallbackHighlight = {
 
 const fallbackSideNews = [
   {
-    image:
-      "/images/news-event.jpg",
+    image: "/images/news-event.jpg",
     category: "Sự kiện",
     title: "Team Building 2026: Vượt Sóng Cùng JobUp tại Phú Quốc",
     date: "15/05/2026",
     slug: "#",
   },
   {
-    image:
-      "/images/news-meeting.jpg",
+    image: "/images/news-meeting.jpg",
     category: "Hoạt động chuyên môn",
     title: "Workshop: Ứng dụng AI trong tối ưu hóa quy trình HR",
     date: "12/05/2026",
     slug: "#",
   },
   {
-    image:
-      "/images/news-community.jpg",
+    image: "/images/news-community.jpg",
     category: "Văn hóa",
     title: "Happy Friday: Gắn kết tình thân giữa các phòng ban",
     date: "08/05/2026",
@@ -67,21 +64,27 @@ export default function NewsSection({ articles }: NewsSectionProps) {
   const sides = hasData ? articles.slice(1) : null;
 
   return (
-    <section id="news" className="py-16 relative bg-white">
+    <section id="news" className="landing-section relative bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-brand-yellow font-bold tracking-widest uppercase text-xs mb-3 block">
-            Tin tức & Hoạt động
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">
-            Cập nhật mới nhất từ{" "}
-            <span className="text-brand-yellow">Gia đình JobUp</span>
-          </h2>
-          <p className="text-gray-500 text-base max-w-2xl mx-auto mb-5">
-            Những sự kiện, văn hoá và workshop chuyển đổi số nổi bật nhất tháng
-            này.
-          </p>
+        <div className="text-center pb-6 md:pb-10 lg:pb-12">
+          <SectionHeader
+            badge="Tin tức & Hoạt động"
+            title={
+              <>
+                Cập nhật mới nhất từ
+                <br />{" "}
+                <span className="text-brand-yellow text-center my-2 block">
+                  Gia đình JobUp
+                </span>
+              </>
+            }
+            description=""
+            align="center"
+            className="mb-4"
+            titleClassName="text-gray-900"
+            descriptionClassName="text-base"
+          />
           <Link
             href="/tin-noi-bo"
             className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-brand-yellow-hover transition"
@@ -91,7 +94,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
         </div>
 
         {/* News Grid */}
-        <div className="grid lg:grid-cols-12 gap-6">
+        <div className="grid lg:grid-cols-12 gap-5 md:gap-6">
           {/* Highlighted Post */}
           <Link
             href={

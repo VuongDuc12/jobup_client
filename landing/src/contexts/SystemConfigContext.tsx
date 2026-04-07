@@ -1,7 +1,13 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { API_BASE_URL } from '@/lib/config';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import { API_BASE_URL } from "@/lib/config";
 
 export interface SystemConfig {
   companyName: string | null;
@@ -12,20 +18,22 @@ export interface SystemConfig {
   facebookUrl: string | null;
   linkedInUrl: string | null;
   tiktokUrl: string | null;
+  threadUrl: string | null;
   instagramUrl: string | null;
   mapEmbedUrl: string | null;
 }
 
 export const defaultConfig: SystemConfig = {
-  companyName: 'JobUp',
-  address: 'C23.Lot18, P.Định Công, Q.Hoàng Mai, Hà Nội',
-  hotline: '0979334143',
-  email: 'tuyendung@jopup.vn',
-  zaloUrl: '#',
-  facebookUrl: '#',
-  linkedInUrl: '#',
-  tiktokUrl: '#',
-  instagramUrl: '#',
+  companyName: "JobUp",
+  address: "C23.Lot18, P.Định Công, Q.Hoàng Mai, Hà Nội",
+  hotline: "0979334143",
+  email: "tuyendung@jopup.vn",
+  zaloUrl: "#",
+  facebookUrl: "#",
+  linkedInUrl: "#",
+  tiktokUrl: "#",
+  threadUrl: "#",
+  instagramUrl: "#",
   mapEmbedUrl: null,
 };
 
@@ -46,9 +54,12 @@ export function SystemConfigProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function fetchConfig() {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/SystemConfigs/public`, {
-          cache: 'no-store',
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/SystemConfigs/public`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (response.ok) {
           const result = await response.json();
@@ -63,12 +74,13 @@ export function SystemConfigProvider({ children }: { children: ReactNode }) {
             facebookUrl: data.facebookUrl || defaultConfig.facebookUrl,
             linkedInUrl: data.linkedInUrl || defaultConfig.linkedInUrl,
             tiktokUrl: data.tiktokUrl || defaultConfig.tiktokUrl,
+            threadUrl: data.threadUrl || defaultConfig.threadUrl,
             instagramUrl: data.instagramUrl || defaultConfig.instagramUrl,
             mapEmbedUrl: data.mapEmbedUrl || defaultConfig.mapEmbedUrl,
           });
         }
       } catch (error) {
-        console.error('Failed to fetch system config:', error);
+        console.error("Failed to fetch system config:", error);
       } finally {
         setLoading(false);
       }

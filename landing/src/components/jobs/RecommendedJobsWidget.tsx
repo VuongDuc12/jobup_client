@@ -32,7 +32,7 @@ export default function RecommendedJobsWidget({
         });
         if (!isMounted) return;
         setJobs(data);
-      } catch (err) {
+      } catch {
         if (!isMounted) return;
         setError("Không thể tải việc làm đề xuất.");
         setJobs([]);

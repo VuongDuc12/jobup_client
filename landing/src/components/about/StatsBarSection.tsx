@@ -24,32 +24,28 @@ export default function StatsBarSection({ statistics }: StatsBarSectionProps) {
       : fallbackStats;
 
   return (
-    <section className="py-16 bg-brand-black">
+    <section className="landing-section-compact bg-brand-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-center">
           {stats.map((stat, idx) => {
-            const value = stat.numberText.trim();
-            const lastChar = value.slice(-1);
-            const hasTrailingSymbol = /[^\dA-Za-z]/.test(lastChar);
-            const number = hasTrailingSymbol ? value.slice(0, -1) : value;
-            const suffix = hasTrailingSymbol ? lastChar : "";
+            // Split numberText into number and suffix (e.g. "100+" → "100" + "+")
+            const match = stat.numberText.match(/^([\d,.]+[KkMm]?)(.*)/);
+            const number = match ? match[1] : stat.numberText;
+            const suffix = match ? match[2] : "";
+            const trimmedSuffix = suffix.trim();
+            const isPlusSuffix = trimmedSuffix === "+";
 
             return (
-              <div key={idx}>
-                <p className="inline-flex items-center justify-center gap-1 text-4xl md:text-5xl font-extrabold leading-none text-brand-yellow">
-                  <span>{number}</span>
+              <div key={idx} className="text-center">
+                <p className="inline-flex items-center justify-center gap-0.5 text-4xl md:text-5xl font-extrabold leading-none text-brand-yellow">
+                  <span className="tabular-nums leading-none">{number}</span>
                   {suffix && (
-                    <span className="inline-flex items-center justify-center leading-none text-brand-yellow">
-                      {suffix === "+" ? (
-                        <i
-                          className="fa-solid fa-plus text-[0.58em]"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <span className="text-[0.72em] leading-none">
-                          {suffix}
-                        </span>
-                      )}
+                    <span
+                      className={`inline-flex items-center leading-none text-3xl md:text-4xl mt-[-2px] ${
+                        isPlusSuffix ? "relative -top-[0.08em]" : ""
+                      }`}
+                    >
+                      {trimmedSuffix}
                     </span>
                   )}
                 </p>

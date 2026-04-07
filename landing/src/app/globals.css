@@ -31,6 +31,7 @@
   --animate-float-slow: float-slow 6s ease-in-out infinite;
   --animate-blob-bounce: blob-bounce 10s infinite ease-in-out;
   --animate-mini-ping: mini-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-placeholder-pan: placeholder-marquee 12s linear infinite;
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -47,6 +48,26 @@ body {
 }
 
 @layer utilities {
+  .landing-page-shell {
+    padding-bottom: 30px;
+  }
+
+  .landing-page-shell-tight {
+    padding-bottom: 30px;
+  }
+
+  .landing-section {
+    padding-block: 50px;
+  }
+
+  .landing-section-compact {
+    padding-block: 30px;
+  }
+
+  .landing-section-header {
+    margin-bottom: 30px;
+  }
+
   .text-black,
   .text-gray-900,
   .text-brand-black,
@@ -140,6 +161,12 @@ body {
   50% {
     transform: translateY(-6px);
   }
+}
+
+@keyframes placeholder-marquee {
+  0%          { transform: translateX(0); }
+  65%         { transform: translateX(-100%); }
+  65.01%, 100% { transform: translateX(0); }
 }
 
 /* ═══════════════════════════════════════════════ */

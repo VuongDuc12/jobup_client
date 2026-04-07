@@ -100,6 +100,23 @@ function HtmlContent({ html }: { html?: string | null }) {
   );
 }
 
+function hasMeaningfulHtmlContent(html?: string | null): boolean {
+  if (!html) return false;
+
+  const raw = html.trim();
+  if (!raw) return false;
+
+  // Keep media-only blocks (image/video/embed) as meaningful content.
+  if (/<(img|video|iframe|embed|object|svg)\b/i.test(raw)) return true;
+
+  const textOnly = raw
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
+    .trim();
+
+  return textOnly.length > 0;
+}
+
 export default function JobDetailPage() {
   const params = useParams();
   const slug = typeof params?.slug === "string" ? params.slug : "";
@@ -196,7 +213,7 @@ export default function JobDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-grow pt-24 pb-20 bg-[#FAFAFA]">
+      <main className="flex-grow pt-24 landing-page-shell bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <nav className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-gray-500">
@@ -242,7 +259,7 @@ export default function JobDetailPage() {
           )}
 
           {!loading && job && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative">
               <div className="lg:col-span-8">
                 <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm relative overflow-hidden h-full">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
@@ -483,7 +500,7 @@ export default function JobDetailPage() {
                     <HtmlContent html={job.benefits} />
                   </div>
 
-                  {job.additionalInfo && job.additionalInfo.trim() && (
+                  {hasMeaningfulHtmlContent(job.additionalInfo) && (
                     <div>
                       <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
                         <span className="w-2 h-8 bg-brand-yellow rounded-full" />
@@ -495,7 +512,7 @@ export default function JobDetailPage() {
                 </div>
 
                 {relatedJobs.length > 0 && (
-                  <div className="order-5 pt-10">
+                  <div className="order-5 pt-8">
                     <h3 className="text-xl font-black text-brand-black mb-6">
                       Việc làm liên quan
                     </h3>

@@ -3,48 +3,19 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import SectionHeader from "@/components/shared/SectionHeader";
 import {
   fetchLatestJobs,
   fetchPublicStaff,
   fetchTopJobCategories,
 } from "@/lib/api";
 import DynamicBanner from "@/components/shared/DynamicBanner";
-import {
-  formatSalary,
-  workTypeLabel,
-  timeAgo,
-  companyInitial,
-  resolveAssetUrl,
-} from "@/lib/utils";
+import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type {
   JobCategoryTreeItem,
   PublicJobResponse,
   PublicStaffResponse,
 } from "@/lib/types";
-
-/* ────────────────────────────────────────────────
- *  Color palette for logo-fallback initials
- * ──────────────────────────────────────────────── */
-const FALLBACK_COLORS = [
-  "bg-blue-600",
-  "bg-orange-500",
-  "bg-purple-600",
-  "bg-teal-600",
-  "bg-pink-600",
-  "bg-emerald-600",
-  "bg-rose-600",
-  "bg-indigo-600",
-  "bg-cyan-600",
-  "bg-amber-600",
-];
-
-function colorForCompany(name: string): string {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
-}
 
 type Tab = { key: string; label: string; categoryId: string | undefined };
 
@@ -79,9 +50,6 @@ function JobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
   const workType = workTypeLabel(job.workType);
   const time = timeAgo(job.createdAt);
-  const initial = companyInitial(job.displayCompanyName);
-  const bgColor = colorForCompany(job.displayCompanyName);
-  const avatar = resolveAssetUrl(job.contactStaff?.avatar);
   const rawTags = job.tags ?? [];
   const tagChips =
     rawTags.length <= 2 ? rawTags : [...rawTags.slice(0, 2), "Khác"];
@@ -94,9 +62,9 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       {/* Company Logo / Fallback */}
       <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
         <div className="relative shrink-0 hidden md:block">
-          <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+          <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden shrink-0 border-2 border-black">
             <Image
-              src="/Logo.png"
+              src="/favicon.png"
               alt="Jobup"
               width={40}
               height={40}
@@ -190,7 +158,6 @@ export default function JobsSection() {
   ]);
   const [jobs, setJobs] = useState<PublicJobResponse[]>([]);
   const [staff, setStaff] = useState<PublicStaffResponse[]>(fallbackStaff);
-  const [staffIndex, setStaffIndex] = useState(0);
   const staffIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -232,13 +199,17 @@ export default function JobsSection() {
   useEffect(() => {
     const tab = tabs.find((t) => t.key === activeTab);
     loadJobs(tab?.categoryId);
-  }, [activeTab, loadJobs]);
+  }, [activeTab, loadJobs, tabs]);
 
   const startStaffAutoPlay = useCallback(() => {
     if (staff.length <= 1) return;
 
     staffIntervalRef.current = setInterval(() => {
-      setStaffIndex((prev) => (prev + 1) % staff.length);
+      setStaff((prev) => {
+        if (prev.length <= 1) return prev;
+        const [first, ...rest] = prev;
+        return [...rest, first];
+      });
     }, 4000);
   }, [staff.length]);
 
@@ -262,7 +233,6 @@ export default function JobsSection() {
         const result = await fetchPublicStaff(8);
         if (!mounted || result.length === 0) return;
         setStaff(result);
-        setStaffIndex(0);
       } catch {
         // Keep fallback staff
       }
@@ -276,20 +246,25 @@ export default function JobsSection() {
   }, []);
 
   return (
-    <section id="jobs" className="py-12 bg-gray-50 scroll-mt-20">
+    <section id="jobs" className="landing-section bg-gray-50 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <span className="text-[#B45309] font-bold uppercase tracking-[0.2em] text-xs mb-3 block">
-            Cơ hội nghề nghiệp
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#111827] mb-3">
-            Việc làm <span className="text-brand-yellow">Mới Nhất</span>
-          </h2>
-          <p className="text-gray-500 text-base max-w-2xl mx-auto mb-8">
-            Hơn 100+ việc làm mới được cập nhật hôm nay từ các tập đoàn công
-            nghệ hàng đầu.
-          </p>
+        <div className="text-center pb-6 md:pb-10 lg:pb-12">
+          <SectionHeader
+            badge="Cơ hội nghề nghiệp"
+            title={
+              <>
+                Việc làm <span className="text-brand-yellow">Mới Nhất</span>
+              </>
+            }
+            description="Hơn 100+ việc làm mới được cập nhật hôm nay từ các tập đoàn công nghệ hàng đầu."
+            align="center"
+            className="mb-6"
+            badgeClassName="text-[#B45309]"
+            badgeContainerClassName="justify-center"
+            lineClassName="bg-[#B45309]"
+            titleClassName="text-[#111827]"
+          />
 
           {/* Tabs */}
           <div className="flex items-center justify-start md:justify-center gap-2 p-1.5 bg-white rounded-full border border-gray-200 shadow-sm overflow-x-auto max-w-fit md:mx-auto no-scrollbar">
@@ -311,7 +286,7 @@ export default function JobsSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-7">
           {/* Job List */}
           <div className="lg:col-span-8">
             <div className="grid grid-cols-1 gap-3 transition-all duration-200">
@@ -354,7 +329,7 @@ export default function JobsSection() {
 
             {/* View More */}
             {!loading && !error && jobs.length > 0 && (
-              <div className="mt-8 text-center">
+              <div className="mt-6 text-center">
                 <Link
                   href="/tuyen-dung"
                   className="inline-block px-8 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-full hover:bg-[#111827] hover:text-white hover:border-[#111827] transition-all shadow-sm"
@@ -366,7 +341,7 @@ export default function JobsSection() {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-5">
             {/* Brand Trust Banner */}
             <DynamicBanner position="home_sidebar" variant="sidebar" />
 
