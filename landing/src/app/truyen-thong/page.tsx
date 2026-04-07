@@ -165,14 +165,12 @@ export default function MediaMentionsPage() {
               badge="Tin tức báo chí, truyền hình"
               title={
                 <>
-                  <span className="text-brand-yellow">Nơi khẳng định </span>
+                  <span className="text-white">Nơi khẳng định </span>
                   <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
                     vị thế
                   </span>
                   <br />
-                  <span className="text-brand-yellow">
-                    trong lòng công chúng
-                  </span>
+                  <span className="text-white">trong lòng công chúng</span>
                 </>
               }
               description="Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi qua lăng kính báo chí."
