@@ -173,7 +173,7 @@ export default function JobSearchHub({
                 type="text"
                 value={keyword}
                 onChange={(e) => onKeywordChange(e.target.value)}
-                placeholder="Tên công việc, công ty hoặc kỹ năng..."
+                placeholder="Nhập ngay công việc bạn đang tìm kiếm."
                 className="w-full pl-14 pr-6 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-white focus:text-gray-900 font-bold placeholder:text-white/60 backdrop-blur-md"
               />
               <div className="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-brand-yellow transition-colors text-lg drop-shadow-md z-10 pointer-events-none">

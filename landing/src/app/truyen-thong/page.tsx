@@ -146,22 +146,29 @@ export default function MediaMentionsPage() {
         <section className="relative landing-section overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[65vh]">
           <div className="absolute inset-0 z-0">
             <img
-              src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=2000"
+              src="/images/press-workplace.jpg"
               alt="Truyền thông"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-black/85 via-brand-black/70 to-brand-black/90" />
+            {/* Dark base overlay */}
+            <div className="absolute inset-0 bg-black/75" />
+            {/* Brand gradient accent */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-black/60 via-transparent to-brand-black/80" />
+            {/* Yellow glow from bottom-left */}
+            <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-brand-yellow/10 blur-[120px] rounded-full" />
+            {/* Subtle top vignette */}
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
             <SectionHeader
-              badge="Tin tức truyền thông"
+              badge="Tin tức báo chí, truyền hình"
               title={
                 <>
-                  Nơi khẳng định{" "}
-                  <span className="text-brand-yellow">Vị Thế</span>
+                  <span className="text-brand-yellow">Nơi khẳng định{" "}</span>
+                  <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">Vị Thế</span>
                   <br />
-                  trong lòng công chúng
+                  <span className="text-brand-yellow">trong lòng công chúng</span>
                 </>
               }
               description="Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi qua lăng kính báo chí."
@@ -170,7 +177,7 @@ export default function MediaMentionsPage() {
               className="mb-6 md:mb-8"
               contentClassName="max-w-4xl"
               badgeClassName="tracking-[0.24em]"
-              titleClassName="text-3xl font-black leading-tight text-white sm:text-4xl md:text-7xl"
+              titleClassName="text-3xl font-black leading-tight sm:text-4xl md:text-7xl"
               descriptionClassName="max-w-4xl text-base font-light leading-relaxed text-white/80 sm:text-lg md:text-2xl"
             />
             <div className="mt-6 md:mt-8 mx-auto max-w-2xl flex flex-col sm:flex-row gap-3">
@@ -190,7 +197,7 @@ export default function MediaMentionsPage() {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="w-full sm:w-auto px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
+                className="w-full sm:w-auto px-5 py-3 rounded-full bg-brand-yellow text-brand-black text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
               >
                 Tìm kiếm
               </button>

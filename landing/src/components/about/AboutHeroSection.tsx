@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/components/shared/SectionHeader";
@@ -19,11 +20,25 @@ export default function AboutHeroSection({
 }: AboutHeroSectionProps) {
   const { config } = useSystemConfig();
   const displayBadge = badgeText || "Về chúng tôi";
-  const displayTitle = title || "Kiến tạo giá trị, Kết nối nhân tài Việt.";
   const displaySubtitle =
     subtitle ||
     "Chuyên gia tư vấn tuyển dụng chuyên nghiệp, đồng hành cùng hơn 100+ doanh nghiệp trong hành trình tìm kiếm và phát triển nguồn nhân lực chất lượng cao.";
   const displayBg = getAssetUrl(backgroundImage) || "/hero-workspace.png";
+
+  // Title: CMS string hoặc fallback JSX đẹp
+  const displayTitle: React.ReactNode = title ? (
+    <span className="text-brand-yellow">{title}</span>
+  ) : (
+    <>
+      <span className="text-brand-yellow">Trở thành đối tác </span>
+      <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
+        tin cậy
+      </span>
+      <span className="text-brand-yellow">
+        {" "}cung cấp dịch vụ tuyển dụng<br />đa ngành nghề khắp Việt Nam
+      </span>
+    </>
+  );
   const displayCta1Url =
     config.zaloUrl && config.zaloUrl !== "#"
       ? config.zaloUrl
@@ -58,7 +73,7 @@ export default function AboutHeroSection({
           className="mb-6 md:mb-10"
           contentClassName="max-w-4xl"
           badgeClassName="tracking-[0.24em]"
-          titleClassName="mt-6 text-4xl !text-brand-yellow font-bold leading-[1.15] tracking-[-0.02em] sm:text-5xl md:text-6xl xl:text-7xl [text-shadow:_0_2px_20px_rgba(240,180,41,0.25),_0_1px_4px_rgba(0,0,0,0.3)] antialiased"
+          titleClassName="mt-6 text-4xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-5xl md:text-6xl xl:text-7xl antialiased"
           descriptionClassName="mt-8 max-w-3xl text-base font-normal leading-relaxed text-white/90 sm:text-lg md:text-xl antialiased"
         />
 

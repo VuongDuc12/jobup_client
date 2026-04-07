@@ -13,8 +13,8 @@ const footerAbout = [
 
 const footerCandidate = [
   { href: "/tuyen-dung", label: "Việc làm mới nhất" },
-  { href: "/tin-noi-bo", label: "Tin tức" },
-  { href: "/truyen-thong", label: "Tin truyền thông" },
+  { href: "/tin-noi-bo", label: "Tin nội bộ" },
+  { href: "/truyen-thong", label: "Tin báo chí, truyền hình" },
 ];
 
 export default function Footer() {
@@ -112,28 +112,24 @@ export default function Footer() {
           <div className="lg:col-span-3">
             <h4 className="font-bold text-white text-lg mb-6">Liên hệ</h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <i className="fa-solid fa-phone text-brand-yellow mt-0.5 text-base mt-[4px]" />
-                <span className="text-white text-base">
-                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms.
-                  Hạ Phan)
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-phone text-brand-yellow text-base flex-shrink-0" />
+                <span className="text-white text-base leading-tight">
+                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms. Hạ Phan)
                 </span>
               </li>
-              <li className="flex items-start gap-3">
-                <i className="fa-solid fa-envelope text-brand-yellow mt-0.5 text-base mt-[4px]" />
-                <span className="text-gray-300">
-                  {loading
-                    ? "tuyendung@jobup.vn"
-                    : config.email || "tuyendung@jobup.vn"}
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-envelope text-brand-yellow text-base flex-shrink-0" />
+                <span className="text-gray-300 leading-tight">
+                  {loading ? "tuyendung@jobup.vn" : config.email || "tuyendung@jobup.vn"}
                 </span>
               </li>
-              <li className="flex items-start gap-3">
-                <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base mt-[4px]" />
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-location-dot text-brand-yellow text-base flex-shrink-0" />
                 <span className="text-gray-300 leading-relaxed">
                   {loading
                     ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"
-                    : config.address ||
-                      "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
+                    : config.address || "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
                 </span>
               </li>
             </ul>
