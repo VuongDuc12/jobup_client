@@ -265,9 +265,9 @@ export default function JobDetailPage() {
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-yellow/10 rounded-bl-[100px] -mr-10 -mt-10 pointer-events-none" />
 
                   <div className="flex flex-col md:flex-row gap-6 items-start relative z-10">
-                    <div className="w-20 h-20 rounded-2xl border border-gray-100 bg-[#1a1a1a] shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden">
+                    <div className="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 p-2 overflow-hidden border-2 border-black">
                       <img
-                        src="/Logo.png"
+                        src="/favicon.png"
                         alt="Jobup"
                         className="w-full h-full object-contain"
                       />
@@ -530,9 +530,9 @@ export default function JobDetailPage() {
                         >
                           <div className="flex items-center gap-0 md:gap-3 grow min-w-0">
                             <div className="relative shrink-0 hidden md:block">
-                              <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center shadow-lg p-1.5 overflow-hidden">
+                              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-lg p-1.5 overflow-hidden border-2 border-black">
                                 <img
-                                  src="/Logo.png"
+                                  src="/favicon.png"
                                   alt="Jobup"
                                   className="w-full h-full object-contain"
                                 />
