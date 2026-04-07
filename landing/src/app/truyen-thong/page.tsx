@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import SectionHeader from "@/components/shared/SectionHeader";
@@ -49,23 +49,78 @@ export default function MediaMentionsPage() {
   const PAGE_SIZE = 5;
   const safeFallbackLogo = mediaLogos[0] || "";
 
-  const [mentionList, setMentionList] =
-    useState<PublicMediaMentionListItemResponse[]>(fallbackMediaList());
+  const [featuredItem, setFeaturedItem] =
+    useState<PublicMediaMentionListItemResponse>(() => {
+      const all = fallbackMediaList();
+      return (
+        all.find((i) => i.isFeatured) ||
+        all[0] || ({
+          id: "fallback-media-featured",
+          title: "Đang cập nhật tin truyền thông",
+          summary: null,
+          categoryName: "Truyền thông",
+          categorySlug: null,
+          sourceName: "Nguồn báo chí",
+          sourceLogo: null,
+          articleUrl: null,
+          thumbnailUrl: null,
+          isFeatured: false,
+          isHot: false,
+          publishedAt: null,
+        } as PublicMediaMentionListItemResponse)
+      );
+    });
+  const [listItems, setListItems] = useState<PublicMediaMentionListItemResponse[]>(() => {
+    const all = fallbackMediaList();
+    const fav = all.find((i) => i.isFeatured) || all[0];
+    return fav ? all.filter((i) => i.id !== fav.id) : all;
+  });
   const [keywordInput, setKeywordInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isPaginating, setIsPaginating] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchFailed, setSearchFailed] = useState(false);
 
+  // Effect 1: fetch featured item once on mount
+  useEffect(() => {
+    let mounted = true;
+    const loadFeatured = async () => {
+      try {
+        const result = await fetchPublicMediaMentions({
+          IsFeatured: true,
+          PageSize: 1,
+          PageNumber: 1,
+        });
+        if (!mounted) return;
+        const item = result.list?.[0];
+        if (item) setFeaturedItem(item);
+      } catch {
+        // keep fallback
+      }
+    };
+    loadFeatured();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Effect 2: fetch list on keyword / page change
   useEffect(() => {
     let mounted = true;
 
-    const loadData = async () => {
+    const loadList = async () => {
       const isFirstPage = pageNumber === 1;
-      if (!isFirstPage) setIsPaginating(true);
+      if (isFirstPage) {
+        setIsSearching(true);
+        setSearchFailed(false);
+      } else {
+        setIsPaginating(true);
+      }
 
       try {
-        const mentionResult = await fetchPublicMediaMentions({
+        const result = await fetchPublicMediaMentions({
           PageNumber: pageNumber,
           PageSize: PAGE_SIZE,
           Keyword: keyword || undefined,
@@ -73,23 +128,28 @@ export default function MediaMentionsPage() {
 
         if (!mounted) return;
 
-        const nextList = mentionResult.list || [];
-        setMentionList(nextList);
-        setTotalPages(Math.max(mentionResult.totalPages || 1, 1));
+        setListItems(result.list || []);
+        setTotalPages(Math.max(result.totalPages || 1, 1));
       } catch {
         if (!mounted) return;
         if (isFirstPage) {
-          const fallbackItems = fallbackMediaList();
-          setMentionList(keyword ? [] : fallbackItems);
-          setTotalPages(1);
+          if (keyword) {
+            setSearchFailed(true);
+          } else {
+            const all = fallbackMediaList();
+            const fav = all.find((i) => i.isFeatured) || all[0];
+            setListItems(fav ? all.filter((i) => i.id !== fav.id) : all);
+            setTotalPages(1);
+          }
         }
       } finally {
         if (!mounted) return;
-        if (!isFirstPage) setIsPaginating(false);
+        if (isFirstPage) setIsSearching(false);
+        else setIsPaginating(false);
       }
     };
 
-    loadData();
+    loadList();
 
     return () => {
       mounted = false;
@@ -108,36 +168,9 @@ export default function MediaMentionsPage() {
     setPageNumber(nextPage);
   };
 
-  const { featured, list } = useMemo(() => {
-    const fallbackItems = fallbackMediaList();
-    const items =
-      mentionList.length > 0 ? mentionList : keyword ? [] : fallbackItems;
-    const first =
-      items.find((item) => item.isFeatured) ||
-      items[0] ||
-      ({
-        id: "fallback-media-featured",
-        title: "Đang cập nhật tin truyền thông",
-        summary: null,
-        categoryName: "Truyền thông",
-        categorySlug: null,
-        sourceName: "Nguồn báo chí",
-        sourceLogo: null,
-        articleUrl: null,
-        thumbnailUrl: null,
-        isFeatured: false,
-        isHot: false,
-        publishedAt: null,
-      } as PublicMediaMentionListItemResponse);
-
-    return {
-      featured: first,
-      list: items.filter((item) => item.id !== first.id),
-    };
-  }, [keyword, mentionList]);
-
+  const displayList = listItems.filter((item) => item.id !== featuredItem.id);
   const featuredLogo =
-    resolveAssetUrl(featured?.thumbnailUrl) || safeFallbackLogo;
+    resolveAssetUrl(featuredItem?.thumbnailUrl) || safeFallbackLogo;
 
   return (
     <>
@@ -214,14 +247,14 @@ export default function MediaMentionsPage() {
                   {/* Header: Category & Quote */}
                   <div className="flex justify-between items-start mb-6">
                     <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-yellow/10 text-brand-yellow text-xs font-bold tracking-widest uppercase">
-                      {featured.categoryName}
+                      {featuredItem.categoryName}
                     </span>
                     <i className="fa-solid fa-quote-right text-3xl text-brand-yellow/20 group-hover:text-brand-yellow/40 transition-colors" />
                   </div>
 
                   {/* Title: Tăng trải nghiệm đọc */}
                   <h2 className="text-2xl sm:text-3xl font-black text-brand-black leading-[1.2] mb-6 group-hover:text-brand-yellow transition-colors duration-300">
-                    “{featured.title}”
+                    &ldquo;{featuredItem.title}&rdquo;
                   </h2>
 
                   {/* Source Tag: Làm gọn lại */}
@@ -230,18 +263,18 @@ export default function MediaMentionsPage() {
                       Nguồn:
                     </span>
                     <span className="px-3 py-1 rounded-lg bg-gray-50 border border-gray-100 text-[11px] font-bold uppercase text-gray-600 tracking-tight">
-                      {featured.sourceName || "Truyền thông"}
+                      {featuredItem.sourceName || "Truyền thông"}
                     </span>
                   </div>
 
                   {/* Link: Thêm hiệu ứng underline giả */}
                   <div className="mt-auto flex items-center justify-end">
                     <a
-                      href={featured.articleUrl || "#"}
+                      href={featuredItem.articleUrl || "#"}
                       className="inline-flex items-center gap-2 text-brand-black font-black text-sm tracking-wider group/link transition-all"
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => trackPublicMediaMentionView(featured.id)}
+                      onClick={() => trackPublicMediaMentionView(featuredItem.id)}
                     >
                       <span className="relative">
                         XEM BÀI GỐC
@@ -258,9 +291,9 @@ export default function MediaMentionsPage() {
                 <div className="relative h-56 sm:h-64 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-12 z-10" />
                   <img
-                    src={resolveAssetUrl(featured.thumbnailUrl) || featuredLogo}
+                    src={resolveAssetUrl(featuredItem.thumbnailUrl) || featuredLogo}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    alt={featured.title}
+                    alt={featuredItem.title}
                   />
                   {/* Một lớp phủ màu khi hover giúp ảnh sâu hơn */}
                   <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -268,12 +301,22 @@ export default function MediaMentionsPage() {
               </div>
 
               <div className="space-y-6">
-                {list.length === 0 && (
-                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-500 font-medium">
-                    Đã hiển thị hết tin truyền thông.
+                {isSearching && (
+                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-400 font-medium">
+                    <i className="fa-solid fa-spinner fa-spin mr-2" />
+                    Đang tìm kiếm...
                   </div>
                 )}
-                {list.map((item) =>
+                {!isSearching && displayList.length === 0 && (
+                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-500 font-medium">
+                    {searchFailed
+                      ? "Tìm kiếm tạm thời không khả dụng, vui lòng thử lại."
+                      : keyword
+                      ? `Không tìm thấy kết quả nào cho "${keyword}".`
+                      : "Đã hiển thị hết tin truyền thông."}
+                  </div>
+                )}
+                {displayList.map((item) =>
                   (() => {
                     const itemLogo =
                       resolveAssetUrl(item.thumbnailUrl) || safeFallbackLogo;
@@ -315,7 +358,7 @@ export default function MediaMentionsPage() {
                   })(),
                 )}
 
-                {list.length > 0 && (
+                {displayList.length > 0 && (
                   <div className="pt-2 flex justify-center">
                     <NumberedPagination
                       page={pageNumber}

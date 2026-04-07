@@ -573,6 +573,7 @@ export async function fetchPublicNewsCategories(): Promise<
 export interface PublicMediaMentionSearchParams {
   Keyword?: string;
   MediaMentionCategoryId?: string;
+  IsFeatured?: boolean;
   PageNumber?: number;
   PageSize?: number;
 }
