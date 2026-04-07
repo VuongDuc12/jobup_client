@@ -9,6 +9,7 @@ import { FloatingActions } from "@/components/sections";
 import {
   fetchPublicArticleBySlug,
   fetchPublicArticles,
+  fetchRelatedArticles,
   trackPublicArticleView,
 } from "@/lib/api";
 import { internalNewsArticles } from "@/lib/mockNews";
@@ -101,19 +102,19 @@ export default function InternalNewsDetailPage() {
           throw new Error("Slug không hợp lệ");
         }
 
-        const [articleResult, relatedResult] = await Promise.all([
-          fetchPublicArticleBySlug(slug),
-          fetchPublicArticles({ PageNumber: 1, PageSize: 6 }),
-        ]);
+        const articleResult = await fetchPublicArticleBySlug(slug);
 
         if (!mounted) return;
 
         setArticle(articleResult);
-        setRelated(
-          relatedResult.list
-            .filter((item) => item.id !== articleResult.id && item.slug)
-            .slice(0, 5),
-        );
+
+        // Fetch related articles using the article's actual ID
+        try {
+          const relatedItems = await fetchRelatedArticles(articleResult.id, 5);
+          if (mounted) setRelated(relatedItems);
+        } catch {
+          if (mounted) setRelated([]);
+        }
       } catch {
         if (!mounted) return;
         const fallbackArticle = fallbackArticleBySlug(slug);

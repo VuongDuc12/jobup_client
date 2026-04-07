@@ -6,6 +6,7 @@ import type {
   FeatureResponse,
   HomepageSettingsResponse,
   PartnerResponse,
+  PublicArticleListItemResponse,
   PublicArticleResponse,
   PublicArticleSearchResponse,
   PublicJobResponse,
@@ -498,6 +499,30 @@ export async function trackPublicArticleView(id: string): Promise<void> {
   if (!res.ok) {
     throw new Error(`Failed to track article view: ${res.status}`);
   }
+}
+
+/* ────────────────────────────────────────────────
+ *  GET /api/Articles/public/{id}/related
+ * ──────────────────────────────────────────────── */
+
+export async function fetchRelatedArticles(
+  id: string,
+  limit = 5,
+): Promise<PublicArticleListItemResponse[]> {
+  const url = new URL(`${API_BASE_URL}/api/Articles/public/${id}/related`);
+  url.searchParams.set("limit", String(limit));
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch related articles: ${res.status}`);
+  }
+
+  const json: ApiResponse<PublicArticleListItemResponse[]> = await res.json();
+  if (!json.succeeded) {
+    throw new Error(json.message || "API error");
+  }
+
+  return json.data;
 }
 
 export async function fetchPublicStaff(
