@@ -467,7 +467,7 @@ export async function fetchPublicArticlesByCategorySlug(
 }
 
 export async function fetchFeaturedArticlesPublic(
-  limit = 4,
+  limit = 5,
 ): Promise<PublicArticleSearchResponse["list"]> {
   const data = await fetchPublicArticles({
     PageSize: limit,
