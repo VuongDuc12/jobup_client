@@ -255,7 +255,9 @@ export default function InternalNewsPage() {
                   badge="Góc chuyên gia JobUp"
                   title={
                     <>
-                      Nơi chia sẻ kiến thức <span className="text-brand-yellow">vươn tầm</span> sự nghiệp
+                      Nơi chia sẻ kiến thức{" "}
+                      <span className="text-brand-yellow">vươn tầm</span> sự
+                      nghiệp
                     </>
                   }
                   description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
@@ -400,7 +402,7 @@ export default function InternalNewsPage() {
               )}
             </div>
 
-            <div className="mt-10 flex justify-center">
+            <div className="mt-6 flex justify-center">
               <NumberedPagination
                 page={pageNumber}
                 totalPages={totalPages}

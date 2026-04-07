@@ -158,7 +158,8 @@ export default function MediaMentionsPage() {
               badge="Tin tức truyền thông"
               title={
                 <>
-                  Nơi khẳng định <span className="text-brand-yellow">Vị Thế</span>
+                  Nơi khẳng định{" "}
+                  <span className="text-brand-yellow">Vị Thế</span>
                   <br />
                   trong lòng công chúng
                 </>
@@ -279,7 +280,7 @@ export default function MediaMentionsPage() {
                         rel="noreferrer"
                         onClick={() => trackPublicMediaMentionView(item.id)}
                       >
-                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200">
+                        <div className="shrink-0 w-28 sm:w-36 aspect-video bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200">
                           <img
                             src={itemLogo}
                             className="w-full h-full object-cover"

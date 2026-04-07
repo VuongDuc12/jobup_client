@@ -230,7 +230,10 @@ export default function FeaturesSection({
   }, [parsedStats, statsAnimationKey, statsVisible]);
 
   return (
-    <section id="features" className="landing-section bg-white relative overflow-hidden">
+    <section
+      id="features"
+      className="landing-section bg-white relative overflow-hidden"
+    >
       {/* Decorative Background */}
       <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-50/50 rounded-full blur-[120px] -z-10 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50/30 rounded-full blur-[100px] -z-10 translate-y-1/4" />
@@ -254,32 +257,37 @@ export default function FeaturesSection({
           {items[0] && (
             <div className="md:col-span-2 bg-[#FAFAFA] rounded-[3rem] p-1 lg:p-1.5 border border-gray-100 hover:border-brand-yellow hover:shadow-[0_40px_80px_-20px_rgba(245,185,20,0.15)] transition-all duration-700 group relative overflow-hidden">
               <div className="bg-white rounded-[2.8rem] p-8 lg:p-10 h-full relative overflow-hidden">
-                {items[0].imageUrl && (
-                  <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                    <Image
-                      src={items[0].imageUrl}
-                      alt={items[0].title}
-                      fill
-                      sizes="400px"
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                      loading="lazy"
-                    />
+                <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+                  <div className="relative z-10 order-2 lg:order-1">
+                    {items[0].tag1 && (
+                      <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-md mb-4">
+                        <span className="w-8 h-[2px] bg-brand-yellow" />{" "}
+                        {items[0].tag1}
+                      </div>
+                    )}
+                    <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
+                      {items[0].title}
+                    </h3>
+                    <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic text-justify [text-justify:inter-word]">
+                      &ldquo;{items[0].description}&rdquo;
+                    </p>
+                    {/* Analytical UI */}
                   </div>
-                )}
-                <div className="relative z-10 max-w-md">
-                  {items[0].tag1 && (
-                    <div className="inline-flex items-center gap-2 text-brand-yellow font-bold text-sm mb-4">
-                      <span className="w-8 h-[2px] bg-brand-yellow" />{" "}
-                      {items[0].tag1}
+
+                  {items[0].imageUrl && (
+                    <div className="order-1 lg:order-2">
+                      <div className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-gray-50 aspect-[4/3] lg:aspect-[16/12]">
+                        <Image
+                          src={items[0].imageUrl}
+                          alt={items[0].title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover transition-all duration-1000 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   )}
-                  <h3 className="text-3xl font-black text-[#111827] mb-4 leading-tight">
-                    {items[0].title}
-                  </h3>
-                  <p className="text-gray-500 mb-8 leading-relaxed text-lg font-light italic text-justify [text-justify:inter-word]">
-                    &ldquo;{items[0].description}&rdquo;
-                  </p>
-                  {/* Analytical UI */}
                 </div>
               </div>
             </div>
@@ -315,13 +323,7 @@ export default function FeaturesSection({
                   <div className="mt-auto space-y-4">
                     <div className="bg-white/5 backdrop-blur-md p-4 rounded-[1.5rem] rounded-tl-none border border-white/5 self-start max-w-[90%] transform -rotate-1">
                       <p className="text-xs text-gray-200">
-                        Em cần tối ưu CV ngành Tech ạ?
-                      </p>
-                    </div>
-                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1">
-                      <p className="text-xs font-bold leading-relaxed italic">
-                        &ldquo;JobUp đã lọc ra Job ngon đúng ý bạn. Apply luôn
-                        kẻo lỡ nhé! 🚀&rdquo;
+                        Anh chị cần tối ưu CV ạ?
                       </p>
                     </div>
                     {items[1].linkUrl && (
@@ -441,7 +443,9 @@ export default function FeaturesSection({
                     <>
                       <span className="tabular-nums">{value}</span>
                       {suffix && (
-                        <span className="text-2xl md:text-3xl text-brand-yellow">{suffix}</span>
+                        <span className="text-2xl md:text-3xl text-brand-yellow">
+                          {suffix}
+                        </span>
                       )}
                     </>
                   );

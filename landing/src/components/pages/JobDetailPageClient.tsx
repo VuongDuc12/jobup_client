@@ -100,6 +100,23 @@ function HtmlContent({ html }: { html?: string | null }) {
   );
 }
 
+function hasMeaningfulHtmlContent(html?: string | null): boolean {
+  if (!html) return false;
+
+  const raw = html.trim();
+  if (!raw) return false;
+
+  // Keep media-only blocks (image/video/embed) as meaningful content.
+  if (/<(img|video|iframe|embed|object|svg)\b/i.test(raw)) return true;
+
+  const textOnly = raw
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
+    .trim();
+
+  return textOnly.length > 0;
+}
+
 export default function JobDetailPage() {
   const params = useParams();
   const slug = typeof params?.slug === "string" ? params.slug : "";
@@ -483,7 +500,7 @@ export default function JobDetailPage() {
                     <HtmlContent html={job.benefits} />
                   </div>
 
-                  {job.additionalInfo && job.additionalInfo.trim() && (
+                  {hasMeaningfulHtmlContent(job.additionalInfo) && (
                     <div>
                       <h3 className="text-lg font-black text-brand-black mb-6 flex items-center gap-3">
                         <span className="w-2 h-8 bg-brand-yellow rounded-full" />
@@ -573,7 +590,7 @@ export default function JobDetailPage() {
               </div>
 
               <div className="order-4 lg:order-none lg:col-span-4 relative">
-              <div className="sticky top-24 space-y-4">
+                <div className="sticky top-24 space-y-4">
                   <div className="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm space-y-4">
                     <h3 className="text-lg font-black text-brand-black">
                       Thông tin tuyển dụng

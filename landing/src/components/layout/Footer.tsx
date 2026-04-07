@@ -23,7 +23,10 @@ export default function Footer() {
   const socialLinks = [
     { icon: "fa-brands fa-facebook-f", href: config.facebookUrl || "#" },
     { icon: "fa-brands fa-linkedin-in", href: config.linkedInUrl || "#" },
-    { icon: "fa-brands fa-instagram", href: config.instagramUrl || "#" },
+    {
+      icon: "fa-brands fa-threads",
+      href: config.threadUrl || "#",
+    },
     { icon: "fa-brands fa-tiktok", href: config.tiktokUrl || "#" },
   ].filter((link) => link.href && link.href !== "#");
   return (
@@ -71,9 +74,7 @@ export default function Footer() {
 
           {/* About */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-white text-lg mb-6">
-              Về chúng tôi
-            </h4>
+            <h4 className="font-bold text-white text-lg mb-6">Về chúng tôi</h4>
             <ul className="space-y-4">
               {footerAbout.map((item, idx) => (
                 <li key={idx}>
@@ -91,7 +92,7 @@ export default function Footer() {
           {/* For Candidates */}
           <div className="lg:col-span-2">
             <h4 className="font-bold text-white text-lg mb-6">
-              Tin tức & Tuyển dụng
+              Tuyển dụng và Tin tức
             </h4>
             <ul className="space-y-4">
               {footerCandidate.map((item, idx) => (
@@ -109,26 +110,30 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h4 className="font-bold text-white text-lg mb-6">
-              Liên hệ
-            </h4>
+            <h4 className="font-bold text-white text-lg mb-6">Liên hệ</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-phone text-brand-yellow mt-0.5 text-base" />
+                <i className="fa-solid fa-phone text-brand-yellow mt-0.5 text-base mt-[4px]" />
                 <span className="text-white text-base">
-                  {loading ? "0979334143" : config.hotline || "0979334143"}
+                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms.
+                  Hạ Phan)
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-envelope text-brand-yellow mt-0.5 text-base" />
+                <i className="fa-solid fa-envelope text-brand-yellow mt-0.5 text-base mt-[4px]" />
                 <span className="text-gray-300">
-                  {loading ? "tuyendung@jobup.vn" : config.email || "tuyendung@jobup.vn"}
+                  {loading
+                    ? "tuyendung@jobup.vn"
+                    : config.email || "tuyendung@jobup.vn"}
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base" />
+                <i className="fa-solid fa-location-dot text-brand-yellow mt-0.5 text-base mt-[4px]" />
                 <span className="text-gray-300 leading-relaxed">
-                  {loading ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam" : config.address || "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
+                  {loading
+                    ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"
+                    : config.address ||
+                      "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
                 </span>
               </li>
             </ul>

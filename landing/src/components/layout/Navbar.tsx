@@ -127,7 +127,7 @@ export default function Navbar() {
               className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-brand-yellow transition-colors"
             >
               <i className="fa-solid fa-phone text-xs" />
-              <span className="font-medium">{config.hotline}</span>
+              <span className="text-[16px]">{config.hotline}</span>
             </a>
             <span className="hidden md:block w-px h-4 bg-gray-200" />
             <a

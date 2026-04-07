@@ -7,8 +7,7 @@ import { getAssetUrl } from "@/lib/utils";
 /* ─── Fallback data (shown when API returns nothing) ─── */
 const fallbackHighlight = {
   title: "Chào đón thành viên thứ 200 gia nhập đại gia đình JobUp",
-  image:
-    "/images/news-main.jpg",
+  image: "/images/news-main.jpg",
   category: "Tin tiêu biểu",
   date: "20/05/2026",
   slug: "#",
@@ -16,24 +15,21 @@ const fallbackHighlight = {
 
 const fallbackSideNews = [
   {
-    image:
-      "/images/news-event.jpg",
+    image: "/images/news-event.jpg",
     category: "Sự kiện",
     title: "Team Building 2026: Vượt Sóng Cùng JobUp tại Phú Quốc",
     date: "15/05/2026",
     slug: "#",
   },
   {
-    image:
-      "/images/news-meeting.jpg",
+    image: "/images/news-meeting.jpg",
     category: "Hoạt động chuyên môn",
     title: "Workshop: Ứng dụng AI trong tối ưu hóa quy trình HR",
     date: "12/05/2026",
     slug: "#",
   },
   {
-    image:
-      "/images/news-community.jpg",
+    image: "/images/news-community.jpg",
     category: "Văn hóa",
     title: "Happy Friday: Gắn kết tình thân giữa các phòng ban",
     date: "08/05/2026",
@@ -76,10 +72,14 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             badge="Tin tức & Hoạt động"
             title={
               <>
-                Cập nhật mới nhất từ <span className="text-brand-yellow">Gia đình JobUp</span>
+                Cập nhật mới nhất từ
+                <br />{" "}
+                <span className="text-brand-yellow text-center my-2 block">
+                  Gia đình JobUp
+                </span>
               </>
             }
-            description="Những sự kiện, văn hoá và workshop chuyển đổi số nổi bật nhất tháng này."
+            description=""
             align="center"
             className="mb-4"
             titleClassName="text-gray-900"

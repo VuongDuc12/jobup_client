@@ -223,7 +223,7 @@ export default function JobListings({
         jobs.slice(3).map((job) => <JobCard key={job.id} job={job} />)}
 
       {!loading && !error && jobs.length > 0 && (
-        <div className="flex justify-center pt-8">
+        <div className="flex justify-center ">
           {viewAllHref ? (
             <a
               href={viewAllHref}

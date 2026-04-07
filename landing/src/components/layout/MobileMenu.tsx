@@ -30,7 +30,7 @@ export default function MobileMenu({
   const socialLinks = [
     { icon: "fa-brands fa-facebook", href: config.facebookUrl },
     { icon: "fa-brands fa-linkedin", href: config.linkedInUrl },
-    { icon: "fa-brands fa-instagram", href: config.instagramUrl },
+    { icon: "fa-brands fa-threads", href: config.threadUrl },
   ].filter((link) => link.href && link.href !== "#");
 
   return (

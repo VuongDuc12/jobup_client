@@ -10,11 +10,7 @@ import {
   fetchTopJobCategories,
 } from "@/lib/api";
 import DynamicBanner from "@/components/shared/DynamicBanner";
-import {
-  formatSalary,
-  workTypeLabel,
-  timeAgo,
-} from "@/lib/utils";
+import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
 import type {
   JobCategoryTreeItem,
   PublicJobResponse,

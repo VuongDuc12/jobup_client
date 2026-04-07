@@ -13,7 +13,7 @@ export default function UrgentJobsWidget() {
   const load = useCallback(async () => {
     try {
       // Fetch latest 5 hot/urgent jobs
-      const data = await fetchLatestJobs({ limit: 5 });
+      const data = await fetchLatestJobs({ limit: 5, IsHot: true });
       setJobs(Array.isArray(data) ? data.slice(0, 5) : []);
     } catch {
       // Silent fail — widget is supplementary
@@ -42,7 +42,7 @@ export default function UrgentJobsWidget() {
           <div className="w-10 h-10 rounded-xl bg-brand-yellow/10 flex items-center justify-center">
             <i className="fa-solid fa-fire text-brand-yellow text-lg animate-pulse" />
           </div>
-          Việc Làm Gấp
+          Việc Làm Hot
         </h4>
         <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-3.5 pl-1">
           Tin mới nhất trong 24h
@@ -78,12 +78,12 @@ export default function UrgentJobsWidget() {
                 className="flex items-center gap-3 p-3 rounded-2xl hover:bg-brand-yellow/5 transition-all duration-300 group/item border border-transparent hover:border-brand-yellow/20"
               >
                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-sm p-1 overflow-hidden border-2 border-black">
-                    <img
-                      src="/favicon.png"
-                      alt="Jobup"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
+                  <img
+                    src="/favicon.png"
+                    alt="Jobup"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 <div className="grow min-w-0">
                   <h5 className="font-bold text-gray-900 text-[13px] leading-tight group-hover/item:text-brand-yellow transition-colors line-clamp-2 wrap-break-word">
                     {job.title}

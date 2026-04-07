@@ -124,21 +124,26 @@ export async function fetchStatisticsPublic(): Promise<StatisticResponse[]> {
 }
 
 /* ────────────────────────────────────────────────
- *  GET /api/Jobs/latest
+ *  GET /api/Jobs/public (paged)
  * ──────────────────────────────────────────────── */
 
 interface FetchLatestJobsParams {
   limit?: number;
   categoryId?: string;
+  IsHot?: boolean;
 }
 
 export async function fetchLatestJobs(
   params: FetchLatestJobsParams = {},
 ): Promise<PublicJobResponse[]> {
-  const url = new URL(`${API_BASE_URL}/api/Jobs/public/latest`);
+  const url = new URL(`${API_BASE_URL}/api/Jobs/public`);
 
-  if (params.limit) url.searchParams.set("limit", String(params.limit));
-  if (params.categoryId) url.searchParams.set("categoryId", params.categoryId);
+  if (params.limit) url.searchParams.set("PageSize", String(params.limit));
+  url.searchParams.set("PageNumber", "1");
+  if (params.categoryId) url.searchParams.set("CategoryId", params.categoryId);
+  if (params.IsHot !== undefined) {
+    url.searchParams.set("IsHot", String(params.IsHot));
+  }
 
   const res = await fetch(url.toString(), {
     next: { revalidate: REVALIDATE_TIME },
@@ -148,13 +153,16 @@ export async function fetchLatestJobs(
     throw new Error(`Failed to fetch latest jobs: ${res.status}`);
   }
 
-  const json: ApiResponse<PublicJobResponse[]> = await res.json();
+  const json: ApiResponse<PublicJobResponse[] | PublicJobSearchResponse> =
+    await res.json();
 
   if (!json.succeeded) {
     throw new Error(json.message || "API error");
   }
 
-  return json.data;
+  const data = json.data;
+  if (Array.isArray(data)) return data;
+  return data?.list || [];
 }
 
 /* ────────────────────────────────────────────────

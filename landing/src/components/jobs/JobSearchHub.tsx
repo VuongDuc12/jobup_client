@@ -8,7 +8,7 @@ const broadcasts = [
   "✨ Liên hệ ngay đội ngũ JobUp để được tư vấn việc làm tận tình 24/7",
 ];
 
-const hotTags = ["Kinh doanh", "Bán hàng", "Giao hàng", "Part-time"];
+const hotTags = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
 interface JobSearchHubProps {
   keyword: string;
@@ -87,7 +87,7 @@ export default function JobSearchHub({
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-yellow" />
               </span>
               <span className="text-[10px] font-black text-white uppercase tracking-widest">
-                Live Broadcast
+                Bảng tin
               </span>
             </div>
             <div className="flex-grow whitespace-nowrap overflow-hidden relative">
@@ -217,7 +217,7 @@ export default function JobSearchHub({
               type="submit"
               className="bg-brand-yellow text-brand-black px-12 py-4 rounded-2xl font-black hover:bg-white transition-all transform hover:scale-[1.03] shadow-[0_10px_20px_rgba(255,193,7,0.3)] active:scale-95 flex items-center justify-center gap-3 cursor-pointer"
             >
-              TÌM KIẾM{" "}
+              Tìm kiếm{" "}
               <i className="fa-solid fa-magnifying-glass-plus text-lg" />
             </button>
           </form>
@@ -380,7 +380,7 @@ export default function JobSearchHub({
                 <button
                   key={tag}
                   onClick={() => onKeywordChange(tag)}
-                  className="px-5 py-2 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-[10px] font-bold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
+                  className="px-6 py-2.5 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-xs font-extrabold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
                 >
                   {tag}
                 </button>

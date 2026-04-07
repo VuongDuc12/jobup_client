@@ -41,6 +41,12 @@ const partnerLogos = [
 
 const trendingKeywords = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
+const heroProvinceOptions = [
+  { id: "11111111-0000-0000-0000-000000000001", name: "Hà Nội" },
+  { id: "11111111-0000-0000-0000-000000000028", name: "HCM" },
+  { id: "11111111-0000-0000-0000-000000000021", name: "Đà Nẵng" },
+];
+
 const PLACEHOLDER_TEXT = "Nhập ngay công việc bạn đang tìm kiếm.";
 
 interface HeroSearchPayload {
@@ -168,8 +174,6 @@ export default function HeroSection({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-150px)] grid-cols-12 items-center gap-8 py-8 sm:py-10 md:min-h-[calc(100vh-180px)] lg:gap-12 lg:py-0">
           <div className="order-2 col-span-12 flex flex-col items-center justify-center text-center lg:order-1 lg:col-span-5 lg:items-start lg:text-left">
-           
-
             <h1 className="mb-4 max-w-3xl">
               <span className="block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight text-[#111827]">
                 {title1 || "Đơn vị cung cấp dịch vụ"}
@@ -252,9 +256,11 @@ export default function HeroSection({
                   {!isInputFocused && !inputValue && (
                     <div
                       className="pointer-events-none absolute top-1/2 -translate-y-1/2 flex whitespace-nowrap"
-                      style={{ animation: 'var(--animate-placeholder-pan)' }}
+                      style={{ animation: "var(--animate-placeholder-pan)" }}
                     >
-                      <span className="text-sm text-gray-400">{PLACEHOLDER_TEXT}</span>
+                      <span className="text-sm text-gray-400">
+                        {PLACEHOLDER_TEXT}
+                      </span>
                     </div>
                   )}
                   <input
@@ -278,15 +284,11 @@ export default function HeroSection({
                   className="w-full appearance-none bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none focus:ring-0 md:py-2"
                 >
                   <option value="">Địa điểm</option>
-                  {(provinces || [])
-                    .filter((p) =>
-                      ["Thành phố Hà Nội", "Thành phố Đà Nẵng", "Thành phố Hồ Chí Minh"].includes(p.name),
-                    )
-                    .map((province) => (
-                      <option key={province.id} value={province.id}>
-                        {province.name}
-                      </option>
-                    ))}
+                  {heroProvinceOptions.map((province) => (
+                    <option key={province.id} value={province.id}>
+                      {province.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <button
