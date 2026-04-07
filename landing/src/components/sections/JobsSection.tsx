@@ -254,7 +254,7 @@ export default function JobsSection() {
             badge="Cơ hội nghề nghiệp"
             title={
               <>
-                Việc làm <span className="text-brand-yellow">Mới Nhất</span>
+                Việc làm <span className="text-brand-yellow">mới nhất</span>
               </>
             }
             description="100+ việc làm mới được cập nhật hôm nay từ các tập đoàn công nghệ hàng đầu."

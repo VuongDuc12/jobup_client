@@ -159,7 +159,7 @@ export default function MediaMentionsPage() {
               title={
                 <>
                   Nơi khẳng định{" "}
-                  <span className="text-brand-yellow">Vị Thế</span>
+                  <span className="text-brand-yellow">vị thế</span>
                   <br />
                   trong lòng công chúng
                 </>

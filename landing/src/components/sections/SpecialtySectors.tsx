@@ -39,7 +39,8 @@ export default function SpecialtySectors() {
           badge="Lĩnh vực chuyên môn"
           title={
             <>
-              Khám phá cơ hội <span className="text-brand-yellow">Tiềm Năng</span>
+              Khám phá cơ hội{" "}
+              <span className="text-brand-yellow">tiềm năng</span>
             </>
           }
           description="Tìm kiếm vị trí phù hợp với thế mạnh của bạn trong hơn 24+ lĩnh vực khác nhau."

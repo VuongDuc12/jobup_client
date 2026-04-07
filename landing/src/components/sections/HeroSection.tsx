@@ -180,7 +180,7 @@ export default function HeroSection({
               </span>
               <span className="mt-1 block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight sm:inline sm:pl-2">
                 <span className="text-brand-yellow">
-                  {titleHighlight || "Tư vấn tuyển dụng"}
+                  {titleHighlight || "tư vấn tuyển dụng"}
                 </span>
               </span>
             </h1>
