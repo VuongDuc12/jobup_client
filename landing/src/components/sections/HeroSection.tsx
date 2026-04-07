@@ -92,7 +92,7 @@ export default function HeroSection({
     /(\d{4})(\d{3})(\d{3})/,
     "$1.$2.$3",
   );
-  const heroImageSrc = getAssetUrl(heroImage) || "/hero-image.jpg";
+  const heroImageSrc = getAssetUrl(heroImage) || "/jobup_client/landing/public/images/trangchu/hero-image.avif";
 
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
