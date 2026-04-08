@@ -54,7 +54,8 @@ export default function MediaMentionsPage() {
       const all = fallbackMediaList();
       return (
         all.find((i) => i.isFeatured) ||
-        all[0] || ({
+        all[0] ||
+        ({
           id: "fallback-media-featured",
           title: "Đang cập nhật tin truyền thông",
           summary: null,
@@ -70,7 +71,9 @@ export default function MediaMentionsPage() {
         } as PublicMediaMentionListItemResponse)
       );
     });
-  const [listItems, setListItems] = useState<PublicMediaMentionListItemResponse[]>(() => {
+  const [listItems, setListItems] = useState<
+    PublicMediaMentionListItemResponse[]
+  >(() => {
     const all = fallbackMediaList();
     const fav = all.find((i) => i.isFeatured) || all[0];
     return fav ? all.filter((i) => i.id !== fav.id) : all;
@@ -242,10 +245,10 @@ export default function MediaMentionsPage() {
 
         <section className="landing-section-compact bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start">
-              <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 grid grid-rows-[45fr_55fr] min-h-[650px] sm:min-h-[700px]">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-stretch">
+              <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 grid grid-rows-[45fr_55fr] min-h-[560px] sm:min-h-[620px]">
                 {/* Content Area */}
-                <div className="p-8 sm:p-10 flex flex-col">
+                <div className="p-8 sm:p-10 flex flex-col shadow-[inset_0_12px_28px_rgba(250,204,21,0.30),inset_0_-10px_24px_rgba(250,204,21,0.22)]">
                   {/* Header: Category & Quote */}
                   <div className="flex justify-between items-start mb-6">
                     <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-yellow/10 text-brand-yellow text-xs font-bold tracking-widest uppercase">
@@ -276,7 +279,9 @@ export default function MediaMentionsPage() {
                       className="inline-flex items-center gap-2 text-brand-black font-black text-sm tracking-wider group/link transition-all"
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => trackPublicMediaMentionView(featuredItem.id)}
+                      onClick={() =>
+                        trackPublicMediaMentionView(featuredItem.id)
+                      }
                     >
                       <span className="relative">
                         XEM BÀI GỐC
@@ -293,7 +298,9 @@ export default function MediaMentionsPage() {
                 <div className="relative h-full w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-12 z-10" />
                   <img
-                    src={resolveAssetUrl(featuredItem.thumbnailUrl) || featuredLogo}
+                    src={
+                      resolveAssetUrl(featuredItem.thumbnailUrl) || featuredLogo
+                    }
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     alt={featuredItem.title}
                   />
@@ -302,77 +309,79 @@ export default function MediaMentionsPage() {
                 </div>
               </div>
 
-              <div className="space-y-6">
-                {isSearching && (
-                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-400 font-medium">
-                    <i className="fa-solid fa-spinner fa-spin mr-2" />
-                    Đang tìm kiếm...
-                  </div>
-                )}
-                {!isSearching && displayList.length === 0 && (
-                  <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-500 font-medium">
-                    {searchFailed
-                      ? "Tìm kiếm tạm thời không khả dụng, vui lòng thử lại."
-                      : keyword
-                      ? `Không tìm thấy kết quả nào cho "${keyword}".`
-                      : "Đã hiển thị hết tin truyền thông."}
-                  </div>
-                )}
-                {displayList.map((item) =>
-                  (() => {
-                    const itemLogo =
-                      resolveAssetUrl(item.thumbnailUrl) || safeFallbackLogo;
+              <div className="h-full flex flex-col">
+                <div className="space-y-6 lg:space-y-0 lg:h-full lg:flex lg:flex-col lg:gap-4">
+                  {isSearching && (
+                    <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-400 font-medium">
+                      <i className="fa-solid fa-spinner fa-spin mr-2" />
+                      Đang tìm kiếm...
+                    </div>
+                  )}
+                  {!isSearching && displayList.length === 0 && (
+                    <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center text-gray-500 font-medium">
+                      {searchFailed
+                        ? "Tìm kiếm tạm thời không khả dụng, vui lòng thử lại."
+                        : keyword
+                          ? `Không tìm thấy kết quả nào cho "${keyword}".`
+                          : "Đã hiển thị hết tin truyền thông."}
+                    </div>
+                  )}
+                  {displayList.map((item) =>
+                    (() => {
+                      const itemLogo =
+                        resolveAssetUrl(item.thumbnailUrl) || safeFallbackLogo;
 
-                    return (
-                      <a
-                        key={item.id}
-                        href={item.articleUrl || "#"}
-                        className="group flex flex-row items-start gap-3 sm:gap-4 p-4 mb-0 rounded-3xl hover:bg-brand-light-gray transition-all border border-transparent hover:border-gray-100"
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={() => trackPublicMediaMentionView(item.id)}
-                      >
-                        <div className="shrink-0 w-28 sm:w-36 aspect-video bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200">
-                          <img
-                            src={itemLogo}
-                            className="w-full h-full object-cover"
-                            alt={item.sourceName || "Nguồn tin"}
-                          />
-                        </div>
-                        <div className="flex-grow min-w-0">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="w-2 h-2 rounded-full bg-brand-yellow" />
-                            <span className="text-brand-yellow text-xs font-black tracking-widest uppercase">
-                              {item.categoryName}
-                            </span>
+                      return (
+                        <a
+                          key={item.id}
+                          href={item.articleUrl || "#"}
+                          className="group flex flex-row items-start gap-3 sm:gap-4 p-4 mb-0 rounded-3xl bg-brand-light-gray hover:bg-brand-light-gray transition-all border border-gray-100 hover:border-gray-100 lg:flex-1"
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={() => trackPublicMediaMentionView(item.id)}
+                        >
+                          <div className="shrink-0 w-28 sm:w-36 aspect-video bg-white rounded-2xl overflow-hidden flex items-center justify-center border border-gray-200">
+                            <img
+                              src={itemLogo}
+                              className="w-full h-full object-cover"
+                              alt={item.sourceName || "Nguồn tin"}
+                            />
                           </div>
-                          <h3 className="text-base sm:text-xl font-extrabold text-brand-black mb-2 sm:mb-4 group-hover:text-brand-yellow transition-colors leading-snug line-clamp-2">
-                            {item.title}
-                          </h3>
-                          <p className="text-gray-400 text-xs sm:text-sm font-bold flex items-center gap-2 line-clamp-1">
-                            Đọc bài tại {item.sourceName || "Nguồn báo chí"} •{" "}
-                            {formatDate(item.publishedAt)}
-                            <i className="fa-solid fa-arrow-right text-[10px]" />
-                          </p>
-                        </div>
-                      </a>
-                    );
-                  })(),
-                )}
-
-                {displayList.length > 0 && (
-                  <div className="pt-2 flex justify-center">
-                    <NumberedPagination
-                      page={pageNumber}
-                      totalPages={totalPages}
-                      disabled={isPaginating}
-                      showWhenSinglePage
-                      onPageChange={handlePageChange}
-                    />
-                  </div>
-                )}
+                          <div className="flex-grow min-w-0">
+                            <div className="flex items-center gap-3 mb-2">
+                              <span className="w-2 h-2 rounded-full bg-brand-yellow" />
+                              <span className="text-brand-yellow text-xs font-black tracking-widest uppercase">
+                                {item.categoryName}
+                              </span>
+                            </div>
+                            <h3 className="text-base sm:text-xl font-extrabold text-brand-black mb-2 sm:mb-4 group-hover:text-brand-yellow transition-colors leading-snug line-clamp-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-gray-400 text-xs sm:text-sm font-bold flex items-center gap-2 line-clamp-1">
+                              Đọc bài tại {item.sourceName || "Nguồn báo chí"} •{" "}
+                              {formatDate(item.publishedAt)}
+                              <i className="fa-solid fa-arrow-right text-[10px]" />
+                            </p>
+                          </div>
+                        </a>
+                      );
+                    })(),
+                  )}
+                </div>
               </div>
             </div>
+
+            {displayList.length > 0 && (
+              <div className="pt-8 flex justify-center">
+                <NumberedPagination
+                  page={pageNumber}
+                  totalPages={totalPages}
+                  disabled={isPaginating}
+                  showWhenSinglePage
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
         </section>
       </main>
