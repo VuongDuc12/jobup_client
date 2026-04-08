@@ -336,7 +336,7 @@ export default function InternalNewsDetailPage() {
               {/* Content */}
               <RichContent
                 html={contentHtml}
-                className="leading-8 [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-brand-black [&_h3]:mb-3 [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-brand-black [&_img]:my-8 [&_img]:shadow-md [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-brand-yellow [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-gray-900"
+                className="leading-8 [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-brand-black [&_h3]:mb-3 [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-brand-black [&_img]:shadow-md [&_blockquote]:border-l-4 [&_blockquote]:border-brand-yellow [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-gray-900"
               />
 
               {/* Tags */}
