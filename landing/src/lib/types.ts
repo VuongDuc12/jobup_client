@@ -361,19 +361,6 @@ export interface AboutSettingResponse {
  *  Articles (public)
  * ──────────────────────────────────────────────── */
 
-export interface PublicArticleListItemResponse {
-  id: string;
-  title: string;
-  slug: string | null;
-  avatar: string | null;
-  summary: string | null;
-  categoryName: string;
-  categorySlug: string | null;
-  isHot: boolean;
-  viewCount: number;
-  publishedAt: string | null;
-}
-
 export interface PublicArticleSearchResponse {
   list: PublicArticleListItemResponse[];
   totalCount: number;

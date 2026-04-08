@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import DynamicBanner from "@/components/shared/DynamicBanner";
+import RichContent from "@/components/shared/RichContent";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import {
@@ -333,9 +334,9 @@ export default function InternalNewsDetailPage() {
               )}
 
               {/* Content */}
-              <div
-                className="text-gray-600 leading-8 space-y-6 [&_p]:mb-6 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-brand-black [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-brand-black [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6 [&_img]:rounded-xl [&_img]:shadow-md [&_img]:my-8 [&_img]:w-full [&_blockquote]:border-l-4 [&_blockquote]:border-brand-yellow [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-gray-900 [&_blockquote]:my-8 [&_a]:text-brand-yellow [&_a]:underline"
-                dangerouslySetInnerHTML={{ __html: contentHtml }}
+              <RichContent
+                html={contentHtml}
+                className="leading-8 space-y-6 [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-brand-black [&_h3]:mb-3 [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-brand-black [&_img]:my-8 [&_img]:shadow-md [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-brand-yellow [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-gray-900"
               />
 
               {/* Tags */}

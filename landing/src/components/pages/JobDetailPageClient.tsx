@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { Navbar, Footer } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import DynamicBanner from "@/components/shared/DynamicBanner";
+import RichContent from "@/components/shared/RichContent";
 import {
   fetchPublicJobBySlug,
   fetchRelatedJobs,
@@ -88,14 +89,11 @@ function buildZaloLink(phone?: string | null): string | null {
 }
 
 function HtmlContent({ html }: { html?: string | null }) {
-  if (!html || !html.trim()) {
-    return <p className="text-gray-500">Đang cập nhật.</p>;
-  }
-
   return (
-    <div
-      className="text-gray-600 leading-relaxed space-y-3 [&_p]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-2"
-      dangerouslySetInnerHTML={{ __html: html }}
+    <RichContent
+      html={html}
+      emptyText="Đang cập nhật."
+      className="leading-relaxed space-y-3 [&_img]:shadow-sm"
     />
   );
 }
