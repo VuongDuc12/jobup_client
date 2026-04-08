@@ -257,7 +257,7 @@ export default function JobsSection() {
                 Việc làm <span className="text-brand-yellow">mới nhất</span>
               </>
             }
-            description="100+ việc làm mới được cập nhật hôm nay từ các tập đoàn công nghệ hàng đầu."
+            description="100+ việc làm mới nhất được cập nhật hôm nay từ các doanh nghiệp hàng đầu."
             align="center"
             className="mb-6"
             badgeClassName="text-[#B45309]"
