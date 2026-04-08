@@ -243,9 +243,9 @@ export default function MediaMentionsPage() {
         <section className="landing-section-compact bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start">
-              <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2">
+              <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 grid grid-rows-[45fr_55fr] min-h-[650px] sm:min-h-[700px]">
                 {/* Content Area */}
-                <div className="p-8 sm:p-10 flex flex-col h-full">
+                <div className="p-8 sm:p-10 flex flex-col">
                   {/* Header: Category & Quote */}
                   <div className="flex justify-between items-start mb-6">
                     <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-yellow/10 text-brand-yellow text-xs font-bold tracking-widest uppercase">
@@ -290,7 +290,7 @@ export default function MediaMentionsPage() {
                 </div>
 
                 {/* Image: Thêm Overlay gradient nhẹ phía trên để tách biệt với nội dung */}
-                <div className="relative h-56 sm:h-64 w-full overflow-hidden">
+                <div className="relative h-full w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-12 z-10" />
                   <img
                     src={resolveAssetUrl(featuredItem.thumbnailUrl) || featuredLogo}

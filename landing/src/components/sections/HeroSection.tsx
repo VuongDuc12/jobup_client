@@ -174,20 +174,27 @@ export default function HeroSection({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-150px)] grid-cols-12 items-center gap-8 py-8 sm:py-10 md:min-h-[calc(100vh-180px)] lg:gap-12 lg:py-0">
           <div className="order-2 col-span-12 flex flex-col items-center justify-center text-center lg:order-1 lg:col-span-5 lg:items-start lg:text-left">
-            <h1 className="mb-4 max-w-3xl">
+            <h1 className="mb-4 max-w-3xl text-balance">
               <span className="block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight text-[#111827]">
-                {title1 || "Đơn vị cung cấp dịch vụ"}
+                {title1 || (
+                  <>
+                    Đơn vị cung cấp{" "}
+                    <span className="whitespace-nowrap">dịch vụ</span>
+                  </>
+                )}
               </span>
-              <span className="mt-1 block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight sm:inline sm:pl-2">
+              <span className="mt-3 block text-[clamp(2.35rem,8vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight">
                 <span className="text-brand-yellow">
-                  {titleHighlight || "tư vấn tuyển dụng"}
+                  {titleHighlight || (
+                    <span className="whitespace-nowrap">tư vấn tuyển dụng</span>
+                  )}
                 </span>
               </span>
             </h1>
 
             <p className="mb-8 max-w-2xl text-base font-light leading-[1.75] text-[#4B5563] md:text-lg lg:max-w-xl text-justify">
               {subtitle ||
-                "Kết nối ứng viên tài năng với hơn 1200+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
+                "Kết nối ứng viên tài năng với hơn 1000+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
             </p>
 
             <div className="relative mb-8 mt-1 w-full max-w-[24rem] md:hidden">
