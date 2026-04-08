@@ -8,9 +8,10 @@ interface RichContentProps {
 
 const baseRichContentClassName = [
   "break-words text-gray-600",
-  "[&_p]:mb-4 [&_p]:leading-relaxed",
-  "[&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5",
-  "[&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5",
+  "[&_p]:my-0 [&_p]:leading-relaxed",
+  "[&_p+p]:mt-4",
+  "[&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-5",
+  "[&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-5",
   "[&_li]:mb-2",
   "[&_a]:text-brand-yellow [&_a]:underline [&_a]:underline-offset-4",
   "[&_img]:my-6 [&_img]:inline-block [&_img]:h-auto [&_img]:max-w-full [&_img]:w-auto [&_img]:rounded-xl",

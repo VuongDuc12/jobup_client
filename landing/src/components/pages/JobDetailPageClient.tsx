@@ -93,7 +93,7 @@ function HtmlContent({ html }: { html?: string | null }) {
     <RichContent
       html={html}
       emptyText="Đang cập nhật."
-      className="leading-relaxed space-y-3 [&_img]:shadow-sm"
+      className="leading-relaxed [&_img]:shadow-sm"
     />
   );
 }
