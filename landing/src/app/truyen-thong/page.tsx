@@ -248,7 +248,7 @@ export default function MediaMentionsPage() {
             <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-stretch">
               <div className="group relative bg-white border border-gray-100 shadow-sm hover:shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 grid grid-rows-[45fr_55fr] min-h-[560px] sm:min-h-[620px]">
                 {/* Content Area */}
-                <div className="p-8 sm:p-10 flex flex-col shadow-[inset_0_12px_28px_rgba(250,204,21,0.30),inset_0_-10px_24px_rgba(250,204,21,0.22)]">
+                <div className="relative p-8 sm:p-10 flex flex-col shadow-[inset_0_12px_28px_rgba(0,0,0,0.18),inset_0_-10px_24px_rgba(255,255,255,0.45)]">
                   {/* Header: Category & Quote */}
                   <div className="flex justify-between items-start mb-6">
                     <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-yellow/10 text-brand-yellow text-xs font-bold tracking-widest uppercase">
@@ -292,11 +292,13 @@ export default function MediaMentionsPage() {
                       </div>
                     </a>
                   </div>
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent via-black/35 to-black/70" />
                 </div>
 
-                {/* Image: Thêm Overlay gradient nhẹ phía trên để tách biệt với nội dung */}
+                {/* Image: Overlay den o phan dau anh de tao hieu ung phu dan tu khu vuc "XEM BAI GOC" */}
                 <div className="relative h-full w-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-12 z-10" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0  z-10" />
                   <img
                     src={
                       resolveAssetUrl(featuredItem.thumbnailUrl) || featuredLogo
