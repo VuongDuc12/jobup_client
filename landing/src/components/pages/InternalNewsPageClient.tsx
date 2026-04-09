@@ -104,19 +104,19 @@ export default function InternalNewsPage() {
 
     const loadData = async () => {
       try {
-        const [mostViewedResult, categoryResult] = await Promise.all([
+        const [featuredResult, categoryResult] = await Promise.all([
           fetchPublicArticles({
             PageNumber: 1,
             PageSize: 1,
-            MostViewed: true,
+            IsHot: true,
           }),
           fetchPublicNewsCategories(),
         ]);
 
         if (!mounted) return;
 
-        const mostViewed = mostViewedResult.list[0];
-        setFeatured(mostViewed || fallbackItems[0] || null);
+        const featuredArticle = featuredResult.list[0];
+        setFeatured(featuredArticle || fallbackItems[0] || null);
 
         const safeCategories = Array.isArray(categoryResult)
           ? categoryResult
