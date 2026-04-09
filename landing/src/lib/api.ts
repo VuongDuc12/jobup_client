@@ -410,6 +410,7 @@ export interface PublicArticleSearchParams {
   NewsCategoryId?: string;
   PageNumber?: number;
   PageSize?: number;
+  IsHot?: boolean;
   MostViewed?: boolean;
 }
 
