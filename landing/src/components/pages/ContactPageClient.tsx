@@ -147,9 +147,8 @@ export default function ContactPageClient() {
   const threadHref =
     config.threadUrl && config.threadUrl !== "#" ? config.threadUrl : null;
   const instagramHref =
-    (config as Record<string, string | undefined>).instagramUrl &&
-    (config as Record<string, string | undefined>).instagramUrl !== "#"
-      ? (config as Record<string, string | undefined>).instagramUrl!
+    config.instagramUrl && config.instagramUrl !== "#"
+      ? config.instagramUrl
       : null;
 
   const fanpageLabel = useMemo(() => {
