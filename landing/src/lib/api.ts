@@ -278,6 +278,36 @@ export async function createEmployerContactPublic(
   }
 }
 
+export interface CreateCandidateContactPayload {
+  fullName: string;
+  phone: string;
+  message?: string;
+}
+
+export async function createCandidateContactPublic(
+  payload: CreateCandidateContactPayload,
+): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/CandidateContacts/public`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    let apiMessage = "";
+    try {
+      const json = (await res.json()) as ApiResponse<unknown>;
+      apiMessage = json.message || "";
+    } catch {
+      // Ignore parse errors and throw with status fallback.
+    }
+    throw new Error(apiMessage || `Submit candidate contact failed: ${res.status}`);
+  }
+}
+
 /* ────────────────────────────────────────────────
  *  GET /api/Jobs/public/{slug}
  * ──────────────────────────────────────────────── */
