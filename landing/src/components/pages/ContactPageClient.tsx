@@ -24,6 +24,7 @@ const FALLBACK_MAP: string | null = null;
 /* ── Types ── */
 type EmployerFormState = {
   contactName: string;
+  phone: string;
   companyName: string;
   message: string;
 };
@@ -107,6 +108,7 @@ export default function ContactPageClient() {
   /* Employer form */
   const [employerForm, setEmployerForm] = useState<EmployerFormState>({
     contactName: "",
+    phone: "",
     companyName: "",
     message: "",
   });
@@ -169,6 +171,7 @@ export default function ContactPageClient() {
   const handleEmployerSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const contactName = employerForm.contactName.trim();
+    const phone = employerForm.phone.trim();
     const companyName = employerForm.companyName.trim();
     const message = employerForm.message.trim();
 
@@ -189,7 +192,7 @@ export default function ContactPageClient() {
         companyName,
         contactName,
         email: "contact@jobup.vn", // Default since email field removed from UI
-        phone: undefined,
+        phone: phone || undefined,
         position: undefined,
         message: message || undefined,
       });
@@ -198,6 +201,7 @@ export default function ContactPageClient() {
       );
       setEmployerForm({
         contactName: "",
+        phone: "",
         companyName: "",
         message: "",
       });
@@ -316,21 +320,39 @@ export default function ContactPageClient() {
               </div>
 
               <form onSubmit={handleEmployerSubmit} className="space-y-4">
-                <div>
-                  <label className={labelClass}>
-                    Họ tên <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    value={employerForm.contactName}
-                    onChange={(e) =>
-                      setEmployerForm((prev) => ({
-                        ...prev,
-                        contactName: e.target.value,
-                      }))
-                    }
-                    className={inputClass}
-                    placeholder="Nhập họ và tên"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>
+                      Họ tên <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      value={employerForm.contactName}
+                      onChange={(e) =>
+                        setEmployerForm((prev) => ({
+                          ...prev,
+                          contactName: e.target.value,
+                        }))
+                      }
+                      className={inputClass}
+                      placeholder="Nhập họ và tên"
+                    />
+                  </div>
+
+                  <div>
+                    <label className={labelClass}>SĐT</label>
+                    <input
+                      type="tel"
+                      value={employerForm.phone}
+                      onChange={(e) =>
+                        setEmployerForm((prev) => ({
+                          ...prev,
+                          phone: e.target.value,
+                        }))
+                      }
+                      className={inputClass}
+                      placeholder="Nhập số điện thoại"
+                    />
+                  </div>
                 </div>
 
                 <div>
