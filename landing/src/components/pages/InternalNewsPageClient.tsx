@@ -260,12 +260,12 @@ export default function InternalNewsPage() {
                       nghiệp
                     </>
                   }
-                  description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp Insights, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
+                  description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
                   align="left"
                   headingTag="h1"
                   className="mb-6 md:mb-7"
                   titleClassName="text-3xl font-black leading-tight text-brand-black md:text-5xl"
-                  descriptionClassName="text-base md:text-lg"
+                  descriptionClassName="text-base md:text-lg !text-justify [text-justify:inter-word]"
                 />
                 <div className="mb-4 flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative w-full">

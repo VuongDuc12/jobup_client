@@ -130,7 +130,7 @@ function SidebarBanner({ data }: { data: BannerPublicResponse }) {
           unoptimized
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-5 md:p-8">
+      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-[#111827]/50 to-transparent flex flex-col justify-end p-5 md:p-5">
         {data.badgeText && (
           <div className="mb-4">
             <BadgeText
@@ -284,7 +284,9 @@ function CompactBanner({
                   ? "border border-brand-yellow/60 bg-brand-yellow/15 font-semibold text-brand-yellow"
                   : "border border-brand-yellow bg-white/80 font-black text-brand-yellow"
               }
-              prefix={<span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />}
+              prefix={
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />
+              }
             />
           )}
           {data.title && (

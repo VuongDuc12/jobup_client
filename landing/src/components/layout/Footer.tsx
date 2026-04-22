@@ -40,7 +40,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Brand */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             <Link
               href="/"
               className="inline-block transition-transform hover:scale-105"
@@ -53,7 +53,7 @@ export default function Footer() {
                 className="h-11 w-auto object-contain"
               />
             </Link>
-            <p className="text-gray-400 text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
+            <p className="text-white text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
               Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
               tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
               viên, kiến tạo hành trình sự nghiệp bền vững.
@@ -80,7 +80,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
+                    className="text-white hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -90,7 +90,7 @@ export default function Footer() {
           </div>
 
           {/* For Candidates */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h4 className="font-bold text-white text-lg mb-6">
               Tuyển dụng và Tin tức
             </h4>
@@ -99,7 +99,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
+                    className="text-white hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -115,21 +115,25 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-phone text-brand-yellow text-base flex-shrink-0" />
                 <span className="text-white text-base leading-tight">
-                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms. Hạ Phan)
+                  {loading ? "0979334143" : config.hotline || "0979334143"} (Ms.
+                  Hạ Phan)
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-envelope text-brand-yellow text-base flex-shrink-0" />
-                <span className="text-gray-300 leading-tight">
-                  {loading ? "tuyendung@jobup.vn" : config.email || "tuyendung@jobup.vn"}
+                <span className="text-white  leading-tight">
+                  {loading
+                    ? "tuyendung@jobup.vn"
+                    : config.email || "tuyendung@jobup.vn"}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-location-dot text-brand-yellow text-base flex-shrink-0" />
-                <span className="text-gray-300 leading-relaxed">
+                <span className="text-white leading-relaxed">
                   {loading
                     ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"
-                    : config.address || "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
+                    : config.address ||
+                      "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"}
                 </span>
               </li>
             </ul>
