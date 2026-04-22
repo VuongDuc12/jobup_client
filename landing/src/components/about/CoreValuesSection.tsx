@@ -40,7 +40,7 @@ const missionVisionData = [
   {
     label: "Tầm nhìn",
     title:
-      "Trở thành đối tác tin cậy cung cấp dịch vụ tuyển dụng đa ngành nghề phổ biến khắp VN.",
+      "Trở thành đối tác tin cậy cung cấp dịch vụ tuyển dụng đa ngành nghề phổ biến khắp Việt Nam.",
     icon: "fa-solid fa-binoculars",
   },
   {
@@ -120,7 +120,11 @@ export default function CoreValuesSection({
         {/* Single Section Header */}
         <SectionHeader
           badge="DNA của chúng tôi"
-          title="Tầm nhìn · Sứ mệnh · Giá trị cốt lõi"
+          title={
+            <span className="whitespace-nowrap">
+              Tầm nhìn · Sứ mệnh · Giá trị cốt lõi
+            </span>
+          }
           description="Những nguyên tắc định hướng mọi hoạt động tư vấn tuyển dụng tại JobUp."
           align="center"
         />
@@ -177,7 +181,7 @@ export default function CoreValuesSection({
 
                 {/* Description (only for core values) */}
                 {item.description && (
-                  <p className="mt-3 text-gray-400 leading-relaxed text-[15px]">
+                  <p className="mt-3 text-gray-400 leading-relaxed text-[15px] text-justify [text-justify:inter-word]">
                     {item.description}
                   </p>
                 )}

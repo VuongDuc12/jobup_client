@@ -108,7 +108,7 @@ export default function CareerHandbook() {
 
   return (
     <div
-      className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 flex flex-col h-[480px] relative group/handbook"
+      className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 flex flex-col h-[480px] lg:h-[480px] relative group/handbook"
       onMouseEnter={stopAutoPlay}
       onMouseLeave={startAutoPlay}
     >
@@ -118,7 +118,7 @@ export default function CareerHandbook() {
           <div className="w-9 h-9 rounded-xl bg-brand-yellow/10 flex items-center justify-center">
             <i className="fa-solid fa-book-open text-brand-yellow text-sm" />
           </div>
-          Cẩm Nang
+          Cẩm nang
         </h4>
         <div className="flex gap-2">
           {handbookSlides.map((_, i) => (
@@ -164,7 +164,7 @@ export default function CareerHandbook() {
                 <h5 className="font-black text-gray-900 text-base leading-tight hover:text-brand-yellow transition-colors line-clamp-2">
                   {slide.title}
                 </h5>
-                <p className="text-gray-500 text-sm mt-3 font-medium leading-relaxed line-clamp-2">
+                <p className="text-gray-500 text-sm mt-3 font-medium leading-relaxed text-justify [text-justify:inter-word]">
                   {slide.description}
                 </p>
               </Link>

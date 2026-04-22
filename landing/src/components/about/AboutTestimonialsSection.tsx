@@ -99,146 +99,165 @@ export default function AboutTestimonialsSection({
         {/* Swiper Slider — wrapper uses overflow-x:clip so side slides are hidden
              but the hover tooltip can overflow vertically without clipping */}
         <div className="[overflow-x:clip]">
-        <Swiper
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          modules={[Autoplay, Pagination, Navigation]}
-          slidesPerView={1}
-          spaceBetween={24}
-          loop={true}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          className="pb-12 !overflow-visible [&_.swiper-pagination-bullet-active]:!bg-brand-yellow [&_.swiper-pagination]:!static [&_.swiper-pagination]:mt-8"
-        >
-          {items.map((item, idx) => {
-            const isDark = idx % 3 === 1;
-            return (
-              <SwiperSlide key={idx} className="!h-[280px] !flex !overflow-visible">
-                <div
-                  className={`group relative overflow-visible z-0 hover:z-40 h-full rounded-3xl p-8 flex flex-col w-full ${
-                    isDark
-                      ? "bg-brand-black text-white"
-                      : "bg-white border border-gray-100 hover:-translate-y-1 transition-transform"
-                  }`}
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            modules={[Autoplay, Pagination, Navigation]}
+            slidesPerView={1}
+            spaceBetween={24}
+            loop={true}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="pb-12 !overflow-visible [&_.swiper-pagination-bullet-active]:!bg-brand-yellow [&_.swiper-pagination]:!static [&_.swiper-pagination]:mt-8"
+          >
+            {items.map((item, idx) => {
+              const isDark = idx % 2 === 1;
+              return (
+                <SwiperSlide
+                  key={idx}
+                  className="!h-[280px] !flex !overflow-visible"
                 >
-                  {/* Stars */}
-                  <div className="flex gap-1 text-brand-yellow mb-5">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <i key={i} className="fa-solid fa-star text-sm" />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p
-                    className={`italic leading-relaxed mb-6 flex-grow overflow-hidden line-clamp-4 ${
-                      isDark ? "text-gray-300" : "text-gray-700"
+                  <div
+                    className={`group relative overflow-visible z-0 hover:z-40 h-full rounded-3xl p-8 flex flex-col w-full ${
+                      isDark
+                        ? "bg-brand-black text-white"
+                        : "bg-white border border-gray-100 hover:-translate-y-1 transition-transform"
                     }`}
                   >
-                    &ldquo;{item.content}&rdquo;
-                  </p>
-
-                  {/* Avatar + Name */}
-                  <div className="flex items-center gap-3">
-                    {item.avatarUrl ? (
-                      <Image
-                        src={item.avatarUrl}
-                        alt={item.name}
-                        width={40}
-                        height={40}
-                        className={`w-10 h-10 rounded-full object-cover ${
-                          isDark ? "border border-brand-yellow/30" : ""
-                        }`}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold">
-                        {item.name
-                          .split(" ")
-                          .map((w) => w[0])
-                          .slice(-2)
-                          .join("")
-                          .toUpperCase()}
-                      </div>
-                    )}
-                    <div>
-                      <p
-                        className={`font-bold text-sm ${
-                          isDark ? "text-white" : "text-brand-black"
-                        }`}
-                      >
-                        {item.name}
-                      </p>
-                      <p
-                        className={`text-xs ${
-                          isDark ? "text-brand-yellow" : "text-gray-400"
-                        }`}
-                      >
-                        {item.position}
-                      </p>
+                    {/* Stars */}
+                    <div className="flex gap-1 text-brand-yellow mb-5">
+                      {[...Array(item.rating)].map((_, i) => (
+                        <i key={i} className="fa-solid fa-star text-sm" />
+                      ))}
                     </div>
-                  </div>
 
-                  {/* Hover tooltip — anchored to top of card, expands downward freely */}
-                  <div className="absolute inset-x-0 top-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:block">
-                    <div
-                      className={`rounded-3xl shadow-2xl border p-8 transform scale-95 group-hover:scale-100 transition-transform duration-300 ${
-                        isDark
-                          ? "bg-brand-black/97 text-gray-200 border-brand-yellow/30"
-                          : "bg-white/97 text-gray-700 border-gray-200"
+                    {/* Quote */}
+                    <p
+                      className={`italic leading-relaxed mb-6 flex-grow overflow-hidden text-justify [text-justify:inter-word] ${
+                        isDark ? "text-gray-300" : "text-gray-700"
                       }`}
-                      style={{ backdropFilter: "blur(12px)" }}
+                      style={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 4,
+                        lineHeight: "1.6",
+                        maxHeight: "calc(1.6em * 4)",
+                      }}
                     >
-                      {/* Stars */}
-                      <div className="flex gap-1 text-brand-yellow mb-4">
-                        {[...Array(item.rating)].map((_, i) => (
-                          <i key={i} className="fa-solid fa-star text-sm" />
-                        ))}
+                      &ldquo;{item.content}&rdquo;
+                    </p>
+
+                    {/* Avatar + Name */}
+                    <div className="flex items-center gap-3">
+                      {item.avatarUrl ? (
+                        <Image
+                          src={item.avatarUrl}
+                          alt={item.name}
+                          width={40}
+                          height={40}
+                          className={`w-10 h-10 rounded-full object-cover ${
+                            isDark ? "border border-brand-yellow/30" : ""
+                          }`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold">
+                          {item.name
+                            .split(" ")
+                            .map((w) => w[0])
+                            .slice(-2)
+                            .join("")
+                            .toUpperCase()}
+                        </div>
+                      )}
+                      <div>
+                        <p
+                          className={`font-bold text-sm ${
+                            isDark ? "text-white" : "text-brand-black"
+                          }`}
+                        >
+                          {item.name}
+                        </p>
+                        <p
+                          className={`text-xs ${
+                            isDark ? "text-brand-yellow" : "text-gray-400"
+                          }`}
+                        >
+                          {item.position}
+                        </p>
                       </div>
-                      {/* Full quote — no line-clamp */}
-                      <p className="italic leading-relaxed text-sm mb-5">
-                        &ldquo;{item.content}&rdquo;
-                      </p>
-                      {/* Name row */}
-                      <div className="flex items-center gap-3 pt-4 border-t border-current/10">
-                        {item.avatarUrl ? (
-                          <Image
-                            src={item.avatarUrl}
-                            alt={item.name}
-                            width={36}
-                            height={36}
-                            className="w-9 h-9 rounded-full object-cover shrink-0"
-                          />
-                        ) : (
-                          <div className="w-9 h-9 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold text-xs shrink-0">
-                            {item.name.split(" ").map((w) => w[0]).slice(-2).join("").toUpperCase()}
+                    </div>
+
+                    {/* Hover tooltip — anchored to top of card, expands downward freely */}
+                    <div className="absolute inset-x-0 top-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none hidden md:block">
+                      <div
+                        className={`rounded-3xl shadow-2xl border p-8 transform scale-95 group-hover:scale-100 transition-transform duration-300 ${
+                          isDark
+                            ? "bg-brand-black/97 text-gray-200 border-brand-yellow/30"
+                            : "bg-white/97 text-gray-700 border-gray-200"
+                        }`}
+                        style={{ backdropFilter: "blur(12px)" }}
+                      >
+                        {/* Stars */}
+                        <div className="flex gap-1 text-brand-yellow mb-4">
+                          {[...Array(item.rating)].map((_, i) => (
+                            <i key={i} className="fa-solid fa-star text-sm" />
+                          ))}
+                        </div>
+                        {/* Quote */}
+                        <p className="italic leading-relaxed text-sm mb-5 text-justify [text-justify:inter-word]">
+                          &ldquo;{item.content}&rdquo;
+                        </p>
+                        {/* Name row */}
+                        <div className="flex items-center gap-3 pt-4 border-t border-current/10">
+                          {item.avatarUrl ? (
+                            <Image
+                              src={item.avatarUrl}
+                              alt={item.name}
+                              width={36}
+                              height={36}
+                              className="w-9 h-9 rounded-full object-cover shrink-0"
+                            />
+                          ) : (
+                            <div className="w-9 h-9 rounded-full bg-brand-yellow flex items-center justify-center text-brand-black font-bold text-xs shrink-0">
+                              {item.name
+                                .split(" ")
+                                .map((w) => w[0])
+                                .slice(-2)
+                                .join("")
+                                .toUpperCase()}
+                            </div>
+                          )}
+                          <div>
+                            <p
+                              className={`font-bold text-sm ${isDark ? "text-white" : "text-brand-black"}`}
+                            >
+                              {item.name}
+                            </p>
+                            <p
+                              className={`text-xs ${isDark ? "text-brand-yellow" : "text-gray-400"}`}
+                            >
+                              {item.position}
+                            </p>
                           </div>
-                        )}
-                        <div>
-                          <p className={`font-bold text-sm ${isDark ? "text-white" : "text-brand-black"}`}>
-                            {item.name}
-                          </p>
-                          <p className={`text-xs ${isDark ? "text-brand-yellow" : "text-gray-400"}`}>
-                            {item.position}
-                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
     </section>

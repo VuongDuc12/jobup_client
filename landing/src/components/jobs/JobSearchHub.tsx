@@ -10,6 +10,12 @@ const broadcasts = [
 
 const hotTags = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
+const heroProvinceOptions = [
+  { id: "11111111-0000-0000-0000-000000000001", name: "Hà Nội" },
+  { id: "11111111-0000-0000-0000-000000000028", name: "TP. HCM" },
+  { id: "11111111-0000-0000-0000-000000000021", name: "Đà Nẵng" },
+];
+
 interface JobSearchHubProps {
   keyword: string;
   provinceId: string;
@@ -63,6 +69,13 @@ export default function JobSearchHub({
       }),
     [],
   );
+
+  const featuredProvinceOptions = useMemo(() => {
+    if (!provinces || provinces.length === 0) return heroProvinceOptions;
+
+    const provinceIdSet = new Set(provinces.map((province) => province.id));
+    return heroProvinceOptions.filter((option) => provinceIdSet.has(option.id));
+  }, [provinces]);
 
   const formatSalaryInput = (value: string) => {
     const digits = value.replace(/[^0-9]/g, "");
@@ -188,21 +201,15 @@ export default function JobSearchHub({
                 onChange={(e) => onProvinceChange(e.target.value)}
                 className="w-full pl-12 pr-10 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-white focus:text-gray-900 font-black appearance-none cursor-pointer backdrop-blur-md"
               >
-                <option className="text-gray-900" value="">
-                  Tất cả địa điểm
-                </option>
-                {provinces
-                  .slice()
-                  .sort((a, b) => a.sortOrder - b.sortOrder)
-                  .map((province) => (
-                    <option
-                      key={province.id}
-                      className="text-gray-900"
-                      value={province.id}
-                    >
-                      {province.name}
-                    </option>
-                  ))}
+                {featuredProvinceOptions.map((province) => (
+                  <option
+                    key={province.id}
+                    className="text-gray-900"
+                    value={province.id}
+                  >
+                    {province.name}
+                  </option>
+                ))}
               </select>
               <div className="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-brand-yellow transition-colors text-lg drop-shadow-md z-10 pointer-events-none">
                 <i className="fa-solid fa-location-dot" />
@@ -371,7 +378,7 @@ export default function JobSearchHub({
 
           {/* Hot Tags */}
           <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-4">
-            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest flex items-center gap-2">
+            <span className="text-[9px] font-black text-white/80 uppercase tracking-widest flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
               Tìm kiếm nhiều nhất:
             </span>

@@ -43,7 +43,7 @@ const trendingKeywords = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
 const heroProvinceOptions = [
   { id: "11111111-0000-0000-0000-000000000001", name: "Hà Nội" },
-  { id: "11111111-0000-0000-0000-000000000028", name: "HCM" },
+  { id: "11111111-0000-0000-0000-000000000028", name: "TP. HCM" },
   { id: "11111111-0000-0000-0000-000000000021", name: "Đà Nẵng" },
 ];
 
@@ -88,11 +88,10 @@ export default function HeroSection({
       : "#");
 
   const hotlineValue = config.hotline || "0979334143";
-  const hotlineDisplay = hotlineValue.replace(
-    /(\d{4})(\d{3})(\d{3})/,
-    "$1.$2.$3",
-  );
-  const heroImageSrc = getAssetUrl(heroImage) || "/jobup_client/landing/public/images/trangchu/hero-image.avif";
+  const hotlineDisplay = hotlineValue;
+  const heroImageSrc =
+    getAssetUrl(heroImage) ||
+    "/jobup_client/landing/public/images/trangchu/hero-image.avif";
 
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -290,7 +289,6 @@ export default function HeroSection({
                   aria-label="Chọn địa điểm làm việc"
                   className="w-full appearance-none bg-transparent py-3 pl-1 text-sm text-gray-700 focus:outline-none focus:ring-0 md:py-2"
                 >
-                  <option value="">Địa điểm</option>
                   {heroProvinceOptions.map((province) => (
                     <option key={province.id} value={province.id}>
                       {province.name}
@@ -322,9 +320,9 @@ export default function HeroSection({
               ))}
             </div>
 
-            <div className="relative z-10 mt-7 w-full border-t border-slate-100/70 pt-6 sm:mt-8 sm:pt-7 lg:mt-0 lg:pt-12">
+            <div className="relative z-10 mt-7 w-full border-t border-slate-100/70 pt-6 sm:mt-8 sm:pt-7 lg:mt-0 lg:pt-8">
               <div className="mx-auto w-full max-w-7xl">
-                <p className="mb-5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 sm:mb-6 lg:mb-8">
+                <p className="mb-2 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-700 sm:mb-2 lg:mb-2">
                   Được tin tưởng bởi 200+ doanh nghiệp hàng đầu
                 </p>
                 <div className="mask-image-gradient relative overflow-hidden pb-4">

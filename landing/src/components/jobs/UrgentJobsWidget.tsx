@@ -42,7 +42,7 @@ export default function UrgentJobsWidget() {
           <div className="w-10 h-10 rounded-xl bg-brand-yellow/10 flex items-center justify-center">
             <i className="fa-solid fa-fire text-brand-yellow text-lg animate-pulse" />
           </div>
-          Việc Làm Hot
+          Việc làm hot
         </h4>
         <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-3.5 pl-1">
           Tin mới nhất trong 24h

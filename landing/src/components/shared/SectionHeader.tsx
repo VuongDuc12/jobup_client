@@ -47,7 +47,7 @@ export default function SectionHeader({
   );
 
   const descriptionBaseClass = cn(
-    "mt-4 text-lg leading-relaxed text-gray-500",
+    "mt-4 text-lg leading-relaxed text-gray-500 text-justify",
     align === "center" ? "mx-auto max-w-2xl text-center" : "text-left",
     descriptionClassName,
   );
@@ -76,7 +76,9 @@ export default function SectionHeader({
           <h2 className={headingBaseClass}>{title}</h2>
         )}
 
-        {description ? <p className={descriptionBaseClass}>{description}</p> : null}
+        {description ? (
+          <p className={descriptionBaseClass}>{description}</p>
+        ) : null}
       </div>
     </div>
   );

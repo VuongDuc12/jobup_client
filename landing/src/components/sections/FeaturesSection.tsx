@@ -308,7 +308,7 @@ export default function FeaturesSection({
                     unoptimized
                   />
                 )}
-                <div className="relative z-10 flex flex-col h-full">
+                <div className="relative z-10 flex flex-col h-full -mx-[4px]">
                   <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center shadow-inner mb-8">
                     <i
                       className={`${items[1].iconClass} text-2xl text-brand-yellow`}
@@ -326,7 +326,6 @@ export default function FeaturesSection({
                         Anh chị cần tối ưu CV ạ?
                       </p>
                     </div>
-                    <div className="bg-brand-yellow text-[#111827] p-4 rounded-[1.5rem] rounded-tr-none self-end max-w-[90%] ml-auto shadow-2xl shadow-brand-yellow transform rotate-1"></div>
                     {items[1].linkUrl && (
                       <a
                         href={items[1].linkUrl}
