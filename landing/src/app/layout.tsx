@@ -15,7 +15,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "JobUp - Nền Tảng Tuyển Dụng & Việc Làm Hàng Đầu Việt Nam 2026",
   description:
-    "JobUp - Cổng thông tin việc làm uy tín nhất Việt Nam. Kết nối ứng viên với 50,000+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu. Tìm việc nhanh, lương cao, đãi ngộ tốt.",
+    "JobUp - Cổng thông tin việc làm uy tín nhất Việt Nam. Kết nối ứng viên với 100+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu. Tìm việc nhanh, lương cao, đãi ngộ tốt.",
   keywords:
     "tìm việc làm, tuyển dụng, jobup, việc làm it, việc làm marketing, cv chuyên nghiệp, tuyển dụng nhân sự cấp cao",
   authors: [{ name: "JobUp Corporation" }],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: "https://jobup.vn/",
     title: "JobUp - Kiến Tạo Sự Nghiệp Đẳng Cấp",
     description:
-      "Hàng ngàn việc làm lương cao đang chờ đón bạn. Tạo CV và ứng tuyển ngay hôm nay.",
+      "100+ việc làm lương cao đang chờ đón bạn. Tạo CV và ứng tuyển ngay hôm nay.",
     images: ["https://jobup.vn/assets/og-image.jpg"],
   },
   other: {

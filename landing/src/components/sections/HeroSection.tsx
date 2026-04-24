@@ -193,7 +193,7 @@ export default function HeroSection({
 
             <p className="mb-8 max-w-2xl text-base font-light leading-[1.75] text-[#4B5563] md:text-lg lg:max-w-xl text-justify">
               {subtitle ||
-                "Kết nối ứng viên tài năng với hơn 1000+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
+                "Kết nối ứng viên tài năng với 100+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
             </p>
 
             <div className="relative mb-8 mt-1 w-full max-w-[24rem] md:hidden">
@@ -237,7 +237,7 @@ export default function HeroSection({
                         Dành cho ứng viên
                       </p>
                       <p className="mt-1 text-sm font-bold leading-snug">
-                        1200+ cơ hội đang chờ bạn.
+                        100+ cơ hội việc làm đang chờ bạn.
                       </p>
                     </div>
                     <Link
