@@ -163,7 +163,7 @@ export default function JobSearchHub({
               </h2>
               <p className="text-white/80 text-sm lg:text-lg font-bold flex items-center gap-3 mt-3">
                 <span className="w-12 h-1 bg-brand-yellow rounded-full" />
-                1000+ tin tuyển dụng đã xác thực
+                100+ tin tuyển dụng đã xác thực
               </p>
             </div>
             <button
