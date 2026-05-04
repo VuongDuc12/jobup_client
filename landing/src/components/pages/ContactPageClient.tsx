@@ -395,7 +395,7 @@ export default function ContactPageClient() {
 
                 <div>
                   <label className={labelClass}>
-                    Thông tin liên quan anh/chị có nhu cầu tuyển dụng
+                    Thông tin liên quan đến vị trị anh/chị có nhu cầu tuyển dụng
                   </label>
                   <textarea
                     value={employerForm.message}
