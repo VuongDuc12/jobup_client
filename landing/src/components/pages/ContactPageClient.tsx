@@ -625,7 +625,7 @@ export default function ContactPageClient() {
                         Liên hệ sử dụng dịch vụ tuyển dụng
                       </p>
                       <p className="text-sm font-bold text-[#3c4d63]">
-                        Ms. Hạ Phan(0979334143)
+                        Ms. Hạ Phan (0979334143)
                       </p>
                     </div>
                     <div>
@@ -633,7 +633,7 @@ export default function ContactPageClient() {
                         Liên hệ để ứng tuyển
                       </p>
                       <p className="text-sm font-bold text-[#3c4d63]">
-                        Ms. Mai Phương(0944549143)
+                        Ms. Mai Phương (0944549143)
                       </p>
                     </div>
                   </div>
