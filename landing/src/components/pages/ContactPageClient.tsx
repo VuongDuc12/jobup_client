@@ -13,8 +13,7 @@ import {
 /* ── Fallbacks ── */
 const FALLBACK_ADDRESS_MAIN =
   "C23, Lô 18 KĐT Định Công, Phường Phương Liệt, Hà Nội";
-const FALLBACK_ADDRESS_OFFICE =
-  "VPGD: Tòa nhà 29T1 Hoàng Đạo Thúy, Phường Yên Hòa, Hà Nội";
+
 const FALLBACK_PHONE = "0979334143";
 const FALLBACK_EMAIL = "tuyendung@jobup.vn";
 const FALLBACK_FANPAGE = "jobup.vn";
@@ -25,6 +24,7 @@ const FALLBACK_MAP: string | null = null;
 type EmployerFormState = {
   contactName: string;
   phone: string;
+  position: string;
   companyName: string;
   message: string;
 };
@@ -109,6 +109,7 @@ export default function ContactPageClient() {
   const [employerForm, setEmployerForm] = useState<EmployerFormState>({
     contactName: "",
     phone: "",
+    position: "",
     companyName: "",
     message: "",
   });
@@ -129,7 +130,6 @@ export default function ContactPageClient() {
   /* Derived display values */
   const displayMainAddress =
     config.address?.trim() || FALLBACK_ADDRESS_MAIN;
-  const displayOfficeAddress = FALLBACK_ADDRESS_OFFICE;
   const displayPhone = toDisplayPhone(config.hotline);
   const displayEmail = config.email?.trim() || FALLBACK_EMAIL;
   const mapEmbedUrl = resolveMapEmbedSrc(config.mapEmbedUrl);
@@ -172,6 +172,7 @@ export default function ContactPageClient() {
     event.preventDefault();
     const contactName = employerForm.contactName.trim();
     const phone = employerForm.phone.trim();
+    const position = employerForm.position.trim();
     const companyName = employerForm.companyName.trim();
     const message = employerForm.message.trim();
 
@@ -193,7 +194,7 @@ export default function ContactPageClient() {
         contactName,
         email: "contact@jobup.vn", // Default since email field removed from UI
         phone: phone || undefined,
-        position: undefined,
+        position: position || undefined,
         message: message || undefined,
       });
       setEmployerSuccess(
@@ -202,6 +203,7 @@ export default function ContactPageClient() {
       setEmployerForm({
         contactName: "",
         phone: "",
+        position: "",
         companyName: "",
         message: "",
       });
@@ -323,7 +325,7 @@ export default function ContactPageClient() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelClass}>
-                      Họ tên <span className="text-red-600">*</span>
+                      Họ tên của anh/chị <span className="text-red-600">*</span>
                     </label>
                     <input
                       value={employerForm.contactName}
@@ -339,7 +341,7 @@ export default function ContactPageClient() {
                   </div>
 
                   <div>
-                    <label className={labelClass}>SĐT</label>
+                    <label className={labelClass}>SĐT liên hệ của anh/chị <span className="text-red-600">*</span></label>
                     <input
                       type="tel"
                       value={employerForm.phone}
@@ -357,7 +359,7 @@ export default function ContactPageClient() {
 
                 <div>
                   <label className={labelClass}>
-                    Tên doanh nghiệp <span className="text-red-600">*</span>
+                    Tên doanh nghiệp của anh/chị <span className="text-red-600">*</span>
                   </label>
                   <input
                     value={employerForm.companyName}
@@ -374,8 +376,24 @@ export default function ContactPageClient() {
 
                 <div>
                   <label className={labelClass}>
-                    Anh/chị vui lòng cung cấp thông tin liên quan về nhu cầu
-                    tuyển dụng
+                    Vị trí công việc của anh/chị
+                  </label>
+                  <input
+                    value={employerForm.position}
+                    onChange={(e) =>
+                      setEmployerForm((prev) => ({
+                        ...prev,
+                        position: e.target.value,
+                      }))
+                    }
+                    className={inputClass}
+                    placeholder="VD: Trưởng phòng Nhân sự"
+                  />
+                </div>
+
+                <div>
+                  <label className={labelClass}>
+                    Thông tin liên quan anh/chị có nhu cầu tuyển dụng
                   </label>
                   <textarea
                     value={employerForm.message}
@@ -389,6 +407,10 @@ export default function ContactPageClient() {
                     className={textareaClass}
                     placeholder="Mô tả nhu cầu tuyển dụng của doanh nghiệp..."
                   />
+                </div>
+
+                <div className="text-sm text-slate-600 text-center">
+                  Liên hệ để sử dụng dịch vụ tuyển dụng: 0979334143 (Ms. Hạ Phan)
                 </div>
 
                 <div className="flex justify-center pt-2">
@@ -452,7 +474,7 @@ export default function ContactPageClient() {
               <form onSubmit={handleCandidateSubmit} className="space-y-4">
                 <div>
                   <label className={labelClass}>
-                    Họ tên <span className="text-red-600">*</span>
+                    Họ tên của anh/chị <span className="text-red-600">*</span>
                   </label>
                   <input
                     value={candidateForm.fullName}
@@ -469,7 +491,7 @@ export default function ContactPageClient() {
 
                 <div>
                   <label className={labelClass}>
-                    SĐT liên hệ <span className="text-red-600">*</span>
+                    SĐT liên hệ của anh/chị <span className="text-red-600">*</span>
                   </label>
                   <input
                     type="tel"
@@ -487,7 +509,7 @@ export default function ContactPageClient() {
 
                 <div>
                   <label className={labelClass}>
-                    Hãy chia sẻ về vị trí việc làm anh/chị muốn ứng tuyển
+                    Vị trí việc làm anh/chị muốn ứng tuyển
                   </label>
                   <textarea
                     value={candidateForm.message}
@@ -501,6 +523,9 @@ export default function ContactPageClient() {
                     className={textareaClass}
                     placeholder="Mô tả vị trí việc làm bạn mong muốn..."
                   />
+                </div>
+                 <div className="text-sm text-slate-600 text-center">
+                  Liên hệ để ứng tuyển: 0944549143 (Ms. Hạ Phan)
                 </div>
 
                 <div className="flex justify-center pt-2">
@@ -560,9 +585,6 @@ export default function ContactPageClient() {
                   <p className="text-[#3c4d63] text-sm leading-relaxed break-words">
                     {displayMainAddress}
                   </p>
-                  <p className="text-[#3c4d63] text-sm leading-relaxed mt-2 break-words">
-                    {displayOfficeAddress}
-                  </p>
                 </article>
 
                 {/* Phone / Email */}
@@ -601,7 +623,7 @@ export default function ContactPageClient() {
                         Liên hệ sử dụng dịch vụ tuyển dụng
                       </p>
                       <p className="text-sm font-bold text-[#3c4d63]">
-                        Ms. Hạ Phan
+                        Ms. Hạ Phan(0979334143)
                       </p>
                     </div>
                     <div>
@@ -609,7 +631,7 @@ export default function ContactPageClient() {
                         Liên hệ để ứng tuyển
                       </p>
                       <p className="text-sm font-bold text-[#3c4d63]">
-                        Ms. Mai Phương
+                        Ms. Mai Phương(0944549143)
                       </p>
                     </div>
                   </div>

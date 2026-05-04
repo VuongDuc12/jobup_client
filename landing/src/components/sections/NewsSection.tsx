@@ -73,9 +73,8 @@ export default function NewsSection({ articles }: NewsSectionProps) {
             title={
               <>
                 Cập nhật mới nhất từ
-                <br />{" "}
                 <span className="text-brand-yellow text-center my-2 block">
-                  gia đình JobUp
+                  JobUp
                 </span>
               </>
             }
