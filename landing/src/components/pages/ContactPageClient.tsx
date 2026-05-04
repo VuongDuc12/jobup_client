@@ -527,7 +527,7 @@ export default function ContactPageClient() {
                   />
                 </div>
                  <div className="text-sm text-slate-600 text-center">
-                  Liên hệ để ứng tuyển: 0944549143 (Ms. Hạ Phan)
+                  Liên hệ để ứng tuyển: 0944549143 (Ms. Mai Phương)
                 </div>
 
                 <div className="flex justify-center pt-2">
