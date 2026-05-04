@@ -357,38 +357,40 @@ export default function ContactPageClient() {
                   </div>
                 </div>
 
-                <div>
-                  <label className={labelClass}>
-                    Tên doanh nghiệp của anh/chị <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    value={employerForm.companyName}
-                    onChange={(e) =>
-                      setEmployerForm((prev) => ({
-                        ...prev,
-                        companyName: e.target.value,
-                      }))
-                    }
-                    className={inputClass}
-                    placeholder="Nhập tên doanh nghiệp"
-                  />
-                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>
+                      Tên doanh nghiệp của anh/chị <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      value={employerForm.companyName}
+                      onChange={(e) =>
+                        setEmployerForm((prev) => ({
+                          ...prev,
+                          companyName: e.target.value,
+                        }))
+                      }
+                      className={inputClass}
+                      placeholder="Nhập tên doanh nghiệp"
+                    />
+                  </div>
 
-                <div>
-                  <label className={labelClass}>
-                    Vị trí công việc của anh/chị
-                  </label>
-                  <input
-                    value={employerForm.position}
-                    onChange={(e) =>
-                      setEmployerForm((prev) => ({
-                        ...prev,
-                        position: e.target.value,
-                      }))
-                    }
-                    className={inputClass}
-                    placeholder="VD: Trưởng phòng Nhân sự"
-                  />
+                  <div>
+                    <label className={labelClass}>
+                      Vị trí công việc của anh/chị
+                    </label>
+                    <input
+                      value={employerForm.position}
+                      onChange={(e) =>
+                        setEmployerForm((prev) => ({
+                          ...prev,
+                          position: e.target.value,
+                        }))
+                      }
+                      className={inputClass}
+                      placeholder="VD: Trưởng phòng Nhân sự"
+                    />
+                  </div>
                 </div>
 
                 <div>
