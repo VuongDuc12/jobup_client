@@ -129,65 +129,71 @@ export default function CoreValuesSection({
           align="center"
         />
 
-        {/* Unified 5-item grid: 2 pillars top, 3 values bottom — one visual flow */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-7">
-          {allItems.map((item, idx) => {
-            const isPillar = item.type === "pillar";
-            return (
+        {/* Pillars Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 mb-8">
+          {allItems
+            .filter((item) => item.type === "pillar")
+            .map((item, idx) => (
               <article
                 key={idx}
-                className={`group relative rounded-3xl border p-7 md:p-9 transition-all duration-300 overflow-hidden ${
-                  isPillar
-                    ? "md:col-span-3 bg-brand-black border-brand-black hover:shadow-hover"
-                    : "md:col-span-2 bg-brand-light-gray border-gray-100 hover:border-brand-yellow/30 hover:shadow-hover"
-                }`}
+                className="group relative rounded-3xl border p-7 md:p-9 transition-all duration-300 overflow-hidden bg-brand-black border-brand-black hover:shadow-hover"
               >
                 {/* Icon */}
-                <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 ${
-                    isPillar
-                      ? "bg-brand-yellow/15 group-hover:bg-brand-yellow"
-                      : "bg-white shadow-soft group-hover:bg-brand-yellow group-hover:shadow-glow"
-                  }`}
-                >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
                   <i
-                    className={`${item.icon} text-xl transition-colors duration-300 ${
-                      isPillar
-                        ? "text-brand-yellow group-hover:text-brand-black"
-                        : "text-brand-yellow group-hover:text-white"
-                    }`}
+                    className={`${item.icon} text-xl transition-colors duration-300 text-brand-yellow group-hover:text-brand-black`}
                   />
                 </div>
 
                 {/* Label */}
-                <span
-                  className={`text-xs font-bold uppercase tracking-[0.18em] ${
-                    isPillar ? "text-brand-yellow" : "text-brand-yellow"
-                  }`}
-                >
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
                   {item.label}
                 </span>
 
                 {/* Title */}
-                <h4
-                  className={`mt-3 font-extrabold leading-snug ${
-                    isPillar
-                      ? "text-xl md:text-2xl text-white"
-                      : "text-lg text-brand-black"
-                  }`}
-                >
+                <h4 className="mt-3 font-extrabold leading-snug text-xl md:text-2xl text-white">
                   {item.title}
                 </h4>
-
-                {/* Description (only for core values) */}
-                {item.description && (
-                  <p className="mt-3 text-gray-400 leading-relaxed text-[15px] text-justify [text-justify:inter-word]">
-                    {item.description}
-                  </p>
-                )}
               </article>
-            );
-          })}
+            ))}
+        </div>
+
+        {/* Core Values Section: Single gray box spanning full width */}
+        <div className="rounded-3xl border border-gray-900 bg-gray-900 p-7 md:p-9 hover:shadow-hover transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+            {allItems
+              .filter((item) => item.type === "value")
+              .map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group rounded-2xl border-3 border-brand-yellow/30 p-5 transition-all"
+                >
+                  {/* Icon */}
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
+                    <i
+                      className={`${item.icon} text-xl transition-colors duration-300 text-brand-yellow group-hover:text-brand-black`}
+                    />
+                  </div>
+
+                  {/* Label */}
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
+                    {item.label}
+                  </span>
+
+                  {/* Title */}
+                  <h4 className="mt-3 font-extrabold leading-snug text-lg text-white">
+                    {item.title}
+                  </h4>
+
+                  {/* Description */}
+                  {item.description && (
+                    <p className="mt-3 text-gray-300 leading-relaxed text-[15px] text-justify [text-justify:inter-word]">
+                      {item.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </section>

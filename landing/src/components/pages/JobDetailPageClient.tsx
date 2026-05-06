@@ -550,16 +550,16 @@ export default function JobDetailPage() {
                                 <p className="text-sm text-gray-500 font-medium truncate min-w-0">
                                   {item.displayCompanyName}
                                 </p>
-                                <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
-                                <p className="text-sm text-gray-400 truncate min-w-0">
-                                  <i className="fa-solid fa-location-dot mr-1" />
-                                  {item.provinceName || "Toàn quốc"}
-                                </p>
                               </div>
                             </div>
                           </div>
 
                           <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
+                            {item.provinceName && (
+                              <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-bold rounded-lg border border-amber-100 max-w-full truncate">
+                                {item.provinceName}
+                              </span>
+                            )}
                             {item.workType !== undefined && (
                               <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100 max-w-full truncate">
                                 {WORK_TYPE_LABELS[item.workType] || "Khác"}
@@ -573,7 +573,7 @@ export default function JobDetailPage() {
                           </div>
 
                           <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center min-w-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-50 gap-2 md:gap-1">
-                            <span className="text-green-600 font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
+                            <span className="text-black font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
                               {formatSalary(item.salaryFrom, item.salaryTo)}
                             </span>
                             <span className="text-gray-400 text-xs mt-0.5 shrink-0">

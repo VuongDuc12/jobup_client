@@ -26,17 +26,14 @@ export default function AboutHeroSection({
   const displayBg = getAssetUrl(backgroundImage) || "/hero-workspace.png";
 
   // Title: CMS string hoặc fallback JSX đẹp
-  const displayTitle: React.ReactNode = title ? (
-    <span className="text-brand-yellow">{title}</span>
-  ) : (
+  const displayTitle: React.ReactNode = (
     <>
-      <span className="text-brand-yellow">Trở thành đối tác </span>
-      <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
-        tin cậy
-      </span>
-      <span className="text-brand-yellow">
-        {" "}cung cấp dịch vụ tuyển dụng<br />đa ngành nghề khắp Việt Nam
-      </span>
+      <span className="text-amber-300">Trở thành đối tác tin cậy</span>
+      <span className="text-amber-300"> cung cấp </span>
+      <span className="inline-block bg-amber-300 text-brand-black px-2.5 my-1.5 py-0.5 rounded-lg font-black">
+        dịch vụ tuyển dụng
+      </span>{" "}
+      <span className="text-amber-300">đa ngành nghề khắp Việt Nam</span>
     </>
   );
   const displayCta1Url =
@@ -73,7 +70,7 @@ export default function AboutHeroSection({
           className="mb-6 md:mb-10"
           contentClassName="max-w-4xl"
           badgeClassName="tracking-[0.24em]"
-          titleClassName="mt-6 text-4xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-5xl md:text-6xl xl:text-7xl antialiased"
+          titleClassName="mt-6 text-3xl font-bold leading-[1.16] tracking-[-0.02em] sm:text-4xl md:text-5xl xl:text-6xl antialiased"
           descriptionClassName="mt-8 max-w-3xl text-base font-normal leading-relaxed text-white/90 sm:text-lg md:text-xl antialiased"
         />
 
