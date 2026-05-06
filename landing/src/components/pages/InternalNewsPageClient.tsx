@@ -252,15 +252,11 @@ export default function InternalNewsPage() {
 
               <div>
                 <SectionHeader
-                  badge="Góc chuyên gia JobUp"
+                  badge="GÓC NỘI BỘ JOBUP"
                   title={
-                    <>
-                      Nơi chia sẻ kiến thức{" "}
-                      <span className="text-brand-yellow">vươn tầm</span> sự
-                      nghiệp
-                    </>
+                    <>Nơi cập nhật thông tin & hoạt động nội bộ tại công ty</>
                   }
-                  description="Chúng tôi tin rằng kiến thức chính là bệ phóng vững chắc nhất. Tại JobUp, chúng tôi tổng hợp những kinh nghiệm thực chiến từ chuyên gia nhân sự và các bài học quản trị đắt giá."
+                  description="Tại đây, chúng tôi chia sẻ mọi hoạt động nội bộ, những cột mốc vận hành đáng nhớ và tôn vinh những giá trị mà đội ngũ đang cùng nhau xây dựng."
                   align="left"
                   headingTag="h1"
                   className="mb-6 md:mb-7"

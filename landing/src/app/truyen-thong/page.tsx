@@ -201,12 +201,12 @@ export default function MediaMentionsPage() {
               badge="Tin tức báo chí, truyền hình"
               title={
                 <>
-                  <span className="text-white">Nơi khẳng định </span>
+                  <span className="text-white">Nơi </span>
                   <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
-                    vị thế
+                    JobUp
                   </span>
                   <br />
-                  <span className="text-white">trong lòng công chúng</span>
+                  <span className="text-white"> khẳng định vị thế</span>
                 </>
               }
               description="Chào mừng bạn đến với trung tâm truyền thông của JobUp. Nơi ghi dấu những cột mốc quan trọng và tầm nhìn chiến lược của chúng tôi qua lăng kính báo chí."
@@ -261,7 +261,7 @@ export default function MediaMentionsPage() {
                   <h2 className="text-2xl sm:text-3xl font-black text-brand-black leading-[1.2] mb-6 group-hover:text-brand-yellow transition-colors duration-300">
                     &ldquo;{featuredItem.title}&rdquo;
                   </h2>
-
+                  <p className="text-brand-black text-justify [text-justify:inter-word]">{featuredItem.summary}</p>
                   {/* Source Tag: Làm gọn lại */}
                   <div className="flex items-center justify-end gap-3 mb-8">
                     <span className="text-gray-400 text-xs font-medium italic">
@@ -284,7 +284,7 @@ export default function MediaMentionsPage() {
                       }
                     >
                       <span className="relative">
-                        XEM BÀI GỐC
+                        XEM ĐẦY ĐỦ CHI TIẾT TẠI ĐÂY
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-yellow transition-all duration-300 group-hover/link:w-full"></span>
                       </span>
                       <div className="w-8 h-8 rounded-full bg-brand-yellow/10 flex items-center justify-center group-hover/link:bg-brand-yellow transition-colors">
