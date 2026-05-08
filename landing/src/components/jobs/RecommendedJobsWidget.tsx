@@ -99,7 +99,7 @@ export default function RecommendedJobsWidget({
                     {job.displayCompanyName || "Doanh nghiệp"}
                   </p>
                 </div>
-                <span className="text-xs font-bold text-green-600 whitespace-nowrap shrink-0 max-w-[45%] truncate text-right">
+                <span className="text-xs font-bold text-brand-yellow whitespace-nowrap shrink-0 max-w-[45%] truncate text-right">
                   {formatSalary(job.salaryFrom, job.salaryTo)}
                 </span>
               </div>
