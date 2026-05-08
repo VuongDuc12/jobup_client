@@ -121,7 +121,7 @@ export default function CoreValuesSection({
         <SectionHeader
           badge="DNA của chúng tôi"
           title={
-            <span className="whitespace-nowrap">
+            <span className="sm:whitespace-nowrap">
               Tầm nhìn · Sứ mệnh · Giá trị cốt lõi
             </span>
           }

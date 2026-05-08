@@ -74,11 +74,11 @@ export default function DifferenceSection({
             />
           </div>
           <div>
-            <h3 className="text-3xl font-extrabold text-brand-black mb-4">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-black mb-4">
               {displayH1}
             </h3>
             <p className="text-gray-500 leading-relaxed mb-6">{displayP1}</p>
-            <h3 className="text-3xl font-extrabold text-brand-black mb-4">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-black mb-4">
               {displayH2}
             </h3>
             <p className="text-gray-500 leading-relaxed mb-8">{displayP2}</p>
