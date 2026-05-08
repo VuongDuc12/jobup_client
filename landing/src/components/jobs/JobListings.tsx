@@ -3,25 +3,15 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { fetchPublicJobs } from "@/lib/api";
-import { formatSalary, workTypeLabel, timeAgo } from "@/lib/utils";
+import { formatSalary, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 import NumberedPagination from "@/components/shared/NumberedPagination";
 
 function JobCard({ job }: { job: PublicJobResponse }) {
   const salary = formatSalary(job.salaryFrom, job.salaryTo);
-  const workType = workTypeLabel(job.workType);
   const time = timeAgo(job.createdAt);
   const jobHref = job.slug ? `/tuyen-dung/${job.slug}` : "/tuyen-dung";
-  const rawTags = job.tags ?? [];
   const locationTag = job.provinceName || null;
-  const otherTags = rawTags.filter((t) => t !== locationTag && t !== workType);
-  const displayedOtherTags =
-    otherTags.length <= 2 ? otherTags : [...otherTags.slice(0, 2), "Khác"];
-  const displayedTags = [
-    ...(locationTag ? [locationTag] : []),
-    workType,
-    ...displayedOtherTags,
-  ];
 
   return (
     <Link
@@ -58,24 +48,15 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
-        {displayedTags.map((tag, idx) => (
-          <span
-            key={`${tag}-${idx}`}
-            className={
-              tag === workType
-                ? "px-3 py-1 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-lg border border-blue-100 max-w-full truncate"
-                : tag === locationTag
-                  ? "px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-bold rounded-lg border border-amber-100 max-w-full truncate"
-                  : "px-3 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-lg border border-gray-100 max-w-full truncate"
-            }
-          >
-            {tag}
+        {locationTag && (
+          <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-bold rounded-lg border border-amber-100 max-w-full truncate">
+            {locationTag}
           </span>
-        ))}
+        )}
       </div>
 
       <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center min-w-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-50 gap-2 md:gap-1">
-        <span className="text-black font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
+        <span className="text-brand-yellow font-extrabold text-sm md:text-base md:text-right max-w-full truncate">
           {salary}
         </span>
         <span className="text-gray-400 text-xs mt-0.5 shrink-0">{time}</span>
