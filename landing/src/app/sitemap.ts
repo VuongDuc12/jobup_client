@@ -5,10 +5,7 @@ import type {
   PublicArticleListItemResponse,
 } from "@/lib/types";
 
-// Revalidate mỗi 1 giờ để sitemap luôn cập nhật jobs/articles mới
-export const revalidate = 3600;
-
-const BASE_URL ="https://jobup.vn";
+const BASE_URL = "https://jobup.vn";
 
 const PAGE_SIZE = 200;
 
