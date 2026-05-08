@@ -95,11 +95,11 @@ export default function OurJourneySection({
           </div>
 
           {/* Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className={`aspect-video rounded-2xl overflow-hidden shadow-lg bg-gray-100 ${img.offset ? "mt-8" : ""}`}
+                className={`aspect-video rounded-2xl overflow-hidden shadow-lg bg-gray-100 ${img.offset ? "sm:mt-8" : ""}`}
               >
                 <Image
                   src={img.src}
