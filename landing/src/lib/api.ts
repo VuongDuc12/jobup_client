@@ -1,4 +1,4 @@
-import { API_BASE_URL, REVALIDATE_JOBS, REVALIDATE_STATIC } from "./config";
+import { API_BASE_URL, REVALIDATE_JOBS, REVALIDATE_SETTINGS, REVALIDATE_STATIC } from "./config";
 import type {
   AboutSettingResponse,
   ApiResponse,
@@ -28,7 +28,7 @@ import type {
 
 export async function fetchHomepageSettingsPublic(): Promise<HomepageSettingsResponse> {
   const res = await fetch(`${API_BASE_URL}/api/HomepageSettings/public`, {
-    next: { revalidate: REVALIDATE_STATIC },
+    next: { revalidate: REVALIDATE_SETTINGS },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch homepage settings: ${res.status}`);
@@ -674,7 +674,7 @@ export async function fetchPublicMediaMentionCategories(): Promise<
 
 export async function fetchAboutSettingsPublic(): Promise<AboutSettingResponse> {
   const res = await fetch(`${API_BASE_URL}/api/AboutSettings/public`, {
-    next: { revalidate: REVALIDATE_STATIC },
+    next: { revalidate: REVALIDATE_SETTINGS },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch about settings: ${res.status}`);

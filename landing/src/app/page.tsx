@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HomePageClient from "@/components/pages/HomePageClient";
-import { fetchHomepageSettingsPublic } from "@/lib/api";
+import { fetchHomepageSettingsPublic, fetchPartnersPublic } from "@/lib/api";
 
 const DEFAULT_META = {
   title: "JobUp",
@@ -21,13 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  let settings = null;
+  const [settings, partners] = await Promise.all([
+    fetchHomepageSettingsPublic().catch(() => null),
+    fetchPartnersPublic().catch(() => null),
+  ]);
 
-  try {
-    settings = await fetchHomepageSettingsPublic();
-  } catch {
-    settings = null;
-  }
-
-  return <HomePageClient initialSettings={settings} />;
+  return <HomePageClient initialSettings={settings} initialPartners={partners} />;
 }

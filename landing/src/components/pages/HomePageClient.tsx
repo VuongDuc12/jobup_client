@@ -13,7 +13,6 @@ import {
 import {
   fetchFeaturedArticlesPublic,
   fetchFeaturesPublic,
-  fetchPartnersPublic,
   fetchProvinces,
   fetchStatisticsPublic,
   fetchTestimonialsPublic,
@@ -30,13 +29,15 @@ import type {
 import JobsSection from "@/components/sections/JobsSection";
 interface HomePageClientProps {
   initialSettings: HomepageSettingsResponse | null;
+  initialPartners: PartnerResponse[] | null;
 }
 
 export default function HomePageClient({
   initialSettings,
+  initialPartners,
 }: HomePageClientProps) {
   const settings: HomepageSettingsResponse | null = initialSettings;
-  const [partners, setPartners] = useState<PartnerResponse[] | null>(null);
+  const [partners, setPartners] = useState<PartnerResponse[] | null>(initialPartners);
   const [features, setFeatures] = useState<FeatureResponse[] | null>(null);
   const [testimonials, setTestimonials] = useState<
     TestimonialResponse[] | null
@@ -54,7 +55,6 @@ export default function HomePageClient({
 
     const loadHomepageData = async () => {
       const results = await Promise.allSettled([
-        fetchPartnersPublic(),
         fetchProvinces(),
         fetchFeaturesPublic(),
         fetchTestimonialsPublic(),
@@ -64,12 +64,11 @@ export default function HomePageClient({
 
       if (!isMounted) return;
 
-      if (results[0].status === "fulfilled") setPartners(results[0].value);
-      if (results[1].status === "fulfilled") setProvinces(results[1].value);
-      if (results[2].status === "fulfilled") setFeatures(results[2].value);
-      if (results[3].status === "fulfilled") setTestimonials(results[3].value);
-      if (results[4].status === "fulfilled") setStatistics(results[4].value);
-      if (results[5].status === "fulfilled") setArticles(results[5].value);
+      if (results[0].status === "fulfilled") setProvinces(results[0].value);
+      if (results[1].status === "fulfilled") setFeatures(results[1].value);
+      if (results[2].status === "fulfilled") setTestimonials(results[2].value);
+      if (results[3].status === "fulfilled") setStatistics(results[3].value);
+      if (results[4].status === "fulfilled") setArticles(results[4].value);
     };
 
     loadHomepageData();
