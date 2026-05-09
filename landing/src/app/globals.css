@@ -1,8 +1,28 @@
 @import "tailwindcss";
-@import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
-@import "@fortawesome/fontawesome-free/css/solid.min.css";
-@import "@fortawesome/fontawesome-free/css/brands.min.css";
-@import "@fortawesome/fontawesome-free/css/regular.min.css";
+/* FontAwesome is loaded asynchronously via layout.tsx to avoid render-blocking.
+   The overrides below ensure glyphs render immediately with font-display: swap
+   instead of waiting for the webfonts to download. */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fa/webfonts/fa-solid-900.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fa/webfonts/fa-brands-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fa/webfonts/fa-regular-400.woff2") format("woff2");
+}
 
 /* ═══════════════════════════════════════════════ */
 /* DESIGN TOKENS & THEME                          */

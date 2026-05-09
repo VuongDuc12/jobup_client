@@ -1,15 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Navbar, Footer } from "@/components/layout";
-import {
-  HeroSection,
-  SpecialtySectors,
-  FeaturesSection,
-  TestimonialsSection,
-  NewsSection,
-  FloatingActions,
-} from "@/components/sections";
+import { HeroSection, FloatingActions } from "@/components/sections";
 import {
   fetchFeaturedArticlesPublic,
   fetchFeaturesPublic,
@@ -26,7 +20,12 @@ import type {
   StatisticResponse,
   TestimonialResponse,
 } from "@/lib/types";
-import JobsSection from "@/components/sections/JobsSection";
+
+// Below-fold sections — loaded lazily after initial paint to reduce TBT/main-thread work
+const JobsSection = dynamic(() => import("@/components/sections/JobsSection"), { ssr: false });
+const SpecialtySectors = dynamic(() => import("@/components/sections/SpecialtySectors"), { ssr: false });
+const FeaturesSection = dynamic(() => import("@/components/sections/FeaturesSection"), { ssr: false });
+const NewsSection = dynamic(() => import("@/components/sections/NewsSection"), { ssr: false });
 interface HomePageClientProps {
   initialSettings: HomepageSettingsResponse | null;
   initialPartners: PartnerResponse[] | null;
