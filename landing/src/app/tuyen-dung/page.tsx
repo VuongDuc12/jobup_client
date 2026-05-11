@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
 export const metadata: Metadata = {
   title: "Việc Làm Mới Nhất | JobUp",
   description:
-    "Khám phá hàng nghìn cơ hội việc làm mới nhất theo ngành nghề, khu vực và mức lương tại JobUp.",
+    "Khám phá hàng trăm cơ hội việc làm mới nhất theo ngành nghề, khu vực và mức lương tại JobUp.",
   alternates: {
     canonical: `${SITE_URL}/tuyen-dung`,
   },
