@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import JobsPageClient from "@/components/pages/JobsPageClient";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ducdev04.pro.vn";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
 
 export const metadata: Metadata = {
   title: "Việc Làm Mới Nhất | JobUp",

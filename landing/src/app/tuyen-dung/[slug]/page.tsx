@@ -3,7 +3,7 @@ import JobDetailPageClient from "@/components/pages/JobDetailPageClient";
 import { fetchPublicJobBySlug } from "@/lib/api";
 import { resolveAssetUrl } from "@/lib/utils";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ducdev04.pro.vn";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
 
 type JobDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   try {
     const job = await fetchPublicJobBySlug(slug);
-    const title = job.title;
+    const title = job.seoTitle?.trim() || job.title;
     const description =
       job.seoDescription?.trim() ||
       job.description
