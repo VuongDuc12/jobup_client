@@ -1,16 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Navbar, Footer } from "@/components/layout";
 import {
     AboutHeroSection,
     OurJourneySection,
     DifferenceSection,
     CoreValuesSection,
-    LeadershipSection,
-    StatsBarSection,
-    PressMediaSection,
-    AboutTestimonialsSection,
-    AboutCTASection,
 } from "@/components/about";
 import { FloatingActions } from "@/components/sections";
 import type {
@@ -19,6 +15,13 @@ import type {
     PublicMediaMentionListItemResponse,
     AboutSettingResponse,
 } from "@/lib/types";
+
+// Below-fold / heavy sections — lazy loaded after initial paint
+const LeadershipSection = dynamic(() => import("@/components/about/LeadershipSection"), { ssr: false });
+const StatsBarSection = dynamic(() => import("@/components/about/StatsBarSection"), { ssr: false });
+const PressMediaSection = dynamic(() => import("@/components/about/PressMediaSection"), { ssr: false });
+const AboutTestimonialsSection = dynamic(() => import("@/components/about/AboutTestimonialsSection"), { ssr: false }); // contains Swiper
+const AboutCTASection = dynamic(() => import("@/components/about/AboutCTASection"), { ssr: false });
 
 interface AboutPageClientProps {
     initialTestimonials: TestimonialResponse[] | null;

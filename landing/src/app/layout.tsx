@@ -42,18 +42,16 @@ export default function RootLayout({
     <html lang="vi" className="scroll-smooth">
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="canonical" href="https://ducdev04.pro.vn/" />
-        {/* Preconnect to critical third-party origins */}
-        <link rel="preconnect" href="https://upload.wikimedia.org" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://i.pravatar.cc" />
-        <link rel="preconnect" href="https://ui-avatars.com" />
-        <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://i.pravatar.cc" />
-        <link rel="dns-prefetch" href="https://ui-avatars.com" />
-        <link rel="dns-prefetch" href="https://www.transparenttextures.com" />
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        <link rel="canonical" href="https://jobup.vn/" />
+        {/* Preconnect only to origins actually used at load time */}
+        <link rel="preconnect" href="https://api.jobup.vn" />
+        <link rel="dns-prefetch" href="https://api.jobup.vn" />
+        {/* Load FontAwesome asynchronously — keeps FA off the render-blocking critical path */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='preload';l.as='style';l.href='/fa/css/all.min.css';l.onload=function(){this.onload=null;this.rel='stylesheet'};document.head.appendChild(l)})()`,
+          }}
+        />
       </head>
       <body
         className={`${plusJakartaSans.variable} font-sans bg-brand-white text-gray-800 flex flex-col min-h-screen antialiased`}

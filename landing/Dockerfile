@@ -2,7 +2,9 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
+# --ignore-scripts: skip postinstall (copy-fa.js) here — run it in build stage
+# where the full source tree (including scripts/) is available
+RUN npm ci --ignore-scripts
 
 # ─── Stage 2: Build ───────────────────────────────────────────────────────────
 FROM node:20-alpine AS build
@@ -14,6 +16,9 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Copy FontAwesome assets from node_modules → public/fa/ (replaces postinstall)
+RUN node scripts/copy-fa.js
 
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build

@@ -60,16 +60,16 @@ export default function LeadershipSection({
               width={600}
               height={800}
               // Sửa position-top thành object-top
-              className="w-full h-[520px] sm:h-[600px] lg:h-[700px] object-cover object-top"
+              className="w-full h-[420px] sm:h-[600px] lg:h-[700px] object-cover object-top"
               loading="lazy"
             />
           </div>
           <div className="lg:col-span-3 flex items-center justify-center self-stretch">
             <div className="">
-              <span className="text-brand-yellow font-bold text-xl uppercase tracking-widest ">
+              <span className="text-brand-yellow font-bold text-base sm:text-lg lg:text-xl uppercase tracking-widest ">
                 {displayCeoRole}
               </span>
-              <h3 className="text-5xl font-extrabold text-brand-black mt-6 mb-6">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-black mt-6 mb-6">
                 {displayCeoName}
               </h3>
 
@@ -130,10 +130,10 @@ export default function LeadershipSection({
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-3 order-2 lg:order-1 flex items-center justify-center self-stretch">
             <div className="">
-              <span className="text-brand-yellow font-bold text-xl uppercase tracking-widest">
+              <span className="text-brand-yellow font-bold text-base sm:text-lg lg:text-xl uppercase tracking-widest">
                 {displayAdvisorRole}
               </span>
-              <h3 className="text-5xl font-extrabold text-brand-black mt-6 mb-6">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-black mt-6 mb-6">
                 {displayAdvisorName}
               </h3>
 
@@ -186,7 +186,7 @@ export default function LeadershipSection({
               alt={`${displayAdvisorName} – ${displayAdvisorRole} JobUp`}
               width={600}
               height={800}
-              className="w-full h-[520px] sm:h-[600px] lg:h-[700px] object-cover object-top"
+              className="w-full h-[420px] sm:h-[600px] lg:h-[700px] object-cover object-top"
               loading="lazy"
             />
           </div>

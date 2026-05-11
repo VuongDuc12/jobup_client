@@ -8,8 +8,11 @@ export const REVALIDATE_TIME = parseInt(
     10
 );
 
-// Jobs thay đổi thường xuyên → cache 20 phút
+// Jobs thay đổi thường xuyên → cache 10 phút
 export const REVALIDATE_JOBS = 600;
 
-// Nội dung tĩnh (ảnh, banner, trang giới thiệu, đối tác) → cache 3 giờ
-export const REVALIDATE_STATIC = 10800;
+// Nội dung tĩnh (ảnh, banner, đối tác) → cache 1 giờ
+export const REVALIDATE_STATIC = 3600;
+
+// Settings chứa ảnh (homepage, about) → cache 5 phút để admin thấy ảnh mới ngay
+export const REVALIDATE_SETTINGS = 300;
