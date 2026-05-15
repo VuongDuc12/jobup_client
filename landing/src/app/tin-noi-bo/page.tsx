@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import InternalNewsPageClient from "@/components/pages/InternalNewsPageClient";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ducdev04.pro.vn";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
 
 export const metadata: Metadata = {
   title: "Tin Nội Bộ | JobUp",

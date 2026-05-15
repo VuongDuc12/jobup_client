@@ -3,7 +3,7 @@ import InternalNewsDetailPageClient from "@/components/pages/InternalNewsDetailP
 import { fetchPublicArticleBySlug } from "@/lib/api";
 import { resolveAssetUrl } from "@/lib/utils";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ducdev04.pro.vn";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
 
 type InternalNewsDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   try {
     const article = await fetchPublicArticleBySlug(slug);
-    const title = article.title;
+    const title = article.seoTitle?.trim() || article.title;
     const description =
       article.seoDescription?.trim() ||
       article.summary?.trim() ||
