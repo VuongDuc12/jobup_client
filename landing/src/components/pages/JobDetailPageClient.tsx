@@ -320,7 +320,7 @@ export default function JobDetailPage() {
                               Địa điểm
                             </p>
                             <p className="text-sm font-bold text-brand-black">
-                              {job.province?.name || "Chua cap nhat"}
+                              {job.province?.name || "Chưa cập nhật"}
                             </p>
                           </div>
                         </div>
@@ -336,8 +336,8 @@ export default function JobDetailPage() {
                               {job.experience !== null &&
                               job.experience !== undefined
                                 ? EXPERIENCE_LABELS[job.experience] ||
-                                  "Chua cap nhat"
-                                : "Chua cap nhat"}
+                                  "Chưa cập nhật"
+                                : "Chưa cập nhật"}
                             </p>
                           </div>
                         </div>
