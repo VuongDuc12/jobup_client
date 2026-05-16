@@ -91,7 +91,7 @@ export default function HeroSection({
   const hotlineDisplay = hotlineValue;
   const heroImageSrc =
     getAssetUrl(heroImage) ||
-    "/jobup_client/landing/public/images/trangchu/hero-image.avif";
+    "/images/trangchu/hero-image.avif";
 
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -330,13 +330,13 @@ export default function HeroSection({
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`a-${idx}`}
-                        className="flex h-16 min-w-[88px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[100px] sm:px-0.5 lg:h-20 lg:min-w-[112px] lg:px-0.5"
+                        className="flex h-24 min-w-[95px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[100px] sm:px-0.5 lg:h-20 lg:min-w-[112px] lg:px-0.5"
                       >
                         <Image
                           src={logo.src}
                           width={150}
                           height={40}
-                          className="h-8 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
+                          className="h-14 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
@@ -346,13 +346,13 @@ export default function HeroSection({
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`b-${idx}`}
-                        className="flex h-16 min-w-[100px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[114px] sm:px-1 lg:h-20 lg:min-w-[128px] lg:px-1"
+                        className="flex h-24 min-w-[95px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[114px] sm:px-1 lg:h-20 lg:min-w-[128px] lg:px-1"
                       >
                         <Image
                           src={logo.src}
                           width={150}
                           height={40}
-                          className="h-8 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
+                          className="h-14 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
@@ -435,7 +435,7 @@ export default function HeroSection({
                         <div className="relative">
                           <div className="relative h-12 w-12 transition-transform duration-300 group-hover/card:scale-110">
                             <Image
-                              src="/Icon_of_Zalo.svg"
+                              src="/zaloicon.svg"
                               width={48}
                               height={48}
                               className="h-12 w-12 object-contain"
