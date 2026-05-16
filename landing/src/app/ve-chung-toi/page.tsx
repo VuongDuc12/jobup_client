@@ -26,7 +26,7 @@ export default async function AboutPage() {
                         "@type": "Organization",
                         name: "JobUp",
                         url: "https://jobup.vn",
-                        logo: "https://jobup.vn/logo.png",
+                        logo: "https://jobup.vn/logo1.png",
                         description:
                             "JobUp là nhà cung cấp dịch vụ tư vấn tuyển dụng chuyên nghiệp, phục vụ hơn 100 khách hàng trong 15+ ngành nghề tại Việt Nam.",
                         foundingDate: "2020",
