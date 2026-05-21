@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     "tìm việc làm, tuyển dụng, jobup, việc làm it, việc làm marketing, cv chuyên nghiệp, tuyển dụng nhân sự cấp cao",
   authors: [{ name: "JobUp Corporation" }],
   robots: "index, follow",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     type: "website",
     url: "https://jobup.vn/",
@@ -41,7 +46,6 @@ export default function RootLayout({
   return (
     <html lang="vi" className="scroll-smooth">
       <head>
-        <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="canonical" href="https://jobup.vn/" />
         {/* Preconnect only to origins actually used at load time */}
         <link rel="preconnect" href="https://api.jobup.vn" />

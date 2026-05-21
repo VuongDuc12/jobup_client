@@ -41,7 +41,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/Logo.png"
+              src="/logo1.png"
               alt="JobUp Logo"
               width={120}
               height={40}

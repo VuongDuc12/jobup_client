@@ -41,7 +41,7 @@ export default function MobileMenu({
     >
       <div className="p-6 flex justify-between items-center border-b border-gray-50">
         <Image
-          src="/Logo.png"
+          src="/logo1.png"
           alt="JobUp"
           width={96}
           height={32}

@@ -111,7 +111,7 @@ export default function FloatingActions() {
           <div className="absolute -inset-2 bg-[#0068FF]/10 rounded-full animate-mini-ping group-hover:scale-150 transition-transform duration-700" />
           <div className="relative w-16 h-16 hover:scale-110 transition-all duration-300 drop-shadow-[0_8px_15px_rgba(0,104,255,0.2)]">
             <Image
-              src="/Icon_of_Zalo.svg"
+              src="/zaloicon.svg"
               width={64}
               height={64}
               className="w-16 h-16 object-contain"

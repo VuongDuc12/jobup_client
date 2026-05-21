@@ -47,8 +47,8 @@ export default function SectionHeader({
   );
 
   const descriptionBaseClass = cn(
-    "mt-4 text-lg leading-relaxed text-gray-500 text-justify",
-    align === "center" ? "mx-auto max-w-2xl text-center" : "text-left",
+    "mt-4 text-lg leading-relaxed text-gray-500",
+    align === "center" ? "mx-auto max-w-2xl text-center" : "text-left text-justify",
     descriptionClassName,
   );
 

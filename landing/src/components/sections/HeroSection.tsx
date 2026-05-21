@@ -91,7 +91,7 @@ export default function HeroSection({
   const hotlineDisplay = hotlineValue;
   const heroImageSrc =
     getAssetUrl(heroImage) ||
-    "/jobup_client/landing/public/images/trangchu/hero-image.avif";
+    "/images/trangchu/hero-image.avif";
 
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -436,7 +436,7 @@ export default function HeroSection({
                         <div className="relative">
                           <div className="relative h-12 w-12 transition-transform duration-300 group-hover/card:scale-110">
                             <Image
-                              src="/Icon_of_Zalo.svg"
+                              src="/zaloicon.svg"
                               width={48}
                               height={48}
                               className="h-12 w-12 object-contain"

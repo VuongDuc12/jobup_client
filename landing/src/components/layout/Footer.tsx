@@ -45,7 +45,7 @@ export default function Footer() {
               className="inline-block transition-transform hover:scale-105"
             >
               <Image
-                src="/Logo.png"
+                src="/logo1.png"
                 alt="JobUp"
                 width={140}
                 height={46}

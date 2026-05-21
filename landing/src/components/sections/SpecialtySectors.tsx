@@ -34,7 +34,7 @@ export default function SpecialtySectors() {
       className="landing-section max-w-[100vw] overflow-hidden bg-[#F5F5F4] relative"
     >
       {/* Section Header */}
-      <div className="text-center">
+      <div className="text-center max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader
           badge="Lĩnh vực chuyên môn"
           title={
