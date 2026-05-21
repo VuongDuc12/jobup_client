@@ -49,7 +49,7 @@ function JobCard({ job }: { job: PublicJobResponse }) {
 
       <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
         {locationTag && (
-          <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-bold rounded-lg border border-amber-100 max-w-full truncate">
+          <span className="px-3 py-1 bg-amber-50 text-amber-600 text-sm md:text-base font-bold rounded-lg border border-amber-100 max-w-full truncate">
             {locationTag}
           </span>
         )}

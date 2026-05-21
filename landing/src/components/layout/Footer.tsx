@@ -31,11 +31,10 @@ export default function Footer() {
   ].filter((link) => link.href && link.href !== "#");
   return (
     <footer
-      className="bg-[#111827] pt-12 font-sans relative overflow-hidden text-white"
+      className="relative overflow-hidden bg-[#FFF7E6] pt-12 font-sans text-[#334155]"
       id="footer"
     >
-      {/* Decorative glow */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px] -z-10 translate-y-1/2" />
+      <div className="absolute inset-x-0 top-0 h-px bg-brand-yellow/60" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
@@ -53,10 +52,8 @@ export default function Footer() {
                 className="h-11 w-auto object-contain"
               />
             </Link>
-            <p className="text-white text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
-              Nền tảng tuyển dụng và quản trị nhân sự 4.0 tại Việt Nam, tối ưu
-              tốc độ - nâng cao chất lượng kết nối giữa doanh nghiệp và ứng
-              viên, kiến tạo hành trình sự nghiệp bền vững.
+            <p className="text-[#475569] text-base leading-relaxed font-medium text-justify [text-justify:inter-word]">
+              Đơn vị cung cấp dịch vụ tuyển dụng uy tín tại Việt Nam, tối ưu tốc độ tuyển dụng – nâng cao chất lượng kết nối giữa doanh nghiệp và ứng viên, đồng hành kiến tạo hành trình sự nghiệp bền vững.
             </p>
 
             <div className="flex gap-3">
@@ -64,7 +61,7 @@ export default function Footer() {
                 <a
                   key={idx}
                   href={social.href}
-                  className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all duration-300 shadow-sm"
+                  className="w-11 h-11 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[#64748B] hover:bg-brand-yellow hover:text-brand-black hover:border-brand-yellow transition-all duration-300 shadow-sm"
                 >
                   <i className={`${social.icon} text-base`} />
                 </a>
@@ -74,13 +71,13 @@ export default function Footer() {
 
           {/* About */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-white text-lg mb-6">Về chúng tôi</h4>
+            <h4 className="font-bold text-[#111827] text-lg mb-6">Về chúng tôi</h4>
             <ul className="space-y-4">
               {footerAbout.map((item, idx) => (
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-white hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
+                    className="text-[#475569] hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -91,7 +88,7 @@ export default function Footer() {
 
           {/* For Candidates */}
           <div className="lg:col-span-3">
-            <h4 className="font-bold text-white text-lg mb-6">
+            <h4 className="font-bold text-[#111827] text-lg mb-6">
               Tuyển dụng và Tin tức
             </h4>
             <ul className="space-y-4">
@@ -99,7 +96,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-white hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
+                    className="text-[#475569] hover:text-brand-yellow hover:translate-x-1 transition-all inline-block"
                   >
                     {item.label}
                   </Link>
@@ -110,18 +107,18 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h4 className="font-bold text-white text-lg mb-6">Liên hệ</h4>
+            <h4 className="font-bold text-[#111827] text-lg mb-6">Liên hệ</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-phone text-brand-yellow text-base flex-shrink-0" />
-                <span className="text-white text-base leading-tight">
+                <span className="text-[#475569] text-base leading-tight">
                   {loading ? "0979334143" : config.hotline || "0979334143"} (Ms.
                   Hạ Phan)
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-envelope text-brand-yellow text-base flex-shrink-0" />
-                <span className="text-white  leading-tight">
+                <span className="text-[#475569]  leading-tight">
                   {loading
                     ? "tuyendung@jobup.vn"
                     : config.email || "tuyendung@jobup.vn"}
@@ -129,7 +126,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <i className="fa-solid fa-location-dot text-brand-yellow text-base flex-shrink-0" />
-                <span className="text-white leading-relaxed">
+                <span className="text-[#475569] leading-relaxed">
                   {loading
                     ? "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam"
                     : config.address ||

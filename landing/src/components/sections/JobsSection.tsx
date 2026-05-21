@@ -92,7 +92,7 @@ function JobCard({ job }: { job: PublicJobResponse }) {
       {/* Tags */}
       <div className="flex flex-wrap items-center gap-2 min-w-0 md:justify-start">
         {locationTag && (
-          <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-bold rounded-lg border border-amber-100 max-w-full truncate">
+          <span className="px-3 py-1 bg-amber-50 text-amber-600 text-sm md:text-base font-bold rounded-lg border border-amber-100 max-w-full truncate">
             {locationTag}
           </span>
         )}
@@ -243,7 +243,7 @@ export default function JobsSection() {
                 Việc làm <span className="text-brand-yellow">mới nhất</span>
               </>
             }
-            description="100+ việc làm mới nhất được cập nhật hôm nay từ các doanh nghiệp hàng đầu."
+            description="Hơn 100 việc làm mới nhất được cập nhật từ các doanh nghiệp hàng đầu."
             align="center"
             className="mb-6"
             badgeClassName="text-[#B45309]"
