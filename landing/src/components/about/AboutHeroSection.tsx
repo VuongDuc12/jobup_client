@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/components/shared/SectionHeader";
-import { getAssetUrl } from "@/lib/utils";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 interface AboutHeroSectionProps {
@@ -22,18 +21,22 @@ export default function AboutHeroSection({
   const displayBadge = badgeText || "Về chúng tôi";
   const displaySubtitle =
     subtitle ||
-    "Chuyên gia tư vấn tuyển dụng chuyên nghiệp, đồng hành cùng 100+ doanh nghiệp trong hành trình tìm kiếm và phát triển nguồn nhân lực chất lượng cao.";
-  const displayBg = getAssetUrl(backgroundImage) || "/hero-workspace.png";
+    "Chúng tôi không đơn thuần cung ứng nhân sự, mà còn đồng hành cùng doanh nghiệp trong việc tư vấn chiến lược tuyển dụng, tối ưu quy trình và nâng cao chất lượng ứng viên đầu vào.";
+  const displayBg = "/bg-about-second.png";
 
   // Title: CMS string hoặc fallback JSX đẹp
   const displayTitle: React.ReactNode = (
     <>
-      <span className="text-amber-300">Trở thành đối tác tin cậy</span>
-      <span className="text-amber-300"> cung cấp </span>
-      <span className="inline-block bg-amber-300 text-brand-black px-2.5 my-1.5 py-0.5 rounded-lg font-black">
-        dịch vụ tuyển dụng
+      <span className="text-white">Trở thành </span>
+      <span className="inline-block bg-brand-yellow text-brand-black px-3 py-1 rounded-xl font-black">
+        đối tác tin cậy
+      </span>
+      <br />
+      <span className="text-white">cung cấp dịch vụ tuyển dụng </span>
+      <span className="inline-block bg-brand-yellow text-brand-black px-2.5 my-1.5 py-0.5 rounded-lg font-black">
+        đa ngành nghề
       </span>{" "}
-      <span className="text-amber-300">đa ngành nghề khắp Việt Nam</span>
+      <span className="text-white">khắp Việt Nam</span>
     </>
   );
   const displayCta1Url =
@@ -52,7 +55,7 @@ export default function AboutHeroSection({
           src={displayBg}
           alt="Không gian làm việc hiện đại của JobUp – nơi kết nối nhân tài và doanh nghiệp"
           fill
-          className="object-contain"
+          className="object-cover"
           priority
         />
         {/* Dark gradient overlay */}

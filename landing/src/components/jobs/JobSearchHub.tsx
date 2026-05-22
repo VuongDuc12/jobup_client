@@ -155,7 +155,7 @@ export default function JobSearchHub({
         <div className="relative z-10 p-6 lg:p-12 pt-20 lg:pt-24">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-7 gap-4">
             <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Tìm việc làm{" "}
                 <span className="text-brand-yellow drop-shadow-[0_0_15px_rgba(255,193,7,0.3)]">
                   phù hợp nhất
@@ -378,9 +378,9 @@ export default function JobSearchHub({
 
           {/* Hot Tags */}
           <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-4">
-              <span className="text-xs md:text-sm font-black text-white/85 uppercase tracking-widest flex items-center gap-2">
-                Tìm kiếm nhiều nhất:
-              </span>
+            <span className="text-xs md:text-sm font-black text-white/85 uppercase tracking-widest flex items-center gap-2">
+              Tìm kiếm nhiều nhất:
+            </span>
             <div className="flex flex-wrap gap-2.5">
               {hotTags.map((tag) => (
                 <button

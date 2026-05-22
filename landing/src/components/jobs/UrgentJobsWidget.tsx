@@ -45,7 +45,7 @@ export default function UrgentJobsWidget() {
           Việc làm hot
         </h4>
         <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-3.5 pl-1">
-          Tin mới nhất trong 24h
+          Tin tuyển dụng nổi bật
         </p>
       </div>
 
