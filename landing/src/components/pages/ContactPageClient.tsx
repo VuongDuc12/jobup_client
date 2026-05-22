@@ -221,7 +221,7 @@ export default function ContactPageClient() {
               title="Dành cho Doanh nghiệp"
               description="Kết nối nhanh với đội ngũ tư vấn tuyển dụng để xây dựng nguồn ứng viên phù hợp."
               benefits={[
-                "Tiếp cận +100.000 hồ sơ ứng viên chất lượng.",
+                "Tiếp cận hồ sơ ứng viên chất lượng.",
                 "Tối ưu thời gian và chi phí tuyển dụng.",
                 "Đội ngũ chuyên viên hỗ trợ 24/7.",
               ]}
