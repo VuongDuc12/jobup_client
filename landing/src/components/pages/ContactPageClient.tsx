@@ -7,7 +7,7 @@ import BadgeText from "@/components/shared/BadgeText";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 
 const FALLBACK_ADDRESS_MAIN =
-  "C23, Lô 18 KĐT Định Công, Phường Phương Liệt, Hà Nội";
+  "29T1 Hoàng Đạo Thúy, Yên Hòa, Hà Nội, Việt Nam";
 const FALLBACK_PHONE = "0979334143";
 const FALLBACK_EMAIL = "tuyendung@jobup.vn";
 const EMPLOYER_LARK_FORM_URL =
@@ -185,7 +185,7 @@ function ContactPersonCard({
 
 export default function ContactPageClient() {
   const { config } = useSystemConfig();
-  const displayMainAddress = config.address?.trim() || FALLBACK_ADDRESS_MAIN;
+  const displayMainAddress = FALLBACK_ADDRESS_MAIN;
   const displayPhone = toDisplayPhone(config.hotline);
   const displayEmail = config.email?.trim() || FALLBACK_EMAIL;
   const fanpageHref = externalHref(config.facebookUrl);
@@ -193,7 +193,6 @@ export default function ContactPageClient() {
   const zaloHref = externalHref(config.zaloUrl);
   const tiktokHref = externalHref(config.tiktokUrl);
   const threadHref = externalHref(config.threadUrl);
-  const instagramHref = externalHref(config.instagramUrl);
 
   return (
     <>
@@ -258,50 +257,50 @@ export default function ContactPageClient() {
                 Gặp JobUp trên mọi nền tảng
               </h2>
               <p className="mt-2 max-w-3xl text-base font-medium text-[#475569]">
-                Theo dõi các kênh chính thức để cập nhật tin tuyển dụng, mẹo nghề nghiệp và nhận hỗ trợ nhanh.
+                Theo dõi các kênh chính thức của JobUp để cập nhật thông tin tuyển dụng, xu hướng nghề nghiệp và nhận hỗ trợ nhanh chóng từ đội ngũ.
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
               <SocialCard
                 href={fanpageHref}
-                title="Cộng đồng JobUp trên Facebook"
-                description="Cập nhật tin tức tuyển dụng và mẹo công sở mỗi ngày (50k+ Follower)."
+                title="Fanpage JobUp"
+                description="Cập nhật thông tin tuyển dụng, kiến thức nghề nghiệp và các nội dung hữu ích dành cho sinh viên, người đi làm."
                 color="#1877F2"
                 className="xl:col-span-1"
                 icon={<i className="fa-brands fa-facebook-f" />}
               />
               <SocialCard
                 href={linkedinHref}
-                title="Kết nối Doanh nghiệp tại LinkedIn"
-                description="Không gian kết nối nhân sự cấp cao và cơ hội việc làm chuyên nghiệp."
+                title="LinkedIn JobUp"
+                description="Nền tảng kết nối chuyên nghiệp dành cho doanh nghiệp, ứng viên và cộng đồng nhân sự, cập nhật cơ hội việc làm và xu hướng thị trường lao động."
                 color="#0077B5"
                 className="xl:col-span-1"
                 icon={<i className="fa-brands fa-linkedin-in" />}
               />
               <SocialCard
                 href={zaloHref}
-                title="Hỗ trợ nhanh qua Zalo OA"
-                description="Nhắn tin trực tiếp với chuyên viên tư vấn để được giải đáp trong 5 phút."
+                title="Hỗ trợ nhanh qua Zalo Hotline"
+                description="Kênh hỗ trợ trực tuyến giúp ứng viên và doanh nghiệp kết nối nhanh chóng với đội ngũ tư vấn của JobUp."
                 color="#0068FF"
                 className="xl:col-span-1"
                 icon={<span className="text-xs font-black">Zalo</span>}
               />
               <SocialCard
                 href={tiktokHref}
-                title="Kênh Video TikTok JobUp"
-                description="Xem short-video hướng dẫn phỏng vấn, sửa CV cực cuốn và hài hước."
+                title="TikTok JobUp"
+                description="Chia sẻ video ngắn về kỹ năng nghề nghiệp, hướng dẫn phỏng vấn, tối ưu CV và các nội dung thực tế dành cho người trẻ."
                 color="#000000"
                 className="md:col-span-1 xl:col-span-1"
                 icon={<i className="fa-brands fa-tiktok" />}
               />
               <SocialCard
-                href={instagramHref || threadHref}
-                title="Góc nhìn GenZ tại Instagram & Threads"
-                description="Nơi chia sẻ trải nghiệm đi làm, văn hóa công sở của người trẻ."
-                color="linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4)"
+                href={threadHref}
+                title="Threads"
+                description="Không gian chia sẻ góc nhìn nghề nghiệp, trải nghiệm công việc và văn hóa làm việc của thế hệ trẻ hiện nay."
+                color="#000000"
                 className="md:col-span-2 xl:col-span-2"
-                icon={<i className="fa-brands fa-instagram" />}
+                icon={<i className="fa-brands fa-threads" />}
               />
             </div>
           </section>
@@ -315,7 +314,7 @@ export default function ContactPageClient() {
                 containerClassName="mb-3"
               />
               <h2 className="text-2xl font-black uppercase text-brand-black">
-                Trụ sở chính & tổng đài
+                Trụ sở chính & Hotline
               </h2>
               <div className="mt-6 space-y-4">
                 <p className="flex gap-3 text-base font-semibold leading-relaxed text-[#475569]">
@@ -327,7 +326,7 @@ export default function ContactPageClient() {
                   className="flex gap-3 text-base font-semibold text-[#475569] hover:text-brand-yellow"
                 >
                   <i className="fa-solid fa-phone mt-1 w-5 shrink-0 text-brand-yellow" />
-                  <span>{displayPhone}</span>
+                  <span>{displayPhone} (Ms. Hạ Phan)</span>
                 </a>
                 <a
                   href={`mailto:${displayEmail}`}
@@ -355,14 +354,14 @@ export default function ContactPageClient() {
                   title="Dịch vụ Doanh nghiệp"
                   name="Ms. Hạ Phan"
                   phone="0979334143"
-                  note="Doanh nghiệp cần tư vấn giải pháp nhân sự, vui lòng gọi trực tiếp."
+                  note="Liên hệ ngay khi doanh nghiệp cần tư vấn giải pháp nhân sự."
                 />
                 <ContactPersonCard
                   iconClass="fa-solid fa-user-graduate"
                   title="Hỗ trợ Ứng viên"
                   name="Ms. Mai Phương"
                   phone="0944549143"
-                  note="Ứng viên gặp khó khăn khi tạo hồ sơ, hãy gọi ngay."
+                  note="Liên hệ ngay khi ứng viên gặp khó khăn trong ứng tuyển."
                 />
               </div>
             </article>
