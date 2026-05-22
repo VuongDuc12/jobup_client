@@ -20,6 +20,9 @@ const mobileLinks = [
   { href: "/lien-he", label: "Liên hệ" },
 ];
 
+const CANDIDATE_LARK_FORM_URL =
+  "https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgWVnS8s3XB5CmWCqdm0CpEh";
+
 export default function MobileMenu({
   isOpen,
   onClose,
@@ -77,7 +80,9 @@ export default function MobileMenu({
 
       <div className="p-8 border-t border-gray-50">
         <a
-          href={`tel:${config.hotline}`}
+          href={CANDIDATE_LARK_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="block w-full py-5 bg-brand-black text-white text-center rounded-[1.5rem] font-bold shadow-xl shadow-gray-200 active:scale-95 transition-transform"
         >
           Gửi CV Ngay

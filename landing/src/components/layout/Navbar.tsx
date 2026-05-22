@@ -17,6 +17,9 @@ const newsDropdown = [
   { href: "/truyen-thong", label: "Tin báo chí, truyền hình" },
 ];
 
+const CANDIDATE_LARK_FORM_URL =
+  "https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgWVnS8s3XB5CmWCqdm0CpEh";
+
 function formatPhone(phone: string | null): string {
   if (!phone) return "";
   const digits = phone.replace(/\D/g, "");
@@ -131,13 +134,7 @@ export default function Navbar() {
             </a>
             <span className="hidden md:block w-px h-4 bg-gray-200" />
             <a
-              href={
-                config.zaloUrl && config.zaloUrl !== "#"
-                  ? config.zaloUrl
-                  : config.hotline
-                    ? `https://zalo.me/${config.hotline.replace(/\D/g, "")}`
-                    : "#"
-              }
+              href={CANDIDATE_LARK_FORM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-full bg-brand-black text-white font-bold text-sm shadow-lg hover:shadow-[0_8px_30px_rgba(245,185,20,0.4)] hover:bg-brand-yellow hover:text-brand-black transition-all duration-300 transform hover:-translate-y-1"
