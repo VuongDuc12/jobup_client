@@ -174,8 +174,10 @@ export default function JobsPage() {
                 experience={searchExperience}
                 workType={searchWorkType}
                 sortBy={searchSortBy}
+                pageSize={15}
               />
-              <DynamicBanner position="jobs_spotlight" variant="spotlight" />
+              {/* Tạm thời ẩn banner bên dưới tin tuyển dụng */}
+              {/* <DynamicBanner position="jobs_spotlight" variant="spotlight" /> */}
             </div>
 
             <aside className="lg:col-span-4 min-w-0 space-y-6">

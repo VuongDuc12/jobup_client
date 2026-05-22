@@ -217,91 +217,85 @@ export default function InternalNewsPage() {
     setPageNumber(nextPage);
   };
 
-  const featuredLink = useMemo(() => {
-    if (!featured?.slug) return "/tin-noi-bo";
-    return `/tin-noi-bo/${featured.slug}`;
-  }, [featured?.slug]);
-
   const featuredImage = resolveAssetUrl(featured?.avatar) || safeFallbackCover;
 
   return (
     <>
       <Navbar />
       <main className="pt-20 landing-page-shell-tight">
-        <section className="landing-section bg-brand-light-gray">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
-              <Link
-                href={featuredLink}
-                className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl group block"
-              >
-                <img
-                  src={featuredImage}
-                  alt={featured?.title || "Bài viết nổi bật"}
-                  className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-1000"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 pt-14 md:pt-20 bg-gradient-to-t from-brand-black/90 via-brand-black/40 to-transparent text-left">
-                  <span className="inline-block px-4 py-1.5 bg-brand-yellow text-brand-black text-xs font-black rounded-full mb-4">
-                    BÀI VIẾT NỔI BẬT
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
-                    {featured?.title || "Đang cập nhật bài viết"}
-                  </h2>
-                </div>
-              </Link>
+        <section className="relative landing-section overflow-hidden flex items-center justify-center min-h-[52vh] sm:min-h-[58vh] md:min-h-[65vh]">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/bg-tin-noi-bo.png"
+              alt="Tin nội bộ JobUp"
+              className="w-full h-full object-cover object-center scale-105"
+            />
+            <div className="absolute inset-0 bg-black/75" />
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-black/60 via-transparent to-brand-black/80" />
+            <div className="absolute bottom-0 left-0 w-[420px] h-[260px] sm:w-[600px] sm:h-[400px] bg-brand-yellow/10 blur-[120px] rounded-full" />
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
+          </div>
 
-              <div>
-                <SectionHeader
-                  badge="GÓC NỘI BỘ JOBUP"
-                  title={
-                    <>Nơi cập nhật thông tin & hoạt động nội bộ tại công ty</>
-                  }
-                  description="Tại đây, chúng tôi chia sẻ mọi hoạt động nội bộ, những cột mốc vận hành đáng nhớ và tôn vinh những giá trị mà đội ngũ đang cùng nhau xây dựng."
-                  align="left"
-                  headingTag="h1"
-                  className="mb-6 md:mb-7"
-                  titleClassName="text-3xl font-black leading-tight text-brand-black md:text-5xl"
-                  descriptionClassName="text-base md:text-lg !text-justify [text-justify:inter-word]"
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+            {/* Tạm thời ẩn bài viết nổi bật ở khu vực hero */}
+            <SectionHeader
+              badge="GÓC NỘI BỘ JOBUP"
+              title={
+                <>
+                  <span className="text-white">Không gian </span>
+                  <span className="inline-block bg-brand-yellow text-brand-black px-4 py-1 rounded-xl leading-tight font-black">
+                    JobUp
+                  </span>
+                  <br />
+                  <span className="text-white">chia sẻ thông tin nội bộ</span>
+                </>
+              }
+              description="Tại đây, chúng tôi chia sẻ mọi hoạt động nội bộ, những cột mốc vận hành đáng nhớ và tôn vinh những giá trị mà đội ngũ đang cùng nhau xây dựng."
+              align="center"
+              headingTag="h1"
+              className="mb-6 md:mb-8"
+              contentClassName="max-w-3xl mx-auto"
+              badgeClassName="tracking-[0.2em] sm:tracking-[0.24em]"
+              titleClassName="text-2xl font-black leading-tight sm:text-4xl md:text-6xl"
+              descriptionClassName="max-w-3xl text-sm font-light leading-relaxed text-white/80 sm:text-base md:text-xl"
+            />
+            <div className="mt-6 md:mt-8 mx-auto max-w-2xl flex flex-row gap-2 sm:gap-3">
+              <div className="flex-1 relative w-full">
+                <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+                <input
+                  value={keywordInput}
+                  onChange={(event) => setKeywordInput(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") handleSearch();
+                  }}
+                  type="text"
+                  placeholder="Tìm kiếm bài viết..."
+                  className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-full border border-gray-200 bg-white text-xs sm:text-sm text-gray-700 focus:outline-none focus:border-brand-yellow"
                 />
-                <div className="mb-4 flex flex-col sm:flex-row gap-3">
-                  <div className="flex-1 relative w-full">
-                    <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-                    <input
-                      value={keywordInput}
-                      onChange={(event) => setKeywordInput(event.target.value)}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") handleSearch();
-                      }}
-                      type="text"
-                      placeholder="Tìm kiếm bài viết..."
-                      className="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 bg-white text-sm text-gray-700 focus:outline-none focus:border-brand-yellow"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleSearch}
-                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-brand-black text-white text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors"
-                  >
-                    Tìm kiếm
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-4">
-                  {categoryPills.map((pill) => (
-                    <button
-                      key={pill.id || pill.label}
-                      type="button"
-                      onClick={() => handleCategoryChange(pill.id)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-bold border shadow-soft transition-colors ${
-                        selectedCategoryId === pill.id
-                          ? "bg-brand-yellow text-brand-black border-brand-yellow"
-                          : "bg-white text-gray-500 border-gray-100"
-                      }`}
-                    >
-                      {pill.label}
-                    </button>
-                  ))}
-                </div>
               </div>
+              <button
+                type="button"
+                onClick={handleSearch}
+                className="w-auto px-5 py-2.5 sm:py-3 rounded-full bg-brand-yellow text-brand-black text-xs sm:text-sm font-bold hover:bg-brand-yellow hover:text-brand-black transition-colors whitespace-nowrap"
+              >
+                Tìm kiếm
+              </button>
+            </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+              {categoryPills.map((pill) => (
+                <button
+                  key={pill.id || pill.label}
+                  type="button"
+                  onClick={() => handleCategoryChange(pill.id)}
+                  className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-bold border transition-all ${
+                    selectedCategoryId === pill.id
+                      ? "bg-brand-yellow text-brand-black border-brand-yellow shadow-lg"
+                      : "bg-white/90 text-gray-600 border-white/70 hover:bg-white"
+                  }`}
+                >
+                  {pill.label}
+                </button>
+              ))}
             </div>
           </div>
         </section>

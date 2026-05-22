@@ -155,7 +155,7 @@ export default function JobSearchHub({
         <div className="relative z-10 p-6 lg:p-12 pt-16 lg:pt-[4.5rem]">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-7 gap-4">
             <div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mt-2">
                 Tìm việc làm{" "}
                 <span className="text-brand-yellow drop-shadow-[0_0_15px_rgba(255,193,7,0.3)]">
                   phù hợp nhất

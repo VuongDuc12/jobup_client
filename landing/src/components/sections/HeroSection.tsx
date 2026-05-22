@@ -4,40 +4,8 @@ import BadgeText from "@/components/shared/BadgeText";
 import type { PartnerResponse, ProvinceDropdown } from "@/lib/types";
 import { useSystemConfig } from "@/hooks/useSystemConfig";
 import { getAssetUrl } from "@/lib/utils";
+import { resolvePartnerLogos } from "@/lib/partnerLogos";
 import { useState } from "react";
-
-const partnerLogos = [
-  {
-    src: "/images/google-logo.svg",
-    alt: "Google",
-    height: "h-5",
-  },
-  {
-    src: "/images/meta-logo.svg",
-    alt: "Meta",
-    height: "h-6",
-  },
-  {
-    src: "/images/microsoft-logo.svg",
-    alt: "Microsoft",
-    height: "h-5",
-  },
-  {
-    src: "/images/amazon-logo.svg",
-    alt: "Amazon",
-    height: "h-5",
-  },
-  {
-    src: "/images/netflix-logo.svg",
-    alt: "Netflix",
-    height: "h-4",
-  },
-  {
-    src: "/images/linkedin-logo.svg",
-    alt: "LinkedIn",
-    height: "h-6",
-  },
-];
 
 const trendingKeywords = ["Nhân sự", "Kế toán", "Marketing", "Sale"];
 
@@ -90,31 +58,12 @@ export default function HeroSection({
   const hotlineValue = config.hotline || "0979334143";
   const hotlineDisplay = hotlineValue;
   const heroImageSrc =
-    getAssetUrl(heroImage) ||
-    "/images/trangchu/hero-image.avif";
+    getAssetUrl(heroImage) || "/images/trangchu/hero-image.avif";
 
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  const partnerItems =
-    partners && partners.length > 0
-      ? partners
-          .filter((item) => Boolean(item.logoUrl))
-          .sort((a, b) => a.displayOrder - b.displayOrder)
-          .flatMap((item) => {
-            if (!item.logoUrl) {
-              return [];
-            }
-
-            return [
-              {
-                src: getAssetUrl(item.logoUrl) || item.logoUrl,
-                alt: item.name || "Partner",
-                height: "h-6",
-              },
-            ];
-          })
-      : partnerLogos;
+  const partnerItems = resolvePartnerLogos(partners);
 
   const createSearchPayload = (
     keyword: string,
