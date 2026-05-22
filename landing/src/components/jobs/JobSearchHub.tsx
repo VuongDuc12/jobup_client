@@ -92,19 +92,19 @@ export default function JobSearchHub({
     <div className="mb-8 md:mb-9">
       <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border border-white/20">
         {/* Live Broadcast Bar */}
-        <div className="absolute top-0 inset-x-0 z-20 bg-white/10 backdrop-blur-md border-b border-white/10 py-3 overflow-hidden">
+        <div className="absolute top-0 inset-x-0 z-20 bg-white/10 backdrop-blur-md border-b border-white/10 py-3.5 overflow-hidden">
           <div className="px-8 flex items-center gap-6">
             <div className="flex items-center gap-2 shrink-0">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-yellow opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-yellow" />
               </span>
-              <span className="text-[10px] font-black text-white uppercase tracking-widest">
+              <span className="text-xs font-black text-white uppercase tracking-widest">
                 Bảng tin
               </span>
             </div>
             <div className="flex-grow whitespace-nowrap overflow-hidden relative">
-              <div className="animate-loop-scroll flex items-center gap-12 text-[12px] font-bold text-white/80">
+              <div className="animate-loop-scroll flex items-center gap-16 text-sm font-bold text-white/85 lg:text-[15px]">
                 {broadcasts.map((text, idx) => (
                   <span
                     key={idx}
@@ -130,8 +130,8 @@ export default function JobSearchHub({
                 ))}
               </div>
             </div>
-            <div className="hidden lg:flex items-center gap-4 text-[10px] font-black text-white/60">
-              <span className="bg-black/20 px-3 py-1 rounded-full uppercase">
+            <div className="hidden lg:flex items-center gap-4 text-xs font-black text-white/70">
+              <span className="min-w-[104px] whitespace-nowrap rounded-full bg-black/20 px-4 py-2 text-center uppercase">
                 {broadcastDate}
               </span>
             </div>
@@ -152,10 +152,10 @@ export default function JobSearchHub({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 p-6 lg:p-12 pt-16 lg:pt-[4.5rem]">
+        <div className="relative z-10 p-6 lg:p-12 pt-20 lg:pt-24">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-7 gap-4">
             <div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mt-2">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
                 Tìm việc làm{" "}
                 <span className="text-brand-yellow drop-shadow-[0_0_15px_rgba(255,193,7,0.3)]">
                   phù hợp nhất
@@ -186,8 +186,8 @@ export default function JobSearchHub({
                 type="text"
                 value={keyword}
                 onChange={(e) => onKeywordChange(e.target.value)}
-                placeholder="Nhập ngay công việc bạn đang tìm kiếm."
-                className="w-full pl-14 pr-6 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-white focus:text-gray-900 font-bold placeholder:text-white/60 backdrop-blur-md"
+                placeholder="Nhập ngay công việc bạn đang tìm kiếm"
+                className="w-full pl-14 pr-6 py-4 bg-white/10 hover:bg-white/20 focus:bg-white rounded-2xl border-2 border-white/20 focus:border-brand-yellow focus:outline-none transition-all text-lg text-white focus:text-gray-900 font-bold placeholder:text-white/60 backdrop-blur-md"
               />
               <div className="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-brand-yellow transition-colors text-lg drop-shadow-md z-10 pointer-events-none">
                 <i className="fa-solid fa-magnifying-glass" />
@@ -378,16 +378,15 @@ export default function JobSearchHub({
 
           {/* Hot Tags */}
           <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-4">
-            <span className="text-[9px] font-black text-white/80 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
+            <span className="text-xs md:text-sm font-black text-white/85 uppercase tracking-widest flex items-center gap-2">
               Tìm kiếm nhiều nhất:
             </span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {hotTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => onKeywordChange(tag)}
-                  className="px-6 py-2.5 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-xs font-extrabold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
+                  className="min-w-[108px] px-6 py-3 bg-white/10 hover:bg-brand-yellow text-white hover:text-brand-black rounded-full text-sm font-extrabold transition-all border border-white/10 backdrop-blur-sm cursor-pointer"
                 >
                   {tag}
                 </button>

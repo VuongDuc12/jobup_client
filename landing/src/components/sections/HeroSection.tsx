@@ -253,7 +253,7 @@ export default function HeroSection({
               </button>
             </form>
 
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm lg:justify-start">
+            <div className="mt-5 flex w-full max-w-3xl flex-wrap items-center justify-start gap-2.5 text-sm">
               <span className="font-medium text-slate-500">Hot:</span>
               {trendingKeywords.map((kw) => (
                 <button
@@ -262,7 +262,7 @@ export default function HeroSection({
                   onClick={() => {
                     redirectToJobs(createSearchPayload(kw, ""));
                   }}
-                  className="cursor-pointer rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.2)] transition-all duration-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700"
+                  className="min-w-[88px] cursor-pointer rounded-full border border-slate-200 bg-white px-5 py-2 text-sm font-medium text-slate-600 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.2)] transition-all duration-200 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700"
                 >
                   {kw}
                 </button>
@@ -271,21 +271,22 @@ export default function HeroSection({
 
             <div className="relative z-10 mt-7 w-full border-t border-slate-100/70 pt-6 sm:mt-8 sm:pt-7 lg:mt-0 lg:pt-8">
               <div className="mx-auto w-full max-w-7xl">
-                <p className="mb-2 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-700 sm:mb-2 lg:mb-2">
-                  Được tin tưởng bởi 200+ doanh nghiệp hàng đầu
+                <p className="mb-1 text-center text-[9px] font-bold uppercase tracking-[0.18em] text-slate-700 sm:mb-1.5 sm:text-[11px] lg:mb-1.5">
+                  Được tin tưởng bởi hơn 200{" "}
+                  <span className="whitespace-nowrap">doanh nghiệp</span> hàng đầu
                 </p>
-                <div className="mask-image-gradient relative overflow-hidden pb-4">
-                  <div className="animate-loop-scroll flex items-center gap-0.5 whitespace-nowrap sm:gap-1 lg:gap-1.5">
+                <div className="mask-image-gradient relative overflow-hidden pb-2">
+                  <div className="animate-loop-scroll flex items-center gap-0 whitespace-nowrap">
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`a-${idx}`}
-                        className="flex h-24 min-w-[95px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[100px] sm:px-0.5 lg:h-20 lg:min-w-[112px] lg:px-0.5"
+                        className="flex h-14 min-w-[82px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-16 sm:min-w-[96px] lg:h-[72px] lg:min-w-[108px]"
                       >
                         <Image
                           src={logo.src}
-                          width={150}
-                          height={40}
-                          className="h-14 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
+                          width={190}
+                          height={56}
+                          className="h-10 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-12 lg:h-14"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
@@ -295,13 +296,13 @@ export default function HeroSection({
                     {partnerItems.map((logo, idx) => (
                       <div
                         key={`b-${idx}`}
-                        className="flex h-24 min-w-[95px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-20 sm:min-w-[114px] sm:px-1 lg:h-20 lg:min-w-[128px] lg:px-1"
+                        className="flex h-14 min-w-[82px] items-center justify-center px-0 transition-transform duration-300 hover:-translate-y-1 sm:h-16 sm:min-w-[96px] lg:h-[72px] lg:min-w-[108px]"
                       >
                         <Image
                           src={logo.src}
-                          width={150}
-                          height={40}
-                          className="h-14 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-9 lg:h-10"
+                          width={190}
+                          height={56}
+                          className="h-10 w-auto object-contain opacity-95 transition-all duration-300 hover:scale-105 sm:h-12 lg:h-14"
                           alt={logo.alt}
                           loading="lazy"
                           unoptimized
