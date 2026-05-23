@@ -26,7 +26,7 @@ const defaultValues = [
     icon: "fa-solid fa-medal",
     title: "Chất lượng",
     description:
-      "Chất lượng là thước đo thành công của chúng tôi trong mọi hoạt động tư vấn và kết nối nhân sự.",
+      "Chất lượng là thước đo thành công của chúng tôi trong tất cả hoạt động tư vấn và kết nối nhân sự.",
   },
   {
     icon: "fa-solid fa-handshake",
@@ -40,13 +40,13 @@ const missionVisionData = [
   {
     label: "Tầm nhìn",
     title:
-      "Trở thành đối tác tin cậy cung cấp dịch vụ tuyển dụng đa ngành nghề phổ biến khắp Việt Nam.",
+      "Trở thành đối tác tin cậy cung cấp dịch vụ tuyển dụng đa ngành nghề phổ biến khắp Việt Nam",
     icon: "fa-solid fa-binoculars",
   },
   {
     label: "Sứ mệnh",
     title:
-      "Tư vấn dịch vụ tuyển dụng giúp kết nối những ứng viên tiềm năng với các doanh nghiệp đang có nhu cầu tuyển dụng nhân sự.",
+      "Tư vấn dịch vụ tuyển dụng giúp kết nối những ứng viên tiềm năng với các doanh nghiệp đang có nhu cầu tuyển dụng nhân sự",
     icon: "fa-solid fa-bullseye",
   },
 ];
@@ -126,7 +126,9 @@ export default function CoreValuesSection({
             </span>
           }
           description="Những nguyên tắc định hướng mọi hoạt động tư vấn tuyển dụng tại JobUp."
-          align="center"
+          align="left"
+          contentClassName="max-w-3xl"
+          descriptionClassName="max-w-3xl"
         />
 
         {/* Pillars Section */}
@@ -139,19 +141,22 @@ export default function CoreValuesSection({
                 className="group relative rounded-3xl border p-7 md:p-9 transition-all duration-300 overflow-hidden bg-brand-black border-brand-black hover:shadow-hover"
               >
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 mx-auto transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
                   <i
                     className={`${item.icon} text-xl transition-colors duration-300 text-brand-yellow group-hover:text-brand-black`}
                   />
                 </div>
 
                 {/* Label */}
-                <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
+                <span className="block text-left text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
                   {item.label}
                 </span>
 
                 {/* Title */}
-                <h4 className="mt-3 font-extrabold leading-snug text-xl md:text-2xl text-white">
+                <h4
+                  className="mt-3 text-left font-extrabold leading-relaxed text-xl md:text-2xl text-white"
+                  style={{ textAlign: "justify", textJustify: "inter-word" }}
+                >
                   {item.title}
                 </h4>
               </article>
@@ -169,19 +174,19 @@ export default function CoreValuesSection({
                   className="group rounded-2xl border-3 border-brand-yellow/30 p-5 transition-all"
                 >
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 mx-auto transition-all duration-300 bg-brand-yellow/15 group-hover:bg-brand-yellow">
                     <i
                       className={`${item.icon} text-xl transition-colors duration-300 text-brand-yellow group-hover:text-brand-black`}
                     />
                   </div>
 
                   {/* Label */}
-                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
+                  <span className="block text-center text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
                     {item.label}
                   </span>
 
                   {/* Title */}
-                  <h4 className="mt-3 font-extrabold leading-snug text-lg text-white">
+                  <h4 className="mt-3 text-center font-extrabold leading-snug text-lg text-white">
                     {item.title}
                   </h4>
 

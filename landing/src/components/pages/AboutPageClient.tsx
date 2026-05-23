@@ -124,11 +124,11 @@ export default function AboutPageClient({
               </span>
               <br />
               <span className="text-brand-black">
-                tạo lực đẩy cho tuyển dụng hiện đại
+                chiến lược – Nền tảng tuyển dụng hiện đại
               </span>
             </>
           }
-          description="Chúng tôi kết nối cùng các doanh nghiệp, tập đoàn và thương hiệu công nghệ để mở rộng cơ hội nghề nghiệp chất lượng cao trên toàn quốc."
+          description="JobUp kết nối cùng các doanh nghiệp, tập đoàn và đối tác công nghệ nhằm xây dựng hệ sinh thái tuyển dụng hiệu quả, mở rộng cơ hội nghề nghiệp chất lượng cao cho ứng viên trên toàn quốc."
           partners={initialPartners}
         />
         {/* <PressMediaSection mediaMentions={initialMediaMentions} /> */}
