@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { fetchLatestJobs } from "@/lib/api";
-import { formatSalary, timeAgo, resolveAssetUrl } from "@/lib/utils";
+import { formatSalary, timeAgo } from "@/lib/utils";
 import type { PublicJobResponse } from "@/lib/types";
 
 export default function UrgentJobsWidget() {
@@ -12,9 +12,21 @@ export default function UrgentJobsWidget() {
 
   const load = useCallback(async () => {
     try {
-      // Fetch latest 5 hot/urgent jobs
-      const data = await fetchLatestJobs({ limit: 5, IsHot: true });
-      setJobs(Array.isArray(data) ? data.slice(0, 5) : []);
+      const hotJobs = await fetchLatestJobs({ limit: 6, IsHot: true });
+      const hotJobList = Array.isArray(hotJobs) ? hotJobs : [];
+
+      if (hotJobList.length >= 6) {
+        setJobs(hotJobList.slice(0, 6));
+        return;
+      }
+
+      const latestJobs = await fetchLatestJobs({ limit: 6 });
+      const seenIds = new Set(hotJobList.map((job) => job.id));
+      const fallbackJobs = (Array.isArray(latestJobs) ? latestJobs : []).filter(
+        (job) => !seenIds.has(job.id),
+      );
+
+      setJobs([...hotJobList, ...fallbackJobs].slice(0, 6));
     } catch {
       // Silent fail — widget is supplementary
     } finally {
@@ -52,7 +64,7 @@ export default function UrgentJobsWidget() {
       {/* List */}
       <div className="px-3 pb-4 space-y-1">
         {loading &&
-          Array.from({ length: 5 }).map((_, i) => (
+          Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
               className="flex items-center gap-3 p-3 rounded-2xl animate-pulse"
@@ -69,7 +81,6 @@ export default function UrgentJobsWidget() {
           jobs.map((job) => {
             const salary = formatSalary(job.salaryFrom, job.salaryTo);
             const time = timeAgo(job.createdAt);
-            const companyAvatar = resolveAssetUrl(job.contactStaff?.avatar);
 
             return (
               <Link
