@@ -48,7 +48,7 @@ export default function AboutHeroSection({
   const displayCta2Url = "/tuyen-dung";
 
   return (
-    <section className="relative w-full aspect-[4/3] sm:aspect-video flex items-start justify-center overflow-hidden">
+    <section className="relative w-full min-h-[75vh] flex items-start justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
