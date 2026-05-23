@@ -103,7 +103,7 @@ export default function UrgentJobsWidget() {
       </div>
 
       {/* Footer */}
-      <div className="p-5 pt-0 mt-auto shrink-0">
+      {/* <div className="p-5 pt-0 mt-auto shrink-0">
         <Link
           href="/tuyen-dung"
           className="w-full py-3.5 bg-gray-50 text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-brand-black hover:text-white transition-all group/btn flex items-center justify-center gap-2 shadow-sm border border-gray-100/50"
@@ -111,7 +111,7 @@ export default function UrgentJobsWidget() {
           Xem tất cả tin gấp{" "}
           <i className="fa-solid fa-chevron-right text-[8px] group-hover/btn:translate-x-1 transition-transform" />
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
