@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Footer, Navbar } from "@/components/layout";
 import { FloatingActions } from "@/components/sections";
 import BadgeText from "@/components/shared/BadgeText";
@@ -111,6 +112,7 @@ function SocialCard({
   description,
   icon,
   color,
+  iconClassName = "text-white",
   className = "",
 }: {
   href: string | null;
@@ -118,13 +120,14 @@ function SocialCard({
   description: string;
   icon: ReactNode;
   color: string;
+  iconClassName?: string;
   className?: string;
 }) {
   const content = (
     <div className={`group h-full rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 ${className}`}>
       <div className="flex min-w-0 items-start gap-4">
         <span
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl text-white transition-transform duration-300 group-hover:scale-105"
+          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl transition-transform duration-300 group-hover:scale-105 ${iconClassName}`}
           style={{ background: color }}
         >
           {icon}
@@ -266,41 +269,81 @@ export default function ContactPageClient() {
                 href={fanpageHref}
                 title="Fanpage JobUp"
                 description="Cập nhật thông tin tuyển dụng, kiến thức nghề nghiệp và các nội dung hữu ích dành cho sinh viên, người đi làm."
-                color="#1877F2"
+                color="transparent"
                 className="xl:col-span-1"
-                icon={<i className="fa-brands fa-facebook-f" />}
+                icon={
+                  <Image
+                    src="/images/social/facebook-logo.png"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-contain"
+                  />
+                }
               />
               <SocialCard
                 href={linkedinHref}
                 title="LinkedIn JobUp"
                 description="Nền tảng kết nối chuyên nghiệp dành cho doanh nghiệp, ứng viên và cộng đồng nhân sự, cập nhật cơ hội việc làm và xu hướng thị trường lao động."
-                color="#0077B5"
+                color="transparent"
                 className="xl:col-span-1"
-                icon={<i className="fa-brands fa-linkedin-in" />}
+                icon={
+                  <Image
+                    src="/images/social/linkedin-logo.png"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-contain"
+                  />
+                }
               />
               <SocialCard
                 href={zaloHref}
                 title="Hỗ trợ nhanh qua Zalo Hotline"
                 description="Kênh hỗ trợ trực tuyến giúp ứng viên và doanh nghiệp kết nối nhanh chóng với đội ngũ tư vấn của JobUp."
-                color="#0068FF"
+                color="transparent"
                 className="xl:col-span-1"
-                icon={<span className="text-xs font-black">Zalo</span>}
+                icon={
+                  <Image
+                    src="/zaloicon.svg"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-contain"
+                  />
+                }
               />
               <SocialCard
                 href={tiktokHref}
                 title="TikTok JobUp"
                 description="Chia sẻ video ngắn về kỹ năng nghề nghiệp, hướng dẫn phỏng vấn, tối ưu CV và các nội dung thực tế dành cho người trẻ."
-                color="#000000"
+                color="transparent"
                 className="md:col-span-1 xl:col-span-1"
-                icon={<i className="fa-brands fa-tiktok" />}
+                icon={
+                  <Image
+                    src="/images/social/tiktok-logo.avif"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 rounded-2xl object-cover"
+                  />
+                }
               />
               <SocialCard
                 href={threadHref}
                 title="Threads"
                 description="Không gian chia sẻ góc nhìn nghề nghiệp, trải nghiệm công việc và văn hóa làm việc của thế hệ trẻ hiện nay."
-                color="#000000"
+                color="transparent"
                 className="md:col-span-2 xl:col-span-2"
-                icon={<i className="fa-brands fa-threads" />}
+                icon={
+                  <Image
+                    src="/images/social/threads-logo.avif"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 rounded-2xl object-cover"
+                  />
+                }
               />
             </div>
           </section>
