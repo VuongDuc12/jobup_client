@@ -28,6 +28,28 @@ export default function SpecialtySectors() {
     trackRef.current?.scrollBy({ left: -400, behavior: "smooth" });
   }, []);
 
+  const openJobsByCategory = useCallback((categoryId: string) => {
+    try {
+      sessionStorage.setItem(
+        "jobup_jobs_filters",
+        JSON.stringify({
+          keyword: "",
+          provinceId: "",
+          categoryId,
+          salaryFrom: "",
+          salaryTo: "",
+          experience: "",
+          workType: "",
+          sortBy: "newest",
+        }),
+      );
+    } catch {
+      // Ignore storage failures; navigation still works.
+    }
+
+    window.location.href = "/tuyen-dung";
+  }, []);
+
   return (
     <section
       id="services"
@@ -107,9 +129,10 @@ export default function SpecialtySectors() {
                     key={cat.id}
                     className="snap-center shrink-0 w-[300px] md:w-[380px] group"
                   >
-                    <Link
-                      href="/tuyen-dung"
-                      className="block h-[440px] rounded-[2.5rem] relative overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-500"
+                    <button
+                      type="button"
+                      onClick={() => openJobsByCategory(cat.id)}
+                      className="block h-[440px] w-full cursor-pointer rounded-[2.5rem] relative overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 text-left"
                     >
                       {resolvedBg ? (
                         <Image
@@ -159,7 +182,7 @@ export default function SpecialtySectors() {
                           <i className="fa-solid fa-arrow-right text-white group-hover:text-[#111827] -rotate-45 group-hover:rotate-0 transition-all duration-300" />
                         </div>
                       </div>
-                    </Link>
+                    </button>
                   </div>
                 );
               })}

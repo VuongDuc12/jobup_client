@@ -354,29 +354,50 @@ export default function JobDetailPage() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Button Ứng tuyển - Nộp CV */}
+                    <div className="shrink-0 flex items-end self-end mt-4 md:mt-0">
+                      <a
+                        href="https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgSARxLFnc5ePFaQLPNc1jHe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackPublicJobApply(job.id)}
+                        className="group relative inline-flex flex-col items-center justify-center gap-1 px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-700 font-black text-sm shadow-sm hover:shadow-[0_8px_30px_rgba(245,158,11,0.2)] hover:from-amber-100 hover:to-orange-100 transition-all duration-300 transform hover:-translate-y-1 active:scale-95 whitespace-nowrap overflow-hidden"
+                      >
+                        {/* Shimmer effect */}
+                        <span className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                          <span className="absolute -left-full top-0 h-full w-1/2 bg-white/40 skew-x-12 group-hover:left-full transition-all duration-700 ease-out" />
+                        </span>
+                        <span className="relative flex items-center gap-2">
+                          <i className="fa-solid fa-paper-plane text-xs" />
+                          <span>Ứng tuyển</span>
+                        </span>
+                        <span className="relative text-[10px] font-bold opacity-70 tracking-wide uppercase">
+                          Nộp CV ngay
+                        </span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-4 group h-fit">
-                {" "}
-                {/* Thêm h-fit để không bị kéo giãn */}
-                <div className="relative bg-white rounded-[2rem] p-4 border border-slate-100 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(245,158,11,0.12)] transition-all duration-500 hover:-translate-y-1 flex flex-col overflow-hidden">
+              <div className="lg:col-span-4 group">
+                <div className="relative bg-white rounded-[2rem] p-4 border border-slate-100 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(245,158,11,0.12)] transition-all duration-500 hover:-translate-y-1 flex flex-col overflow-hidden h-full">
                   {/* Decor nhẹ nhàng hơn */}
                   <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-amber-50 blur-2xl pointer-events-none" />
 
-                  <div className="relative z-10 flex flex-col bg-slate-50/50 rounded-[1.5rem] border border-white overflow-hidden">
+                  <div className="relative z-10 flex flex-col bg-slate-50/50 rounded-[1.5rem] border border-white overflow-hidden h-full">
                     {/* Header mỏng hơn */}
                     <div className="bg-gradient-to-r from-amber-50 to-orange-50/30 px-4 py-3 text-center border-b border-amber-100/40">
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-amber-700/80">
-                        Đừng bỏ lỡ cơ hội này!
+                        Liên hệ ngay với Chuyên viên tuyển dụng của chúng tôi
                       </h3>
                     </div>
 
                     {job.contactStaff ? (
-                      <div className="flex flex-col p-4">
+                      <div className="flex flex-col flex-grow justify-between p-4">
                         {/* Avatar (portrait rectangle) + Information */}
-                        <div className="flex items-start gap-4 mb-4">
+                        <div className="flex items-start gap-4 mb-4 flex-grow">
                           <div className="shrink-0">
                             {companyAvatar ? (
                               <img
@@ -385,7 +406,7 @@ export default function JobDetailPage() {
                                 className="w-28 h-36 rounded-xl object-cover border border-gray-100 shadow-sm"
                               />
                             ) : (
-                              <div className="w-28 h-36 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-2xl border border-gray-100 uppercase overflow-hidden">
+                              <div className="w-28 h-36 rounded-xl bg-brand-black text-white flex items-center justify-center font-bold text-2xl border border-gray-100 uppercase overflow-hidden">
                                 {companyInitial(job.contactStaff.fullName)}
                               </div>
                             )}
@@ -396,8 +417,8 @@ export default function JobDetailPage() {
                               {job.contactStaff.fullName}
                             </p>
                             <p className="text-sm text-slate-500 font-medium mt-1">
-                              Chuyên viên tư vấn
-                            </p>
+                               Chuyên viên tuyển dụng
+                             </p>
 
                             <div className="mt-3 space-y-2">
                               <div className="flex items-center gap-3 text-sm text-slate-600">
@@ -416,8 +437,8 @@ export default function JobDetailPage() {
                                   />
                                 </svg>
                                 <span className="truncate">
-                                  {job.contactStaff.email || "Chưa cập nhật"}
-                                </span>
+                                   tuyendung@jobup.vn
+                                 </span>
                               </div>
 
                               <div className="flex items-center gap-3 text-sm text-slate-600">
@@ -451,12 +472,12 @@ export default function JobDetailPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackPublicJobApply(job.id)}
-                            className="w-full py-3 bg-slate-900 hover:bg-[#F9C11C] hover:text-slate-900 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md text-white shadow-slate-200"
+                            className="w-full py-3 bg-brand-black hover:bg-brand-yellow hover:text-brand-black rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md text-white shadow-slate-200"
                           >
-                            <i className="fa-solid fa-paper-plane text-[10px]" />
-                            <span className="text-[10px] uppercase font-bold tracking-wider">
-                              Liên hệ ngay
-                            </span>
+                             <i className="fa-brands fa-zalo text-sm" />
+                             <span className="text-[10px] uppercase font-bold tracking-wider">
+                               Chat ngay với NTD qua Zalo
+                             </span>
                           </a>
                         ) : (
                           <div className="w-full py-3 bg-slate-100 text-slate-400 font-bold rounded-xl text-center text-[10px] border border-dashed border-slate-200">
