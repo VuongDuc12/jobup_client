@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import JobDetailPageClient from "@/components/pages/JobDetailPageClient";
 import { fetchPublicJobBySlug } from "@/lib/api";
-import { resolveAssetUrl } from "@/lib/utils";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
+const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.jpg`;
 
 type JobDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -24,7 +24,6 @@ export async function generateMetadata({
         .replace(/\s+/g, " ")
         .trim() ||
       `Ứng tuyển vị trí ${job.title} tại ${job.displayCompanyName} trên JobUp.`;
-    const image = resolveAssetUrl(job.contactStaff?.avatar) || undefined;
     const canonical = `${SITE_URL}/tuyen-dung/${slug}`;
 
     return {
@@ -36,13 +35,20 @@ export async function generateMetadata({
         description,
         url: canonical,
         type: "article",
-        images: image ? [image] : undefined,
+        images: [
+          {
+            url: PREVIEW_IMAGE,
+            width: 1448,
+            height: 1086,
+            alt: "JobUp",
+          },
+        ],
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: image ? [image] : undefined,
+        images: [PREVIEW_IMAGE],
       },
     };
   } catch {

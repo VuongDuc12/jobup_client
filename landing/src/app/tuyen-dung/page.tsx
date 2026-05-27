@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import JobsPageClient from "@/components/pages/JobsPageClient";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
+const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.jpg`;
 
 export const metadata: Metadata = {
   title: "Việc Làm Mới Nhất | JobUp",
@@ -16,12 +17,21 @@ export const metadata: Metadata = {
       "Tìm việc nhanh với danh sách việc làm cập nhật liên tục tại JobUp.",
     url: `${SITE_URL}/tuyen-dung`,
     type: "website",
+    images: [
+      {
+        url: PREVIEW_IMAGE,
+        width: 1448,
+        height: 1086,
+        alt: "JobUp",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Việc Làm Mới Nhất | JobUp",
     description:
       "Tìm việc nhanh với danh sách việc làm cập nhật liên tục tại JobUp.",
+    images: [PREVIEW_IMAGE],
   },
 };
 
