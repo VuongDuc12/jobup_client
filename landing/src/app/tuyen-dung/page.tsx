@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import JobsPageClient from "@/components/pages/JobsPageClient";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
-const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.jpg`;
+const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.png`;
 
 export const metadata: Metadata = {
   title: "Việc Làm Mới Nhất | JobUp",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: PREVIEW_IMAGE,
-        width: 1448,
-        height: 1086,
+        width: 1080,
+        height: 892,
         alt: "JobUp",
       },
     ],

@@ -3,7 +3,7 @@ import JobDetailPageClient from "@/components/pages/JobDetailPageClient";
 import { fetchPublicJobBySlug } from "@/lib/api";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobup.vn";
-const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.jpg`;
+const PREVIEW_IMAGE = `${SITE_URL}/jobdetail-og.png`;
 
 type JobDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,8 +38,8 @@ export async function generateMetadata({
         images: [
           {
             url: PREVIEW_IMAGE,
-            width: 1448,
-            height: 1086,
+            width: 1080,
+            height: 892,
             alt: "JobUp",
           },
         ],
