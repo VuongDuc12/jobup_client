@@ -145,6 +145,23 @@ export default function HeroSection({
                 "Kết nối ứng viên tài năng với 100+ cơ hội nghề nghiệp tại các tập đoàn hàng đầu Việt Nam."}
             </p>
 
+            <div className="mb-6 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2 lg:mb-7">
+              <Link
+                href="/lien-he"
+                className="group inline-flex min-h-11 items-center justify-center gap-1.5 rounded-2xl bg-brand-yellow px-3 py-2.5 text-[11px] font-black uppercase tracking-normal text-brand-black shadow-[0_18px_40px_-20px_rgba(240,180,41,0.9)] transition-all duration-300 hover:-translate-y-1 hover:bg-brand-black hover:text-white sm:min-h-11 sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-wide md:min-h-12 md:rounded-full"
+              >
+                <i className="fa-solid fa-building text-xs transition-transform duration-300 group-hover:scale-110 sm:text-sm" />
+                Dành cho doanh nghiệp
+              </Link>
+              <Link
+                href="/lien-he"
+                className="group inline-flex min-h-11 items-center justify-center gap-1.5 rounded-2xl bg-brand-black px-3 py-2.5 text-[11px] font-black uppercase tracking-normal text-white shadow-[0_18px_40px_-22px_rgba(15,23,42,0.65)] transition-all duration-300 hover:-translate-y-1 hover:bg-brand-yellow hover:text-brand-black sm:min-h-11 sm:gap-1.5 sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-wide md:min-h-12 md:rounded-full"
+              >
+                <i className="fa-solid fa-user-tie text-xs transition-transform duration-300 group-hover:scale-110 sm:text-sm" />
+                Dành cho ứng viên
+              </Link>
+            </div>
+
             <div className="relative mb-8 mt-1 w-full max-w-[24rem] md:hidden">
               <div className="absolute inset-x-6 top-8 h-40 rounded-full bg-gradient-to-r from-amber-200/70 via-yellow-100/80 to-white blur-3xl" />
               <div className="absolute -left-1 top-20 h-20 w-20 rounded-full border border-white/70 bg-white/45 backdrop-blur-xl" />

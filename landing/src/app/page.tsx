@@ -24,6 +24,14 @@ export async function generateMetadata(): Promise<Metadata> {
         siteName: "JobUp",
         url: "https://jobup.vn",
         type: "website",
+        images: [
+          {
+            url: "https://jobup.vn/assets/favicon.png?v=20260531",
+            width: 956,
+            height: 760,
+            alt: "JobUp - Đơn vị cung cấp dịch vụ tư vấn tuyển dụng",
+          },
+        ],
       },
     };
   } catch {
@@ -32,9 +40,19 @@ export async function generateMetadata(): Promise<Metadata> {
       description: DEFAULT_META.description,
 
       openGraph: {
+        title: DEFAULT_META.title,
+        description: DEFAULT_META.description,
         siteName: "JobUp",
         url: "https://jobup.vn",
         type: "website",
+        images: [
+          {
+            url: "https://jobup.vn/assets/favicon.png?v=20260531",
+            width: 956,
+            height: 760,
+            alt: "JobUp - Đơn vị cung cấp dịch vụ tư vấn tuyển dụng",
+          },
+        ],
       },
     };
   }

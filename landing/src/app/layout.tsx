@@ -31,7 +31,14 @@ export const metadata: Metadata = {
     title: "JobUp - Kiến Tạo Sự Nghiệp Đẳng Cấp",
     description:
       "100+ việc làm lương cao đang chờ đón bạn. Tạo CV và ứng tuyển ngay hôm nay.",
-    images: ["https://jobup.vn/assets/og-image.jpg"],
+    images: [
+      {
+        url: "https://jobup.vn/assets/favicon.png?v=20260531",
+        width: 956,
+        height: 760,
+        alt: "JobUp - Đơn vị cung cấp dịch vụ tư vấn tuyển dụng",
+      },
+    ],
   },
   other: {
     "theme-color": "#F0B429",

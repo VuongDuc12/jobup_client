@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import SectionHeader from "@/components/shared/SectionHeader";
 import type { PartnerResponse } from "@/lib/types";
@@ -33,11 +36,43 @@ export default function PartnersSection({
   stats,
   partners,
 }: PartnersSectionProps) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const partnerLogos = resolvePartnerLogos(partners);
   const partnerSlides = chunkItems(partnerLogos, 6);
   const loopSlides = partnerSlides.length
     ? [...partnerSlides, ...partnerSlides]
     : [];
+  const dragState = useRef({
+    active: false,
+    startX: 0,
+    scrollLeft: 0,
+  });
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    dragState.current = {
+      active: true,
+      startX: event.clientX,
+      scrollLeft: scroller.scrollLeft,
+    };
+    scroller.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    if (!scroller || !dragState.current.active) return;
+    const delta = event.clientX - dragState.current.startX;
+    scroller.scrollLeft = dragState.current.scrollLeft - delta;
+  };
+
+  const stopDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    dragState.current.active = false;
+    if (scroller?.hasPointerCapture(event.pointerId)) {
+      scroller.releasePointerCapture(event.pointerId);
+    }
+  };
 
   return (
     <section className="landing-section relative overflow-hidden bg-white">
@@ -80,9 +115,17 @@ export default function PartnersSection({
           </div>
 
           <div className="relative w-full min-w-0 lg:max-w-[560px] lg:justify-self-end">
-            <div className="mask-image-gradient relative overflow-hidden">
+            <div
+              ref={scrollerRef}
+              className="mask-image-gradient group/partners relative cursor-grab overflow-x-auto overflow-y-hidden active:cursor-grabbing scrollbar-hide"
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={stopDrag}
+              onPointerCancel={stopDrag}
+              onPointerLeave={stopDrag}
+            >
               <div
-                className="animate-loop-scroll flex"
+                className="animate-loop-scroll flex group-hover/partners:[animation-play-state:paused] group-active/partners:[animation-play-state:paused]"
                 style={{ willChange: "transform" }}
               >
                 {loopSlides.map((slide, slideIndex) => (
@@ -94,16 +137,16 @@ export default function PartnersSection({
                       {slide.map((partner) => (
                         <div
                           key={`${slideIndex}-${partner.alt}`}
-                          className="group relative rounded-3xl border border-white/70 bg-white/85 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
+                          className="group relative rounded-3xl border border-white/70 bg-white/85 p-2 shadow-[0_16px_40px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] sm:p-2.5"
                         >
                           <div className="absolute -top-2 -right-2 h-3 w-3 rounded-full bg-brand-yellow/70" />
-                          <div className="flex h-16 items-center justify-center sm:h-20">
+                          <div className="flex h-20 items-center justify-center sm:h-24">
                             <Image
                               src={partner.src}
                               alt={`${partner.alt} logo`}
-                              width={160}
-                              height={64}
-                              className="h-12 w-auto object-contain sm:h-14"
+                              width={240}
+                              height={96}
+                              className="max-h-[4.5rem] w-auto max-w-[96%] object-contain sm:max-h-20"
                               loading="lazy"
                             />
                           </div>
