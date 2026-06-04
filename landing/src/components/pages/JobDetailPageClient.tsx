@@ -358,7 +358,7 @@ export default function JobDetailPage() {
                     {/* Button Ứng tuyển - Nộp CV */}
                     <div className="shrink-0 flex items-end self-end mt-4 md:mt-0">
                       <a
-                        href="https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgSARxLFnc5ePFaQLPNc1jHe"
+                        href="https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgjIFtwQHEqDKuj1O2vIQ6Pc"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => trackPublicJobApply(job.id)}

@@ -12,7 +12,7 @@ const FALLBACK_ADDRESS_MAIN =
 const FALLBACK_PHONE = "0979334143";
 const FALLBACK_EMAIL = "tuyendung@jobup.vn";
 const EMPLOYER_LARK_FORM_URL =
-  "https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlglGQjwpLLWYGHEhLmBS6Wlh";
+  "https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgdNMsnElOWGgPbFX0MqtFAf";
 const CANDIDATE_LARK_FORM_URL =
   "https://ygm980ysfo1.sg.larksuite.com/share/base/form/shrlgWVnS8s3XB5CmWCqdm0CpEh";
 
