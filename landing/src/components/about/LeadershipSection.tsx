@@ -9,10 +9,6 @@ interface LeadershipSectionProps {
   ceoName?: string | null;
   ceoImage?: string | null;
   ceoAchievements?: string | null;
-  advisorRoleLabel?: string | null;
-  advisorName?: string | null;
-  advisorImage?: string | null;
-  advisorAchievements?: string | null;
 }
 
 export default function LeadershipSection({
@@ -22,10 +18,6 @@ export default function LeadershipSection({
   ceoName,
   ceoImage,
   ceoAchievements,
-  advisorRoleLabel,
-  advisorName,
-  advisorImage,
-  advisorAchievements,
 }: LeadershipSectionProps) {
   // Khai báo các giá trị hiển thị (fallback values)
   const displayBadge = badgeText || "Đội ngũ lãnh đạo";
@@ -35,11 +27,6 @@ export default function LeadershipSection({
   const displayCeoName = ceoName || "Mrs. Ha Phan, MHRM";
   const displayCeoImage =
     getAssetUrl(ceoImage) || "/images/leadership-woman-1.jpg";
-
-  const displayAdvisorRole = advisorRoleLabel || "Ban Cố Vấn";
-  const displayAdvisorName = advisorName || "Mrs. Diep Nguyen Ngoc, MHRM";
-  const displayAdvisorImage =
-    getAssetUrl(advisorImage) || "/images/leadership-woman.jpg";
 
   return (
     <section className="landing-section bg-brand-light-gray">
@@ -52,7 +39,7 @@ export default function LeadershipSection({
         />
 
         {/* CEO Section */}
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start mb-14">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-2 max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-xl">
             <Image
               src={displayCeoImage}
@@ -123,72 +110,6 @@ export default function LeadershipSection({
                 </ul>
               )}
             </div>
-          </div>
-        </div>
-
-        {/* Advisor Section */}
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
-          <div className="lg:col-span-3 order-2 lg:order-1 flex items-center justify-center self-stretch">
-            <div className="">
-              <span className="text-brand-yellow font-bold text-base sm:text-lg lg:text-xl uppercase tracking-widest">
-                {displayAdvisorRole}
-              </span>
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-black mt-6 mb-6">
-                {displayAdvisorName}
-              </h3>
-
-              {advisorAchievements ? (
-                <div className="space-y-3 text-gray-600 mt-8">
-                  {advisorAchievements
-                    .split(/<\/p>/i)
-                    .map((item) =>
-                      item
-                        .replace(/<p>/i, "")
-                        .replace(/<br\s*\/?>/gi, "")
-                        .trim(),
-                    )
-                    .filter(Boolean)
-                    .map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex gap-3 items-start leading-relaxed my-6"
-                      >
-                        <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                        <span
-                          className="text-justify"
-                          dangerouslySetInnerHTML={{ __html: item }}
-                        />
-                      </div>
-                    ))}
-                </div>
-              ) : (
-                <ul className="space-y-4 text-gray-600">
-                  <li className="flex gap-3">
-                    <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                    <span>
-                      Cố vấn tại <strong>JobUp</strong>
-                    </span>
-                  </li>
-                  <li className="flex gap-3">
-                    <i className="fa-solid fa-check-circle text-brand-yellow mt-1 shrink-0" />
-                    <span>
-                      <strong>15 năm</strong> kinh nghiệm Quản lý Nhân sự tại
-                      Tập đoàn <strong>Lotus, Vingroup</strong>
-                    </span>
-                  </li>
-                </ul>
-              )}
-            </div>
-          </div>
-          <div className="lg:col-span-2 order-1 lg:order-2 max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src={displayAdvisorImage}
-              alt={`${displayAdvisorName} – ${displayAdvisorRole} JobUp`}
-              width={600}
-              height={800}
-              className="w-full h-[420px] sm:h-[600px] lg:h-[700px] object-cover object-top"
-              loading="lazy"
-            />
           </div>
         </div>
       </div>

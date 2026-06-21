@@ -101,6 +101,7 @@ export default function AboutPageClient({
           value3Title={s?.coreValue3Title}
           value3Description={s?.coreValue3Description}
         />
+
         <LeadershipSection
           badgeText={s?.leadershipBadgeText}
           title={s?.leadershipTitle}
@@ -108,11 +109,8 @@ export default function AboutPageClient({
           ceoName={s?.ceoName}
           ceoImage={s?.ceoImage}
           ceoAchievements={s?.ceoAchievements}
-          advisorRoleLabel={s?.advisorRoleLabel}
-          advisorName={s?.advisorName}
-          advisorImage={s?.advisorImage}
-          advisorAchievements={s?.advisorAchievements}
         />
+
         <StatsBarSection statistics={initialStatistics} />
         <PartnersSection
           badge="ĐỐI TÁC CHIẾN LƯỢC"
