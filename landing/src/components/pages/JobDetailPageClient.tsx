@@ -38,13 +38,12 @@ const EXPERIENCE_LABELS: Record<number, string> = {
 };
 
 const LEVEL_LABELS: Record<number, string> = {
-  0: "Thực tập",
-  1: "Fresher",
-  2: "Junior",
-  3: "Middle",
-  4: "Senior",
-  5: "Leader",
-  6: "Manager",
+  0: "Thực tập sinh",
+  1: "Nhân viên",
+  2: "Chuyên viên",
+  3: "Senior / Trưởng nhóm",
+  4: "Quản lý",
+  5: "Giám đốc",
 };
 
 const GENDER_LABELS: Record<number, string> = {
